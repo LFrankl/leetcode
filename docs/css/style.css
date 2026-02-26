@@ -922,63 +922,83 @@ body {
         font-size: 20px;
     }
 
-    /* 移动端分页控制器 */
+    /* 移动端分页控制器 - Material Design 风格 */
     .pagination-controls {
-        padding: 16px 0;
-        gap: 12px;
+        padding: 20px 16px;
+        gap: 16px;
+        background: var(--surface);
+        border-radius: 8px;
+        margin-bottom: 16px;
     }
 
     .pagination-info {
         width: 100%;
-        justify-content: flex-end;
-        padding-bottom: 12px;
-        padding-right: 8px;
-        border-bottom: 1px solid var(--border);
+        justify-content: center;
+        padding-bottom: 0;
         gap: 8px;
     }
 
     .pagination-info label {
         font-size: 13px;
-        flex-shrink: 0;
+        font-weight: 500;
+        color: var(--text-secondary);
     }
 
     .page-size-selector {
         font-size: 13px;
-        padding: 6px 28px 6px 10px;
+        padding: 6px 30px 6px 12px;
         background-size: 14px;
-        background-position: right 6px center;
-        min-width: 70px;
+        background-position: right 8px center;
+        min-width: 75px;
+        font-weight: 500;
     }
 
-    /* 翻页按钮紧凑布局 */
+    /* 翻页按钮 - 优雅布局 */
     .pagination-buttons {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 0;
+        gap: 12px;
         width: 100%;
     }
 
     .pagination-btn {
-        min-width: 44px;
-        height: 44px;
+        min-width: 48px;
+        height: 48px;
         font-size: 20px;
         flex-shrink: 0;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
+    }
+
+    .pagination-btn:disabled {
+        opacity: 0.3;
+        box-shadow: none;
     }
 
     .page-jump {
-        padding-right: 8px;
+        padding: 0 4px;
         justify-content: center;
     }
 
     .page-input {
-        width: 45px;
-        padding: 8px 6px;
-        font-size: 14px;
+        width: 48px;
+        padding: 10px 8px;
+        font-size: 15px;
+        font-weight: 500;
+        border-width: 2px;
+        text-align: center;
     }
 
     .page-total {
-        font-size: 13px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
     }
 
     /* 鸡汤部分移动端调整 - 更精致 */
