@@ -393,13 +393,150 @@ def save_as_markdown(
     return True
 
 class HTMLGenerator:
-    """HTML 页面生成器"""
+    """HTML 页面生成器（三层架构）"""
     def __init__(self, docs_dir: str = "docs"):
         self.docs_dir = Path(docs_dir)
         self.docs_dir.mkdir(parents=True, exist_ok=True)
 
-    def convert_markdown_to_html(self, md_files: List[str], date_str: str, time_str: str) -> Optional[str]:
-        """将当天的 markdown 文件转换为一个 HTML 页面"""
+    def parse_markdown_file(self, md_file_path: str) -> Optional[Dict]:
+        """解析单个 markdown 文件，提取题目信息"""
+        try:
+            with open(md_file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+
+            # 从文件名提取难度：题号_难度_标题_日期.md
+            filename = Path(md_file_path).stem
+            parts = filename.split('_')
+
+            difficulty = "medium"  # 默认
+            if len(parts) >= 4:
+                difficulty_str = parts[1]  # 第二部分是难度
+                if difficulty_str in ['简单', 'Easy']:
+                    difficulty = 'easy'
+                elif difficulty_str in ['困难', 'Hard']:
+                    difficulty = 'hard'
+                elif difficulty_str in ['中等', 'Medium']:
+                    difficulty = 'medium'
+
+            # 提取题号和标题（支持 "1. 两数之和" 和 "LCR 031. LRU 缓存" 格式）
+            title_match = re.search(r'^#\s+([\w\s]+)\.\s+(.+)$', content, re.MULTILINE)
+            question_number = title_match.group(1).strip() if title_match else "Unknown"
+            question_title = title_match.group(2).strip() if title_match else "未知题目"
+
+            # 提取 LeetCode 链接
+            leetcode_url = ""
+            url_match = re.search(r'https://leetcode\.cn/problems/[^\s\)]+', content)
+            if url_match:
+                leetcode_url = url_match.group(0)
+
+            return {
+                'number': question_number,
+                'title': question_title,
+                'difficulty': difficulty,
+                'content': content,
+                'url': leetcode_url
+            }
+
+        except Exception as e:
+            print(f"  ⚠️ 解析失败 {md_file_path}: {e}")
+            return None
+
+    def generate_question_html(self, question_info: Dict, record_id: str, question_index: int, date_str: str, time_str: str) -> Optional[str]:
+        """生成单个题目的 HTML 文件"""
+        if not MARKDOWN2_AVAILABLE:
+            return None
+
+        # 转换 Markdown 为 HTML
+        html_body = markdown2.markdown(
+            question_info['content'],
+            extras=['fenced-code-blocks', 'tables', 'header-ids']
+        )
+
+        # 格式化日期时间
+        formatted_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
+        formatted_time = f"{time_str[:2]}:{time_str[2:4]}:{time_str[4:]}"
+
+        # 生成文件名
+        html_filename = f"{record_id}_q{question_index}.html"
+        html_file = self.docs_dir / html_filename
+
+        # 难度中文映射
+        difficulty_map = {
+            'easy': '简单',
+            'medium': '中等',
+            'hard': '困难'
+        }
+        difficulty_cn = difficulty_map.get(question_info['difficulty'], '未知')
+
+        # 生成完整 HTML
+        full_html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{question_info['number']}. {question_info['title']} - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">{formatted_date} {formatted_time}</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">{question_info['number']}. {question_info['title']}</span>
+                    <span class="difficulty-badge difficulty-{question_info['difficulty']}">
+                        {difficulty_cn}
+                    </span>
+                    {f'<a href="{question_info["url"]}" target="_blank" class="question-link">在 LeetCode 打开</a>' if question_info['url'] else ''}
+                </div>
+                <div class="markdown-content">
+                    {html_body}
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>"""
+
+        try:
+            with open(html_file, 'w', encoding='utf-8') as f:
+                f.write(full_html)
+            return html_filename
+        except Exception as e:
+            print(f"  ✗ 生成 HTML 失败: {e}")
+            return None
+
+    def convert_markdown_to_html(self, md_files: List[str], date_str: str, time_str: str) -> Optional[List[Dict]]:
+        """将当天的 markdown 文件转换为独立的题目 HTML 文件（三层架构）"""
         if not MARKDOWN2_AVAILABLE:
             print("  ⚠ markdown2 未安装，跳过 HTML 生成")
             return None
@@ -407,141 +544,38 @@ class HTMLGenerator:
         if not md_files:
             return None
 
-        # 读取所有 markdown 文件内容
-        all_content = []
-        for md_file in md_files:
-            try:
-                with open(md_file, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                    all_content.append(content)
-            except Exception as e:
-                print(f"  ⚠ 读取文件失败 {md_file}: {e}")
+        record_id = f"{date_str}_{time_str}"
+        questions = []
 
-        if not all_content:
-            return None
+        # 为每道题目生成独立的 HTML 文件
+        for q_idx, md_file in enumerate(md_files, 1):
+            question_info = self.parse_markdown_file(md_file)
 
-        # 合并内容，用分隔线分开
-        combined_md = "\n\n---\n\n".join(all_content)
-
-        # 转换为 HTML
-        html_body = markdown2.markdown(
-            combined_md,
-            extras=['fenced-code-blocks', 'tables', 'header-ids']
-        )
-
-        # 生成完整 HTML，文件名包含时间戳
-        formatted_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-        html_filename = f"{date_str}_{time_str}.html"
-        html_file = self.docs_dir / html_filename
-
-        # 格式化时间显示
-        formatted_time = f"{time_str[:2]}:{time_str[2:4]}:{time_str[4:]}"
-
-        full_html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeetCode {formatted_date} {formatted_time}</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">← 返回首页</a>
-        <div class="content">
-            <h1>📅 {formatted_date} {formatted_time} 每日题目</h1>
-            {html_body}
-        </div>
-    </div>
-</body>
-</html>"""
-
-        try:
-            with open(html_file, 'w', encoding='utf-8') as f:
-                f.write(full_html)
-            print(f"  ✓ 已生成 HTML: {html_file.name}")
-            return html_filename
-        except Exception as e:
-            print(f"  ✗ HTML 生成失败: {e}")
-            return None
-
-    def update_index_page(self, date_str: str, time_str: str, html_filename: str, question_count: int, total_questions: int):
-        """更新索引页面"""
-        index_file = self.docs_dir / "index.html"
-
-        if not index_file.exists():
-            print(f"  ⚠ 索引文件不存在: {index_file}")
-            return False
-
-        try:
-            with open(index_file, 'r', encoding='utf-8') as f:
-                content = f.read()
-
-            # 格式化日期和时间显示
-            formatted_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-            formatted_time = f"{time_str[:2]}:{time_str[2:4]}:{time_str[4:]}"
-            formatted_datetime = f"{formatted_date} {formatted_time}"
-
-            # 构造本次执行的条目
-            item = f'''            <div class="day-item latest">
-                <span class="date">{formatted_datetime}</span>
-                <a href="{html_filename}">查看题目</a>
-                <span class="count">共 {question_count} 题</span>
-            </div>'''
-
-            # 移除空状态提示（如果存在）
-            content = re.sub(
-                r'<div class="empty-state">.*?</div>',
-                '',
-                content,
-                flags=re.DOTALL
-            )
-
-            # 每次都在列表顶部插入新条目（不检查重复）
-            if '<div class="daily-list">' in content:
-                content = content.replace(
-                    '<div class="daily-list">',
-                    f'<div class="daily-list">\n{item}',
-                    1
+            if question_info:
+                html_filename = self.generate_question_html(
+                    question_info,
+                    record_id,
+                    q_idx,
+                    date_str,
+                    time_str
                 )
 
-            # 更新时间戳
-            now = datetime.now().strftime("%Y-%m-%d %H:%M")
-            content = re.sub(
-                r'<p class="update-time">最后更新：.*?</p>',
-                f'<p class="update-time">最后更新：{now}</p>',
-                content
-            )
+                if html_filename:
+                    questions.append({
+                        'number': question_info['number'],
+                        'title': question_info['title'],
+                        'difficulty': question_info['difficulty'],
+                        'file': html_filename
+                    })
+                    print(f"  ✓ 已生成题目 {q_idx}: {html_filename}")
 
-            # 更新统计信息
-            # 计算天数（有多少个 day-item）
-            day_count = content.count('class="day-item')
+        if questions:
+            return questions
+        else:
+            return None
 
-            content = re.sub(
-                r'(<div class="stat-item">[\s\S]*?<span class="stat-label">累计题目</span>[\s\S]*?<span class="stat-value">)\d+(</span>)',
-                f'\\g<1>{total_questions}\\g<2>',
-                content
-            )
-
-            content = re.sub(
-                r'(<div class="stat-item">[\s\S]*?<span class="stat-label">连续天数</span>[\s\S]*?<span class="stat-value">)\d+(</span>)',
-                f'\\g<1>{day_count}\\g<2>',
-                content
-            )
-
-            # 保存更新后的内容
-            with open(index_file, 'w', encoding='utf-8') as f:
-                f.write(content)
-
-            print(f"  ✓ 已更新索引页面")
-            return True
-
-        except Exception as e:
-            print(f"  ✗ 更新索引页面失败: {e}")
-            return False
-
-    def update_history_json(self, date_str: str, time_str: str, html_filename: str, question_count: int):
-        """更新历史记录 JSON 文件"""
+    def update_history_json(self, date_str: str, time_str: str, questions: List[Dict]):
+        """更新历史记录 JSON 文件（三层架构）"""
         history_file = self.docs_dir / "history.json"
 
         # 格式化日期和时间显示
@@ -549,11 +583,13 @@ class HTMLGenerator:
         formatted_time = f"{time_str[:2]}:{time_str[2:4]}:{time_str[4:]}"
         formatted_datetime = f"{formatted_date} {formatted_time}"
 
-        # 构造新记录
+        # 构造新记录（三层架构）
+        record_id = f"{date_str}_{time_str}"
         new_record = {
             "date": formatted_datetime,
-            "file": html_filename,
-            "count": question_count
+            "record_id": record_id,
+            "count": len(questions),
+            "questions": questions
         }
 
         try:
@@ -811,16 +847,13 @@ def main():
         # 获取当前时间戳（时分秒）
         time_str = datetime.now().strftime("%H%M%S")
 
-        # 生成 HTML
+        # 生成 HTML（三层架构）
         html_gen = HTMLGenerator("docs")
-        html_filename = html_gen.convert_markdown_to_html(saved_files, date_str, time_str)
+        questions = html_gen.convert_markdown_to_html(saved_files, date_str, time_str)
 
-        if html_filename:
-            # 更新索引页
-            html_gen.update_index_page(date_str, time_str, html_filename, saved_count, len(history.history))
-
+        if questions:
             # 更新历史记录 JSON
-            html_gen.update_history_json(date_str, time_str, html_filename, saved_count)
+            html_gen.update_history_json(date_str, time_str, questions)
 
             # 推送到 GitHub
             publisher = GitHubPagesPublisher(github_config)
