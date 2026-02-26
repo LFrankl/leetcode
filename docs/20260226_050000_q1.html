@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>496. 下一个更大元素 I - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 05:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">496. 下一个更大元素 I</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/next-greater-element-i/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="496-下一个更大元素-i">496. 下一个更大元素 I</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 栈, 数组, 哈希表, 单调栈</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/next-greater-element-i/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p><code>nums1</code>&nbsp;中数字&nbsp;<code>x</code>&nbsp;的 <strong>下一个更大元素</strong> 是指&nbsp;<code>x</code>&nbsp;在&nbsp;<code>nums2</code> 中对应位置 <strong>右侧</strong> 的 <strong>第一个</strong> 比&nbsp;<code>x</code><strong>&nbsp;</strong>大的元素。</p>
+
+<p>给你两个<strong> 没有重复元素</strong> 的数组&nbsp;<code>nums1</code> 和&nbsp;<code>nums2</code> ，下标从 <strong>0</strong> 开始计数，其中<code>nums1</code>&nbsp;是&nbsp;<code>nums2</code>&nbsp;的子集。</p>
+
+<p>对于每个 <code>0 &lt;= i &lt; nums1.length</code> ，找出满足 <code>nums1[i] == nums2[j]</code> 的下标 <code>j</code> ，并且在 <code>nums2</code> 确定 <code>nums2[j]</code> 的 <strong>下一个更大元素</strong> 。如果不存在下一个更大元素，那么本次查询的答案是 <code>-1</code> 。</p>
+
+<p>返回一个长度为&nbsp;<code>nums1.length</code> 的数组<em> </em><code>ans</code><em> </em>作为答案，满足<em> </em><code>ans[i]</code><em> </em>是如上所述的 <strong>下一个更大元素</strong> 。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums1 = [4,1,2], nums2 = [1,3,4,2].
+<strong>输出：</strong>[-1,3,-1]
+<strong>解释：</strong>nums1 中每个值的下一个更大元素如下所述：
+- 4 ，用加粗斜体标识，nums2 = [1,3,<strong>4</strong>,2]。不存在下一个更大元素，所以答案是 -1 。
+- 1 ，用加粗斜体标识，nums2 = [<em><strong>1</strong></em>,3,4,2]。下一个更大元素是 3 。
+- 2 ，用加粗斜体标识，nums2 = [1,3,4,<em><strong>2</strong></em>]。不存在下一个更大元素，所以答案是 -1 。</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums1 = [2,4], nums2 = [1,2,3,4].
+<strong>输出：</strong>[3,-1]
+<strong>解释：</strong>nums1 中每个值的下一个更大元素如下所述：
+- 2 ，用加粗斜体标识，nums2 = [1,<em><strong>2</strong></em>,3,4]。下一个更大元素是 3 。
+- 4 ，用加粗斜体标识，nums2 = [1,2,3,<em><strong>4</strong></em>]。不存在下一个更大元素，所以答案是 -1 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000</code></li>
+    <li><code>0 &lt;= nums1[i], nums2[i] &lt;= 10<sup>4</sup></code></li>
+    <li><code>nums1</code>和<code>nums2</code>中所有整数 <strong>互不相同</strong></li>
+    <li><code>nums1</code> 中的所有整数同样出现在 <code>nums2</code> 中</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>进阶：</strong>你可以设计一个时间复杂度为 <code>O(nums1.length + nums2.length)</code> 的解决方案吗？</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -&gt; List[int]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var nextGreaterElement = function(nums1, nums2) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func nextGreaterElement(nums1 []int, nums2 []int) []int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[4,1,2]
+[1,3,4,2]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个经典的"下一个更大元素"问题。给定两个数组：
+- <code>nums1</code> 是 <code>nums2</code> 的子集
+- 对于 <code>nums1</code> 中的每个元素，需要在 <code>nums2</code> 中找到该元素，然后在其右侧找到第一个比它大的元素</p>
+
+<p>关键约束：
+1. 所有元素互不相同
+2. <code>nums1</code> 是 <code>nums2</code> 的子集
+3. 数组长度 ≤ 1000</p>
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心思路">核心思路</h3>
+
+<p>我们需要为 <code>nums2</code> 中的每个元素找到其右侧第一个更大的元素，然后将 <code>nums1</code> 中元素对应的结果提取出来。</p>
+
+<h3 id="方法对比">方法对比</h3>
+
+<ol>
+<li><strong>暴力法</strong>：直接遍历查找，简单但效率低</li>
+<li><strong>哈希表+单调栈</strong>：最优解，利用单调递减栈一次遍历 <code>nums2</code>，同时用哈希表记录结果</li>
+<li><strong>哈希表+反向遍历</strong>：从右向左遍历，利用哈希表记录已处理元素的下一个更大值</li>
+</ol>
+
+<h2 id="解法详解">解法详解</h2>
+
+<h3 id="解法一暴力法双重循环">解法一：暴力法（双重循环）</h3>
+
+<p><strong>思路</strong>：
+1. 对于 <code>nums1</code> 中的每个元素，先在 <code>nums2</code> 中找到它的位置
+2. 从该位置开始向右遍历，找到第一个更大的元素</p>
+
+<p><strong>时间复杂度</strong>：O(n×m)，其中 n=nums1.length, m=nums2.length
+<strong>空间复杂度</strong>：O(1)（不考虑输出数组）</p>
+
+<pre><code>// Go 实现
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+    result := make([]int, len(nums1))
+
+    for i, num := range nums1 {
+        // 在 nums2 中找到 num 的位置
+        found := false
+        result[i] = -1
+
+        for j := 0; j &lt; len(nums2); j++ {
+            if nums2[j] == num {
+                found = true
+            }
+            if found &amp;&amp; nums2[j] &gt; num {
+                result[i] = nums2[j]
+                break
+            }
+        }
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        vector&lt;int&gt; result(nums1.size(), -1);
+
+        for (int i = 0; i &lt; nums1.size(); i++) {
+            bool found = false;
+
+            for (int j = 0; j &lt; nums2.size(); j++) {
+                if (nums2[j] == nums1[i]) {
+                    found = true;
+                }
+                if (found &amp;&amp; nums2[j] &gt; nums1[i]) {
+                    result[i] = nums2[j];
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="解法二哈希表单调栈最优解">解法二：哈希表+单调栈（最优解）</h3>
+
+<p><strong>思路</strong>：
+1. 使用单调递减栈处理 <code>nums2</code>
+2. 遍历 <code>nums2</code>，当当前元素大于栈顶元素时，栈顶元素的下一个更大元素就是当前元素
+3. 用哈希表记录每个元素的下一个更大元素
+4. 最后遍历 <code>nums1</code>，从哈希表中获取结果</p>
+
+<p><strong>时间复杂度</strong>：O(n+m)，其中 n=nums1.length, m=nums2.length
+<strong>空间复杂度</strong>：O(m)，用于存储哈希表和栈</p>
+
+<pre><code>// Go 实现
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+    // 使用哈希表存储每个元素的下一个更大元素
+    nextGreater := make(map[int]int)
+    stack := make([]int, 0)  // 单调递减栈
+
+    // 遍历 nums2
+    for _, num := range nums2 {
+        // 当栈不为空且当前元素大于栈顶元素时
+        for len(stack) &gt; 0 &amp;&amp; num &gt; stack[len(stack)-1] {
+            // 栈顶元素的下一个更大元素是当前元素
+            top := stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+            nextGreater[top] = num
+        }
+        // 当前元素入栈
+        stack = append(stack, num)
+    }
+
+    // 栈中剩余元素没有下一个更大元素，设为 -1
+    for _, num := range stack {
+        nextGreater[num] = -1
+    }
+
+    // 构建结果
+    result := make([]int, len(nums1))
+    for i, num := range nums1 {
+        result[i] = nextGreater[num]
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        unordered_map&lt;int, int&gt; nextGreater;
+        stack&lt;int&gt; st;  // 单调递减栈
+
+        // 遍历 nums2
+        for (int num : nums2) {
+            // 当栈不为空且当前元素大于栈顶元素时
+            while (!st.empty() &amp;&amp; num &gt; st.top()) {
+                nextGreater[st.top()] = num;
+                st.pop();
+            }
+            // 当前元素入栈
+            st.push(num);
+        }
+
+        // 栈中剩余元素没有下一个更大元素
+        while (!st.empty()) {
+            nextGreater[st.top()] = -1;
+            st.pop();
+        }
+
+        // 构建结果
+        vector&lt;int&gt; result(nums1.size());
+        for (int i = 0; i &lt; nums1.size(); i++) {
+            result[i] = nextGreater[nums1[i]];
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="解法三哈希表反向遍历">解法三：哈希表+反向遍历</h3>
+
+<p><strong>思路</strong>：
+1. 从右向左遍历 <code>nums2</code>
+2. 维护一个哈希表，记录已处理元素的下一个更大值
+3. 对于每个元素，向右查找第一个更大的元素</p>
+
+<p><strong>时间复杂度</strong>：O(m²) 最坏情况，但实际运行较快
+<strong>空间复杂度</strong>：O(m)</p>
+
+<pre><code>// Go 实现
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+    // 存储每个元素的下一个更大元素
+    nextMap := make(map[int]int)
+
+    // 从右向左遍历 nums2
+    for i := len(nums2) - 1; i &gt;= 0; i-- {
+        j := i + 1
+        // 向右查找第一个更大的元素
+        for j &lt; len(nums2) &amp;&amp; nums2[j] &lt;= nums2[i] {
+            // 如果 nums2[j] 的下一个更大元素存在且大于当前元素
+            if next, ok := nextMap[nums2[j]]; ok &amp;&amp; next &gt; nums2[i] {
+                j = len(nums2)  // 可以直接使用这个更大的元素
+                break
+            }
+            j++
+        }
+
+        if j &lt; len(nums2) {
+            nextMap[nums2[i]] = nums2[j]
+        } else {
+            nextMap[nums2[i]] = -1
+        }
+    }
+
+    // 构建结果
+    result := make([]int, len(nums1))
+    for i, num := range nums1 {
+        result[i] = nextMap[num]
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        unordered_map&lt;int, int&gt; nextMap;
+
+        // 从右向左遍历 nums2
+        for (int i = nums2.size() - 1; i &gt;= 0; i--) {
+            int j = i + 1;
+            // 向右查找第一个更大的元素
+            while (j &lt; nums2.size() &amp;&amp; nums2[j] &lt;= nums2[i]) {
+                // 如果 nums2[j] 的下一个更大元素存在且大于当前元素
+                if (nextMap.count(nums2[j]) &amp;&amp; nextMap[nums2[j]] &gt; nums2[i]) {
+                    j = nums2.size();  // 可以直接使用这个更大的元素
+                    break;
+                }
+                j++;
+            }
+
+            if (j &lt; nums2.size()) {
+                nextMap[nums2[i]] = nums2[j];
+            } else {
+                nextMap[nums2[i]] = -1;
+            }
+        }
+
+        // 构建结果
+        vector&lt;int&gt; result(nums1.size());
+        for (int i = 0; i &lt; nums1.size(); i++) {
+            result[i] = nextMap[nums1[i]];
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h2 id="复杂度分析对比">复杂度分析对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>时间复杂度</th>
+  <th>空间复杂度</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>暴力法</td>
+  <td>O(n×m)</td>
+  <td>O(1)</td>
+  <td>实现简单，易于理解</td>
+  <td>效率低，不适合大数据量</td>
+</tr>
+<tr>
+  <td>哈希表+单调栈</td>
+  <td>O(n+m)</td>
+  <td>O(m)</td>
+  <td>最优时间复杂度，效率高</td>
+  <td>需要理解单调栈概念</td>
+</tr>
+<tr>
+  <td>哈希表+反向遍历</td>
+  <td>O(m²) 最坏</td>
+  <td>O(m)</td>
+  <td>思路直观，比暴力法优化</td>
+  <td>最坏情况效率仍不高</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="推荐解法">推荐解法</h2>
+
+<p><strong>哈希表+单调栈</strong>是最优解法，理由如下：
+1. 时间复杂度最优：O(n+m)，满足进阶要求
+2. 空间复杂度合理：O(m)，只存储必要信息
+3. 通用性强：该模式可解决一系列"下一个更大/更小元素"问题
+4. 代码简洁：实现优雅，逻辑清晰</p>
+
+<h2 id="关键点总结">关键点总结</h2>
+
+<ol>
+<li><strong>单调栈</strong>是解决这类问题的核心数据结构</li>
+<li><strong>哈希表</strong>用于快速查询结果</li>
+<li>注意处理栈中剩余元素（没有下一个更大元素的元素）</li>
+<li>利用题目条件（元素互不相同）简化实现</li>
+</ol>
+
+<p>这种解法不仅适用于本题，还可以扩展到：
+- 下一个更大元素 II（循环数组）
+- 每日温度问题
+- 柱状图中最大矩形等经典问题</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 15:29:28</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

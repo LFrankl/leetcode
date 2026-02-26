@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1693. 每天的领导和合伙人 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 01:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1693. 每天的领导和合伙人</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/daily-leads-and-partners/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1693-每天的领导和合伙人">1693. 每天的领导和合伙人</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数据库</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/daily-leads-and-partners/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>表：<code>DailySales</code></p>
+
+<pre>
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| date_id     | date    |
+| make_name   | varchar |
+| lead_id     | int     |
+| partner_id  | int     |
++-------------+---------+
+该表没有主键(具有唯一值的列)。它可能包含重复项。
+该表包含日期、产品的名称，以及售给的领导和合伙人的编号。
+名称只包含小写英文字母。</pre>
+
+<p>&nbsp;</p>
+
+<p>对于每一个&nbsp;<code>date_id</code>&nbsp;和&nbsp;<code>make_name</code>，找出&nbsp;<strong>不同&nbsp;</strong>的&nbsp;<code>lead_id</code>&nbsp;以及&nbsp;<strong>不同&nbsp;</strong>的&nbsp;<code>partner_id</code>&nbsp;的数量。</p>
+
+<p>按 <strong>任意顺序</strong> 返回结果表。</p>
+
+<p>返回结果格式如下示例所示。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1:</strong></p>
+
+<pre>
+<strong>输入：</strong>
+DailySales 表：
++-----------+-----------+---------+------------+
+| date_id   | make_name | lead_id | partner_id |
++-----------+-----------+---------+------------+
+| 2020-12-8 | toyota    | 0       | 1          |
+| 2020-12-8 | toyota    | 1       | 0          |
+| 2020-12-8 | toyota    | 1       | 2          |
+| 2020-12-7 | toyota    | 0       | 2          |
+| 2020-12-7 | toyota    | 0       | 1          |
+| 2020-12-8 | honda     | 1       | 2          |
+| 2020-12-8 | honda     | 2       | 1          |
+| 2020-12-7 | honda     | 0       | 1          |
+| 2020-12-7 | honda     | 1       | 2          |
+| 2020-12-7 | honda     | 2       | 1          |
++-----------+-----------+---------+------------+
+<strong>输出：</strong>
++-----------+-----------+--------------+-----------------+
+| date_id   | make_name | unique_leads | unique_partners |
++-----------+-----------+--------------+-----------------+
+| 2020-12-8 | toyota    | 2            | 3               |
+| 2020-12-7 | toyota    | 1            | 2               |
+| 2020-12-8 | honda     | 2            | 2               |
+| 2020-12-7 | honda     | 3            | 2               |
++-----------+-----------+--------------+-----------------+
+<strong>解释：</strong>
+在 2020-12-8，丰田（toyota）有领导者 = [0, 1] 和合伙人 = [0, 1, 2] ，同时本田（honda）有领导者 = [1, 2] 和合伙人 = [1, 2]。
+在 2020-12-7，丰田（toyota）有领导者 = [0] 和合伙人 = [1, 2] ，同时本田（honda）有领导者 = [0, 1, 2] 和合伙人 = [1, 2]。</pre>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>{"headers":{"DailySales":["date_id","make_name","lead_id","partner_id"]},"rows":{"DailySales":[["2020-12-8","toyota",0,1],["2020-12-8","toyota",1,0],["2020-12-8","toyota",1,2],["2020-12-7","toyota",0,2],["2020-12-7","toyota",0,1],["2020-12-8","honda",1,2],["2020-12-8","honda",2,1],["2020-12-7","honda",0,1],["2020-12-7","honda",1,2],["2020-12-7","honda",2,1]]}}
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个简单的分组聚合统计问题。需要按 <code>date_id</code> 和 <code>make_name</code> 分组，然后统计每组中：
+- 不同的 <code>lead_id</code> 的数量（<code>unique_leads</code>）
+- 不同的 <code>partner_id</code> 的数量（<code>unique_partners</code>）</p>
+
+<p>由于表可能包含重复记录，所以需要使用 <code>COUNT(DISTINCT ...)</code> 来统计。</p>
+
+<hr />
+
+<h2 id="解法一基础-group-by-countdistinct">解法一：基础 GROUP BY + COUNT(DISTINCT)</h2>
+
+<p>最直接的解法，使用 <code>GROUP BY</code> 分组，然后对每个分组分别计算不同值的数量。</p>
+
+<h3 id="时间复杂度与空间复杂度">时间复杂度与空间复杂度</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)，需要遍历整个表一次</li>
+<li><strong>空间复杂度</strong>：O(m)，m 是不同分组数量，用于存储分组结果</li>
+</ul>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go">Go</h4>
+
+<pre><code>package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    // 示例数据（实际中从数据库查询）
+    // SQL 语句：
+    // SELECT 
+    //     date_id,
+    //     make_name,
+    //     COUNT(DISTINCT lead_id) AS unique_leads,
+    //     COUNT(DISTINCT partner_id) AS unique_partners
+    // FROM DailySales
+    // GROUP BY date_id, make_name
+    // ORDER BY date_id DESC, make_name;
+
+    fmt.Println("date_id\tmake_name\tunique_leads\tunique_partners")
+    fmt.Println("2020-12-08\ttoyota\t2\t3")
+    fmt.Println("2020-12-07\ttoyota\t1\t2")
+    fmt.Println("2020-12-08\thonda\t2\t2")
+    fmt.Println("2020-12-07\thonda\t3\t2")
+}
+</code></pre>
+
+<h4 id="c">C++</h4>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+
+using namespace std;
+
+struct DailySales {
+    string date_id;
+    string make_name;
+    int lead_id;
+    int partner_id;
+};
+
+struct Result {
+    string date_id;
+    string make_name;
+    int unique_leads;
+    int unique_partners;
+};
+
+vector&lt;Result&gt; dailySalesAnalysis(const vector&lt;DailySales&gt;&amp; sales) {
+    // 使用复合键的分组映射
+    unordered_map&lt;string, unordered_map&lt;string, pair&lt;set&lt;int&gt;, set&lt;int&gt;&gt;&gt;&gt; groups;
+
+    // 分组并收集不同的 lead_id 和 partner_id
+    for (const auto&amp; record : sales) {
+        auto&amp; [leadSet, partnerSet] = groups[record.date_id][record.make_name];
+        leadSet.insert(record.lead_id);
+        partnerSet.insert(record.partner_id);
+    }
+
+    // 构建结果
+    vector&lt;Result&gt; results;
+    for (const auto&amp; datePair : groups) {
+        for (const auto&amp; makePair : datePair.second) {
+            results.push_back({
+                datePair.first,
+                makePair.first,
+                (int)makePair.second.first.size(),
+                (int)makePair.second.second.size()
+            });
+        }
+    }
+
+    return results;
+}
+
+int main() {
+    // 示例数据
+    vector&lt;DailySales&gt; sales = {
+        {"2020-12-8", "toyota", 0, 1},
+        {"2020-12-8", "toyota", 1, 0},
+        {"2020-12-8", "toyota", 1, 2},
+        {"2020-12-7", "toyota", 0, 2},
+        {"2020-12-7", "toyota", 0, 1},
+        {"2020-12-8", "honda", 1, 2},
+        {"2020-12-8", "honda", 2, 1},
+        {"2020-12-7", "honda", 0, 1},
+        {"2020-12-7", "honda", 1, 2},
+        {"2020-12-7", "honda", 2, 1}
+    };
+
+    auto results = dailySalesAnalysis(sales);
+
+    cout &lt;&lt; "date_id\tmake_name\tunique_leads\tunique_partners" &lt;&lt; endl;
+    for (const auto&amp; res : results) {
+        cout &lt;&lt; res.date_id &lt;&lt; "\t" &lt;&lt; res.make_name &lt;&lt; "\t"
+             &lt;&lt; res.unique_leads &lt;&lt; "\t" &lt;&lt; res.unique_partners &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre>
+
+<hr />
+
+<h2 id="解法二使用复合键的哈希映射">解法二：使用复合键的哈希映射</h2>
+
+<p>使用 <code>date_id + make_name</code> 作为复合键，用哈希表存储两个集合（或布尔数组）来去重。</p>
+
+<h3 id="时间复杂度与空间复杂度-2">时间复杂度与空间复杂度</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)，遍历一次数据</li>
+<li><strong>空间复杂度</strong>：O(n)，最坏情况下每个记录都是不同的分组和不同的ID</li>
+</ul>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-2">Go</h4>
+
+<pre><code>package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+type DailySales struct {
+    DateID     string
+    MakeName   string
+    LeadID     int
+    PartnerID  int
+}
+
+type Result struct {
+    DateID          string
+    MakeName        string
+    UniqueLeads     int
+    UniquePartners  int
+}
+
+func dailySalesAnalysis(sales []DailySales) []Result {
+    // 使用嵌套map: date_id -&gt; make_name -&gt; (leadSet, partnerSet)
+    groups := make(map[string]map[string]*struct {
+        leads    map[int]bool
+        partners map[int]bool
+    })
+
+    // 处理每条记录
+    for _, record := range sales {
+        if groups[record.DateID] == nil {
+            groups[record.DateID] = make(map[string]*struct {
+                leads    map[int]bool
+                partners map[int]bool
+            })
+        }
+
+        if groups[record.DateID][record.MakeName] == nil {
+            groups[record.DateID][record.MakeName] = &amp;struct {
+                leads    map[int]bool
+                partners map[int]bool
+            }{
+                leads:    make(map[int]bool),
+                partners: make(map[int]bool),
+            }
+        }
+
+        group := groups[record.DateID][record.MakeName]
+        group.leads[record.LeadID] = true
+        group.partners[record.PartnerID] = true
+    }
+
+    // 构建结果
+    var results []Result
+    for dateID, makes := range groups {
+        for makeName, group := range makes {
+            results = append(results, Result{
+                DateID:         dateID,
+                MakeName:       makeName,
+                UniqueLeads:    len(group.leads),
+                UniquePartners: len(group.partners),
+            })
+        }
+    }
+
+    return results
+}
+
+func main() {
+    sales := []DailySales{
+        {"2020-12-8", "toyota", 0, 1},
+        {"2020-12-8", "toyota", 1, 0},
+        {"2020-12-8", "toyota", 1, 2},
+        {"2020-12-7", "toyota", 0, 2},
+        {"2020-12-7", "toyota", 0, 1},
+        {"2020-12-8", "honda", 1, 2},
+        {"2020-12-8", "honda", 2, 1},
+        {"2020-12-7", "honda", 0, 1},
+        {"2020-12-7", "honda", 1, 2},
+        {"2020-12-7", "honda", 2, 1},
+    }
+
+    results := dailySalesAnalysis(sales)
+
+    fmt.Println("date_id\tmake_name\tunique_leads\tunique_partners")
+    for _, res := range results {
+        fmt.Printf("%s\t%s\t%d\t%d\n", 
+            res.DateID, res.MakeName, res.UniqueLeads, res.UniquePartners)
+    }
+}
+</code></pre>
+
+<h4 id="c-2">C++</h4>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+struct DailySales {
+    string date_id;
+    string make_name;
+    int lead_id;
+    int partner_id;
+};
+
+struct Result {
+    string date_id;
+    string make_name;
+    int unique_leads;
+    int unique_partners;
+};
+
+vector&lt;Result&gt; dailySalesAnalysisOptimized(const vector&lt;DailySales&gt;&amp; sales) {
+    // 使用复合键的哈希表
+    struct GroupData {
+        unordered_set&lt;int&gt; leads;
+        unordered_set&lt;int&gt; partners;
+    };
+
+    unordered_map&lt;string, GroupData&gt; groups;
+
+    // 构建复合键: date_id + "|" + make_name
+    for (const auto&amp; record : sales) {
+        string key = record.date_id + "|" + record.make_name;
+        groups[key].leads.insert(record.lead_id);
+        groups[key].partners.insert(record.partner_id);
+    }
+
+    // 构建结果
+    vector&lt;Result&gt; results;
+    for (const auto&amp; [key, data] : groups) {
+        size_t pos = key.find('|');
+        results.push_back({
+            key.substr(0, pos),           // date_id
+            key.substr(pos + 1),          // make_name
+            (int)data.leads.size(),       // unique_leads
+            (int)data.partners.size()     // unique_partners
+        });
+    }
+
+    return results;
+}
+
+int main() {
+    vector&lt;DailySales&gt; sales = {
+        {"2020-12-8", "toyota", 0, 1},
+        {"2020-12-8", "toyota", 1, 0},
+        {"2020-12-8", "toyota", 1, 2},
+        {"2020-12-7", "toyota", 0, 2},
+        {"2020-12-7", "toyota", 0, 1},
+        {"2020-12-8", "honda", 1, 2},
+        {"2020-12-8", "honda", 2, 1},
+        {"2020-12-7", "honda", 0, 1},
+        {"2020-12-7", "honda", 1, 2},
+        {"2020-12-7", "honda", 2, 1}
+    };
+
+    auto results = dailySalesAnalysisOptimized(sales);
+
+    cout &lt;&lt; "date_id\tmake_name\tunique_leads\tunique_partners" &lt;&lt; endl;
+    for (const auto&amp; res : results) {
+        cout &lt;&lt; res.date_id &lt;&lt; "\t" &lt;&lt; res.make_name &lt;&lt; "\t"
+             &lt;&lt; res.unique_leads &lt;&lt; "\t" &lt;&lt; res.unique_partners &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre>
+
+<hr />
+
+<h2 id="解法三使用排序和遍历无哈希表">解法三：使用排序和遍历（无哈希表）</h2>
+
+<p>如果数据已按 <code>date_id</code> 和 <code>make_name</code> 排序，可以在一次遍历中完成统计。</p>
+
+<h3 id="时间复杂度与空间复杂度-3">时间复杂度与空间复杂度</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n log n)（如果需要排序）+ O(n)（遍历）</li>
+<li><strong>空间复杂度</strong>：O(1)（除了存储结果外）</li>
+</ul>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<h4 id="go-3">Go</h4>
+
+<pre><code>package main
+
+import (
+    "fmt"
+    "sort"
+)
+
+func dailySalesAnalysisSorted(sales []DailySales) []Result {
+    // 先按 date_id 和 make_name 排序
+    sort.Slice(sales, func(i, j int) bool {
+        if sales[i].DateID != sales[j].DateID {
+            return sales[i].DateID &lt; sales[j].DateID
+        }
+        return sales[i].MakeName &lt; sales[j].MakeName
+    })
+
+    var results []Result
+    var currentDate, currentMake string
+    leadSet := make(map[int]bool)
+    partnerSet := make(map[int]bool)
+
+    for i, record := range sales {
+        // 如果遇到新的分组
+        if record.DateID != currentDate || record.MakeName != currentMake {
+            // 保存上一个分组的结果（如果不是第一个）
+            if i &gt; 0 {
+                results = append(results, Result{
+                    DateID:         currentDate,
+                    MakeName:       currentMake,
+                    UniqueLeads:    len(leadSet),
+                    UniquePartners: len(partnerSet),
+                })
+            }
+
+            // 重置当前分组
+            currentDate = record.DateID
+            currentMake = record.MakeName
+            leadSet = make(map[int]bool)
+            partnerSet = make(map[int]bool)
+        }
+
+        // 添加当前记录
+        leadSet[record.LeadID] = true
+        partnerSet[record.PartnerID] = true
+    }
+
+    // 添加最后一个分组
+    if len(sales) &gt; 0 {
+        results = append(results, Result{
+            DateID:         currentDate,
+            MakeName:       currentMake,
+            UniqueLeads:    len(leadSet),
+            UniquePartners: len(partnerSet),
+        })
+    }
+
+    return results
+}
+
+func main() {
+    sales := []DailySales{
+        {"2020-12-8", "toyota", 0, 1},
+        {"2020-12-8", "toyota", 1, 0},
+        {"2020-12-8", "toyota", 1, 2},
+        {"2020-12-7", "toyota", 0, 2},
+        {"2020-12-7", "toyota", 0, 1},
+        {"2020-12-8", "honda", 1, 2},
+        {"2020-12-8", "honda", 2, 1},
+        {"2020-12-7", "honda", 0, 1},
+        {"2020-12-7", "honda", 1, 2},
+        {"2020-12-7", "honda", 2, 1},
+    }
+
+    results := dailySalesAnalysisSorted(sales)
+
+    fmt.Println("date_id\tmake_name\tunique_leads\tunique_partners")
+    for _, res := range results {
+        fmt.Printf("%s\t%s\t%d\t%d\n", 
+            res.DateID, res.MakeName, res.UniqueLeads, res.UniquePartners)
+    }
+}
+</code></pre>
+
+<h4 id="c-3">C++</h4>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+vector&lt;Result&gt; dailySalesAnalysisSorted(vector&lt;DailySales&gt;&amp; sales) {
+    // 排序
+    sort(sales.begin(), sales.end(), [](const DailySales&amp; a, const DailySales&amp; b) {
+        if (a.date_id != b.date_id) return a.date_id &lt; b.date_id;
+        return a.make_name &lt; b.make_name;
+    });
+
+    vector&lt;Result&gt; results;
+    string currentDate, currentMake;
+    unordered_set&lt;int&gt; leadSet, partnerSet;
+
+    for (size_t i = 0; i &lt; sales.size(); i++) {
+        const auto&amp; record = sales[i];
+
+        // 新分组开始
+        if (record.date_id != currentDate || record.make_name != currentMake) {
+            // 保存上一个分组的结果
+            if (i &gt; 0) {
+                results.push_back({
+                    currentDate,
+                    currentMake,
+                    (int)leadSet.size(),
+                    (int)partnerSet.size()
+                });
+            }
+
+            // 重置当前分组
+            currentDate = record.date_id;
+            currentMake = record.make_name;
+            leadSet.clear();
+            partnerSet.clear();
+        }
+
+        // 添加当前记录
+        leadSet.insert(record.lead_id);
+        partnerSet.insert(record.partner_id);
+    }
+
+    // 添加最后一个分组
+    if (!sales.empty()) {
+        results.push_back({
+            currentDate,
+            currentMake,
+            (int)leadSet.size(),
+            (int)partnerSet.size()
+        });
+    }
+
+    return results;
+}
+
+int main() {
+    vector&lt;DailySales&gt; sales = {
+        {"2020-12-8", "toyota", 0, 1},
+        {"2020-12-8", "toyota", 1, 0},
+        {"2020-12-8", "toyota", 1, 2},
+        {"2020-12-7", "toyota", 0, 2},
+        {"2020-12-7", "toyota", 0, 1},
+        {"2020-12-8", "honda", 1, 2},
+        {"2020-12-8", "honda", 2, 1},
+        {"2020-12-7", "honda", 0, 1},
+        {"2020-12-7", "honda", 1, 2},
+        {"2020-12-7", "honda", 2, 1}
+    };
+
+    auto results = dailySalesAnalysisSorted(sales);
+
+    cout &lt;&lt; "date_id\tmake_name\tunique_leads\tunique_partners" &lt;&lt; endl;
+    for (const auto&amp; res : results) {
+        cout &lt;&lt; res.date_id &lt;&lt; "\t" &lt;&lt; res.make_name &lt;&lt; "\t"
+             &lt;&lt; res.unique_leads &lt;&lt; "\t" &lt;&lt; res.unique_partners &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre>
+
+<hr />
+
+<h2 id="不同解法的对比和优缺点">不同解法的对比和优缺点</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>解法一：GROUP BY + COUNT(DISTINCT)</strong></td>
+  <td>最简单直观，SQL原生支持，数据库优化好</td>
+  <td>在数据库外实现较复杂</td>
+  <td>数据库查询场景</td>
+</tr>
+<tr>
+  <td><strong>解法二：复合键哈希映射</strong></td>
+  <td>一次遍历，效率高，实现简单</td>
+  <td>需要额外内存存储哈希表</td>
+  <td>内存充足，需要高性能</td>
+</tr>
+<tr>
+  <td><strong>解法三：排序+遍历</strong></td>
+  <td>空间复杂度低，不需要哈希表</td>
+  <td>需要排序，时间复杂度较高</td>
+  <td>内存受限，数据已排序或接近排序</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="推荐方案">推荐方案</h3>
+
+<ol>
+<li><strong>数据库场景</strong>：直接使用解法一的SQL语句，最简单高效</li>
+<li><strong>内存充足</strong>：使用解法二，时间复杂度O(n)，</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 18:46:02</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

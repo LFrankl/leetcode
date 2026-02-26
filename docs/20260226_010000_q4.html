@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2019. 解出数学表达式的学生分数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 01:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2019. 解出数学表达式的学生分数</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/the-score-of-students-solving-math-expression/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2019-解出数学表达式的学生分数">2019. 解出数学表达式的学生分数</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 栈, 记忆化, 数组, 哈希表, 数学, 字符串, 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/the-score-of-students-solving-math-expression/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个字符串&nbsp;<code>s</code>&nbsp;，它 <strong>只</strong> 包含数字&nbsp;<code>0-9</code>&nbsp;，加法运算符&nbsp;<code>'+'</code>&nbsp;和乘法运算符&nbsp;<code>'*'</code>&nbsp;，这个字符串表示一个&nbsp;<strong>合法</strong>&nbsp;的只含有&nbsp;<strong>个位数</strong><strong>数字</strong>&nbsp;的数学表达式（比方说&nbsp;<code>3+5*2</code>）。有 <code>n</code>&nbsp;位小学生将计算这个数学表达式，并遵循如下 <strong>运算顺序</strong>&nbsp;：</p>
+
+<ol>
+    <li>按照 <strong>从左到右</strong>&nbsp;的顺序计算 <strong>乘法</strong>&nbsp;，然后</li>
+    <li>按照 <strong>从左到右</strong>&nbsp;的顺序计算 <strong>加法</strong>&nbsp;。</li>
+</ol>
+
+<p>给你一个长度为 <code>n</code>&nbsp;的整数数组&nbsp;<code>answers</code>&nbsp;，表示每位学生提交的答案。你的任务是给 <code>answer</code>&nbsp;数组按照如下 <strong>规则</strong>&nbsp;打分：</p>
+
+<ul>
+    <li>如果一位学生的答案 <strong>等于</strong>&nbsp;表达式的正确结果，这位学生将得到 <code>5</code>&nbsp;分。</li>
+    <li>否则，如果答案由&nbsp;<strong>一处或多处错误的运算顺序</strong>&nbsp;计算得到，那么这位学生能得到 <code>2</code>&nbsp;分。</li>
+    <li>否则，这位学生将得到 <code>0</code>&nbsp;分。</li>
+</ul>
+
+<p>请你返回所有学生的分数和。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/09/17/student_solving_math.png" style="width: 678px; height: 109px;" /></p>
+
+<pre>
+<b>输入：</b>s = "7+3*1*2", answers = [20,13,42]
+<b>输出：</b>7
+<b>解释：</b>如上图所示，正确答案为 13 ，因此有一位学生得分为 5 分：[20,<em><strong>13</strong></em>,42] 。
+一位学生可能通过错误的运算顺序得到结果 20 ：7+3=10，10*1=10，10*2=20 。所以这位学生得分为 2 分：[<em><strong>20</strong></em>,13,42] 。
+所有学生得分分别为：[2,5,0] 。所有得分之和为 2+5+0=7 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<b>输入：</b>s = "3+5*2", answers = [13,0,10,13,13,16,16]
+<b>输出：</b>19
+<b>解释：</b>表达式的正确结果为 13 ，所以有 3 位学生得到 5 分：[<em><strong>13</strong></em>,0,10,<em><strong>13</strong></em>,<em><strong>13</strong></em>,16,16] 。
+学生可能通过错误的运算顺序得到结果 16 ：3+5=8，8*2=16 。所以两位学生得到 2 分：[13,0,10,13,13,<em><strong>16</strong></em>,<em><strong>16</strong></em>] 。
+所有学生得分分别为：[5,0,0,5,5,2,2] 。所有得分之和为 5+0+0+5+5+2+2=19 。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<b>输入：</b>s = "6+0*1", answers = [12,9,6,4,8,6]
+<b>输出：</b>10
+<b>解释：</b>表达式的正确结果为 6 。
+如果一位学生通过错误的运算顺序计算该表达式，结果仍为 6 。
+根据打分规则，运算顺序错误的学生也将得到 5 分（因为他们仍然得到了正确的结果），而不是 2 分。
+所有学生得分分别为：[0,0,5,0,0,5] 。所有得分之和为 10 分。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>3 &lt;= s.length &lt;= 31</code></li>
+    <li><code>s</code>&nbsp;表示一个只包含&nbsp;<code>0-9</code>&nbsp;，<code>'+'</code>&nbsp;和&nbsp;<code>'*'</code>&nbsp;的合法表达式。</li>
+    <li>表达式中所有整数运算数字都在闭区间&nbsp;<code>[0, 9]</code>&nbsp;以内。</li>
+    <li><code>1 &lt;=</code>&nbsp;数学表达式中所有运算符数目（<code>'+'</code> 和&nbsp;<code>'*'</code>）&nbsp;<code>&lt;= 15</code></li>
+    <li>测试数据保证正确表达式结果在范围&nbsp;<code>[0, 1000]</code>&nbsp;以内。</li>
+    <li>测试用例保证乘法中间步骤中的值永远不会超过 <code>10<sup>9</sup></code>。</li>
+    <li><code>n == answers.length</code></li>
+    <li><code>1 &lt;= n &lt;= 10<sup>4</sup></code></li>
+    <li><code>0 &lt;= answers[i] &lt;= 1000</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int scoreOfStudents(string s, vector&lt;int&gt;&amp; answers) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int scoreOfStudents(String s, int[] answers) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def scoreOfStudents(self, s: str, answers: List[int]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string} s
+ * @param {number[]} answers
+ * @return {number}
+ */
+var scoreOfStudents = function(s, answers) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func scoreOfStudents(s string, answers []int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>The number of operators in the equation is less. Could you find the right answer then generate all possible answers using different orders of operations?</li>
+<li>Divide the equation into blocks separated by the operators, and use memoization on the results of blocks for optimization.</li>
+<li>Use set and the max limit of the answer for further optimization.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"7+3*1*2"
+[20,13,42]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个关于数学表达式计算和错误运算顺序得分的题目。关键点如下：</p>
+
+<ol>
+<li><strong>合法表达式</strong>：只包含数字 0-9、'+' 和 '*'，数字都是个位数</li>
+<li><strong>正确计算顺序</strong>：先计算所有乘法（从左到右），再计算所有加法（从左到右）</li>
+<li><strong>得分规则</strong>：
+<ul>
+<li>答案等于正确结果：5分</li>
+<li>答案通过错误运算顺序得到（但结果正确时仍得5分）：2分</li>
+<li>其他：0分</li>
+</ul></li>
+<li><strong>需要计算</strong>：所有学生得分总和</li>
+</ol>
+
+<p><strong>核心挑战</strong>：需要找出所有可能的运算顺序（包括正确和错误的）能产生的结果集合。</p>
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="关键观察">关键观察</h3>
+
+<ol>
+<li>表达式中的数字都是个位数（0-9）</li>
+<li>运算符只有 '+' 和 '*'</li>
+<li>错误运算顺序意味着可以任意选择先计算哪个运算，而不是严格按照先乘后加</li>
+<li>这实际上是一个<strong>表达式所有可能求值结果</strong>的问题</li>
+</ol>
+
+<h3 id="问题转化">问题转化</h3>
+
+<p>题目等价于：给定一个由数字和 '+'、'*' 组成的表达式，求：
+1. 按照先乘后加规则的正确结果
+2. 所有可能的运算顺序（任意结合顺序）能产生的结果集合</p>
+
+<p>然后对每个学生的答案：
+- 如果等于正确结果：5分
+- 否则如果在所有可能结果集合中：2分
+- 否则：0分</p>
+
+<h2 id="解法一区间dp动态规划">解法一：区间DP（动态规划）</h2>
+
+<h3 id="思路">思路</h3>
+
+<p>使用动态规划计算每个子表达式的所有可能结果：
+- <code>dp[i][j]</code> 表示从第 i 个数字到第 j 个数字（按数字索引）的所有可能结果集合
+- 通过枚举分割点 k，将表达式分为左右两部分，然后根据运算符组合结果</p>
+
+<h3 id="详细步骤">详细步骤</h3>
+
+<ol>
+<li>提取所有数字和运算符</li>
+<li>定义 <code>dp[i][j]</code> 为集合，存储子表达式 <code>nums[i..j]</code> 的所有可能结果</li>
+<li>状态转移：
+<ul>
+<li>如果 i == j：<code>dp[i][j] = {nums[i]}</code></li>
+<li>否则：枚举分割点 k (i ≤ k &lt; j)
+<ul>
+<li>运算符为 '+'：<code>dp[i][j] ∪= {a+b | a∈dp[i][k], b∈dp[k+1][j]}</code></li>
+<li>运算符为 '*'：<code>dp[i][j] ∪= {a*b | a∈dp[i][k], b∈dp[k+1][j]}</code></li>
+</ul></li>
+</ul></li>
+<li>计算所有可能结果集合</li>
+<li>计算正确结果（先乘后加）</li>
+<li>根据规则计算得分</li>
+</ol>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-实现">Go 实现</h4>
+
+<pre><code>func scoreOfStudents(s string, answers []int) int {
+    n := len(s)
+    // 提取数字和运算符
+    nums := []int{}
+    ops := []byte{}
+    for i := 0; i &lt; n; i++ {
+        if i%2 == 0 {
+            nums = append(nums, int(s[i]-'0'))
+        } else {
+            ops = append(ops, s[i])
+        }
+    }
+
+    m := len(nums)
+    // dp[i][j] 存储所有可能结果
+    dp := make([][]map[int]bool, m)
+    for i := range dp {
+        dp[i] = make([]map[int]bool, m)
+        for j := range dp[i] {
+            dp[i][j] = make(map[int]bool)
+        }
+    }
+
+    // 初始化：单个数字
+    for i := 0; i &lt; m; i++ {
+        dp[i][i][nums[i]] = true
+    }
+
+    // 区间DP
+    for length := 2; length &lt;= m; length++ {
+        for i := 0; i+length-1 &lt; m; i++ {
+            j := i + length - 1
+            for k := i; k &lt; j; k++ {
+                op := ops[k]
+                for a := range dp[i][k] {
+                    for b := range dp[k+1][j] {
+                        if op == '+' {
+                            sum := a + b
+                            if sum &lt;= 1000 {
+                                dp[i][j][sum] = true
+                            }
+                        } else { // '*'
+                            prod := a * b
+                            if prod &lt;= 1000 {
+                                dp[i][j][prod] = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // 所有可能结果
+    allResults := dp[0][m-1]
+
+    // 计算正确结果（先乘后加）
+    correctResult := calculateCorrect(s)
+
+    // 计算总分
+    totalScore := 0
+    for _, ans := range answers {
+        if ans == correctResult {
+            totalScore += 5
+        } else if allResults[ans] {
+            totalScore += 2
+        }
+    }
+
+    return totalScore
+}
+
+func calculateCorrect(s string) int {
+    // 先处理乘法
+    nums := []int{}
+    ops := []byte{}
+
+    // 第一遍：处理乘法
+    i := 0
+    for i &lt; len(s) {
+        if s[i] &gt;= '0' &amp;&amp; s[i] &lt;= '9' {
+            num := int(s[i] - '0')
+            // 查看后面是否是乘法
+            for i+1 &lt; len(s) &amp;&amp; s[i+1] == '*' {
+                i += 2
+                nextNum := int(s[i] - '0')
+                num *= nextNum
+            }
+            nums = append(nums, num)
+        } else if s[i] == '+' {
+            ops = append(ops, '+')
+        }
+        i++
+    }
+
+    // 第二遍：处理加法
+    result := nums[0]
+    for j := 1; j &lt; len(nums); j++ {
+        result += nums[j]
+    }
+
+    return result
+}
+</code></pre>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    int scoreOfStudents(string s, vector&lt;int&gt;&amp; answers) {
+        int n = s.length();
+        // 提取数字和运算符
+        vector&lt;int&gt; nums;
+        vector&lt;char&gt; ops;
+        for (int i = 0; i &lt; n; i++) {
+            if (i % 2 == 0) {
+                nums.push_back(s[i] - '0');
+            } else {
+                ops.push_back(s[i]);
+            }
+        }
+
+        int m = nums.size();
+        // dp[i][j] 存储所有可能结果
+        vector&lt;vector&lt;unordered_set&lt;int&gt;&gt;&gt; dp(m, vector&lt;unordered_set&lt;int&gt;&gt;(m));
+
+        // 初始化：单个数字
+        for (int i = 0; i &lt; m; i++) {
+            dp[i][i].insert(nums[i]);
+        }
+
+        // 区间DP
+        for (int len = 2; len &lt;= m; len++) {
+            for (int i = 0; i + len - 1 &lt; m; i++) {
+                int j = i + len - 1;
+                for (int k = i; k &lt; j; k++) {
+                    char op = ops[k];
+                    for (int a : dp[i][k]) {
+                        for (int b : dp[k+1][j]) {
+                            if (op == '+') {
+                                int sum = a + b;
+                                if (sum &lt;= 1000) {
+                                    dp[i][j].insert(sum);
+                                }
+                            } else { // '*'
+                                int prod = a * b;
+                                if (prod &lt;= 1000) {
+                                    dp[i][j].insert(prod);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 所有可能结果
+        unordered_set&lt;int&gt; allResults = dp[0][m-1];
+
+        // 计算正确结果
+        int correctResult = calculateCorrect(s);
+
+        // 计算总分
+        int totalScore = 0;
+        for (int ans : answers) {
+            if (ans == correctResult) {
+                totalScore += 5;
+            } else if (allResults.count(ans)) {
+                totalScore += 2;
+            }
+        }
+
+        return totalScore;
+    }
+
+private:
+    int calculateCorrect(string s) {
+        vector&lt;int&gt; nums;
+        int i = 0;
+
+        // 第一遍：处理乘法
+        while (i &lt; s.length()) {
+            if (isdigit(s[i])) {
+                int num = s[i] - '0';
+                // 处理连续的乘法
+                while (i + 1 &lt; s.length() &amp;&amp; s[i+1] == '*') {
+                    i += 2;
+                    int nextNum = s[i] - '0';
+                    num *= nextNum;
+                }
+                nums.push_back(num);
+            }
+            i++;
+        }
+
+        // 第二遍：处理加法
+        int result = 0;
+        for (int num : nums) {
+            result += num;
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(m³ × R²)，其中 m 是数字个数，R 是可能结果的数量（最大 1000）</li>
+<li><strong>空间复杂度</strong>：O(m² × R)，存储 DP 表</li>
+</ul>
+
+<h2 id="解法二记忆化搜索-剪枝">解法二：记忆化搜索 + 剪枝</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<p>使用递归+记忆化搜索，通过剪枝减少不必要的计算：
+1. 递归计算每个子表达式的所有可能结果
+2. 使用备忘录避免重复计算
+3. 剪枝：超过 1000 的结果不存储</p>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-实现-2">Go 实现</h4>
+
+<pre><code>func scoreOfStudents(s string, answers []int) int {
+    n := len(s)
+    // 提取数字和运算符
+    nums := make([]int, (n+1)/2)
+    ops := make([]byte, (n-1)/2)
+
+    for i := 0; i &lt; n; i++ {
+        if i%2 == 0 {
+            nums[i/2] = int(s[i] - '0')
+        } else {
+            ops[i/2] = s[i]
+        }
+    }
+
+    m := len(nums)
+    memo := make([][]map[int]bool, m)
+    for i := range memo {
+        memo[i] = make([]map[int]bool, m)
+    }
+
+    // 计算所有可能结果
+    allResults := dfs(nums, ops, 0, m-1, memo)
+
+    // 计算正确结果
+    correctResult := calculateCorrect(s)
+
+    // 计算总分
+    totalScore := 0
+    for _, ans := range answers {
+        if ans == correctResult {
+            totalScore += 5
+        } else if allResults[ans] {
+            totalScore += 2
+        }
+    }
+
+    return totalScore
+}
+
+func dfs(nums []int, ops []byte, l, r int, memo [][]map[int]bool) map[int]bool {
+    if memo[l][r] != nil {
+        return memo[l][r]
+    }
+
+    result := make(map[int]bool)
+
+    if l == r {
+        result[nums[l]] = true
+        memo[l][r] = result
+        return result
+    }
+
+    for i := l; i &lt; r; i++ {
+        leftResults := dfs(nums, ops, l, i, memo)
+        rightResults := dfs(nums, ops, i+1, r, memo)
+
+        op := ops[i]
+        for a := range leftResults {
+            for b := range rightResults {
+                var val int
+                if op == '+' {
+                    val = a + b
+                } else {
+                    val = a * b
+                }
+                if val &lt;= 1000 {
+                    result[val] = true
+                }
+            }
+        }
+    }
+
+    memo[l][r] = result
+    return result
+}
+
+// calculateCorrect 函数同解法一
+</code></pre>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    int scoreOfStudents(string s, vector&lt;int&gt;&amp; answers) {
+        int n = s.length();
+        int m = (n + 1) / 2;
+        vector&lt;int&gt; nums(m);
+        vector&lt;char&gt; ops(m - 1);
+
+        for (int i = 0; i &lt; n; i++) {
+            if (i % 2 == 0) {
+                nums[i / 2] = s[i] - '0';
+            } else {
+                ops[i / 2] = s[i];
+            }
+        }
+
+        vector&lt;vector&lt;unordered_set&lt;int&gt;&gt;&gt; memo(m, vector&lt;unordered_set&lt;int&gt;&gt;(m));
+        unordered_set&lt;int&gt; allResults = dfs(nums, ops, 0, m - 1, memo);
+
+        int correctResult = calculateCorrect(s);
+
+        int totalScore = 0;
+        for (int ans : answers) {
+            if (ans == correctResult) {
+                totalScore += 5;
+            } else if (allResults.count(ans)) {
+                totalScore += 2;
+            }
+        }
+
+        return totalScore;
+    }
+
+private:
+    unordered_set&lt;int&gt; dfs(vector&lt;int&gt;&amp; nums, vector&lt;char&gt;&amp; ops, int l, int r, 
+                          vector&lt;vector&lt;unordered_set&lt;int&gt;&gt;&gt;&amp; memo) {
+        if (!memo[l][r].empty()) {
+            return memo[l][r];
+        }
+
+        unordered_set&lt;int&gt; result;
+
+        if (l == r) {
+            result.insert(nums[l]);
+            memo[l][r] = result;
+            return result;
+        }
+
+        for (int i = l; i &lt; r; i++) {
+            auto leftResults = dfs(nums, ops, l, i, memo);
+            auto rightResults = dfs(nums, ops, i + 1, r, memo);
+
+            char op = ops[i];
+            for (int a : leftResults) {
+                for (int b : rightResults) {
+                    int val;
+                    if (op == '+') {
+                        val = a + b;
+                    } else {
+                        val = a * b;
+                    }
+                    if (val &lt;= 1000) {
+                        result.insert(val);
+                    }
+                }
+            }
+        }
+
+        memo[l][r] = result;
+        return result;
+    }
+
+    // calculateCorrect 函数同解法一
+};
+</code></pre>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(m³ × R²)，与 DP 相同，但实际运行可能更快（剪枝）</li>
+<li><strong>空间复杂度</strong>：O(m² × R)</li>
+</ul>
+
+<h2 id="解法三优化版dp按运算符dp">解法三：优化版DP（按运算符DP）</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<p>观察到表达式是数字和运算符交替的，可以按运算符进行DP：
+1. <code>dp[i][j]</code> 表示从第 i 个运算符到第 j 个运算符之间的表达式所有可能结果
+2. 减少状态数量，提高效率</p>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<h4 id="go-实现-3">Go 实现</h4>
+
+<pre><code>func scoreOfStudents(s string, answers []int) int {
+    n := len(s)
+    // 提取数字
+    nums := []int{}
+    for i := 0; i &lt; n; i += 2 {
+        nums = append(nums, int(s[i]-'0'))
+    }
+
+    m := len(nums)
+    if m == 1 {
+        // 只有一个数字
+        correct := nums[0]
+        total := 0
+        for _, ans := range answers {
+            if ans == correct {
+                total += 5
+            }
+        }
+        return total
+    }
+
+    // 提取运算符
+    ops := []byte{}
+    for i := 1; i &lt; n; i += 2 {
+        ops = append(ops, s[i])
+    }
+
+    // dp[i][j] 表示 nums[i..j] 的所有可能结果
+    dp := make([][]map[int]bool, m)
+    for i := range dp {
+        dp[i] = make([]map[int]bool, m)
+        for j := range dp[i] {
+            dp[i][j] = make(map[int]bool)
+        }
+    }
+
+    // 初始化
+    for i := 0; i &lt; m; i++ {
+        dp[i][i][nums[i]] = true
+    }
+
+    // 按长度DP
+    for length := 2; length &lt;= m; length++ {
+        for i := 0; i+length-1 &lt; m; i++ {
+            j := i + length - 1
+            // 枚举最后一个运算符位置
+            for k := i; k &lt; j; k++ {
+                leftSet := dp[i][k]
+                rightSet := dp[k+1][j]
+                op := ops[k]
+
+                for a := range leftSet {
+                    for b := range rightSet {
+                        var val int
+                        if op == '+' {
+                            val = a + b
+                        } else {
+                            val = a * b
+                        }
+                        if val &lt;= 1000 {
+                            dp[i][j][val] = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    allResults := dp[0][m-1]
+    correctResult := calculateCorrect(s)
+
+    totalScore := 0
+    for _, ans := range answers {
+        if ans == correctResult {
+            totalScore += 5
+        } else if allResults[ans] {
+            totalScore += 2
+        }
+    }
+
+    return totalScore
+}
+
+// calculateCorrect 函数同解法一
+</code></pre>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<p>```cpp
+class Solution {
+public:
+    int scoreOfStudents(string s, vector<int>&amp; answers) {
+        int n = s.length();
+        vector<int> nums;
+        for (int i = 0; i &lt; n; i += 2) {
+            nums.push_back(s[i] - '0');
+        }</p>
+
+<pre><code>    int m = nums.size();
+    if (m == 1) {
+        int correct = nums[0];
+        int total = 0;
+        for (int ans : answers) {
+            if (ans == correct) total += 5;
+        }
+        return total;
+    }
+
+    vector&lt;char&gt; ops;
+    for (int i = 1; i &lt; n; i += 2) {
+        ops.push_back(s[i]);
+    }
+
+    vector&lt;vector&lt;unordered_set&lt;int&gt;&gt;&gt; dp(m, vector&lt;unordered_set&lt;int&gt;&gt;(m));
+
+    // 初始化
+    for (int i = 0; i &lt; m; i++) {
+        dp[i][i].insert(nums[i]);
+    }
+
+    // DP
+    for
+</code></pre>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 18:48:40</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3222. 求出硬币游戏的赢家 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 03:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3222. 求出硬币游戏的赢家</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/find-the-winning-player-in-coin-game/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3222-求出硬币游戏的赢家">3222. 求出硬币游戏的赢家</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数学, 博弈, 模拟</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/find-the-winning-player-in-coin-game/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你两个 <strong>正</strong>&nbsp;整数&nbsp;<code>x</code>&nbsp;和&nbsp;<code>y</code>&nbsp;，分别表示价值为 75 和 10 的硬币的数目。</p>
+
+<p>Alice 和 Bob 正在玩一个游戏。每一轮中，Alice&nbsp;先进行操作，Bob 后操作。每次操作中，玩家需要拿走价值 <b>总和</b>&nbsp;为 115 的硬币。如果一名玩家无法执行此操作，那么这名玩家 <strong>输掉</strong>&nbsp;游戏。</p>
+
+<p>两名玩家都采取 <strong>最优</strong>&nbsp;策略，请你返回游戏的赢家。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>x = 2, y = 7</span></p>
+
+<p><span class="example-io"><b>输出：</b>"Alice"</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>游戏一次操作后结束：</p>
+
+<ul>
+    <li>Alice 拿走 1 枚价值为 75 的硬币和 4 枚价值为 10 的硬币。</li>
+</ul>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>x = 4, y = 11</span></p>
+
+<p><span class="example-io"><b>输出：</b>"Bob"</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>游戏 2 次操作后结束：</p>
+
+<ul>
+    <li>Alice 拿走&nbsp;1 枚价值为 75 的硬币和 4 枚价值为 10 的硬币。</li>
+    <li>Bob 拿走&nbsp;1 枚价值为 75 的硬币和 4 枚价值为 10 的硬币。</li>
+</ul>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= x, y &lt;= 100</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    string winningPlayer(int x, int y) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public String winningPlayer(int x, int y) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def winningPlayer(self, x: int, y: int) -&gt; str:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} x
+ * @param {number} y
+ * @return {string}
+ */
+var winningPlayer = function(x, y) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func winningPlayer(x int, y int) string {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>The only way to make 115 is to use one coin of value 75 and four coins of value 10. Each turn uses up these many coins.</li>
+<li>Hence the number of turns is <code>min(x, y / 4)</code>.</li>
+<li>Determine the winner from its parity.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>2
+7
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个双人博弈游戏，规则如下：
+- 有面值75和10的硬币，数量分别为x和y
+- 每轮必须拿走总价值为115的硬币组合
+- 组合只能是：1个75 + 4个10（75+40=115）
+- Alice先手，Bob后手
+- 无法操作者输
+- 双方都采取最优策略</p>
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="关键观察">关键观察</h3>
+
+<ol>
+<li>每次操作必须消耗1个75硬币和4个10硬币</li>
+<li>游戏能进行的轮数取决于min(x, y//4)</li>
+<li>这是一个典型的公平组合游戏，可以用博弈论分析</li>
+</ol>
+
+<h3 id="核心逻辑">核心逻辑</h3>
+
+<ul>
+<li>游戏最多能进行 <code>min(x, y//4)</code> 轮</li>
+<li>如果总轮数是奇数：Alice赢（因为Alice先手，最后一轮是Alice操作）</li>
+<li>如果总轮数是偶数：Bob赢（最后一轮是Bob操作）</li>
+</ul>
+
+<h2 id="解法">解法</h2>
+
+<h3 id="解法一数学计算法最优解">解法一：数学计算法（最优解）</h3>
+
+<p>直接计算最大轮数，根据奇偶性判断胜负。</p>
+
+<p><strong>时间复杂度</strong>：O(1)<br />
+<strong>空间复杂度</strong>：O(1)</p>
+
+<pre><code>func winnerOfGame(x int, y int) string {
+    // 计算最多能进行的轮数
+    rounds := min(x, y/4)
+    // 奇数轮Alice赢，偶数轮Bob赢
+    if rounds%2 == 1 {
+        return "Alice"
+    }
+    return "Bob"
+}
+
+func min(a, b int) int {
+    if a &lt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    string winnerOfGame(int x, int y) {
+        // 计算最多能进行的轮数
+        int rounds = min(x, y / 4);
+        // 奇数轮Alice赢，偶数轮Bob赢
+        return (rounds % 2 == 1) ? "Alice" : "Bob";
+    }
+};
+</code></pre>
+
+<h3 id="解法二递归记忆化搜索">解法二：递归+记忆化搜索</h3>
+
+<p>使用递归模拟游戏过程，记录胜负状态。</p>
+
+<p><strong>时间复杂度</strong>：O(x<em>y)<br />
+<strong>空间复杂度</strong>：O(x</em>y)</p>
+
+<pre><code>func winnerOfGame(x int, y int) string {
+    memo := make([][]int, x+1)
+    for i := range memo {
+        memo[i] = make([]int, y+1)
+        for j := range memo[i] {
+            memo[i][j] = -1
+        }
+    }
+
+    var dfs func(x, y int) bool
+    dfs = func(x, y int) bool {
+        if x &lt; 1 || y &lt; 4 {
+            return false // 无法操作，当前玩家输
+        }
+
+        if memo[x][y] != -1 {
+            return memo[x][y] == 1
+        }
+
+        // 尝试拿走1个75和4个10
+        // 如果对手在剩余状态下会输，则当前玩家赢
+        if !dfs(x-1, y-4) {
+            memo[x][y] = 1
+            return true
+        }
+
+        memo[x][y] = 0
+        return false
+    }
+
+    if dfs(x, y) {
+        return "Alice"
+    }
+    return "Bob"
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    string winnerOfGame(int x, int y) {
+        vector&lt;vector&lt;int&gt;&gt; memo(x+1, vector&lt;int&gt;(y+1, -1));
+
+        function&lt;bool(int, int)&gt; dfs = [&amp;](int x, int y) -&gt; bool {
+            if (x &lt; 1 || y &lt; 4) return false;
+
+            if (memo[x][y] != -1) return memo[x][y] == 1;
+
+            // 当前玩家操作后，看对手是否会输
+            if (!dfs(x-1, y-4)) {
+                memo[x][y] = 1;
+                return true;
+            }
+
+            memo[x][y] = 0;
+            return false;
+        };
+
+        return dfs(x, y) ? "Alice" : "Bob";
+    }
+};
+</code></pre>
+
+<h3 id="解法三动态规划">解法三：动态规划</h3>
+
+<p>自底向上计算所有状态的胜负。</p>
+
+<p><strong>时间复杂度</strong>：O(x<em>y)<br />
+<strong>空间复杂度</strong>：O(x</em>y)</p>
+
+<pre><code>func winnerOfGame(x int, y int) string {
+    // dp[i][j]表示有i个75硬币和j个10硬币时，当前玩家是否能赢
+    dp := make([][]bool, x+1)
+    for i := range dp {
+        dp[i] = make([]bool, y+1)
+    }
+
+    for i := 1; i &lt;= x; i++ {
+        for j := 0; j &lt;= y; j++ {
+            // 如果可以操作，且操作后对手会输，则当前玩家赢
+            if i &gt;= 1 &amp;&amp; j &gt;= 4 &amp;&amp; !dp[i-1][j-4] {
+                dp[i][j] = true
+            }
+        }
+    }
+
+    if dp[x][y] {
+        return "Alice"
+    }
+    return "Bob"
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    string winnerOfGame(int x, int y) {
+        vector&lt;vector&lt;bool&gt;&gt; dp(x+1, vector&lt;bool&gt;(y+1, false));
+
+        for (int i = 1; i &lt;= x; i++) {
+            for (int j = 0; j &lt;= y; j++) {
+                // 如果可以操作，且操作后对手会输，则当前玩家赢
+                if (i &gt;= 1 &amp;&amp; j &gt;= 4 &amp;&amp; !dp[i-1][j-4]) {
+                    dp[i][j] = true;
+                }
+            }
+        }
+
+        return dp[x][y] ? "Alice" : "Bob";
+    }
+};
+</code></pre>
+
+<h2 id="复杂度对比">复杂度对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>时间复杂度</th>
+  <th>空间复杂度</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>数学计算法</td>
+  <td>O(1)</td>
+  <td>O(1)</td>
+  <td>效率最高，代码简洁</td>
+  <td>需要数学推导</td>
+</tr>
+<tr>
+  <td>递归+记忆化</td>
+  <td>O(x*y)</td>
+  <td>O(x*y)</td>
+  <td>通用性强，易于理解</td>
+  <td>效率较低</td>
+</tr>
+<tr>
+  <td>动态规划</td>
+  <td>O(x*y)</td>
+  <td>O(x*y)</td>
+  <td>避免递归开销</td>
+  <td>需要额外空间</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="总结">总结</h2>
+
+<ol>
+<li><strong>数学计算法</strong>是最优解，直接利用游戏特性得出公式</li>
+<li><strong>递归+记忆化</strong>和<strong>动态规划</strong>是通用解法，适用于更复杂的博弈问题</li>
+<li>对于本题，由于约束条件简单（x,y≤100），三种方法都能通过</li>
+<li>实际面试中，推荐使用数学计算法，并解释推导过程</li>
+</ol>
+
+<p><strong>推荐解法</strong>：数学计算法，因为它是最优的，且能体现对问题本质的理解。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 17:53:01</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -621,3 +621,32 @@ body {
         page-break-inside: avoid;
     }
 }
+
+/* 可点击的题目卡片 */
+.question-card.clickable {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.question-card.clickable:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-blue);
+}
+
+.question-card.clickable .question-header {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.question-card.clickable .record-arrow {
+    margin-left: auto;
+    font-size: 20px;
+    color: var(--text-secondary);
+    transition: transform 0.2s;
+}
+
+.question-card.clickable:hover .record-arrow {
+    transform: translateX(4px);
+    color: var(--primary-blue);
+}

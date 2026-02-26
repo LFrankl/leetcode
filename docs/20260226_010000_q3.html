@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. 两数之和 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 01:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1. 两数之和</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/two-sum/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1-两数之和">1. 两数之和</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数组, 哈希表</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/two-sum/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给定一个整数数组 <code>nums</code>&nbsp;和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值 </strong><em><code>target</code></em>&nbsp; 的那&nbsp;<strong>两个</strong>&nbsp;整数，并返回它们的数组下标。</p>
+
+<p>你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。</p>
+
+<p>你可以按任意顺序返回答案。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [2,7,11,15], target = 9
+<strong>输出：</strong>[0,1]
+<strong>解释：</strong>因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [3,2,4], target = 6
+<strong>输出：</strong>[1,2]
+</pre>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [3,3], target = 6
+<strong>输出：</strong>[0,1]
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>2 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+    <li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
+    <li><code>-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></code></li>
+    <li><strong>只会存在一个有效答案</strong></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>进阶：</strong>你可以想出一个时间复杂度小于 <code>O(n<sup>2</sup>)</code> 的算法吗？</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int[] twoSum(int[] nums, int target) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def twoSum(self, nums: List[int], target: int) -&gt; List[int]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func twoSum(nums []int, target int) []int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>A really brute force way would be to search for all possible pairs of numbers but that would be too slow. Again, it's best to try out brute force solutions just for completeness. It is from these brute force solutions that you can come up with optimizations.</li>
+<li>So, if we fix one of the numbers, say <code>x</code>, we have to scan the entire array to find the next number <code>y</code> which is <code>value - x</code> where value is the input parameter. Can we change our array somehow so that this search becomes faster?</li>
+<li>The second train of thought is, without changing the array, can we use additional space somehow? Like maybe a hash map to speed up the search?</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[2,7,11,15]
+9
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h1 id="两数之和-详细解题分析">两数之和 - 详细解题分析</h1>
+
+<h2 id="1-题目分析和解题思路">1. 题目分析和解题思路</h2>
+
+<p><strong>问题核心</strong>：在数组中找到两个数，使它们的和等于目标值 target。</p>
+
+<p><strong>关键约束</strong>：
+- 不能使用同一个元素两次
+- 假设只有一个有效答案
+- 需要返回元素的下标（不是值本身）</p>
+
+<p><strong>基本思路</strong>：
+1. <strong>暴力枚举</strong>：遍历所有可能的元素对，检查它们的和是否等于 target
+2. <strong>哈希表优化</strong>：利用哈希表存储已遍历元素的值和下标，快速查找 complement = target - current</p>
+
+<h2 id="2-不同解法及实现">2. 不同解法及实现</h2>
+
+<h3 id="解法一暴力枚举法">解法一：暴力枚举法</h3>
+
+<p><strong>思路</strong>：使用两层循环遍历所有可能的元素组合</p>
+
+<pre><code>// Go 实现
+func twoSum(nums []int, target int) []int {
+    n := len(nums)
+    for i := 0; i &lt; n; i++ {
+        for j := i + 1; j &lt; n; j++ {
+            if nums[i] + nums[j] == target {
+                return []int{i, j}
+            }
+        }
+    }
+    return nil
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+        int n = nums.size();
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = i + 1; j &lt; n; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return {i, j};
+                }
+            }
+        }
+        return {};
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(n²)，两层循环
+- 空间复杂度：O(1)，只使用了常数空间</p>
+
+<h3 id="解法二哈希表法一次遍历">解法二：哈希表法（一次遍历）</h3>
+
+<p><strong>思路</strong>：遍历数组，对于每个元素，检查 target - nums[i] 是否在哈希表中</p>
+
+<pre><code>// Go 实现
+func twoSum(nums []int, target int) []int {
+    hashMap := make(map[int]int)
+
+    for i, num := range nums {
+        complement := target - num
+        if idx, exists := hashMap[complement]; exists {
+            return []int{idx, i}
+        }
+        hashMap[num] = i
+    }
+    return nil
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+        unordered_map&lt;int, int&gt; hashMap;
+
+        for (int i = 0; i &lt; nums.size(); i++) {
+            int complement = target - nums[i];
+            if (hashMap.find(complement) != hashMap.end()) {
+                return {hashMap[complement], i};
+            }
+            hashMap[nums[i]] = i;
+        }
+        return {};
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(n)，只需一次遍历
+- 空间复杂度：O(n)，最坏情况下需要存储所有元素</p>
+
+<h3 id="解法三哈希表法两次遍历">解法三：哈希表法（两次遍历）</h3>
+
+<p><strong>思路</strong>：先构建完整的哈希表，再查找匹配对</p>
+
+<pre><code>// Go 实现
+func twoSum(nums []int, target int) []int {
+    hashMap := make(map[int]int)
+
+    // 第一次遍历：构建哈希表
+    for i, num := range nums {
+        hashMap[num] = i
+    }
+
+    // 第二次遍历：查找匹配
+    for i, num := range nums {
+        complement := target - num
+        if idx, exists := hashMap[complement]; exists &amp;&amp; idx != i {
+            return []int{i, idx}
+        }
+    }
+    return nil
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+        unordered_map&lt;int, int&gt; hashMap;
+
+        // 第一次遍历：构建哈希表
+        for (int i = 0; i &lt; nums.size(); i++) {
+            hashMap[nums[i]] = i;
+        }
+
+        // 第二次遍历：查找匹配
+        for (int i = 0; i &lt; nums.size(); i++) {
+            int complement = target - nums[i];
+            if (hashMap.find(complement) != hashMap.end() &amp;&amp; hashMap[complement] != i) {
+                return {i, hashMap[complement]};
+            }
+        }
+        return {};
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(n)，两次遍历
+- 空间复杂度：O(n)，需要存储所有元素</p>
+
+<h2 id="3-解法对比和优缺点">3. 解法对比和优缺点</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>时间复杂度</th>
+  <th>空间复杂度</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>暴力枚举</td>
+  <td>O(n²)</td>
+  <td>O(1)</td>
+  <td>实现简单，无需额外空间</td>
+  <td>效率低，不适合大数据量</td>
+</tr>
+<tr>
+  <td>哈希表（一次遍历）</td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+  <td>效率最高，一次遍历完成</td>
+  <td>需要额外空间</td>
+</tr>
+<tr>
+  <td>哈希表（两次遍历）</td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+  <td>逻辑清晰，分步明确</td>
+  <td>需要两次遍历</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="4-推荐解法">4. 推荐解法</h2>
+
+<p><strong>推荐使用解法二（哈希表一次遍历）</strong>，原因：
+1. <strong>效率最高</strong>：只需一次遍历即可完成
+2. <strong>处理重复元素</strong>：当遇到重复元素时，后出现的会覆盖先出现的，这恰好符合题目要求（不能使用同一个元素两次）
+3. <strong>代码简洁</strong>：逻辑清晰，易于理解和维护</p>
+
+<h2 id="5-特殊情况处理">5. 特殊情况处理</h2>
+
+<ol>
+<li><p><strong>重复元素</strong>：如 nums = [3, 3], target = 6</p>
+
+<ul>
+<li>哈希表法能正确处理，因为查找时检查了下标是否相同</li>
+</ul></li>
+<li><p><strong>负数和大数</strong>：题目范围是 -10⁹ 到 10⁹</p>
+
+<ul>
+<li>哈希表法不受数值范围影响</li>
+</ul></li>
+<li><p><strong>无解情况</strong>：题目保证有且只有一个有效答案，实际应用中可返回空数组或特定值</p></li>
+</ol>
+
+<h2 id="6-进阶思考">6. 进阶思考</h2>
+
+<p>对于更复杂的情况（如需要返回所有可能的解），可以考虑：
+1. 使用哈希表存储所有相同值的下标列表
+2. 先排序再使用双指针法（但需要额外处理下标信息）</p>
+
+<p><strong>总结</strong>：两数之和是哈希表应用的经典例题，掌握哈希表解法对于解决类似问题（如三数之和、四数之和）有重要帮助。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 19:05:33</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1408. 数组中的字符串匹配 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 00:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1408. 数组中的字符串匹配</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/string-matching-in-an-array/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1408-数组中的字符串匹配">1408. 数组中的字符串匹配</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数组, 字符串, 字符串匹配</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/string-matching-in-an-array/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个字符串数组 <code>words</code> ，数组中的每个字符串都可以看作是一个单词。请你按 <strong>任意</strong> 顺序返回 <code>words</code> 中是其他单词的 <span data-keyword="substring-nonempty">子字符串</span> 的所有单词。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>words = ["mass","as","hero","superhero"]
+<strong>输出：</strong>["as","hero"]
+<strong>解释：</strong>"as" 是 "mass" 的子字符串，"hero" 是 "superhero" 的子字符串。
+["hero","as"] 也是有效的答案。
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>words = ["leetcode","et","code"]
+<strong>输出：</strong>["et","code"]
+<strong>解释：</strong>"et" 和 "code" 都是 "leetcode" 的子字符串。
+</pre>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>words = ["blue","green","bu"]
+<strong>输出：</strong>[]
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= words.length &lt;= 100</code></li>
+    <li><code>1 &lt;= words[i].length &lt;= 30</code></li>
+    <li><code>words[i]</code> 仅包含小写英文字母。</li>
+    <li>题目数据 <strong>保证</strong> <code>words</code>&nbsp;的每个字符串都是独一无二的。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;string&gt; stringMatching(vector&lt;string&gt;&amp; words) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public List&lt;String&gt; stringMatching(String[] words) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def stringMatching(self, words: List[str]) -&gt; List[str]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string[]} words
+ * @return {string[]}
+ */
+var stringMatching = function(words) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func stringMatching(words []string) []string {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Bruteforce to find if one string is substring of another or use KMP algorithm.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>["mass","as","hero","superhero"]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>题目要求找出字符串数组中，那些是其他单词子字符串的单词。需要返回所有符合条件的单词，顺序任意。</p>
+
+<p><strong>关键点</strong>：
+- 一个单词是其他单词的子字符串（不能是自身）
+- 所有单词都是唯一的
+- 需要检查每个单词是否是其他任意单词的子串</p>
+
+<h2 id="解法一暴力枚举法">解法一：暴力枚举法</h2>
+
+<h3 id="解题思路">解题思路</h3>
+
+<p>最直接的方法：对于每个单词，检查它是否是其他任意单词的子串。使用双重循环实现。</p>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-实现">Go 实现</h4>
+
+<pre><code>func stringMatching(words []string) []string {
+    var result []string
+    n := len(words)
+
+    for i := 0; i &lt; n; i++ {
+        for j := 0; j &lt; n; j++ {
+            if i != j &amp;&amp; len(words[i]) &lt;= len(words[j]) {
+                // 检查 words[i] 是否是 words[j] 的子串
+                if strings.Contains(words[j], words[i]) {
+                    result = append(result, words[i])
+                    break  // 找到一个包含它的单词即可
+                }
+            }
+        }
+    }
+    return result
+}
+</code></pre>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;string&gt; stringMatching(vector&lt;string&gt;&amp; words) {
+        vector&lt;string&gt; result;
+        int n = words.size();
+
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                if (i != j &amp;&amp; words[i].length() &lt;= words[j].length()) {
+                    // 检查 words[i] 是否是 words[j] 的子串
+                    if (words[j].find(words[i]) != string::npos) {
+                        result.push_back(words[i]);
+                        break;  // 找到一个包含它的单词即可
+                    }
+                }
+            }
+        }
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n² * L)，其中 n 是单词数量，L 是单词平均长度。最坏情况下需要比较所有单词对。</li>
+<li><strong>空间复杂度</strong>：O(1)（不考虑输出结果的空间）</li>
+</ul>
+
+<h2 id="解法二排序-后缀检查法">解法二：排序 + 后缀检查法</h2>
+
+<h3 id="解题思路-2">解题思路</h3>
+
+<ol>
+<li>按长度对单词排序，较短的单词更可能是较长单词的子串</li>
+<li>对于每个单词，只检查它后面的单词（因为后面的单词更长）</li>
+<li>这样可以减少不必要的比较</li>
+</ol>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-实现-2">Go 实现</h4>
+
+<pre><code>func stringMatching(words []string) []string {
+    // 按长度排序
+    sortedWords := make([]string, len(words))
+    copy(sortedWords, words)
+    sort.Slice(sortedWords, func(i, j int) bool {
+        return len(sortedWords[i]) &lt; len(sortedWords[j])
+    })
+
+    var result []string
+    n := len(sortedWords)
+
+    for i := 0; i &lt; n; i++ {
+        for j := i + 1; j &lt; n; j++ {
+            // 只检查更长的单词
+            if strings.Contains(sortedWords[j], sortedWords[i]) {
+                result = append(result, sortedWords[i])
+                break  // 找到一个包含它的单词即可
+            }
+        }
+    }
+    return result
+}
+</code></pre>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;string&gt; stringMatching(vector&lt;string&gt;&amp; words) {
+        // 按长度排序
+        vector&lt;string&gt; sortedWords = words;
+        sort(sortedWords.begin(), sortedWords.end(), 
+             [](const string&amp; a, const string&amp; b) {
+                 return a.length() &lt; b.length();
+             });
+
+        vector&lt;string&gt; result;
+        int n = sortedWords.size();
+
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = i + 1; j &lt; n; j++) {
+                // 只检查更长的单词
+                if (sortedWords[j].find(sortedWords[i]) != string::npos) {
+                    result.push_back(sortedWords[i]);
+                    break;  // 找到一个包含它的单词即可
+                }
+            }
+        }
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n log n + n² * L)，排序需要 O(n log n)，比较需要 O(n² * L)</li>
+<li><strong>空间复杂度</strong>：O(n)，需要额外的数组存储排序后的单词</li>
+</ul>
+
+<h2 id="解法三连接字符串法">解法三：连接字符串法</h2>
+
+<h3 id="解题思路-3">解题思路</h3>
+
+<ol>
+<li>将所有单词用特殊字符连接成一个长字符串</li>
+<li>对于每个单词，检查它在这个长字符串中出现的次数</li>
+<li>如果出现次数大于1，说明它是其他单词的子串</li>
+</ol>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<h4 id="go-实现-3">Go 实现</h4>
+
+<pre><code>func stringMatching(words []string) []string {
+    // 用特殊字符连接所有单词
+    joined := strings.Join(words, "#")
+
+    var result []string
+    for _, word := range words {
+        // 在连接后的字符串中查找该单词
+        // 需要确保找到的位置不是单词本身的一部分
+        count := 0
+        pos := 0
+        for {
+            idx := strings.Index(joined[pos:], word)
+            if idx == -1 {
+                break
+            }
+            count++
+            pos += idx + 1
+            if count &gt;= 2 {
+                // 出现至少2次，说明是其他单词的子串
+                result = append(result, word)
+                break
+            }
+        }
+    }
+    return result
+}
+</code></pre>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;string&gt; stringMatching(vector&lt;string&gt;&amp; words) {
+        // 用特殊字符连接所有单词
+        string joined;
+        for (const string&amp; word : words) {
+            joined += word + "#";
+        }
+
+        vector&lt;string&gt; result;
+        for (const string&amp; word : words) {
+            // 统计单词在连接字符串中出现的次数
+            int count = 0;
+            size_t pos = 0;
+
+            while ((pos = joined.find(word, pos)) != string::npos) {
+                count++;
+                pos += 1;  // 移动位置继续查找
+                if (count &gt;= 2) {
+                    // 出现至少2次，说明是其他单词的子串
+                    result.push_back(word);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-3">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n * L * S)，其中 S 是连接后字符串的长度，最坏情况下接近 n*L</li>
+<li><strong>空间复杂度</strong>：O(n * L)，需要存储连接后的字符串</li>
+</ul>
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>暴力枚举</td>
+  <td>实现简单，无需额外空间</td>
+  <td>时间复杂度高，O(n² * L)</td>
+  <td>数据规模小（n ≤ 100）</td>
+</tr>
+<tr>
+  <td>排序+后缀检查</td>
+  <td>减少比较次数，效率较高</td>
+  <td>需要排序，改变原始顺序</td>
+  <td>通用场景，性能较好</td>
+</tr>
+<tr>
+  <td>连接字符串</td>
+  <td>思路巧妙，代码简洁</td>
+  <td>可能误判（如"a"在"ab"中出现），需要特殊分隔符</td>
+  <td>需要快速实现，对性能要求不高</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="推荐解法">推荐解法</h2>
+
+<p>对于本题的数据规模（n ≤ 100，L ≤ 30），<strong>解法一（暴力枚举）</strong> 是最简单直接的选择，代码清晰易懂，性能也完全足够。</p>
+
+<p><strong>解法二（排序+后缀检查）</strong> 在性能上更优，特别是当单词数量较多时，是更通用的解决方案。</p>
+
+<p><strong>解法三（连接字符串）</strong> 虽然思路巧妙，但需要注意处理边界情况，实际应用中较少使用。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 17:47:40</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

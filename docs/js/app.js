@@ -1,4 +1,4 @@
-// LeetCode 每日题目 - Google 风格应用
+// LeetCode 每日题目 - Google 风格应用（三层结构）
 
 class LeetCodeApp {
     constructor() {
@@ -182,11 +182,11 @@ class LeetCodeApp {
         }).join('');
     }
 
-    async viewRecord(index, date) {
+    viewRecord(index, date) {
         const records = this.recordsByDate[date];
         const record = records[index];
 
-        // 切换到详情视图
+        // 切换到详情视图（题目列表）
         this.currentView = 'detail';
         document.getElementById('recordListView').style.display = 'none';
         document.getElementById('questionDetailView').classList.add('active');
@@ -195,104 +195,15 @@ class LeetCodeApp {
         document.getElementById('detailTitle').textContent = record.date;
         document.getElementById('detailSubtitle').textContent = `共 ${record.count} 题`;
 
-        // 加载题目内容
-        await this.loadQuestions(record.file, record.count);
+        // 显示题目列表
+        this.showQuestionList(record);
 
         // 滚动到顶部
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    async loadQuestions(file, count) {
+    showQuestionList(record) {
         const questionList = document.getElementById('questionList');
-
-        // 显示加载状态
-        questionList.innerHTML = `
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <div>正在加载题目...</div>
-            </div>
-        `;
-
-        try {
-            const response = await fetch(file);
-            if (!response.ok) {
-                throw new Error('加载失败');
-            }
-
-            const html = await response.text();
-
-            // 解析 HTML
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const content = doc.querySelector('.content');
-
-            if (!content) {
-                throw new Error('内容格式错误');
-            }
-
-            // 提取所有题目（通过 hr 分隔）
-            const contentHTML = content.innerHTML;
-            const questions = contentHTML.split('<hr>').filter(q => q.trim());
-
-            questionList.innerHTML = questions.map((questionHTML, index) => {
-                return this.renderQuestion(questionHTML, index);
-            }).join('');
-
-        } catch (error) {
-            console.error('加载题目失败:', error);
-            questionList.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-state-icon">❌</div>
-                    <div class="empty-state-text">加载失败</div>
-                    <div class="empty-state-hint">${error.message}</div>
-                </div>
-            `;
-        }
-    }
-
-    renderQuestion(questionHTML, index) {
-        // 解析题目 HTML
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(questionHTML, 'text/html');
-
-        // 提取题目信息
-        const firstH1 = doc.querySelector('h1');
-        let questionNumber = '';
-        let questionTitle = '';
-        let difficulty = '';
-        let leetcodeUrl = '';
-
-        if (firstH1) {
-            const text = firstH1.textContent;
-            const match = text.match(/^(\d+)\.\s*(.+)/);
-            if (match) {
-                questionNumber = match[1];
-                questionTitle = match[2];
-            }
-        }
-
-        // 提取难度
-        const allPs = Array.from(doc.querySelectorAll('p'));
-        const difficultyP = allPs.find(p => p.textContent.includes('难度'));
-        if (difficultyP) {
-            const text = difficultyP.textContent;
-            if (text.includes('Easy') || text.includes('简单')) {
-                difficulty = 'easy';
-            } else if (text.includes('Medium') || text.includes('中等')) {
-                difficulty = 'medium';
-            } else if (text.includes('Hard') || text.includes('困难')) {
-                difficulty = 'hard';
-            }
-        }
-
-        // 提取 LeetCode 链接
-        const linkP = allPs.find(p => p.textContent.includes('链接'));
-        if (linkP) {
-            const link = linkP.querySelector('a');
-            if (link) {
-                leetcodeUrl = link.href;
-            }
-        }
 
         // 难度中文映射
         const difficultyMap = {
@@ -301,21 +212,25 @@ class LeetCodeApp {
             'hard': '困难'
         };
 
-        // 构建题目卡片
-        return `
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">${questionNumber}. ${questionTitle}</span>
-                    <span class="difficulty-badge difficulty-${difficulty}">
-                        ${difficultyMap[difficulty] || '未知'}
-                    </span>
-                    ${leetcodeUrl ? `<a href="${leetcodeUrl}" target="_blank" class="question-link">在 LeetCode 打开</a>` : ''}
+        // 渲染题目列表卡片
+        questionList.innerHTML = record.questions.map((question, index) => {
+            return `
+                <div class="question-card clickable" onclick="app.viewQuestion('${question.file}')">
+                    <div class="question-header">
+                        <span class="question-number">${question.number}. ${question.title}</span>
+                        <span class="difficulty-badge difficulty-${question.difficulty}">
+                            ${difficultyMap[question.difficulty] || '未知'}
+                        </span>
+                        <div class="record-arrow">→</div>
+                    </div>
                 </div>
-                <div class="markdown-content">
-                    ${doc.body.innerHTML}
-                </div>
-            </div>
-        `;
+            `;
+        }).join('');
+    }
+
+    viewQuestion(filename) {
+        // 跳转到题目详情页
+        window.location.href = filename;
     }
 
     updateStats() {

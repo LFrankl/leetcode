@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>868. 二进制间距 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 05:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">868. 二进制间距</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/binary-gap/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="868-二进制间距">868. 二进制间距</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 位运算</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/binary-gap/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给定一个正整数 <code>n</code>，找到并返回 <code>n</code> 的二进制表示中两个 <strong>相邻</strong> 1 之间的<strong> 最长距离 </strong>。如果不存在两个相邻的 1，返回 <code>0</code> 。</p>
+
+<p>如果只有 <code>0</code> 将两个 <code>1</code> 分隔开（可能不存在 <code>0</code> ），则认为这两个 1 彼此 <strong>相邻</strong> 。两个 <code>1</code> 之间的距离是它们的二进制表示中位置的绝对差。例如，<code>"1001"</code> 中的两个 <code>1</code> 的距离为 3 。</p>
+
+<p>&nbsp;</p>
+
+<ul>
+</ul>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>n = 22
+<strong>输出：</strong>2
+<strong>解释：</strong>22 的二进制是 "10110" 。
+在 22 的二进制表示中，有三个 1，组成两对相邻的 1 。
+第一对相邻的 1 中，两个 1 之间的距离为 2 。
+第二对相邻的 1 中，两个 1 之间的距离为 1 。
+答案取两个距离之中最大的，也就是 2 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>n = 8
+<strong>输出：</strong>0
+<strong>解释：</strong>8 的二进制是 "1000" 。
+在 8 的二进制表示中没有相邻的两个 1，所以返回 0 。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>n = 5
+<strong>输出：</strong>2
+<strong>解释：</strong>5 的二进制是 "101" 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= n &lt;= 10<sup>9</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int binaryGap(int n) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def binaryGap(self, n: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @return {number}
+ */
+var binaryGap = function(n) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func binaryGap(n int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>22
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>给定正整数 n，求其二进制表示中两个相邻 1 之间的最大距离（位置差）。如果不存在两个相邻的 1，返回 0。</p>
+
+<p><strong>关键点</strong>：
+- 相邻 1 指的是在二进制串中，两个 1 之间可以有 0，但中间没有其他 1。
+- 距离是二进制位的位置差（从最低位开始，位索引通常从 0 或 1 开始，但题目示例中距离是位置差，如 "1001" 距离为 3）。
+- 示例中 "10110"（22）的二进制，索引从右向左（最低位索引 0）：
+  - 位：1(4) 0(3) 1(2) 1(1) 0(0)
+  - 1 的位置：4, 2, 1
+  - 相邻对 (4,2) 距离 2, (2,1) 距离 1 → 最大 2。</p>
+
+<hr />
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心思路">核心思路</h3>
+
+<p>遍历二进制位，记录上一个 1 出现的位置，当遇到新的 1 时，计算与上一个 1 的位置差，更新最大距离。</p>
+
+<p><strong>位置计算</strong>：
+- 从最低位（索引 0）开始，每次右移 n，检查最低位是否为 1。
+- 记录上一个 1 的索引 <code>last</code>，初始为 -1 表示未遇到。
+- 当遇到 1 时，如果 <code>last != -1</code>，计算 <code>i - last</code> 更新最大值，然后更新 <code>last = i</code>。</p>
+
+<hr />
+
+<h2 id="解法一位运算遍历">解法一：位运算遍历</h2>
+
+<h3 id="思路">思路</h3>
+
+<p>从右向左遍历每一位（索引 i 从 0 开始），用 <code>n &gt;&gt; i &amp; 1</code> 检查第 i 位是否为 1。</p>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-2">Go</h4>
+
+<pre><code>func binaryGap(n int) int {
+    maxDist := 0
+    last := -1
+    for i := 0; n &gt; 0; i++ {
+        if n&amp;1 == 1 {
+            if last != -1 {
+                dist := i - last
+                if dist &gt; maxDist {
+                    maxDist = dist
+                }
+            }
+            last = i
+        }
+        n &gt;&gt;= 1
+    }
+    return maxDist
+}
+</code></pre>
+
+<h4 id="c-2">C++</h4>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+        int maxDist = 0;
+        int last = -1;
+        for (int i = 0; n &gt; 0; i++) {
+            if (n &amp; 1) {
+                if (last != -1) {
+                    maxDist = max(maxDist, i - last);
+                }
+                last = i;
+            }
+            n &gt;&gt;= 1;
+        }
+        return maxDist;
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(log n)，因为 n 的二进制位数是 O(log n)。
+- 空间复杂度：O(1)。</p>
+
+<hr />
+
+<h2 id="解法二只遍历-1-的位置">解法二：只遍历 1 的位置</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<p>不遍历所有位，只关注 1 出现的位置。用 <code>last</code> 记录上一个 1 的位置，每次找到新的 1 就计算距离。</p>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-3">Go</h4>
+
+<pre><code>func binaryGap(n int) int {
+    maxDist := 0
+    last := -1
+    pos := 0
+    for n &gt; 0 {
+        if n&amp;1 == 1 {
+            if last != -1 {
+                dist := pos - last
+                if dist &gt; maxDist {
+                    maxDist = dist
+                }
+            }
+            last = pos
+        }
+        n &gt;&gt;= 1
+        pos++
+    }
+    return maxDist
+}
+</code></pre>
+
+<h4 id="c-3">C++</h4>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+        int maxDist = 0;
+        int last = -1;
+        int pos = 0;
+        while (n &gt; 0) {
+            if (n &amp; 1) {
+                if (last != -1) {
+                    maxDist = max(maxDist, pos - last);
+                }
+                last = pos;
+            }
+            n &gt;&gt;= 1;
+            pos++;
+        }
+        return maxDist;
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(log n)
+- 空间复杂度：O(1)</p>
+
+<hr />
+
+<h2 id="解法三使用内置函数仅作参考">解法三：使用内置函数（仅作参考）</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<p>某些语言提供获取二进制位索引的函数，但为了通用性，这里用位运算模拟。</p>
+
+<h3 id="代码实现go-利用-bitsonescount-和-bitstrailingzeros">代码实现（Go 利用 bits.OnesCount 和 bits.TrailingZeros）</h3>
+
+<pre><code>import "math/bits"
+
+func binaryGap(n int) int {
+    maxDist := 0
+    last := -1
+    for n &gt; 0 {
+        // 获取最低位 1 的位置
+        pos := bits.TrailingZeros(uint(n))
+        if last != -1 {
+            dist := pos - last
+            if dist &gt; maxDist {
+                maxDist = dist
+            }
+        }
+        last = pos
+        // 移除最低位的 1
+        n &amp;= n - 1
+    }
+    return maxDist
+}
+</code></pre>
+
+<h4 id="c利用-__builtin_ctz">C++（利用 <em>_builtin</em>ctz）</h4>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+        int maxDist = 0;
+        int last = -1;
+        while (n &gt; 0) {
+            int pos = __builtin_ctz(n); // 最低位 1 的位置
+            if (last != -1) {
+                maxDist = max(maxDist, pos - last);
+            }
+            last = pos;
+            n &amp;= n - 1; // 移除最低位的 1
+        }
+        return maxDist;
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(k)，k 是 n 中 1 的个数，最坏 O(log n)。
+- 空间复杂度：O(1)</p>
+
+<hr />
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>简单直观，通用性强</td>
+  <td>遍历所有位，即使没有 1 也遍历</td>
+  <td>通用解法</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>和解法一类似，逻辑清晰</td>
+  <td>和解法一几乎相同</td>
+  <td>通用解法</td>
+</tr>
+<tr>
+  <td>解法三</td>
+  <td>只遍历 1 的位置，效率高</td>
+  <td>依赖内置函数（如 <code>__builtin_ctz</code>），可移植性差</td>
+  <td>对性能要求高，且环境支持内置函数</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐</strong>：解法一或解法二，因为它们不依赖特定内置函数，代码清晰，且复杂度相同。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 15:42:51</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

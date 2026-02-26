@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3613. 最小化连通分量的最大成本 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 04:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3613. 最小化连通分量的最大成本</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/minimize-maximum-component-cost/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3613-最小化连通分量的最大成本">3613. 最小化连通分量的最大成本</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 并查集, 图, 二分查找, 排序</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/minimize-maximum-component-cost/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p data-end="331" data-start="85">给你一个无向连通图，包含 <code data-end="137" data-start="134">n</code> 个节点，节点编号从 0 到 <code data-end="171" data-start="164">n - 1</code>，以及一个二维整数数组 <code data-end="202" data-start="195">edges</code>，其中 <code data-end="234" data-start="209">edges[i] = [u<sub>i</sub>, v<sub>i</sub>, w<sub>i</sub>]</code> 表示一条连接节点 <code data-end="279" data-start="275">u<sub>i</sub></code> 和节点 <code data-end="293" data-start="289">v<sub>i</sub></code> 的无向边，边权为 <code data-end="310" data-start="306">w<sub>i</sub></code>，另有一个整数 <code data-end="330" data-start="327">k</code>。</p>
+
+<p data-end="461" data-start="333">你可以从图中移除任意数量的边，使得最终的图中&nbsp;<strong>最多&nbsp;</strong>只包含 <code data-end="439" data-start="436">k</code> 个连通分量。</p>
+
+<p data-end="589" data-start="463">连通分量的 <strong>成本&nbsp;</strong>定义为该分量中边权的&nbsp;<strong>最大值&nbsp;</strong>。如果一个连通分量没有边，则其代价为 0。</p>
+
+<p data-end="760" data-start="661">请返回在移除这些边之后，在所有连通分量之中的&nbsp;<strong>最大成本&nbsp;</strong>的&nbsp;<strong>最小可能值&nbsp;</strong>。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">n = 5, edges = [[0,1,4],[1,2,3],[1,3,2],[3,4,6]], k = 2</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">4</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2025/04/19/minimizemaximumm.jpg" style="width: 535px; height: 225px;" /></p>
+
+<ul>
+    <li data-end="1070" data-start="1021">移除节点 3 和节点 4 之间的边（权值为 6）。</li>
+    <li data-end="1141" data-start="1073">最终的连通分量成本分别为 0 和 4，因此最大代价为 4。</li>
+</ul>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">n = 4, edges = [[0,1,5],[1,2,5],[2,3,5]], k = 1</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">5</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2025/04/19/minmax2.jpg" style="width: 315px; height: 55px;" /></p>
+
+<ul>
+    <li data-end="1315" data-start="1251">无法移除任何边，因为只允许一个连通分量（<code>k = 1</code>），图必须保持完全连通。</li>
+    <li data-end="1389" data-start="1318">该连通分量的成本等于其最大边权，即 5。</li>
+</ul>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= n &lt;= 5 * 10<sup>4</sup></code></li>
+    <li><code>0 &lt;= edges.length &lt;= 10<sup>5</sup></code></li>
+    <li><code>edges[i].length == 3</code></li>
+    <li><code>0 &lt;= u<sub>i</sub>, v<sub>i</sub> &lt; n</code></li>
+    <li><code>1 &lt;= w<sub>i</sub> &lt;= 10<sup>6</sup></code></li>
+    <li><code>1 &lt;= k &lt;= n</code></li>
+    <li>输入图是连通图。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int minCost(int n, vector&lt;vector&lt;int&gt;&gt;&amp; edges, int k) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int minCost(int n, int[][] edges, int k) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def minCost(self, n: int, edges: List[List[int]], k: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @param {number} k
+ * @return {number}
+ */
+var minCost = function(n, edges, k) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func minCost(n int, edges [][]int, k int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Sort the <code>edges</code> and do binary search on the candidate maximum weight</li>
+<li>Use <code>DFS</code> or <code>DSU</code> to count the number of connected components when keeping only edges with weight &lt;= mid</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>5
+[[0,1,4],[1,2,3],[1,3,2],[3,4,6]]
+2
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个<strong>最小化最大值</strong>问题，我们需要在最多保留 k 个连通分量的前提下，通过删除边来最小化所有连通分量中边权最大值的最大值。</p>
+
+<p><strong>关键点</strong>：
+1. 初始图是连通的（n 个节点，1 个连通分量）
+2. 删除边会增加连通分量数量
+3. 每个连通分量的成本 = 该分量中所有边的最大边权（如果没有边则为 0）
+4. 最终连通分量数 ≤ k
+5. 目标是<strong>最小化所有连通分量成本的最大值</strong></p>
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心观察">核心观察</h3>
+
+<ul>
+<li>如果我们设定一个阈值 <code>x</code>，只保留边权 ≤ <code>x</code> 的边，那么：
+<ul>
+<li>每个连通分量的成本 ≤ <code>x</code></li>
+<li>删除边权 &gt; <code>x</code> 的边会增加连通分量数量</li>
+</ul></li>
+<li>问题转化为：找到最小的 <code>x</code>，使得删除所有边权 &gt; <code>x</code> 的边后，连通分量数 ≤ k</li>
+</ul>
+
+<h3 id="转化为判定问题">转化为判定问题</h3>
+
+<p>对于给定的 <code>x</code>：
+1. 只考虑边权 ≤ <code>x</code> 的边构建子图
+2. 计算该子图的连通分量数 <code>cnt</code>
+3. 如果 <code>cnt ≤ k</code>，则 <code>x</code> 可行（因为可以进一步删除边来增加分量，但不会增加成本）</p>
+
+<h3 id="解法选择">解法选择</h3>
+
+<ol>
+<li><strong>二分答案 + 并查集</strong>（最优解）</li>
+<li><strong>Kruskal 变种</strong>（类似最小生成树思想）</li>
+<li><strong>DFS/BFS 计数</strong>（配合二分）</li>
+</ol>
+
+<h2 id="解法一二分答案-并查集">解法一：二分答案 + 并查集</h2>
+
+<h3 id="思路">思路</h3>
+
+<ol>
+<li>对边权进行排序（用于二分）</li>
+<li>二分查找最小的 <code>x</code>，使得只使用边权 ≤ <code>x</code> 的边时，连通分量数 ≤ k</li>
+<li>使用并查集快速计算连通分量数</li>
+</ol>
+
+<h3 id="复杂度">复杂度</h3>
+
+<ul>
+<li>时间复杂度：O((E + n) log W)，W 是最大边权</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-实现">Go 实现</h4>
+
+<pre><code>func minMaxCost(n int, edges [][]int, k int) int {
+    // 边权范围
+    left, right := 0, 0
+    for _, e := range edges {
+        if e[2] &gt; right {
+            right = e[2]
+        }
+    }
+
+    // 二分答案
+    ans := right
+    for left &lt;= right {
+        mid := left + (right-left)/2
+        if check(n, edges, k, mid) {
+            ans = mid
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
+    }
+    return ans
+}
+
+func check(n int, edges [][]int, k int, limit int) bool {
+    // 初始化并查集
+    parent := make([]int, n)
+    for i := 0; i &lt; n; i++ {
+        parent[i] = i
+    }
+
+    var find func(int) int
+    find = func(x int) int {
+        if parent[x] != x {
+            parent[x] = find(parent[x])
+        }
+        return parent[x]
+    }
+
+    union := func(x, y int) {
+        px, py := find(x), find(y)
+        if px != py {
+            parent[px] = py
+        }
+    }
+
+    // 只连接边权 &lt;= limit 的边
+    for _, e := range edges {
+        if e[2] &lt;= limit {
+            union(e[0], e[1])
+        }
+    }
+
+    // 计算连通分量数
+    components := 0
+    for i := 0; i &lt; n; i++ {
+        if find(i) == i {
+            components++
+        }
+    }
+
+    return components &lt;= k
+}
+</code></pre>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    int minMaxCost(int n, vector&lt;vector&lt;int&gt;&gt;&amp; edges, int k) {
+        int left = 0, right = 0;
+        for (auto&amp; e : edges) {
+            right = max(right, e[2]);
+        }
+
+        int ans = right;
+        while (left &lt;= right) {
+            int mid = left + (right - left) / 2;
+            if (check(n, edges, k, mid)) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+private:
+    bool check(int n, vector&lt;vector&lt;int&gt;&gt;&amp; edges, int k, int limit) {
+        vector&lt;int&gt; parent(n);
+        iota(parent.begin(), parent.end(), 0);
+
+        function&lt;int(int)&gt; find = [&amp;](int x) {
+            if (parent[x] != x) {
+                parent[x] = find(parent[x]);
+            }
+            return parent[x];
+        };
+
+        auto unionSet = [&amp;](int x, int y) {
+            int px = find(x), py = find(y);
+            if (px != py) {
+                parent[px] = py;
+            }
+        };
+
+        for (auto&amp; e : edges) {
+            if (e[2] &lt;= limit) {
+                unionSet(e[0], e[1]);
+            }
+        }
+
+        int components = 0;
+        for (int i = 0; i &lt; n; i++) {
+            if (find(i) == i) {
+                components++;
+            }
+        }
+
+        return components &lt;= k;
+    }
+};
+</code></pre>
+
+<h2 id="解法二kruskal-变种贪心">解法二：Kruskal 变种（贪心）</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<ol>
+<li>将边按权值从小到大排序</li>
+<li>使用 Kruskal 算法逐步添加边</li>
+<li>当添加一条边会减少连通分量数时，记录当前连通分量数</li>
+<li>找到满足连通分量数 ≤ k 的最小边权</li>
+</ol>
+
+<h3 id="复杂度-2">复杂度</h3>
+
+<ul>
+<li>时间复杂度：O(E log E + E α(n))</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-实现-2">Go 实现</h4>
+
+<pre><code>func minMaxCost(n int, edges [][]int, k int) int {
+    // 按边权排序
+    sort.Slice(edges, func(i, j int) bool {
+        return edges[i][2] &lt; edges[j][2]
+    })
+
+    // 初始化并查集
+    parent := make([]int, n)
+    for i := 0; i &lt; n; i++ {
+        parent[i] = i
+    }
+
+    var find func(int) int
+    find = func(x int) int {
+        if parent[x] != x {
+            parent[x] = find(parent[x])
+        }
+        return parent[x]
+    }
+
+    union := func(x, y int) bool {
+        px, py := find(x), find(y)
+        if px == py {
+            return false
+        }
+        parent[px] = py
+        return true
+    }
+
+    // 初始连通分量数
+    components := n
+
+    // 特殊情况：不需要边
+    if components &lt;= k {
+        return 0
+    }
+
+    // 逐步添加边
+    for _, e := range edges {
+        if union(e[0], e[1]) {
+            components--
+            if components &lt;= k {
+                return e[2]
+            }
+        }
+    }
+
+    // 如果所有边都添加后仍然 &gt; k，返回最大边权
+    return edges[len(edges)-1][2]
+}
+</code></pre>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    int minMaxCost(int n, vector&lt;vector&lt;int&gt;&gt;&amp; edges, int k) {
+        // 按边权排序
+        sort(edges.begin(), edges.end(), [](const vector&lt;int&gt;&amp; a, const vector&lt;int&gt;&amp; b) {
+            return a[2] &lt; b[2];
+        });
+
+        vector&lt;int&gt; parent(n);
+        iota(parent.begin(), parent.end(), 0);
+
+        function&lt;int(int)&gt; find = [&amp;](int x) {
+            if (parent[x] != x) {
+                parent[x] = find(parent[x]);
+            }
+            return parent[x];
+        };
+
+        auto unionSet = [&amp;](int x, int y) -&gt; bool {
+            int px = find(x), py = find(y);
+            if (px == py) return false;
+            parent[px] = py;
+            return true;
+        };
+
+        int components = n;
+
+        // 特殊情况
+        if (components &lt;= k) return 0;
+
+        for (auto&amp; e : edges) {
+            if (unionSet(e[0], e[1])) {
+                components--;
+                if (components &lt;= k) {
+                    return e[2];
+                }
+            }
+        }
+
+        return edges.back()[2];
+    }
+};
+</code></pre>
+
+<h2 id="解法三二分答案-dfsbfs">解法三：二分答案 + DFS/BFS</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<ol>
+<li>二分答案</li>
+<li>对于每个 mid，构建只包含边权 ≤ mid 的图</li>
+<li>使用 DFS/BFS 计算连通分量数</li>
+</ol>
+
+<h3 id="复杂度-3">复杂度</h3>
+
+<ul>
+<li>时间复杂度：O((E + n) log W)</li>
+<li>空间复杂度：O(E + n)</li>
+</ul>
+
+<h3 id="代码实现go">代码实现（Go）</h3>
+
+<pre><code>func minMaxCost(n int, edges [][]int, k int) int {
+    // 构建邻接表（用于DFS/BFS）
+    maxWeight := 0
+    for _, e := range edges {
+        if e[2] &gt; maxWeight {
+            maxWeight = e[2]
+        }
+    }
+
+    left, right := 0, maxWeight
+    ans := right
+
+    for left &lt;= right {
+        mid := left + (right-left)/2
+
+        // 构建邻接表（只包含边权 &lt;= mid 的边）
+        adj := make([][]int, n)
+        for _, e := range edges {
+            if e[2] &lt;= mid {
+                adj[e[0]] = append(adj[e[0]], e[1])
+                adj[e[1]] = append(adj[e[1]], e[0])
+            }
+        }
+
+        // DFS计算连通分量数
+        visited := make([]bool, n)
+        components := 0
+        for i := 0; i &lt; n; i++ {
+            if !visited[i] {
+                components++
+                dfs(i, adj, visited)
+            }
+        }
+
+        if components &lt;= k {
+            ans = mid
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
+    }
+
+    return ans
+}
+
+func dfs(node int, adj [][]int, visited []bool) {
+    visited[node] = true
+    for _, neighbor := range adj[node] {
+        if !visited[neighbor] {
+            dfs(neighbor, adj, visited)
+        }
+    }
+}
+</code></pre>
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>二分+并查集</th>
+  <th>Kruskal变种</th>
+  <th>二分+DFS/BFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>时间复杂度</td>
+  <td>O((E+n)logW)</td>
+  <td>O(ElogE + Eα(n))</td>
+  <td>O((E+n)logW)</td>
+</tr>
+<tr>
+  <td>空间复杂度</td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+  <td>O(E+n)</td>
+</tr>
+<tr>
+  <td>实现难度</td>
+  <td>简单</td>
+  <td>简单</td>
+  <td>中等</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>通用</td>
+  <td>边已排序或需要排序</td>
+  <td>需要显式图结构</td>
+</tr>
+<tr>
+  <td>优点</td>
+  <td>稳定高效</td>
+  <td>直观，一次遍历</td>
+  <td>不需要并查集</td>
+</tr>
+<tr>
+  <td>缺点</td>
+  <td>需要二分</td>
+  <td>必须排序所有边</td>
+  <td>需要构建图，空间大</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="推荐解法">推荐解法</h2>
+
+<p><strong>解法一（二分+并查集）是最推荐的</strong>，因为：
+1. 时间复杂度最优
+2. 空间复杂度低
+3. 实现简单直观
+4. 适用于各种规模的输入</p>
+
+<p><strong>解法二（Kruskal变种）</strong> 也很优秀，特别是当边已经排序或需要排序时，它更直观。</p>
+
+<p><strong>解法三</strong> 在需要显式图结构时有用，但空间开销较大。</p>
+
+<p>在实际 LeetCode 提交中，解法一和解法二都是可行的，解法一通常更快一些。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 19:06:37</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,50 +1,222 @@
 {
   "records": [
     {
-      "date": "2026-02-26 19:08:03",
-      "file": "20260226_190803.html",
-      "count": 3
-    },
-    {
-      "date": "2026-02-26 18:48:23",
-      "file": "20260226_184823.html",
-      "count": 3
-    },
-    {
       "date": "2026-02-26 06:00:00",
-      "file": "20260226_060000.html",
-      "count": 4
+      "record_id": "20260226_060000",
+      "count": 4,
+      "questions": [
+        {
+          "number": "879",
+          "title": "盈利计划",
+          "difficulty": "medium",
+          "file": "20260226_060000_q1.html"
+        },
+        {
+          "number": "888",
+          "title": "公平的糖果交换",
+          "difficulty": "medium",
+          "file": "20260226_060000_q2.html"
+        },
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "medium",
+          "file": "20260226_060000_q3.html"
+        },
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "medium",
+          "file": "20260226_060000_q4.html"
+        }
+      ]
     },
     {
       "date": "2026-02-26 05:00:00",
-      "file": "20260226_050000.html",
-      "count": 4
+      "record_id": "20260226_050000",
+      "count": 4,
+      "questions": [
+        {
+          "number": "496",
+          "title": "下一个更大元素 I",
+          "difficulty": "medium",
+          "file": "20260226_050000_q1.html"
+        },
+        {
+          "number": "688",
+          "title": "骑士在棋盘上的概率",
+          "difficulty": "medium",
+          "file": "20260226_050000_q2.html"
+        },
+        {
+          "number": "777",
+          "title": "在 LR 字符串中交换相邻字符",
+          "difficulty": "medium",
+          "file": "20260226_050000_q3.html"
+        },
+        {
+          "number": "868",
+          "title": "二进制间距",
+          "difficulty": "medium",
+          "file": "20260226_050000_q4.html"
+        }
+      ]
     },
     {
       "date": "2026-02-26 04:00:00",
-      "file": "20260226_040000.html",
-      "count": 4
+      "record_id": "20260226_040000",
+      "count": 4,
+      "questions": [
+        {
+          "number": "3486",
+          "title": "最长特殊路径 II",
+          "difficulty": "medium",
+          "file": "20260226_040000_q1.html"
+        },
+        {
+          "number": "3504",
+          "title": "子字符串连接后的最长回文串 II",
+          "difficulty": "medium",
+          "file": "20260226_040000_q2.html"
+        },
+        {
+          "number": "3613",
+          "title": "最小化连通分量的最大成本",
+          "difficulty": "medium",
+          "file": "20260226_040000_q3.html"
+        },
+        {
+          "number": "3751",
+          "title": "范围内总波动值 I",
+          "difficulty": "medium",
+          "file": "20260226_040000_q4.html"
+        }
+      ]
     },
     {
       "date": "2026-02-26 03:00:00",
-      "file": "20260226_030000.html",
-      "count": 4
+      "record_id": "20260226_030000",
+      "count": 4,
+      "questions": [
+        {
+          "number": "3222",
+          "title": "求出硬币游戏的赢家",
+          "difficulty": "medium",
+          "file": "20260226_030000_q1.html"
+        },
+        {
+          "number": "3280",
+          "title": "将日期转换为二进制表示",
+          "difficulty": "medium",
+          "file": "20260226_030000_q2.html"
+        },
+        {
+          "number": "3290",
+          "title": "最高乘法得分",
+          "difficulty": "medium",
+          "file": "20260226_030000_q3.html"
+        },
+        {
+          "number": "3321",
+          "title": "计算子数组的 x-sum II",
+          "difficulty": "medium",
+          "file": "20260226_030000_q4.html"
+        }
+      ]
     },
     {
       "date": "2026-02-26 02:00:00",
-      "file": "20260226_020000.html",
-      "count": 4
+      "record_id": "20260226_020000",
+      "count": 4,
+      "questions": [
+        {
+          "number": "2092",
+          "title": "找出知晓秘密的所有专家",
+          "difficulty": "medium",
+          "file": "20260226_020000_q1.html"
+        },
+        {
+          "number": "2213",
+          "title": "由单个字符重复的最长子字符串",
+          "difficulty": "medium",
+          "file": "20260226_020000_q2.html"
+        },
+        {
+          "number": "2525",
+          "title": "根据规则将箱子分类",
+          "difficulty": "medium",
+          "file": "20260226_020000_q3.html"
+        },
+        {
+          "number": "3106",
+          "title": "满足距离约束且字典序最小的字符串",
+          "difficulty": "medium",
+          "file": "20260226_020000_q4.html"
+        }
+      ]
     },
     {
       "date": "2026-02-26 01:00:00",
-      "file": "20260226_010000.html",
-      "count": 4
+      "record_id": "20260226_010000",
+      "count": 4,
+      "questions": [
+        {
+          "number": "1693",
+          "title": "每天的领导和合伙人",
+          "difficulty": "medium",
+          "file": "20260226_010000_q1.html"
+        },
+        {
+          "number": "1806",
+          "title": "还原排列的最少操作步数",
+          "difficulty": "medium",
+          "file": "20260226_010000_q2.html"
+        },
+        {
+          "number": "1",
+          "title": "两数之和",
+          "difficulty": "medium",
+          "file": "20260226_010000_q3.html"
+        },
+        {
+          "number": "2019",
+          "title": "解出数学表达式的学生分数",
+          "difficulty": "medium",
+          "file": "20260226_010000_q4.html"
+        }
+      ]
     },
     {
       "date": "2026-02-26 00:00:00",
-      "file": "20260226_000000.html",
-      "count": 4
+      "record_id": "20260226_000000",
+      "count": 4,
+      "questions": [
+        {
+          "number": "1184",
+          "title": "公交站间的距离",
+          "difficulty": "medium",
+          "file": "20260226_000000_q1.html"
+        },
+        {
+          "number": "1383",
+          "title": "最大的团队表现值",
+          "difficulty": "medium",
+          "file": "20260226_000000_q2.html"
+        },
+        {
+          "number": "1408",
+          "title": "数组中的字符串匹配",
+          "difficulty": "medium",
+          "file": "20260226_000000_q3.html"
+        },
+        {
+          "number": "1616",
+          "title": "分割两个字符串得到回文串",
+          "difficulty": "medium",
+          "file": "20260226_000000_q4.html"
+        }
+      ]
     }
   ],
-  "last_updated": "2026-02-26 19:18:10"
+  "last_updated": "2026-02-26 19:27:05"
 }

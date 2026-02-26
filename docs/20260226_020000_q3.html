@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2525. 根据规则将箱子分类 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 02:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2525. 根据规则将箱子分类</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/categorize-box-according-to-criteria/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2525-根据规则将箱子分类">2525. 根据规则将箱子分类</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数学</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/categorize-box-according-to-criteria/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你四个整数&nbsp;<code>length</code>&nbsp;，<code>width</code>&nbsp;，<code>height</code>&nbsp;和&nbsp;<code>mass</code>&nbsp;，分别表示一个箱子的三个维度和质量，请你返回一个表示箱子 <strong>类别</strong> 的字符串。</p>
+
+<ul>
+    <li>如果满足以下条件，那么箱子是&nbsp;<code>"Bulky"</code>&nbsp;的：
+
+    <ul>
+        <li>箱子 <strong>至少有一个</strong> 维度大于等于 <code>10<sup>4</sup></code>&nbsp;。</li>
+        <li>或者箱子的 <strong>体积</strong> 大于等于&nbsp;<code>10<sup>9</sup></code>&nbsp;。</li>
+    </ul>
+    </li>
+    <li>如果箱子的质量大于等于&nbsp;<code>100</code>&nbsp;，那么箱子是&nbsp;<code>"Heavy"</code>&nbsp;的。</li>
+    <li>如果箱子同时是&nbsp;<code>"Bulky"</code> 和&nbsp;<code>"Heavy"</code>&nbsp;，那么返回类别为&nbsp;<code>"Both"</code>&nbsp;。</li>
+    <li>如果箱子既不是&nbsp;<code>"Bulky"</code>&nbsp;，也不是&nbsp;<code>"Heavy"</code>&nbsp;，那么返回类别为&nbsp;<code>"Neither"</code>&nbsp;。</li>
+    <li>如果箱子是&nbsp;<code>"Bulky"</code>&nbsp;但不是&nbsp;<code>"Heavy"</code>&nbsp;，那么返回类别为&nbsp;<code>"Bulky"</code>&nbsp;。</li>
+    <li>如果箱子是&nbsp;<code>"Heavy"</code>&nbsp;但不是&nbsp;<code>"Bulky"</code>&nbsp;，那么返回类别为&nbsp;<code>"Heavy"</code>&nbsp;。</li>
+</ul>
+
+<p><strong>注意</strong>，箱子的体积等于箱子的长度、宽度和高度的乘积。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<b>输入：</b>length = 1000, width = 35, height = 700, mass = 300
+<b>输出：</b>"Heavy"
+<b>解释：</b>
+箱子没有任何维度大于等于 10<sup>4 </sup>。
+体积为 24500000 &lt;= 10<sup>9 </sup>。所以不能归类为 "Bulky" 。
+但是质量 &gt;= 100 ，所以箱子是 "Heavy" 的。
+由于箱子不是 "Bulky" 但是是 "Heavy" ，所以我们返回 "Heavy" 。</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<b>输入：</b>length = 200, width = 50, height = 800, mass = 50
+<b>输出：</b>"Neither"
+<b>解释：</b>
+箱子没有任何维度大于等于 10<sup>4</sup>&nbsp;。
+体积为 8 * 10<sup>6</sup> &lt;= 10<sup>9</sup>&nbsp;。所以不能归类为 "Bulky" 。
+质量小于 100 ，所以不能归类为 "Heavy" 。
+由于不属于上述两者任何一类，所以我们返回 "Neither" 。</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= length, width, height &lt;= 10<sup>5</sup></code></li>
+    <li><code>1 &lt;= mass &lt;= 10<sup>3</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    string categorizeBox(int length, int width, int height, int mass) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public String categorizeBox(int length, int width, int height, int mass) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def categorizeBox(self, length: int, width: int, height: int, mass: int) -&gt; str:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} length
+ * @param {number} width
+ * @param {number} height
+ * @param {number} mass
+ * @return {string}
+ */
+var categorizeBox = function(length, width, height, mass) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func categorizeBox(length int, width int, height int, mass int) string {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Use conditional statements to find the right category of the box.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>1000
+35
+700
+300
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>题目要求根据箱子的尺寸（长、宽、高）和质量（mass）将其分类为以下四种情况之一：
+1. <strong>Both</strong>：箱子既是"Bulky"又是"Heavy"
+2. <strong>Bulky</strong>：箱子是"Bulky"但不是"Heavy"
+3. <strong>Heavy</strong>：箱子是"Heavy"但不是"Bulky"
+4. <strong>Neither</strong>：箱子既不是"Bulky"也不是"Heavy"</p>
+
+<p><strong>判断条件</strong>：
+- <strong>Bulky</strong>：至少有一个维度 ≥ 10⁴ <strong>或者</strong> 体积 ≥ 10⁹
+- <strong>Heavy</strong>：质量 ≥ 100</p>
+
+<p><strong>注意</strong>：
+- 体积 = length × width × height
+- 维度比较时，每个维度单独与 10⁴ 比较
+- 体积可能很大（最大 10¹⁵），需要注意整数溢出问题</p>
+
+<hr />
+
+<h2 id="解法一直接判断法推荐">解法一：直接判断法（推荐）</h2>
+
+<h3 id="解题思路">解题思路</h3>
+
+<p>直接按照题目描述的条件进行判断：
+1. 判断是否为 Bulky：
+   - 检查 length、width、height 是否 ≥ 10⁴
+   - 计算体积并检查是否 ≥ 10⁹
+2. 判断是否为 Heavy：
+   - 检查 mass 是否 ≥ 100
+3. 根据两个布尔值的组合返回对应字符串</p>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-实现">Go 实现</h4>
+
+<pre><code>func categorizeBox(length int, width int, height int, mass int) string {
+    bulky := false
+    heavy := mass &gt;= 100
+
+    // 检查维度
+    if length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000 {
+        bulky = true
+    }
+
+    // 检查体积（注意类型转换避免溢出）
+    volume := int64(length) * int64(width) * int64(height)
+    if volume &gt;= 1000000000 {
+        bulky = true
+    }
+
+    // 分类
+    if bulky &amp;&amp; heavy {
+        return "Both"
+    } else if bulky &amp;&amp; !heavy {
+        return "Bulky"
+    } else if !bulky &amp;&amp; heavy {
+        return "Heavy"
+    } else {
+        return "Neither"
+    }
+}
+</code></pre>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    string categorizeBox(int length, int width, int height, int mass) {
+        bool bulky = false;
+        bool heavy = mass &gt;= 100;
+
+        // 检查维度
+        if (length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000) {
+            bulky = true;
+        }
+
+        // 检查体积（使用 long long 避免溢出）
+        long long volume = (long long)length * width * height;
+        if (volume &gt;= 1000000000) {
+            bulky = true;
+        }
+
+        // 分类
+        if (bulky &amp;&amp; heavy) return "Both";
+        if (bulky &amp;&amp; !heavy) return "Bulky";
+        if (!bulky &amp;&amp; heavy) return "Heavy";
+        return "Neither";
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(1)，只有常数次比较和乘法运算</li>
+<li><strong>空间复杂度</strong>：O(1)，只使用了几个变量</li>
+</ul>
+
+<hr />
+
+<h2 id="解法二位运算标记法">解法二：位运算标记法</h2>
+
+<h3 id="解题思路-2">解题思路</h3>
+
+<p>使用两个二进制位来标记状态：
+- 第 0 位：是否为 Bulky
+- 第 1 位：是否为 Heavy
+然后通过状态值直接映射到结果</p>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-实现-2">Go 实现</h4>
+
+<pre><code>func categorizeBox(length int, width int, height int, mass int) string {
+    status := 0
+
+    // 设置 Heavy 位
+    if mass &gt;= 100 {
+        status |= 2  // 二进制 10
+    }
+
+    // 设置 Bulky 位
+    if length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000 {
+        status |= 1  // 二进制 01
+    } else {
+        volume := int64(length) * int64(width) * int64(height)
+        if volume &gt;= 1000000000 {
+            status |= 1
+        }
+    }
+
+    // 映射结果
+    switch status {
+    case 0: return "Neither"
+    case 1: return "Bulky"
+    case 2: return "Heavy"
+    case 3: return "Both"
+    }
+    return "" // 不会执行到这里
+}
+</code></pre>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    string categorizeBox(int length, int width, int height, int mass) {
+        int status = 0;
+
+        // 设置 Heavy 位
+        if (mass &gt;= 100) {
+            status |= 2;  // 二进制 10
+        }
+
+        // 设置 Bulky 位
+        if (length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000) {
+            status |= 1;  // 二进制 01
+        } else {
+            long long volume = (long long)length * width * height;
+            if (volume &gt;= 1000000000) {
+                status |= 1;
+            }
+        }
+
+        // 映射结果
+        switch (status) {
+            case 0: return "Neither";
+            case 1: return "Bulky";
+            case 2: return "Heavy";
+            case 3: return "Both";
+        }
+        return "";
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(1)</li>
+<li><strong>空间复杂度</strong>：O(1)</li>
+</ul>
+
+<hr />
+
+<h2 id="解法三提前计算体积优化版">解法三：提前计算体积（优化版）</h2>
+
+<h3 id="解题思路-3">解题思路</h3>
+
+<p>先计算体积，然后一次性判断所有 Bulky 条件，减少条件判断次数</p>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<h4 id="go-实现-3">Go 实现</h4>
+
+<pre><code>func categorizeBox(length int, width int, height int, mass int) string {
+    // 提前计算体积
+    volume := int64(length) * int64(width) * int64(height)
+
+    // 判断 Bulky
+    bulky := length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000 || volume &gt;= 1000000000
+
+    // 判断 Heavy
+    heavy := mass &gt;= 100
+
+    // 使用二维数组映射结果
+    results := [2][2]string{
+        {"Neither", "Bulky"},
+        {"Heavy", "Both"},
+    }
+
+    bulkyIdx := 0
+    if bulky {
+        bulkyIdx = 1
+    }
+
+    heavyIdx := 0
+    if heavy {
+        heavyIdx = 1
+    }
+
+    return results[heavyIdx][bulkyIdx]
+}
+</code></pre>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    string categorizeBox(int length, int width, int height, int mass) {
+        // 提前计算体积
+        long long volume = (long long)length * width * height;
+
+        // 判断 Bulky
+        bool bulky = (length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000 || volume &gt;= 1000000000);
+
+        // 判断 Heavy
+        bool heavy = mass &gt;= 100;
+
+        // 使用二维数组映射结果
+        string results[2][2] = {
+            {"Neither", "Bulky"},
+            {"Heavy", "Both"}
+        };
+
+        return results[heavy][bulky];
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-3">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(1)</li>
+<li><strong>空间复杂度</strong>：O(1)</li>
+</ul>
+
+<hr />
+
+<h2 id="不同解法对比">不同解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>解法一：直接判断法</strong></td>
+  <td>逻辑清晰，易于理解和维护</td>
+  <td>有多个条件判断分支</td>
+  <td>通用场景，推荐使用</td>
+</tr>
+<tr>
+  <td><strong>解法二：位运算标记法</strong></td>
+  <td>代码简洁，状态映射高效</td>
+  <td>可读性稍差</td>
+  <td>对性能有极致要求的场景</td>
+</tr>
+<tr>
+  <td><strong>解法三：提前计算体积</strong></td>
+  <td>减少条件判断次数</td>
+  <td>可能提前计算不必要的体积</td>
+  <td>维度经常满足条件的情况</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="推荐">推荐</h3>
+
+<p>对于 LeetCode 题目，<strong>解法一（直接判断法）</strong> 是最佳选择，因为：
+1. 逻辑最清晰，符合题目描述
+2. 易于理解和维护
+3. 性能已经足够（O(1) 时间复杂度）
+4. 避免了不必要的优化带来的复杂性</p>
+
+<h3 id="注意事项">注意事项</h3>
+
+<ol>
+<li><strong>整数溢出问题</strong>：计算体积时，三个 int 相乘可能溢出，需要转换为 long long（C++）或 int64（Go）</li>
+<li><strong>边界条件</strong>：注意 ≥ 和 &gt; 的区别，题目使用的是 ≥</li>
+<li><strong>条件顺序</strong>：Bulky 的两个条件是"或"关系，只要满足一个就是 Bulky</li>
+</ol>
+
+<h3 id="扩展思考">扩展思考</h3>
+
+<p>如果维度数量增加到 n 个，可以使用循环检查每个维度是否 ≥ 10⁴，但核心逻辑不变。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 15:48:56</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

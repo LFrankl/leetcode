@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3280. 将日期转换为二进制表示 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 03:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3280. 将日期转换为二进制表示</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/convert-date-to-binary/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3280-将日期转换为二进制表示">3280. 将日期转换为二进制表示</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数学, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/convert-date-to-binary/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个字符串 <code>date</code>，它的格式为 <code>yyyy-mm-dd</code>，表示一个公历日期。</p>
+
+<p><code>date</code> 可以重写为二进制表示，只需要将年、月、日分别转换为对应的二进制表示（不带前导零）并遵循 <code>year-month-day</code> 的格式。</p>
+
+<p>返回 <code>date</code> 的 <strong>二进制</strong> 表示。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">date = "2080-02-29"</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">"100000100000-10-11101"</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><span class="example-io">100000100000, 10 和 11101 分别是 2080, 02 和 29 的二进制表示。</span></p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">date = "1900-01-01"</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">"11101101100-1-1"</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><span class="example-io">11101101100, 1 和 1 分别是 1900, 1 和 1 的二进制表示。</span></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>date.length == 10</code></li>
+    <li><code>date[4] == date[7] == '-'</code>，其余的 <code>date[i]</code> 都是数字。</li>
+    <li>输入保证 <code>date</code> 代表一个有效的公历日期，日期范围从 1900 年 1 月 1 日到 2100 年 12 月 31 日（包括这两天）。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    string convertDateToBinary(string date) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public String convertDateToBinary(String date) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def convertDateToBinary(self, date: str) -&gt; str:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string} date
+ * @return {string}
+ */
+var convertDateToBinary = function(date) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func convertDateToBinary(date string) string {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"2080-02-29"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>题目要求将日期字符串 "yyyy-mm-dd" 中的年、月、日分别转换为二进制表示（不带前导零），然后用 "-" 连接。<br />
+日期范围是 1900-01-01 到 2100-12-31，因此年份最大为 2100，二进制位数不超过 12 位。</p>
+
+<p><strong>关键点</strong>：
+- 输入格式固定，长度为 10，第 5 和第 8 个字符是 '-'。
+- 需要分别提取年、月、日，转换为整数，再转换为二进制字符串（去掉前导零）。
+- 输出格式为 "二进制年-二进制月-二进制日"。</p>
+
+<hr />
+
+<h2 id="解法一直接转换字符串分割-整数转二进制">解法一：直接转换（字符串分割 + 整数转二进制）</h2>
+
+<h3 id="思路">思路</h3>
+
+<ol>
+<li>用 <code>split</code> 或手动分割提取年、月、日的字符串。</li>
+<li>将字符串转为整数。</li>
+<li>使用语言内置的进制转换函数或手动转换得到二进制字符串（去掉前导零）。</li>
+<li>用 "-" 连接三部分。</li>
+</ol>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-2">Go</h4>
+
+<pre><code>func convertDateToBinary(date string) string {
+    // 提取年、月、日
+    year, _ := strconv.Atoi(date[:4])
+    month, _ := strconv.Atoi(date[5:7])
+    day, _ := strconv.Atoi(date[8:])
+
+    // 转换为二进制字符串（去掉前导零）
+    yearBin := strconv.FormatInt(int64(year), 2)
+    monthBin := strconv.FormatInt(int64(month), 2)
+    dayBin := strconv.FormatInt(int64(day), 2)
+
+    return yearBin + "-" + monthBin + "-" + dayBin
+}
+</code></pre>
+
+<h4 id="c-2">C++</h4>
+
+<pre><code>#include &lt;string&gt;
+#include &lt;sstream&gt;
+#include &lt;bitset&gt;
+
+class Solution {
+public:
+    std::string convertDateToBinary(std::string date) {
+        int year = std::stoi(date.substr(0, 4));
+        int month = std::stoi(date.substr(5, 2));
+        int day = std::stoi(date.substr(8, 2));
+
+        // 使用 bitset 转换，然后去掉前导零
+        std::string yearBin = std::bitset&lt;32&gt;(year).to_string();
+        yearBin.erase(0, yearBin.find_first_not_of('0'));
+        if (yearBin.empty()) yearBin = "0";
+
+        std::string monthBin = std::bitset&lt;32&gt;(month).to_string();
+        monthBin.erase(0, monthBin.find_first_not_of('0'));
+        if (monthBin.empty()) monthBin = "0";
+
+        std::string dayBin = std::bitset&lt;32&gt;(day).to_string();
+        dayBin.erase(0, dayBin.find_first_not_of('0'));
+        if (dayBin.empty()) dayBin = "0";
+
+        return yearBin + "-" + monthBin + "-" + dayBin;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(1)，因为日期长度固定，转换位数固定。</li>
+<li><strong>空间复杂度</strong>：O(1)，除了输出字符串外，只用了常数空间。</li>
+</ul>
+
+<hr />
+
+<h2 id="解法二手动分割-手动二进制转换">解法二：手动分割 + 手动二进制转换</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<ol>
+<li>手动解析字符串中的数字，避免调用 <code>split</code> 或 <code>substr</code> 的开销（虽然本题影响不大）。</li>
+<li>手动实现整数转二进制字符串（去掉前导零），避免调用内置函数。</li>
+</ol>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-3">Go</h4>
+
+<pre><code>func convertDateToBinary(date string) string {
+    // 手动提取数字
+    year := int(date[0]-'0')*1000 + int(date[1]-'0')*100 + int(date[2]-'0')*10 + int(date[3]-'0')
+    month := int(date[5]-'0')*10 + int(date[6]-'0')
+    day := int(date[8]-'0')*10 + int(date[9]-'0')
+
+    // 手动转二进制
+    toBin := func(n int) string {
+        if n == 0 {
+            return "0"
+        }
+        var bin []byte
+        for n &gt; 0 {
+            bin = append([]byte{byte('0' + n%2)}, bin...)
+            n /= 2
+        }
+        return string(bin)
+    }
+
+    return toBin(year) + "-" + toBin(month) + "-" + toBin(day)
+}
+</code></pre>
+
+<h4 id="c-3">C++</h4>
+
+<pre><code>#include &lt;string&gt;
+
+class Solution {
+public:
+    std::string convertDateToBinary(std::string date) {
+        int year = (date[0]-'0')*1000 + (date[1]-'0')*100 + (date[2]-'0')*10 + (date[3]-'0');
+        int month = (date[5]-'0')*10 + (date[6]-'0');
+        int day = (date[8]-'0')*10 + (date[9]-'0');
+
+        auto toBin = [](int n) -&gt; std::string {
+            if (n == 0) return "0";
+            std::string bin;
+            while (n &gt; 0) {
+                bin = char('0' + (n % 2)) + bin;
+                n /= 2;
+            }
+            return bin;
+        };
+
+        return toBin(year) + "-" + toBin(month) + "-" + toBin(day);
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(1)，手动转换的循环次数不超过 12 次（年份最大 2100，二进制 12 位）。</li>
+<li><strong>空间复杂度</strong>：O(1)，只用了常数空间。</li>
+</ul>
+
+<hr />
+
+<h2 id="解法三查表法预计算二进制字符串">解法三：查表法（预计算二进制字符串）</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<p>由于日期范围有限（1900~2100，月 1~12，日 1~31），可以预计算所有可能值的二进制字符串，直接查表输出。<br />
+这种方法在多次调用时效率高，但本题只需一次转换，预计算优势不大。</p>
+
+<h3 id="代码实现仅展示思路">代码实现（仅展示思路）</h3>
+
+<h4 id="go-4">Go</h4>
+
+<pre><code>func convertDateToBinary(date string) string {
+    // 预计算 0~2100 的二进制字符串
+    binMap := make([]string, 2101)
+    for i := 0; i &lt;= 2100; i++ {
+        binMap[i] = strconv.FormatInt(int64(i), 2)
+    }
+
+    year, _ := strconv.Atoi(date[:4])
+    month, _ := strconv.Atoi(date[5:7])
+    day, _ := strconv.Atoi(date[8:])
+
+    return binMap[year] + "-" + binMap[month] + "-" + binMap[day]
+}
+</code></pre>
+
+<h4 id="c-4">C++</h4>
+
+<pre><code>#include &lt;string&gt;
+#include &lt;vector&gt;
+
+class Solution {
+public:
+    std::string convertDateToBinary(std::string date) {
+        static std::vector&lt;std::string&gt; binMap(2101);
+        static bool init = false;
+        if (!init) {
+            for (int i = 0; i &lt;= 2100; i++) {
+                binMap[i] = std::bitset&lt;32&gt;(i).to_string();
+                binMap[i].erase(0, binMap[i].find_first_not_of('0'));
+                if (binMap[i].empty()) binMap[i] = "0";
+            }
+            init = true;
+        }
+
+        int year = std::stoi(date.substr(0, 4));
+        int month = std::stoi(date.substr(5, 2));
+        int day = std::stoi(date.substr(8, 2));
+
+        return binMap[year] + "-" + binMap[month] + "-" + binMap[day];
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-3">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(1)，查表操作常数时间。</li>
+<li><strong>空间复杂度</strong>：O(2101) ≈ O(1)，因为范围固定。</li>
+</ul>
+
+<hr />
+
+<h2 id="不同解法对比">不同解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一（内置函数）</td>
+  <td>代码简洁，可读性好，利用语言内置优化</td>
+  <td>依赖内置函数，可能略慢（但本题可忽略）</td>
+</tr>
+<tr>
+  <td>解法二（手动转换）</td>
+  <td>不依赖内置函数，可控性强，适合嵌入式或无库环境</td>
+  <td>代码稍长，手动解析易出错</td>
+</tr>
+<tr>
+  <td>解法三（查表法）</td>
+  <td>多次调用时效率高，直接查表 O(1)</td>
+  <td>需要预计算，空间占用稍大，单次调用优势不明显</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐</strong>：<br />
+对于本题，解法一最简单直接，代码清晰，且性能足够（日期长度固定，转换量小）。<br />
+如果追求极致性能且多次调用，解法三更优。<br />
+解法二适合对内置函数有限制的环境。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 16:15:56</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

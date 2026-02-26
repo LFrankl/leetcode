@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3290. 最高乘法得分 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 03:00:00</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3290. 最高乘法得分</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-multiplication-score/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3290-最高乘法得分">3290. 最高乘法得分</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 数组, 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-multiplication-score/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个大小为 4 的整数数组 <code>a</code> 和一个大小 <strong>至少</strong>为 4 的整数数组 <code>b</code>。</p>
+
+<p>你需要从数组 <code>b</code> 中选择四个下标 <code>i<sub>0</sub></code>, <code>i<sub>1</sub></code>, <code>i<sub>2</sub></code>, 和 <code>i<sub>3</sub></code>，并满足 <code>i<sub>0</sub> &lt; i<sub>1</sub> &lt; i<sub>2</sub> &lt; i<sub>3</sub></code>。你的得分将是 <code>a[0] * b[i<sub>0</sub>] + a[1] * b[i<sub>1</sub>] + a[2] * b[i<sub>2</sub>] + a[3] * b[i<sub>3</sub>]</code> 的值。</p>
+
+<p>返回你能够获得的 <strong>最大 </strong>得分。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">a = [3,2,5,6], b = [2,-6,4,-5,-3,2,-7]</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">26</span></p>
+
+<p><strong>解释：</strong><br />
+选择下标 0, 1, 2 和 5。得分为 <code>3 * 2 + 2 * (-6) + 5 * 4 + 6 * 2 = 26</code>。</p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">a = [-1,4,5,-2], b = [-5,-1,-3,-2,-4]</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">-1</span></p>
+
+<p><strong>解释：</strong><br />
+选择下标 0, 1, 3 和 4。得分为 <code>(-1) * (-5) + 4 * (-1) + 5 * (-2) + (-2) * (-4) = -1</code>。</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>a.length == 4</code></li>
+    <li><code>4 &lt;= b.length &lt;= 10<sup>5</sup></code></li>
+    <li><code>-10<sup>5</sup> &lt;= a[i], b[i] &lt;= 10<sup>5</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    long long maxScore(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public long maxScore(int[] a, int[] b) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def maxScore(self, a: List[int], b: List[int]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} a
+ * @param {number[]} b
+ * @return {number}
+ */
+var maxScore = function(a, b) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func maxScore(a []int, b []int) int64 {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Try using dynamic programming.</li>
+<li>Consider a dp with the following states: The current position in the array b, and the number of indices considered.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[3,2,5,6]
+[2,-6,4,-5,-3,2,-7]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>我们需要从数组 <code>b</code> 中选择 4 个索引（保持顺序），与固定长度为 4 的数组 <code>a</code> 对应相乘求和，使得得分最大。</p>
+
+<p><strong>关键约束</strong>：
+- <code>a</code> 长度固定为 4
+- <code>b</code> 长度 <code>n ≥ 4</code>
+- 选择的 4 个索引必须严格递增：<code>i0 &lt; i1 &lt; i2 &lt; i3</code>
+- 目标是最大化：<code>a[0]*b[i0] + a[1]*b[i1] + a[2]*b[i2] + a[3]*b[i3]</code></p>
+
+<hr />
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="思路一动态规划4-阶段-dp">思路一：动态规划（4 阶段 DP）</h3>
+
+<p>将问题看作在 <code>b</code> 中按顺序选择 4 个元素，每个阶段对应一个 <code>a[k]</code>。<br />
+定义 <code>dp[k][i]</code> 表示从 <code>b[0..i]</code> 中选择 <code>k+1</code> 个元素（对应 <code>a[0..k]</code>）的最大得分。<br />
+转移方程：</p>
+
+<pre><code>dp[k][i] = max(dp[k][i-1], dp[k-1][i-1] + a[k] * b[i])
+</code></pre>
+
+<p>其中 <code>k = 0..3</code>，<code>i ≥ k</code>（因为至少需要 k+1 个元素）。<br />
+最终答案：<code>dp[3][n-1]</code>。</p>
+
+<p><strong>时间复杂度</strong>：O(4n) = O(n)<br />
+<strong>空间复杂度</strong>：O(4n) = O(n)，可优化到 O(1)（滚动数组）</p>
+
+<hr />
+
+<h3 id="思路二分阶段贪心基于-a-的符号">思路二：分阶段贪心（基于 a 的符号）</h3>
+
+<p>由于 <code>a</code> 固定为 4 个数，我们可以分阶段选择：
+- 如果 <code>a[k] &gt; 0</code>，则在可选范围内选择最大的 <code>b[i]</code>
+- 如果 <code>a[k] &lt; 0</code>，则在可选范围内选择最小的 <code>b[i]</code>
+但必须保证索引递增，所以每个阶段的可选范围是 <code>b</code> 的剩余部分。</p>
+
+<p>这种方法需要维护前缀/后缀的最大最小值，实现较复杂，且不一定保证全局最优（因为选择当前最优可能影响后续选择）。</p>
+
+<hr />
+
+<h3 id="思路三四重循环优化后缀最大值">思路三：四重循环优化（后缀最大值）</h3>
+
+<p>对于固定 <code>i3</code>，我们需要前三个索引的最优选择。<br />
+可以预处理：
+- 对于每个位置 <code>i</code>，计算 <code>a[3]*b[i]</code> 加上之前三个阶段的最大值。
+- 用类似 DP 但反向或正向递推的方式，避免 O(n⁴) 暴力。</p>
+
+<p>实际上，我们可以用 <strong>分阶段后缀最大值</strong> 来优化：
+1. 从右往左计算 <code>max3[i] = max(a[3]*b[j])</code> 对于 <code>j ≥ i</code>
+2. 然后计算 <code>max2[i] = max(a[2]*b[i] + max3[i+1])</code> 对于 <code>i</code>
+3. 类似得到 <code>max1</code> 和 <code>max0</code>。</p>
+
+<p>这样时间复杂度 O(n)，空间 O(n) 或 O(1)。</p>
+
+<hr />
+
+<h2 id="解法实现">解法实现</h2>
+
+<h3 id="解法一动态规划4-阶段-dp空间优化">解法一：动态规划（4 阶段 DP，空间优化）</h3>
+
+<pre><code>func maxScore(a []int, b []int) int {
+    n := len(b)
+    // dpPrev 和 dpCurr 分别表示上一阶段和当前阶段
+    dpPrev := make([]int, n)
+    dpCurr := make([]int, n)
+
+    // 初始化 k=0 阶段
+    dpCurr[0] = a[0] * b[0]
+    for i := 1; i &lt; n; i++ {
+        dpCurr[i] = max(dpCurr[i-1], a[0]*b[i])
+    }
+
+    // 阶段 k=1,2,3
+    for k := 1; k &lt; 4; k++ {
+        dpPrev, dpCurr = dpCurr, dpPrev
+        // i &lt; k 时不可能选 k+1 个元素，跳过
+        dpCurr[k] = dpPrev[k-1] + a[k]*b[k]
+        for i := k+1; i &lt; n; i++ {
+            dpCurr[i] = max(dpCurr[i-1], dpPrev[i-1] + a[k]*b[i])
+        }
+    }
+    return dpCurr[n-1]
+}
+
+func max(x, y int) int {
+    if x &gt; y {
+        return x
+    }
+    return y
+}
+</code></pre>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+class Solution {
+public:
+    int maxScore(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b) {
+        int n = b.size();
+        vector&lt;long long&gt; dpPrev(n), dpCurr(n);
+        // 阶段 0
+        dpCurr[0] = (long long)a[0] * b[0];
+        for (int i = 1; i &lt; n; i++) {
+            dpCurr[i] = max(dpCurr[i-1], (long long)a[0] * b[i]);
+        }
+        // 阶段 1,2,3
+        for (int k = 1; k &lt; 4; k++) {
+            swap(dpPrev, dpCurr);
+            dpCurr[k] = dpPrev[k-1] + (long long)a[k] * b[k];
+            for (int i = k+1; i &lt; n; i++) {
+                dpCurr[i] = max(dpCurr[i-1], dpPrev[i-1] + (long long)a[k] * b[i]);
+            }
+        }
+        return dpCurr[n-1];
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(4n) = O(n)
+- 空间复杂度：O(n)（两个数组）</p>
+
+<hr />
+
+<h3 id="解法二分阶段后缀最大值反向-dp">解法二：分阶段后缀最大值（反向 DP）</h3>
+
+<p>定义：
+- <code>suffix3[i]</code> = 从 <code>i</code> 开始往后选一个数作为第 4 个数的最大 <code>a[3]*b[j]</code>
+- <code>suffix2[i]</code> = 从 <code>i</code> 开始往后选两个数（第3、4个）的最大和
+- <code>suffix1[i]</code> = 从 <code>i</code> 开始往后选三个数的最大和
+- <code>suffix0[i]</code> = 从 <code>i</code> 开始往后选四个数的最大和（即最终答案）</p>
+
+<p>递推：</p>
+
+<pre><code>suffix3[i] = max(a[3]*b[i], suffix3[i+1])
+suffix2[i] = max(a[2]*b[i] + suffix3[i+1], suffix2[i+1])
+suffix1[i] = max(a[1]*b[i] + suffix2[i+1], suffix1[i+1])
+suffix0[i] = max(a[0]*b[i] + suffix1[i+1], suffix0[i+1])
+</code></pre>
+
+<p>从右往左计算。</p>
+
+<pre><code>func maxScore(a []int, b []int) int {
+    n := len(b)
+    suffix3 := make([]int64, n)
+    suffix2 := make([]int64, n)
+    suffix1 := make([]int64, n)
+    suffix0 := make([]int64, n)
+
+    // 初始化最后一个位置
+    suffix3[n-1] = int64(a[3]) * int64(b[n-1])
+    suffix2[n-1] = -1 &lt;&lt; 62 // 不可能选两个数，设为极小
+    suffix1[n-1] = -1 &lt;&lt; 62
+    suffix0[n-1] = -1 &lt;&lt; 62
+
+    for i := n-2; i &gt;= 0; i-- {
+        // 第 4 个数
+        suffix3[i] = max(int64(a[3])*int64(b[i]), suffix3[i+1])
+        // 第 3、4 个数
+        if i &lt;= n-2 {
+            suffix2[i] = max(int64(a[2])*int64(b[i])+suffix3[i+1], suffix2[i+1])
+        } else {
+            suffix2[i] = -1 &lt;&lt; 62
+        }
+        // 第 2、3、4 个数
+        if i &lt;= n-3 {
+            suffix1[i] = max(int64(a[1])*int64(b[i])+suffix2[i+1], suffix1[i+1])
+        } else {
+            suffix1[i] = -1 &lt;&lt; 62
+        }
+        // 第 1、2、3、4 个数
+        if i &lt;= n-4 {
+            suffix0[i] = max(int64(a[0])*int64(b[i])+suffix1[i+1], suffix0[i+1])
+        } else {
+            suffix0[i] = -1 &lt;&lt; 62
+        }
+    }
+    return int(suffix0[0])
+}
+
+func max(x, y int64) int64 {
+    if x &gt; y {
+        return x
+    }
+    return y
+}
+</code></pre>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+class Solution {
+public:
+    int maxScore(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b) {
+        int n = b.size();
+        vector&lt;long long&gt; suffix3(n), suffix2(n), suffix1(n), suffix0(n);
+        const long long INF = LLONG_MIN / 2;
+
+        suffix3[n-1] = (long long)a[3] * b[n-1];
+        suffix2[n-1] = INF;
+        suffix1[n-1] = INF;
+        suffix0[n-1] = INF;
+
+        for (int i = n-2; i &gt;= 0; i--) {
+            suffix3[i] = max((long long)a[3] * b[i], suffix3[i+1]);
+
+            if (i &lt;= n-2) {
+                suffix2[i] = max((long long)a[2] * b[i] + suffix3[i+1], suffix2[i+1]);
+            } else {
+                suffix2[i] = INF;
+            }
+
+            if (i &lt;= n-3) {
+                suffix1[i] = max((long long)a[1] * b[i] + suffix2[i+1], suffix1[i+1]);
+            } else {
+                suffix1[i] = INF;
+            }
+
+            if (i &lt;= n-4) {
+                suffix0[i] = max((long long)a[0] * b[i] + suffix1[i+1], suffix0[i+1]);
+            } else {
+                suffix0[i] = INF;
+            }
+        }
+        return suffix0[0];
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(n)
+- 空间复杂度：O(n)（可优化到 O(1)，只保留最近几个值）</p>
+
+<hr />
+
+<h3 id="解法三四变量滚动-dp最优空间">解法三：四变量滚动 DP（最优空间）</h3>
+
+<p>由于只依赖前一阶段，我们可以用 4 个变量分别表示以当前位置结尾的 1、2、3、4 个数的最大得分。</p>
+
+<pre><code>func maxScore(a []int, b []int) int {
+    n := len(b)
+    // dp1, dp2, dp3, dp4 分别表示选择 1,2,3,4 个数的最大得分
+    dp1, dp2, dp3, dp4 := int64(-1e18), int64(-1e18), int64(-1e18), int64(-1e18)
+
+    for i := 0; i &lt; n; i++ {
+        val := int64(b[i])
+        // 注意更新顺序：从多到少，避免重复使用当前元素
+        dp4 = max(dp4, dp3 + int64(a[3])*val)
+        dp3 = max(dp3, dp2 + int64(a[2])*val)
+        dp2 = max(dp2, dp1 + int64(a[1])*val)
+        dp1 = max(dp1, int64(a[0])*val)
+    }
+    return int(dp4)
+}
+
+func max(x, y int64) int64 {
+    if x &gt; y {
+        return x
+    }
+    return y
+}
+</code></pre>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+class Solution {
+public:
+    int maxScore(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b) {
+        int n = b.size();
+        long long dp1 = LLONG_MIN, dp2 = LLONG_MIN, dp3 = LLONG_MIN, dp4 = LLONG_MIN;
+        for (int i = 0; i &lt; n; i++) {
+            long long val = b[i];
+            dp4 = max(dp4, dp3 + a[3] * val);
+            dp3 = max(dp3, dp2 + a[2] * val);
+            dp2 = max(dp2, dp1 + a[1] * val);
+            dp1 = max(dp1, a[0] * val);
+        }
+        return dp4;
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(n)
+- 空间复杂度：O(1)</p>
+
+<hr />
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>时间复杂度</th>
+  <th>空间复杂度</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>动态规划（4阶段）</td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+  <td>直观，易于理解</td>
+  <td>空间可优化</td>
+</tr>
+<tr>
+  <td>后缀最大值</td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+  <td>反向思维，避免索引越界判断</td>
+  <td>实现稍复杂</td>
+</tr>
+<tr>
+  <td>四变量滚动 DP</td>
+  <td>O(n)</td>
+  <td>O(1)</td>
+  <td>最优空间，代码简洁</td>
+  <td>需要仔细处理更新顺序</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：解法三（四变量滚动 DP），因为它在时间和空间上都是最优的，且代码简洁。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 17:48:47</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
