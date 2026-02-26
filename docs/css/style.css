@@ -318,6 +318,36 @@ body {
     color: var(--primary-blue);
 }
 
+/* 浮动返回按钮 (FAB) */
+.fab-back {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    background: var(--primary-blue);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+    color: white;
+    font-size: 24px;
+}
+
+.fab-back:hover {
+    box-shadow: 0 4px 8px 0 rgba(60,64,67,0.3), 0 8px 16px 6px rgba(60,64,67,0.15);
+    transform: scale(1.05);
+}
+
+.fab-back:active {
+    transform: scale(0.95);
+}
+
 .question-list {
     display: flex;
     flex-direction: column;
