@@ -98,15 +98,27 @@ class LeetCodeApp {
             }
         });
 
-        document.getElementById('pageSize').addEventListener('change', (e) => {
+        const pageSizeSelector = document.getElementById('pageSize');
+        pageSizeSelector.addEventListener('change', (e) => {
             const oldPageSize = this.pageSize;
-            this.pageSize = parseInt(e.target.value);
+            const newPageSize = parseInt(e.target.value);
+
+            console.log(`页面大小改变: ${oldPageSize} → ${newPageSize}`);
+
+            this.pageSize = newPageSize;
 
             // 重新计算当前页，保持用户看到的第一条记录尽可能不变
             const firstRecordIndex = (this.currentPage - 1) * oldPageSize;
             this.currentPage = Math.floor(firstRecordIndex / this.pageSize) + 1;
 
+            console.log(`当前页重新计算: ${this.currentPage}`);
+
             this.renderPage();
+        });
+
+        // 确保 select 在移动端可点击
+        pageSizeSelector.addEventListener('touchstart', (e) => {
+            e.stopPropagation();
         });
     }
 

@@ -211,29 +211,66 @@ body {
     display: block;
 }
 
-/* 鸡汤文案区域 */
+/* 鸡汤文案区域 - 水墨风格 */
 .motivation-section {
     padding: 24px;
-    margin-top: 16px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 8px;
     margin: 16px 24px;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 水墨风格装饰 */
+.motivation-section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #bdbdbd 20%, #bdbdbd 80%, transparent);
+}
+
+.motivation-section::after {
+    content: '✦';
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 20px;
+    color: #d0d0d0;
+    opacity: 0.5;
 }
 
 .motivation-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    color: #757575;
     margin-bottom: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.motivation-title::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #9e9e9e;
+    border-radius: 50%;
 }
 
 .motivation-text {
     font-size: 14px;
-    line-height: 1.6;
-    color: white;
+    line-height: 1.8;
+    color: #424242;
     font-style: italic;
+    text-align: justify;
+    padding-left: 12px;
+    border-left: 3px solid #e0e0e0;
 }
 
 /* 主内容区 */
@@ -295,6 +332,16 @@ body {
     cursor: pointer;
     transition: all 0.2s;
     outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f6368' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
+    position: relative;
+    z-index: 1;
 }
 
 .page-size-selector:hover {
@@ -304,6 +351,10 @@ body {
 .page-size-selector:focus {
     border-color: var(--primary-blue);
     box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.page-size-selector:active {
+    transform: scale(0.98);
 }
 
 .pagination-buttons {
@@ -871,17 +922,39 @@ body {
 
     /* 移动端分页控制器 */
     .pagination-controls {
-        flex-direction: column;
-        align-items: stretch;
+        padding: 16px 0;
+        gap: 12px;
     }
 
     .pagination-info {
+        width: 100%;
         justify-content: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .pagination-info label {
+        font-size: 13px;
+    }
+
+    .page-size-selector {
+        font-size: 13px;
+        padding: 6px 10px;
     }
 
     .pagination-buttons {
-        justify-content: space-between;
         width: 100%;
+        gap: 8px;
+    }
+
+    .pagination-btn {
+        flex: 0 0 auto;
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    .pagination-btn span:first-child {
+        font-size: 16px;
     }
 
     .pagination-btn span:last-child {
@@ -889,17 +962,44 @@ body {
     }
 
     .page-jump {
+        flex: 1;
         padding: 0;
+        justify-content: center;
     }
 
-    /* 鸡汤部分移动端调整 */
+    .page-input {
+        width: 50px;
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+
+    .page-total {
+        font-size: 13px;
+    }
+
+    /* 鸡汤部分移动端调整 - 更精致 */
     .motivation-section {
-        margin: 16px;
-        padding: 16px;
+        margin: 12px 16px;
+        padding: 20px 16px;
+        border-radius: 8px;
+    }
+
+    .motivation-section::after {
+        font-size: 16px;
+        top: 12px;
+        right: 16px;
+    }
+
+    .motivation-title {
+        font-size: 11px;
+        letter-spacing: 0.8px;
     }
 
     .motivation-text {
         font-size: 13px;
+        line-height: 1.7;
+        padding-left: 8px;
+        border-left-width: 2px;
     }
 }
 
