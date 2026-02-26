@@ -1,0 +1,30 @@
+# 历史记录（本地使用，不推送到 GitHub）
+question_history.json
+
+# 日志文件（本地使用，不推送到 GitHub）
+logs/
+*.log
+execution.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# 配置文件（包含 API Key）
+config.json
+
+# macOS
+.DS_Store
+*.DS_Store
+
+# 备份文件
+*_backup/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

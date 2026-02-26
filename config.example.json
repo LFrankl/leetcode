@@ -1,0 +1,25 @@
+{
+  "questions_per_day": 3,
+  "difficulties": {
+    "easy": 1,
+    "medium": 1,
+    "hard": 1
+  },
+  "output_dir": "leetcode_questions",
+  "history_file": "question_history.json",
+  "language": "zh-CN",
+  "github_pages": {
+    "enabled": false,
+    "username": "YOUR_GITHUB_USERNAME",
+    "repo": "leetcode",
+    "site_url": "https://YOUR_GITHUB_USERNAME.github.io/leetcode/"
+  },
+  "deepseek": {
+    "enabled": true,
+    "api_key": "YOUR_DEEPSEEK_API_KEY_HERE",
+    "base_url": "https://api.deepseek.com/v1",
+    "model": "deepseek-chat",
+    "timeout": 180,
+    "prompt_template": "请分析以下 LeetCode 题目，提供详细的解题思路：\n\n题目：{title}\n难度：{difficulty}\n\n{content}\n\n请提供：\n1. 题目分析和解题思路\n2. 至少 2-3 种不同的解法（如果适用）\n3. 每种解法的详细代码实现（同时提供 Go 和 C++ 两种语言的实现）\n4. 每种解法的时间复杂度和空间复杂度分析\n5. 不同解法之间的对比和优缺点\n\n请用中文回答，代码部分使用 Markdown 格式。\n\n代码格式示例：\n### 解法一：xxx\n```go\n// Go 代码\n```\n```cpp\n// C++ 代码\n```"
+  }
+}
