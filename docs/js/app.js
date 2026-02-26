@@ -65,7 +65,8 @@ class LeetCodeApp {
 
     async loadHistory() {
         try {
-            const response = await fetch('history.json');
+            // 添加时间戳防止浏览器缓存
+            const response = await fetch(`history.json?t=${Date.now()}`);
             if (!response.ok) {
                 throw new Error('无法加载历史记录');
             }
