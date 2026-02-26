@@ -45,6 +45,11 @@ class LeetCodeApp {
             this.showRecordList(this.currentDate);
         });
 
+        // FAB 返回按钮
+        document.getElementById('fabBack').addEventListener('click', () => {
+            this.showRecordList(this.currentDate);
+        });
+
         // ESC 键关闭侧边栏
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && sidebar.classList.contains('open')) {

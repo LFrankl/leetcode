@@ -629,6 +629,15 @@ body {
         margin-top: 8px;
         margin-left: 0;
     }
+
+    /* 移动端 FAB 样式调整 */
+    .fab-back {
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
 }
 
 /* 打印样式 */
@@ -637,7 +646,8 @@ body {
     .sidebar,
     .sidebar-overlay,
     .footer,
-    .back-button {
+    .back-button,
+    .fab-back {
         display: none;
     }
 
