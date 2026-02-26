@@ -930,8 +930,9 @@ body {
 
     .pagination-info {
         width: 100%;
-        justify-content: center;
+        justify-content: flex-end;
         padding-bottom: 12px;
+        padding-right: 8px;
         border-bottom: 1px solid var(--border);
         gap: 8px;
     }
@@ -949,10 +950,13 @@ body {
         min-width: 70px;
     }
 
+    /* 翻页按钮紧凑布局 */
     .pagination-buttons {
-        width: 100%;
+        display: flex;
         justify-content: center;
-        gap: 16px;
+        align-items: center;
+        gap: 0;
+        width: 100%;
     }
 
     .pagination-btn {
@@ -962,16 +966,8 @@ body {
         flex-shrink: 0;
     }
 
-    /* 两个翻页按钮挨在一起 */
-    .pagination-buttons {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 8px;
-        align-items: center;
-    }
-
     .page-jump {
-        padding: 0 12px;
+        padding: 0 6px;
         justify-content: center;
     }
 
