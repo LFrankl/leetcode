@@ -967,7 +967,7 @@ body {
     }
 
     .page-jump {
-        padding: 0 6px;
+        padding-right: 8px;
         justify-content: center;
     }
 
