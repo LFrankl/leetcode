@@ -1,11 +1,29 @@
-// LeetCode 每日题目 - Google 风格应用（三层结构）
+// LeetCode 每日题目 - 分页显示版本
 
 class LeetCodeApp {
     constructor() {
         this.allRecords = [];
-        this.recordsByDate = {};
-        this.currentDate = null;
         this.currentView = 'list'; // 'list' or 'detail'
+
+        // 分页相关
+        this.currentPage = 1;
+        this.pageSize = 10;
+        this.totalPages = 1;
+
+        // 鸡汤文案库
+        this.motivationQuotes = [
+            "代码如诗，算法如画。每一道题目都是通往卓越的阶梯。",
+            "坚持每天刷题，你与梦想的距离就会越来越近。",
+            "算法不会背叛努力，坚持就是胜利。",
+            "每一次提交，都是对自己的一次挑战。",
+            "编程之路漫长，但每一步都算数。",
+            "别怕题目难，怕的是不敢开始。",
+            "优秀的程序员都是从一道道题目中成长起来的。",
+            "今天解决的 bug，就是明天的经验。",
+            "代码改变世界，而你正在改变代码。",
+            "保持好奇心，永远在学习的路上。"
+        ];
+
         this.init();
     }
 
@@ -16,13 +34,11 @@ class LeetCodeApp {
         // 加载历史数据
         await this.loadHistory();
 
-        // 显示今天的记录列表
-        if (Object.keys(this.recordsByDate).length > 0) {
-            const latestDate = Object.keys(this.recordsByDate)[0];
-            this.showRecordList(latestDate);
-        } else {
-            this.showEmptyState();
-        }
+        // 显示第一页
+        this.renderPage();
+
+        // 随机显示鸡汤
+        this.showRandomMotivation();
     }
 
     bindEvents() {
@@ -42,12 +58,12 @@ class LeetCodeApp {
 
         // 返回按钮
         document.getElementById('backButton').addEventListener('click', () => {
-            this.showRecordList(this.currentDate);
+            this.showRecordList();
         });
 
         // FAB 返回按钮
         document.getElementById('fabBack').addEventListener('click', () => {
-            this.showRecordList(this.currentDate);
+            this.showRecordList();
         });
 
         // ESC 键关闭侧边栏
@@ -55,6 +71,42 @@ class LeetCodeApp {
             if (e.key === 'Escape' && sidebar.classList.contains('open')) {
                 this.closeSidebar();
             }
+        });
+
+        // 分页控件事件
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.renderPage();
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+                this.renderPage();
+            }
+        });
+
+        document.getElementById('pageInput').addEventListener('change', (e) => {
+            const page = parseInt(e.target.value);
+            if (page >= 1 && page <= this.totalPages) {
+                this.currentPage = page;
+                this.renderPage();
+            } else {
+                e.target.value = this.currentPage;
+            }
+        });
+
+        document.getElementById('pageSize').addEventListener('change', (e) => {
+            const oldPageSize = this.pageSize;
+            this.pageSize = parseInt(e.target.value);
+
+            // 重新计算当前页，保持用户看到的第一条记录尽可能不变
+            const firstRecordIndex = (this.currentPage - 1) * oldPageSize;
+            this.currentPage = Math.floor(firstRecordIndex / this.pageSize) + 1;
+
+            this.renderPage();
         });
     }
 
@@ -74,11 +126,10 @@ class LeetCodeApp {
             const data = await response.json();
             this.allRecords = data.records || [];
 
-            // 按日期分组
-            this.groupRecordsByDate();
-
-            // 渲染侧边栏
-            this.renderSidebar();
+            // 按时间倒序排序（最新的在前）
+            this.allRecords.sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+            });
 
             // 更新统计
             this.updateStats();
@@ -89,101 +140,71 @@ class LeetCodeApp {
         }
     }
 
-    groupRecordsByDate() {
-        this.recordsByDate = {};
-
-        this.allRecords.forEach(record => {
-            // 提取日期部分（YYYY-MM-DD）
-            const dateOnly = record.date.split(' ')[0];
-
-            if (!this.recordsByDate[dateOnly]) {
-                this.recordsByDate[dateOnly] = [];
-            }
-
-            this.recordsByDate[dateOnly].push(record);
-        });
-    }
-
-    renderSidebar() {
-        const historyList = document.getElementById('historyList');
-
-        if (Object.keys(this.recordsByDate).length === 0) {
-            historyList.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-state-icon">📝</div>
-                    <div class="empty-state-text">暂无历史记录</div>
-                </div>
-            `;
-            return;
-        }
-
-        // 按日期分组渲染
-        const dates = Object.keys(this.recordsByDate).sort((a, b) => b.localeCompare(a));
-
-        historyList.innerHTML = dates.map(date => {
-            const records = this.recordsByDate[date];
-            const totalCount = records.reduce((sum, r) => sum + r.count, 0);
-
-            return `
-                <div class="date-group">
-                    <div class="date-group-header">${date}</div>
-                    <div class="date-group-items">
-                        <div class="history-item" onclick="app.selectDate('${date}')">
-                            <span class="history-date">${records.length} 次执行，共 ${totalCount} 题</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    selectDate(date) {
-        this.showRecordList(date);
-
-        // 移动端自动关闭侧边栏
-        if (window.innerWidth <= 768) {
-            this.closeSidebar();
+    calculatePagination() {
+        this.totalPages = Math.ceil(this.allRecords.length / this.pageSize);
+        if (this.currentPage > this.totalPages) {
+            this.currentPage = this.totalPages || 1;
         }
     }
 
-    showRecordList(date) {
-        this.currentDate = date;
-        this.currentView = 'list';
-
-        const records = this.recordsByDate[date] || [];
-
-        // 切换视图
-        document.getElementById('recordListView').style.display = 'block';
-        document.getElementById('questionDetailView').classList.remove('active');
+    renderPage() {
+        this.calculatePagination();
 
         // 更新标题
-        document.getElementById('contentTitle').textContent = date;
+        document.getElementById('contentTitle').textContent = '所有记录';
         document.getElementById('contentSubtitle').textContent =
-            `共 ${records.length} 次执行`;
+            `共 ${this.allRecords.length} 条记录`;
+
+        // 计算当前页的记录
+        const startIndex = (this.currentPage - 1) * this.pageSize;
+        const endIndex = Math.min(startIndex + this.pageSize, this.allRecords.length);
+        const pageRecords = this.allRecords.slice(startIndex, endIndex);
 
         // 渲染记录列表
+        this.renderRecordList(pageRecords);
+
+        // 更新分页控件
+        this.updatePaginationControls();
+    }
+
+    updatePaginationControls() {
+        // 更新按钮状态
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+
+        prevBtn.disabled = this.currentPage <= 1;
+        nextBtn.disabled = this.currentPage >= this.totalPages;
+
+        // 更新页码输入框
+        document.getElementById('pageInput').value = this.currentPage;
+        document.getElementById('pageInput').max = this.totalPages;
+        document.getElementById('totalPages').textContent = this.totalPages;
+    }
+
+    renderRecordList(records) {
         const recordList = document.getElementById('recordList');
 
         if (records.length === 0) {
             recordList.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-state-icon">📝</div>
-                    <div class="empty-state-text">该日期暂无记录</div>
+                    <div class="empty-state-text">暂无记录</div>
+                    <div class="empty-state-hint">运行脚本后，记录将自动显示在这里</div>
                 </div>
             `;
             return;
         }
 
-        recordList.innerHTML = records.map((record, index) => {
-            // 提取时间部分
-            const timeOnly = record.date.split(' ')[1];
+        // 难度中文映射
+        const difficultyMap = {
+            'easy': '简单',
+            'medium': '中等',
+            'hard': '困难'
+        };
 
-            // 难度中文映射
-            const difficultyMap = {
-                'easy': '简单',
-                'medium': '中等',
-                'hard': '困难'
-            };
+        recordList.innerHTML = records.map((record, index) => {
+            // 计算全局索引
+            const globalIndex = (this.currentPage - 1) * this.pageSize + index;
 
             // 生成题目预览列表
             const questionsHTML = record.questions ? record.questions.map(q => {
@@ -205,9 +226,9 @@ class LeetCodeApp {
             }).join('') : '';
 
             return `
-                <div class="record-card" onclick="app.viewRecord(${index}, '${date}')">
+                <div class="record-card" onclick="app.viewRecord(${globalIndex})">
                     <div class="record-header">
-                        <div class="record-time">${timeOnly}</div>
+                        <div class="record-time">${record.date}</div>
                         <div class="record-info">共 ${record.count} 道题目</div>
                         <div class="record-arrow">→</div>
                     </div>
@@ -217,9 +238,9 @@ class LeetCodeApp {
         }).join('');
     }
 
-    viewRecord(index, date) {
-        const records = this.recordsByDate[date];
-        const record = records[index];
+    viewRecord(globalIndex) {
+        const record = this.allRecords[globalIndex];
+        if (!record) return;
 
         // 切换到详情视图（题目列表）
         this.currentView = 'detail';
@@ -268,13 +289,28 @@ class LeetCodeApp {
         window.location.href = filename;
     }
 
+    showRecordList() {
+        this.currentView = 'list';
+        document.getElementById('recordListView').style.display = 'block';
+        document.getElementById('questionDetailView').classList.remove('active');
+
+        // 滚动到顶部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     updateStats() {
         // 更新统计数据
         const totalQuestions = this.allRecords.reduce((sum, record) => sum + record.count, 0);
-        const uniqueDates = Object.keys(this.recordsByDate).length;
+
+        // 计算连续天数（按日期去重）
+        const uniqueDates = new Set();
+        this.allRecords.forEach(record => {
+            const dateOnly = record.date.split(' ')[0];
+            uniqueDates.add(dateOnly);
+        });
 
         document.getElementById('totalQuestions').textContent = totalQuestions;
-        document.getElementById('continuousDays').textContent = uniqueDates;
+        document.getElementById('continuousDays').textContent = uniqueDates.size;
 
         // 更新最后更新时间
         if (this.allRecords.length > 0) {
@@ -283,15 +319,12 @@ class LeetCodeApp {
         }
     }
 
-    showEmptyState() {
-        const recordList = document.getElementById('recordList');
-        recordList.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-state-icon">📝</div>
-                <div class="empty-state-text">暂无记录</div>
-                <div class="empty-state-hint">运行脚本后，记录将自动显示在这里</div>
-            </div>
-        `;
+    showRandomMotivation() {
+        const randomIndex = Math.floor(Math.random() * this.motivationQuotes.length);
+        const motivationText = document.getElementById('motivationText');
+        if (motivationText) {
+            motivationText.textContent = `"${this.motivationQuotes[randomIndex]}"`;
+        }
     }
 }
 

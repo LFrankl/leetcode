@@ -211,6 +211,31 @@ body {
     display: block;
 }
 
+/* 鸡汤文案区域 */
+.motivation-section {
+    padding: 24px;
+    margin-top: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    margin: 16px 24px;
+}
+
+.motivation-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.motivation-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: white;
+    font-style: italic;
+}
+
 /* 主内容区 */
 .main-content {
     margin-top: 64px;
@@ -238,6 +263,125 @@ body {
 .content-subtitle {
     font-size: 14px;
     color: var(--text-secondary);
+}
+
+/* 分页控制器 */
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.page-size-selector {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--background);
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.page-size-selector:hover {
+    border-color: var(--primary-blue);
+}
+
+.page-size-selector:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.pagination-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pagination-btn {
+    padding: 8px 16px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    outline: none;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: var(--surface);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-jump {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+.page-input {
+    width: 60px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--background);
+    color: var(--text-primary);
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.page-input:hover {
+    border-color: var(--primary-blue);
+}
+
+.page-input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+/* 移除数字输入框的上下箭头 */
+.page-input::-webkit-inner-spin-button,
+.page-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.page-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.page-total {
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
 }
 
 /* 条目列表（一天内的多个执行记录）*/
@@ -686,8 +830,8 @@ body {
     }
 
     .record-time {
-        font-size: 13px;
-        min-width: 70px;
+        font-size: 11px;
+        min-width: auto;
     }
 
     .record-question-item {
@@ -723,6 +867,39 @@ body {
         width: 48px;
         height: 48px;
         font-size: 20px;
+    }
+
+    /* 移动端分页控制器 */
+    .pagination-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pagination-info {
+        justify-content: center;
+    }
+
+    .pagination-buttons {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .pagination-btn span:last-child {
+        display: none;
+    }
+
+    .page-jump {
+        padding: 0;
+    }
+
+    /* 鸡汤部分移动端调整 */
+    .motivation-section {
+        margin: 16px;
+        padding: 16px;
+    }
+
+    .motivation-text {
+        font-size: 13px;
     }
 }
 

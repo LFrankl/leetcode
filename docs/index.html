@@ -42,8 +42,11 @@
                 </div>
             </div>
         </div>
-        <div class="history-list" id="historyList">
-            <!-- 历史记录将由 JavaScript 动态生成 -->
+        <div class="motivation-section">
+            <div class="motivation-title">每日一言</div>
+            <div class="motivation-text" id="motivationText">
+                "代码如诗，算法如画。每一道题目都是通往卓越的阶梯。"
+            </div>
         </div>
     </div>
 
@@ -53,9 +56,37 @@
             <!-- 条目列表视图（默认显示） -->
             <div id="recordListView">
                 <div class="content-header">
-                    <h1 class="content-title" id="contentTitle">今日记录</h1>
-                    <p class="content-subtitle" id="contentSubtitle">选择一个记录查看题目</p>
+                    <h1 class="content-title" id="contentTitle">所有记录</h1>
+                    <p class="content-subtitle" id="contentSubtitle">共 0 条记录</p>
                 </div>
+
+                <!-- 分页控制器 -->
+                <div class="pagination-controls" id="paginationControls">
+                    <div class="pagination-info">
+                        <label for="pageSize">每页显示：</label>
+                        <select id="pageSize" class="page-size-selector">
+                            <option value="5">5 条</option>
+                            <option value="10" selected>10 条</option>
+                            <option value="20">20 条</option>
+                            <option value="50">50 条</option>
+                        </select>
+                    </div>
+                    <div class="pagination-buttons">
+                        <button id="prevPage" class="pagination-btn" disabled>
+                            <span>←</span>
+                            <span>上一页</span>
+                        </button>
+                        <div class="page-jump">
+                            <input type="number" id="pageInput" class="page-input" min="1" value="1">
+                            <span class="page-total">/ <span id="totalPages">1</span></span>
+                        </div>
+                        <button id="nextPage" class="pagination-btn" disabled>
+                            <span>下一页</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="record-list" id="recordList">
                     <!-- 记录列表将由 JavaScript 动态生成 -->
                     <div class="loading">
