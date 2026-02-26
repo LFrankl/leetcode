@@ -1,0 +1,360 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* 头部 */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    font-size: 1.1em;
+    opacity: 0.95;
+    margin-bottom: 15px;
+}
+
+.update-time {
+    font-size: 0.9em;
+    opacity: 0.85;
+    margin-top: 10px;
+}
+
+/* 统计信息 */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+/* 题目列表 */
+.daily-list {
+    padding: 30px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.empty-state p:first-child {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.empty-hint {
+    font-size: 1em;
+    color: #adb5bd;
+}
+
+.day-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 15px;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.day-item:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+
+.day-item.latest {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-color: #667eea;
+}
+
+.date {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #667eea;
+    min-width: 120px;
+}
+
+.day-item a {
+    flex: 1;
+    font-size: 1em;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.day-item a:hover {
+    color: #667eea;
+}
+
+.count {
+    font-size: 0.9em;
+    color: #6c757d;
+    padding: 4px 12px;
+    background: #f8f9fa;
+    border-radius: 20px;
+}
+
+/* 题目详情页样式 */
+.back-link {
+    display: inline-block;
+    margin: 30px;
+    padding: 10px 20px;
+    background: #667eea;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.back-link:hover {
+    background: #5568d3;
+}
+
+.content {
+    padding: 30px;
+}
+
+h1, h2, h3, h4 {
+    color: #2d3748;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+}
+
+h1 {
+    font-size: 2em;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.6em;
+    color: #667eea;
+}
+
+h3 {
+    font-size: 1.3em;
+    color: #764ba2;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+/* 代码块 */
+pre {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5em 0;
+    line-height: 1.5;
+}
+
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+    font-size: 0.9em;
+}
+
+p code, li code {
+    background: #f8f9fa;
+    color: #e83e8c;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* 表格 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+}
+
+th {
+    background: #667eea;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+/* 列表 */
+ul, ol {
+    margin: 1em 0 1em 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* 链接 */
+a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 分隔线 */
+hr {
+    border: none;
+    border-top: 2px solid #e9ecef;
+    margin: 40px 0;
+}
+
+/* 页脚 */
+.footer {
+    text-align: center;
+    padding: 30px;
+    background: #f8f9fa;
+    color: #6c757d;
+    font-size: 0.9em;
+    border-top: 1px solid #e9ecef;
+}
+
+.footer a {
+    color: #667eea;
+    font-weight: 500;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        border-radius: 12px;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .stats {
+        padding: 20px;
+    }
+
+    .stat-value {
+        font-size: 1.5em;
+    }
+
+    .daily-list {
+        padding: 20px;
+    }
+
+    .day-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .date {
+        margin-bottom: 8px;
+    }
+
+    .count {
+        margin-top: 8px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    pre {
+        padding: 15px;
+        font-size: 0.85em;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .container {
+        box-shadow: none;
+    }
+
+    .header {
+        background: white;
+        color: black;
+    }
+
+    .back-link, .footer {
+        display: none;
+    }
+}
