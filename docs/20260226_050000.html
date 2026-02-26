@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode 2026-02-26 05:00:00</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        <div class="content">
+            <h1>📅 2026-02-26 05:00:00 每日题目 (第 6 组)</h1>
+            <h1 id="496-下一个更大元素-i">496. 下一个更大元素 I</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 栈, 数组, 哈希表, 单调栈</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/next-greater-element-i/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p><code>nums1</code>&nbsp;中数字&nbsp;<code>x</code>&nbsp;的 <strong>下一个更大元素</strong> 是指&nbsp;<code>x</code>&nbsp;在&nbsp;<code>nums2</code> 中对应位置 <strong>右侧</strong> 的 <strong>第一个</strong> 比&nbsp;<code>x</code><strong>&nbsp;</strong>大的元素。</p>
+
+<p>给你两个<strong> 没有重复元素</strong> 的数组&nbsp;<code>nums1</code> 和&nbsp;<code>nums2</code> ，下标从 <strong>0</strong> 开始计数，其中<code>nums1</code>&nbsp;是&nbsp;<code>nums2</code>&nbsp;的子集。</p>
+
+<p>对于每个 <code>0 &lt;= i &lt; nums1.length</code> ，找出满足 <code>nums1[i] == nums2[j]</code> 的下标 <code>j</code> ，并且在 <code>nums2</code> 确定 <code>nums2[j]</code> 的 <strong>下一个更大元素</strong> 。如果不存在下一个更大元素，那么本次查询的答案是 <code>-1</code> 。</p>
+
+<p>返回一个长度为&nbsp;<code>nums1.length</code> 的数组<em> </em><code>ans</code><em> </em>作为答案，满足<em> </em><code>ans[i]</code><em> </em>是如上所述的 <strong>下一个更大元素</strong> 。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums1 = [4,1,2], nums2 = [1,3,4,2].
+<strong>输出：</strong>[-1,3,-1]
+<strong>解释：</strong>nums1 中每个值的下一个更大元素如下所述：
+- 4 ，用加粗斜体标识，nums2 = [1,3,<strong>4</strong>,2]。不存在下一个更大元素，所以答案是 -1 。
+- 1 ，用加粗斜体标识，nums2 = [<em><strong>1</strong></em>,3,4,2]。下一个更大元素是 3 。
+- 2 ，用加粗斜体标识，nums2 = [1,3,4,<em><strong>2</strong></em>]。不存在下一个更大元素，所以答案是 -1 。</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums1 = [2,4], nums2 = [1,2,3,4].
+<strong>输出：</strong>[3,-1]
+<strong>解释：</strong>nums1 中每个值的下一个更大元素如下所述：
+- 2 ，用加粗斜体标识，nums2 = [1,<em><strong>2</strong></em>,3,4]。下一个更大元素是 3 。
+- 4 ，用加粗斜体标识，nums2 = [1,2,3,<em><strong>4</strong></em>]。不存在下一个更大元素，所以答案是 -1 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000</code></li>
+    <li><code>0 &lt;= nums1[i], nums2[i] &lt;= 10<sup>4</sup></code></li>
+    <li><code>nums1</code>和<code>nums2</code>中所有整数 <strong>互不相同</strong></li>
+    <li><code>nums1</code> 中的所有整数同样出现在 <code>nums2</code> 中</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>进阶：</strong>你可以设计一个时间复杂度为 <code>O(nums1.length + nums2.length)</code> 的解决方案吗？</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -&gt; List[int]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var nextGreaterElement = function(nums1, nums2) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func nextGreaterElement(nums1 []int, nums2 []int) []int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[4,1,2]
+[1,3,4,2]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个经典的"下一个更大元素"问题。给定两个数组：
+- <code>nums1</code> 是 <code>nums2</code> 的子集
+- 对于 <code>nums1</code> 中的每个元素，需要在 <code>nums2</code> 中找到该元素，然后在其右侧找到第一个比它大的元素</p>
+
+<p>关键约束：
+1. 所有元素互不相同
+2. <code>nums1</code> 是 <code>nums2</code> 的子集
+3. 数组长度 ≤ 1000</p>
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心思路">核心思路</h3>
+
+<p>我们需要为 <code>nums2</code> 中的每个元素找到其右侧第一个更大的元素，然后将 <code>nums1</code> 中元素对应的结果提取出来。</p>
+
+<h3 id="方法对比">方法对比</h3>
+
+<ol>
+<li><strong>暴力法</strong>：直接遍历查找，简单但效率低</li>
+<li><strong>哈希表+单调栈</strong>：最优解，利用单调递减栈一次遍历 <code>nums2</code>，同时用哈希表记录结果</li>
+<li><strong>哈希表+反向遍历</strong>：从右向左遍历，利用哈希表记录已处理元素的下一个更大值</li>
+</ol>
+
+<h2 id="解法详解">解法详解</h2>
+
+<h3 id="解法一暴力法双重循环">解法一：暴力法（双重循环）</h3>
+
+<p><strong>思路</strong>：
+1. 对于 <code>nums1</code> 中的每个元素，先在 <code>nums2</code> 中找到它的位置
+2. 从该位置开始向右遍历，找到第一个更大的元素</p>
+
+<p><strong>时间复杂度</strong>：O(n×m)，其中 n=nums1.length, m=nums2.length
+<strong>空间复杂度</strong>：O(1)（不考虑输出数组）</p>
+
+<pre><code>// Go 实现
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+    result := make([]int, len(nums1))
+
+    for i, num := range nums1 {
+        // 在 nums2 中找到 num 的位置
+        found := false
+        result[i] = -1
+
+        for j := 0; j &lt; len(nums2); j++ {
+            if nums2[j] == num {
+                found = true
+            }
+            if found &amp;&amp; nums2[j] &gt; num {
+                result[i] = nums2[j]
+                break
+            }
+        }
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        vector&lt;int&gt; result(nums1.size(), -1);
+
+        for (int i = 0; i &lt; nums1.size(); i++) {
+            bool found = false;
+
+            for (int j = 0; j &lt; nums2.size(); j++) {
+                if (nums2[j] == nums1[i]) {
+                    found = true;
+                }
+                if (found &amp;&amp; nums2[j] &gt; nums1[i]) {
+                    result[i] = nums2[j];
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="解法二哈希表单调栈最优解">解法二：哈希表+单调栈（最优解）</h3>
+
+<p><strong>思路</strong>：
+1. 使用单调递减栈处理 <code>nums2</code>
+2. 遍历 <code>nums2</code>，当当前元素大于栈顶元素时，栈顶元素的下一个更大元素就是当前元素
+3. 用哈希表记录每个元素的下一个更大元素
+4. 最后遍历 <code>nums1</code>，从哈希表中获取结果</p>
+
+<p><strong>时间复杂度</strong>：O(n+m)，其中 n=nums1.length, m=nums2.length
+<strong>空间复杂度</strong>：O(m)，用于存储哈希表和栈</p>
+
+<pre><code>// Go 实现
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+    // 使用哈希表存储每个元素的下一个更大元素
+    nextGreater := make(map[int]int)
+    stack := make([]int, 0)  // 单调递减栈
+
+    // 遍历 nums2
+    for _, num := range nums2 {
+        // 当栈不为空且当前元素大于栈顶元素时
+        for len(stack) &gt; 0 &amp;&amp; num &gt; stack[len(stack)-1] {
+            // 栈顶元素的下一个更大元素是当前元素
+            top := stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+            nextGreater[top] = num
+        }
+        // 当前元素入栈
+        stack = append(stack, num)
+    }
+
+    // 栈中剩余元素没有下一个更大元素，设为 -1
+    for _, num := range stack {
+        nextGreater[num] = -1
+    }
+
+    // 构建结果
+    result := make([]int, len(nums1))
+    for i, num := range nums1 {
+        result[i] = nextGreater[num]
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        unordered_map&lt;int, int&gt; nextGreater;
+        stack&lt;int&gt; st;  // 单调递减栈
+
+        // 遍历 nums2
+        for (int num : nums2) {
+            // 当栈不为空且当前元素大于栈顶元素时
+            while (!st.empty() &amp;&amp; num &gt; st.top()) {
+                nextGreater[st.top()] = num;
+                st.pop();
+            }
+            // 当前元素入栈
+            st.push(num);
+        }
+
+        // 栈中剩余元素没有下一个更大元素
+        while (!st.empty()) {
+            nextGreater[st.top()] = -1;
+            st.pop();
+        }
+
+        // 构建结果
+        vector&lt;int&gt; result(nums1.size());
+        for (int i = 0; i &lt; nums1.size(); i++) {
+            result[i] = nextGreater[nums1[i]];
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="解法三哈希表反向遍历">解法三：哈希表+反向遍历</h3>
+
+<p><strong>思路</strong>：
+1. 从右向左遍历 <code>nums2</code>
+2. 维护一个哈希表，记录已处理元素的下一个更大值
+3. 对于每个元素，向右查找第一个更大的元素</p>
+
+<p><strong>时间复杂度</strong>：O(m²) 最坏情况，但实际运行较快
+<strong>空间复杂度</strong>：O(m)</p>
+
+<pre><code>// Go 实现
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+    // 存储每个元素的下一个更大元素
+    nextMap := make(map[int]int)
+
+    // 从右向左遍历 nums2
+    for i := len(nums2) - 1; i &gt;= 0; i-- {
+        j := i + 1
+        // 向右查找第一个更大的元素
+        for j &lt; len(nums2) &amp;&amp; nums2[j] &lt;= nums2[i] {
+            // 如果 nums2[j] 的下一个更大元素存在且大于当前元素
+            if next, ok := nextMap[nums2[j]]; ok &amp;&amp; next &gt; nums2[i] {
+                j = len(nums2)  // 可以直接使用这个更大的元素
+                break
+            }
+            j++
+        }
+
+        if j &lt; len(nums2) {
+            nextMap[nums2[i]] = nums2[j]
+        } else {
+            nextMap[nums2[i]] = -1
+        }
+    }
+
+    // 构建结果
+    result := make([]int, len(nums1))
+    for i, num := range nums1 {
+        result[i] = nextMap[num]
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>// C++ 实现
+class Solution {
+public:
+    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        unordered_map&lt;int, int&gt; nextMap;
+
+        // 从右向左遍历 nums2
+        for (int i = nums2.size() - 1; i &gt;= 0; i--) {
+            int j = i + 1;
+            // 向右查找第一个更大的元素
+            while (j &lt; nums2.size() &amp;&amp; nums2[j] &lt;= nums2[i]) {
+                // 如果 nums2[j] 的下一个更大元素存在且大于当前元素
+                if (nextMap.count(nums2[j]) &amp;&amp; nextMap[nums2[j]] &gt; nums2[i]) {
+                    j = nums2.size();  // 可以直接使用这个更大的元素
+                    break;
+                }
+                j++;
+            }
+
+            if (j &lt; nums2.size()) {
+                nextMap[nums2[i]] = nums2[j];
+            } else {
+                nextMap[nums2[i]] = -1;
+            }
+        }
+
+        // 构建结果
+        vector&lt;int&gt; result(nums1.size());
+        for (int i = 0; i &lt; nums1.size(); i++) {
+            result[i] = nextMap[nums1[i]];
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h2 id="复杂度分析对比">复杂度分析对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>时间复杂度</th>
+  <th>空间复杂度</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>暴力法</td>
+  <td>O(n×m)</td>
+  <td>O(1)</td>
+  <td>实现简单，易于理解</td>
+  <td>效率低，不适合大数据量</td>
+</tr>
+<tr>
+  <td>哈希表+单调栈</td>
+  <td>O(n+m)</td>
+  <td>O(m)</td>
+  <td>最优时间复杂度，效率高</td>
+  <td>需要理解单调栈概念</td>
+</tr>
+<tr>
+  <td>哈希表+反向遍历</td>
+  <td>O(m²) 最坏</td>
+  <td>O(m)</td>
+  <td>思路直观，比暴力法优化</td>
+  <td>最坏情况效率仍不高</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="推荐解法">推荐解法</h2>
+
+<p><strong>哈希表+单调栈</strong>是最优解法，理由如下：
+1. 时间复杂度最优：O(n+m)，满足进阶要求
+2. 空间复杂度合理：O(m)，只存储必要信息
+3. 通用性强：该模式可解决一系列"下一个更大/更小元素"问题
+4. 代码简洁：实现优雅，逻辑清晰</p>
+
+<h2 id="关键点总结">关键点总结</h2>
+
+<ol>
+<li><strong>单调栈</strong>是解决这类问题的核心数据结构</li>
+<li><strong>哈希表</strong>用于快速查询结果</li>
+<li>注意处理栈中剩余元素（没有下一个更大元素的元素）</li>
+<li>利用题目条件（元素互不相同）简化实现</li>
+</ol>
+
+<p>这种解法不仅适用于本题，还可以扩展到：
+- 下一个更大元素 II（循环数组）
+- 每日温度问题
+- 柱状图中最大矩形等经典问题</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 15:29:28</em></p>
+
+<hr />
+
+<h1 id="688-骑士在棋盘上的概率">688. 骑士在棋盘上的概率</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/knight-probability-in-chessboard/</p>
+
+<hr />
+
+<h2 id="题目描述-2">题目描述</h2>
+
+<p>在一个&nbsp;<code>n x n</code>&nbsp;的国际象棋棋盘上，一个骑士从单元格 <code>(row, column)</code>&nbsp;开始，并尝试进行 <code>k</code> 次移动。行和列是 <strong>从 0 开始</strong> 的，所以左上单元格是 <code>(0,0)</code> ，右下单元格是 <code>(n - 1, n - 1)</code> 。</p>
+
+<p>象棋骑士有8种可能的走法，如下图所示。每次移动在基本方向上是两个单元格，然后在正交方向上是一个单元格。</p>
+
+<p><img src="https://assets.leetcode.cn/aliyun-lc-upload/uploads/2018/10/12/knight.png" style="height: 300px; width: 300px;" /></p>
+
+<p>每次骑士要移动时，它都会随机从8种可能的移动中选择一种(即使棋子会离开棋盘)，然后移动到那里。</p>
+
+<p>骑士继续移动，直到它走了 <code>k</code> 步或离开了棋盘。</p>
+
+<p>返回 <em>骑士在棋盘停止移动后仍留在棋盘上的概率</em> 。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入:</strong> n = 3, k = 2, row = 0, column = 0
+<strong>输出:</strong> 0.0625
+<strong>解释:</strong> 有两步(到(1,2)，(2,1))可以让骑士留在棋盘上。
+在每一个位置上，也有两种移动可以让骑士留在棋盘上。
+骑士留在棋盘上的总概率是0.0625。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入:</strong> n = 1, k = 0, row = 0, column = 0
+<strong>输出:</strong> 1.00000
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示:</strong></p>
+
+<ul>
+    <li><code>1 &lt;= n &lt;= 25</code></li>
+    <li><code>0 &lt;= k &lt;= 100</code></li>
+    <li><code>0 &lt;= row, column &lt;= n - 1</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板-2">代码模板</h2>
+
+<h3 id="c-2">C++</h3>
+
+<pre><code>class Solution {
+public:
+    double knightProbability(int n, int k, int row, int column) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java-2">Java</h3>
+
+<pre><code>class Solution {
+    public double knightProbability(int n, int k, int row, int column) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3-2">Python3</h3>
+
+<pre><code>class Solution:
+    def knightProbability(self, n: int, k: int, row: int, column: int) -&gt; float:
+
+</code></pre>
+
+<h3 id="javascript-2">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @param {number} k
+ * @param {number} row
+ * @param {number} column
+ * @return {number}
+ */
+var knightProbability = function(n, k, row, column) {
+
+};
+</code></pre>
+
+<h3 id="go-2">Go</h3>
+
+<pre><code>func knightProbability(n int, k int, row int, column int) float64 {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例-2">示例测试用例</h2>
+
+<pre><code>3
+2
+0
+0
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答">AI 解答</h2>
+
+<p><em>DeepSeek API 未配置或调用失败</em></p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 15:30:29</em></p>
+
+<hr />
+
+<h1 id="777-在-lr-字符串中交换相邻字符">777. 在 LR 字符串中交换相邻字符</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 双指针, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/swap-adjacent-in-lr-string/</p>
+
+<hr />
+
+<h2 id="题目描述-3">题目描述</h2>
+
+<p>在一个由 <code>'L'</code> , <code>'R'</code> 和 <code>'X'</code> 三个字符组成的字符串（例如<code>"RXXLRXRXL"</code>）中进行移动操作。一次移动操作指用一个&nbsp;<code>"LX"</code>&nbsp;替换一个&nbsp;<code>"XL"</code>，或者用一个&nbsp;<code>"XR"</code>&nbsp;替换一个&nbsp;<code>"RX"</code>。现给定起始字符串&nbsp;<code>start</code>&nbsp;和结束字符串&nbsp;<code>result</code>，请编写代码，当且仅当存在一系列移动操作使得&nbsp;<code>start</code>&nbsp;可以转换成&nbsp;<code>result</code>&nbsp;时， 返回&nbsp;<code>True</code>。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>start = "RXXLRXRXL", result = "XRLXXRRLX"
+<strong>输出：</strong>true
+<strong>解释：</strong>通过以下步骤我们可以将 start 转化为 result：
+RXXLRXRXL -&gt;
+XRXLRXRXL -&gt;
+XRLXRXRXL -&gt;
+XRLXXRRXL -&gt;
+XRLXXRRLX
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>start = "X", result = "L"
+<strong>输出：</strong>false
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= start.length&nbsp;&lt;= 10<sup>4</sup></code></li>
+    <li><code>start.length == result.length</code></li>
+    <li><code>start</code> 和&nbsp;<code>result</code>&nbsp;都只包含&nbsp;<code>'L'</code>, <code>'R'</code>&nbsp;或&nbsp;<code>'X'</code>。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板-3">代码模板</h2>
+
+<h3 id="c-3">C++</h3>
+
+<pre><code>class Solution {
+public:
+    bool canTransform(string start, string result) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java-3">Java</h3>
+
+<pre><code>class Solution {
+    public boolean canTransform(String start, String result) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3-3">Python3</h3>
+
+<pre><code>class Solution:
+    def canTransform(self, start: str, result: str) -&gt; bool:
+
+</code></pre>
+
+<h3 id="javascript-3">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string} start
+ * @param {string} result
+ * @return {boolean}
+ */
+var canTransform = function(start, result) {
+
+};
+</code></pre>
+
+<h3 id="go-3">Go</h3>
+
+<pre><code>func canTransform(start string, result string) bool {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Think of the L and R's as people on a horizontal line, where X is a space.  The people can't cross each other, and also you can't go from XRX to RXX.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例-3">示例测试用例</h2>
+
+<pre><code>"RXXLRXRXL"
+"XRLXXRRLX"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek-2">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析-2">题目分析</h2>
+
+<p>题目给出了两种移动规则：
+1. <code>"XL" → "LX"</code>（L 可以向左移动）
+2. <code>"RX" → "XR"</code>（R 可以向右移动）</p>
+
+<p>关键限制：
+- L 只能向左移动（通过替换 XL）
+- R 只能向右移动（通过替换 RX）
+- X 只是占位符，本身没有方向性
+- 移动操作是相邻字符交换，但只能按上述规则进行</p>
+
+<h2 id="核心观察">核心观察</h2>
+
+<ol>
+<li><strong>相对顺序不变性</strong>：移除所有 X 后，start 和 result 中的 L 和 R 的相对顺序必须完全相同</li>
+<li><strong>位置约束</strong>：
+<ul>
+<li>L 在 result 中的位置不能比在 start 中更靠右（因为 L 只能向左移动）</li>
+<li>R 在 result 中的位置不能比在 start 中更靠左（因为 R 只能向右移动）</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<h2 id="解法一双指针比较法">解法一：双指针比较法</h2>
+
+<h3 id="思路">思路</h3>
+
+<ol>
+<li>使用两个指针分别遍历 start 和 result</li>
+<li>跳过所有的 X，比较非 X 字符</li>
+<li>检查顺序一致性</li>
+<li>检查位置约束</li>
+</ol>
+
+<h3 id="时间复杂度on">时间复杂度：O(n)</h3>
+
+<h3 id="空间复杂度o1">空间复杂度：O(1)</h3>
+
+<pre><code>func canTransform(start string, end string) bool {
+    if len(start) != len(end) {
+        return false
+    }
+
+    n := len(start)
+    i, j := 0, 0
+
+    for i &lt; n &amp;&amp; j &lt; n {
+        // 跳过 start 中的 X
+        for i &lt; n &amp;&amp; start[i] == 'X' {
+            i++
+        }
+        // 跳过 end 中的 X
+        for j &lt; n &amp;&amp; end[j] == 'X' {
+            j++
+        }
+
+        // 如果都到达末尾，返回 true
+        if i == n &amp;&amp; j == n {
+            return true
+        }
+        // 如果一个到达末尾而另一个没有，返回 false
+        if i == n || j == n {
+            return false
+        }
+
+        // 字符必须相同
+        if start[i] != end[j] {
+            return false
+        }
+
+        // 检查位置约束
+        // L 在 end 中的位置不能比在 start 中更靠右
+        if start[i] == 'L' &amp;&amp; i &lt; j {
+            return false
+        }
+        // R 在 end 中的位置不能比在 start 中更靠左
+        if start[i] == 'R' &amp;&amp; i &gt; j {
+            return false
+        }
+
+        i++
+        j++
+    }
+
+    // 处理末尾的 X
+    for i &lt; n {
+        if start[i] != 'X' {
+            return false
+        }
+        i++
+    }
+    for j &lt; n {
+        if end[j] != 'X' {
+            return false
+        }
+        j++
+    }
+
+    return true
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    bool canTransform(string start, string end) {
+        if (start.length() != end.length()) return false;
+
+        int n = start.length();
+        int i = 0, j = 0;
+
+        while (i &lt; n &amp;&amp; j &lt; n) {
+            // 跳过 X
+            while (i &lt; n &amp;&amp; start[i] == 'X') i++;
+            while (j &lt; n &amp;&amp; end[j] == 'X') j++;
+
+            // 检查是否都到达末尾
+            if (i == n &amp;&amp; j == n) return true;
+            if (i == n || j == n) return false;
+
+            // 字符必须相同
+            if (start[i] != end[j]) return false;
+
+            // 检查位置约束
+            if (start[i] == 'L' &amp;&amp; i &lt; j) return false;  // L 不能向右移动
+            if (start[i] == 'R' &amp;&amp; i &gt; j) return false;  // R 不能向左移动
+
+            i++;
+            j++;
+        }
+
+        // 检查剩余字符
+        while (i &lt; n) {
+            if (start[i] != 'X') return false;
+            i++;
+        }
+        while (j &lt; n) {
+            if (end[j] != 'X') return false;
+            j++;
+        }
+
+        return true;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="解法二记录位置并比较">解法二：记录位置并比较</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<ol>
+<li>分别记录 start 和 result 中所有非 X 字符及其位置</li>
+<li>比较两个序列</li>
+<li>检查位置约束</li>
+</ol>
+
+<h3 id="时间复杂度on-2">时间复杂度：O(n)</h3>
+
+<h3 id="空间复杂度on">空间复杂度：O(n)</h3>
+
+<pre><code>func canTransform(start string, end string) bool {
+    if len(start) != len(end) {
+        return false
+    }
+
+    n := len(start)
+    var startChars []byte
+    var startPos []int
+    var endChars []byte
+    var endPos []int
+
+    // 记录 start 中的非 X 字符和位置
+    for i := 0; i &lt; n; i++ {
+        if start[i] != 'X' {
+            startChars = append(startChars, start[i])
+            startPos = append(startPos, i)
+        }
+    }
+
+    // 记录 end 中的非 X 字符和位置
+    for i := 0; i &lt; n; i++ {
+        if end[i] != 'X' {
+            endChars = append(endChars, end[i])
+            endPos = append(endPos, i)
+        }
+    }
+
+    // 非 X 字符数量必须相同
+    if len(startChars) != len(endChars) {
+        return false
+    }
+
+    // 比较字符序列和位置约束
+    for i := 0; i &lt; len(startChars); i++ {
+        if startChars[i] != endChars[i] {
+            return false
+        }
+
+        if startChars[i] == 'L' &amp;&amp; startPos[i] &lt; endPos[i] {
+            return false  // L 不能向右移动
+        }
+        if startChars[i] == 'R' &amp;&amp; startPos[i] &gt; endPos[i] {
+            return false  // R 不能向左移动
+        }
+    }
+
+    return true
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    bool canTransform(string start, string end) {
+        if (start.length() != end.length()) return false;
+
+        int n = start.length();
+        vector&lt;pair&lt;char, int&gt;&gt; startSeq, endSeq;
+
+        // 记录 start 序列
+        for (int i = 0; i &lt; n; i++) {
+            if (start[i] != 'X') {
+                startSeq.push_back({start[i], i});
+            }
+        }
+
+        // 记录 end 序列
+        for (int i = 0; i &lt; n; i++) {
+            if (end[i] != 'X') {
+                endSeq.push_back({end[i], i});
+            }
+        }
+
+        // 检查长度
+        if (startSeq.size() != endSeq.size()) return false;
+
+        // 比较
+        for (int i = 0; i &lt; startSeq.size(); i++) {
+            if (startSeq[i].first != endSeq[i].first) return false;
+
+            if (startSeq[i].first == 'L' &amp;&amp; startSeq[i].second &lt; endSeq[i].second) {
+                return false;  // L 不能向右移动
+            }
+            if (startSeq[i].first == 'R' &amp;&amp; startSeq[i].second &gt; endSeq[i].second) {
+                return false;  // R 不能向左移动
+            }
+        }
+
+        return true;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="解法三单次遍历验证">解法三：单次遍历验证</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<ol>
+<li>同时遍历两个字符串</li>
+<li>维护 L 和 R 的计数差</li>
+<li>通过计数差验证可达性</li>
+</ol>
+
+<h3 id="时间复杂度on-3">时间复杂度：O(n)</h3>
+
+<h3 id="空间复杂度o1-2">空间复杂度：O(1)</h3>
+
+<pre><code>func canTransform(start string, end string) bool {
+    if len(start) != len(end) {
+        return false
+    }
+
+    n := len(start)
+    balance := 0  // R 的数量减去 L 的数量
+
+    for i := 0; i &lt; n; i++ {
+        if start[i] == 'R' {
+            balance++
+        }
+        if end[i] == 'L' {
+            balance--
+        }
+
+        // 任何时候 balance 不能为负（L 不能超过 R）
+        if balance &lt; 0 {
+            return false
+        }
+
+        if start[i] == 'L' {
+            balance--
+        }
+        if end[i] == 'R' {
+            balance++
+        }
+
+        // 任何时候 balance 不能为正（R 不能超过 L）
+        if balance &gt; 0 {
+            return false
+        }
+    }
+
+    return balance == 0
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    bool canTransform(string start, string end) {
+        if (start.length() != end.length()) return false;
+
+        int n = start.length();
+        int balance = 0;  // R 的数量减去 L 的数量
+
+        for (int i = 0; i &lt; n; i++) {
+            if (start[i] == 'R') balance++;
+            if (end[i] == 'L') balance--;
+
+            // 任何时候 L 不能超过 R
+            if (balance &lt; 0) return false;
+
+            if (start[i] == 'L') balance--;
+            if (end[i] == 'R') balance++;
+
+            // 任何时候 R 不能超过 L
+            if (balance &gt; 0) return false;
+        }
+
+        return balance == 0;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="复杂度对比">复杂度对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>时间复杂度</th>
+  <th>空间复杂度</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>O(n)</td>
+  <td>O(1)</td>
+  <td>最直观，空间最优</td>
+  <td>逻辑稍复杂</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+  <td>逻辑清晰，易于理解</td>
+  <td>需要额外空间</td>
+</tr>
+<tr>
+  <td>解法三</td>
+  <td>O(n)</td>
+  <td>O(1)</td>
+  <td>简洁巧妙</td>
+  <td>逻辑不够直观</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="推荐解法-2">推荐解法</h2>
+
+<p><strong>解法一（双指针比较法）</strong> 是最推荐的，因为：
+1. 空间复杂度最优（O(1)）
+2. 时间复杂度最优（O(n)）
+3. 逻辑相对清晰，符合题目直观理解
+4. 不需要额外存储空间</p>
+
+<p>解法三虽然也很简洁，但逻辑不够直观，调试和理解起来相对困难。解法二需要额外空间，不是最优选择。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 17:53:56</em></p>
+
+<hr />
+
+<h1 id="868-二进制间距">868. 二进制间距</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 位运算</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/binary-gap/</p>
+
+<hr />
+
+<h2 id="题目描述-4">题目描述</h2>
+
+<p>给定一个正整数 <code>n</code>，找到并返回 <code>n</code> 的二进制表示中两个 <strong>相邻</strong> 1 之间的<strong> 最长距离 </strong>。如果不存在两个相邻的 1，返回 <code>0</code> 。</p>
+
+<p>如果只有 <code>0</code> 将两个 <code>1</code> 分隔开（可能不存在 <code>0</code> ），则认为这两个 1 彼此 <strong>相邻</strong> 。两个 <code>1</code> 之间的距离是它们的二进制表示中位置的绝对差。例如，<code>"1001"</code> 中的两个 <code>1</code> 的距离为 3 。</p>
+
+<p>&nbsp;</p>
+
+<ul>
+</ul>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>n = 22
+<strong>输出：</strong>2
+<strong>解释：</strong>22 的二进制是 "10110" 。
+在 22 的二进制表示中，有三个 1，组成两对相邻的 1 。
+第一对相邻的 1 中，两个 1 之间的距离为 2 。
+第二对相邻的 1 中，两个 1 之间的距离为 1 。
+答案取两个距离之中最大的，也就是 2 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>n = 8
+<strong>输出：</strong>0
+<strong>解释：</strong>8 的二进制是 "1000" 。
+在 8 的二进制表示中没有相邻的两个 1，所以返回 0 。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>n = 5
+<strong>输出：</strong>2
+<strong>解释：</strong>5 的二进制是 "101" 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= n &lt;= 10<sup>9</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板-4">代码模板</h2>
+
+<h3 id="c-4">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java-4">Java</h3>
+
+<pre><code>class Solution {
+    public int binaryGap(int n) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3-4">Python3</h3>
+
+<pre><code>class Solution:
+    def binaryGap(self, n: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript-4">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @return {number}
+ */
+var binaryGap = function(n) {
+
+};
+</code></pre>
+
+<h3 id="go-4">Go</h3>
+
+<pre><code>func binaryGap(n int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例-4">示例测试用例</h2>
+
+<pre><code>22
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek-3">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析-3">题目分析</h2>
+
+<p>给定正整数 n，求其二进制表示中两个相邻 1 之间的最大距离（位置差）。如果不存在两个相邻的 1，返回 0。</p>
+
+<p><strong>关键点</strong>：
+- 相邻 1 指的是在二进制串中，两个 1 之间可以有 0，但中间没有其他 1。
+- 距离是二进制位的位置差（从最低位开始，位索引通常从 0 或 1 开始，但题目示例中距离是位置差，如 "1001" 距离为 3）。
+- 示例中 "10110"（22）的二进制，索引从右向左（最低位索引 0）：
+  - 位：1(4) 0(3) 1(2) 1(1) 0(0)
+  - 1 的位置：4, 2, 1
+  - 相邻对 (4,2) 距离 2, (2,1) 距离 1 → 最大 2。</p>
+
+<hr />
+
+<h2 id="解题思路-2">解题思路</h2>
+
+<h3 id="核心思路-2">核心思路</h3>
+
+<p>遍历二进制位，记录上一个 1 出现的位置，当遇到新的 1 时，计算与上一个 1 的位置差，更新最大距离。</p>
+
+<p><strong>位置计算</strong>：
+- 从最低位（索引 0）开始，每次右移 n，检查最低位是否为 1。
+- 记录上一个 1 的索引 <code>last</code>，初始为 -1 表示未遇到。
+- 当遇到 1 时，如果 <code>last != -1</code>，计算 <code>i - last</code> 更新最大值，然后更新 <code>last = i</code>。</p>
+
+<hr />
+
+<h2 id="解法一位运算遍历">解法一：位运算遍历</h2>
+
+<h3 id="思路-4">思路</h3>
+
+<p>从右向左遍历每一位（索引 i 从 0 开始），用 <code>n &gt;&gt; i &amp; 1</code> 检查第 i 位是否为 1。</p>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-5">Go</h4>
+
+<pre><code>func binaryGap(n int) int {
+    maxDist := 0
+    last := -1
+    for i := 0; n &gt; 0; i++ {
+        if n&amp;1 == 1 {
+            if last != -1 {
+                dist := i - last
+                if dist &gt; maxDist {
+                    maxDist = dist
+                }
+            }
+            last = i
+        }
+        n &gt;&gt;= 1
+    }
+    return maxDist
+}
+</code></pre>
+
+<h4 id="c-5">C++</h4>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+        int maxDist = 0;
+        int last = -1;
+        for (int i = 0; n &gt; 0; i++) {
+            if (n &amp; 1) {
+                if (last != -1) {
+                    maxDist = max(maxDist, i - last);
+                }
+                last = i;
+            }
+            n &gt;&gt;= 1;
+        }
+        return maxDist;
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(log n)，因为 n 的二进制位数是 O(log n)。
+- 空间复杂度：O(1)。</p>
+
+<hr />
+
+<h2 id="解法二只遍历-1-的位置">解法二：只遍历 1 的位置</h2>
+
+<h3 id="思路-5">思路</h3>
+
+<p>不遍历所有位，只关注 1 出现的位置。用 <code>last</code> 记录上一个 1 的位置，每次找到新的 1 就计算距离。</p>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-6">Go</h4>
+
+<pre><code>func binaryGap(n int) int {
+    maxDist := 0
+    last := -1
+    pos := 0
+    for n &gt; 0 {
+        if n&amp;1 == 1 {
+            if last != -1 {
+                dist := pos - last
+                if dist &gt; maxDist {
+                    maxDist = dist
+                }
+            }
+            last = pos
+        }
+        n &gt;&gt;= 1
+        pos++
+    }
+    return maxDist
+}
+</code></pre>
+
+<h4 id="c-6">C++</h4>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+        int maxDist = 0;
+        int last = -1;
+        int pos = 0;
+        while (n &gt; 0) {
+            if (n &amp; 1) {
+                if (last != -1) {
+                    maxDist = max(maxDist, pos - last);
+                }
+                last = pos;
+            }
+            n &gt;&gt;= 1;
+            pos++;
+        }
+        return maxDist;
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(log n)
+- 空间复杂度：O(1)</p>
+
+<hr />
+
+<h2 id="解法三使用内置函数仅作参考">解法三：使用内置函数（仅作参考）</h2>
+
+<h3 id="思路-6">思路</h3>
+
+<p>某些语言提供获取二进制位索引的函数，但为了通用性，这里用位运算模拟。</p>
+
+<h3 id="代码实现go-利用-bitsonescount-和-bitstrailingzeros">代码实现（Go 利用 bits.OnesCount 和 bits.TrailingZeros）</h3>
+
+<pre><code>import "math/bits"
+
+func binaryGap(n int) int {
+    maxDist := 0
+    last := -1
+    for n &gt; 0 {
+        // 获取最低位 1 的位置
+        pos := bits.TrailingZeros(uint(n))
+        if last != -1 {
+            dist := pos - last
+            if dist &gt; maxDist {
+                maxDist = dist
+            }
+        }
+        last = pos
+        // 移除最低位的 1
+        n &amp;= n - 1
+    }
+    return maxDist
+}
+</code></pre>
+
+<h4 id="c利用-__builtin_ctz">C++（利用 <em>_builtin</em>ctz）</h4>
+
+<pre><code>class Solution {
+public:
+    int binaryGap(int n) {
+        int maxDist = 0;
+        int last = -1;
+        while (n &gt; 0) {
+            int pos = __builtin_ctz(n); // 最低位 1 的位置
+            if (last != -1) {
+                maxDist = max(maxDist, pos - last);
+            }
+            last = pos;
+            n &amp;= n - 1; // 移除最低位的 1
+        }
+        return maxDist;
+    }
+};
+</code></pre>
+
+<p><strong>复杂度分析</strong>：
+- 时间复杂度：O(k)，k 是 n 中 1 的个数，最坏 O(log n)。
+- 空间复杂度：O(1)</p>
+
+<hr />
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>简单直观，通用性强</td>
+  <td>遍历所有位，即使没有 1 也遍历</td>
+  <td>通用解法</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>和解法一类似，逻辑清晰</td>
+  <td>和解法一几乎相同</td>
+  <td>通用解法</td>
+</tr>
+<tr>
+  <td>解法三</td>
+  <td>只遍历 1 的位置，效率高</td>
+  <td>依赖内置函数（如 <code>__builtin_ctz</code>），可移植性差</td>
+  <td>对性能要求高，且环境支持内置函数</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐</strong>：解法一或解法二，因为它们不依赖特定内置函数，代码清晰，且复杂度相同。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 15:42:51</em></p>
+
+        </div>
+    </div>
+</body>
+</html>
