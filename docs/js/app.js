@@ -7,7 +7,7 @@ class LeetCodeApp {
 
         // 分页相关
         this.currentPage = 1;
-        this.pageSize = 10;
+        this.pageSize = 4;
         this.totalPages = 1;
 
         // 鸡汤文案库
