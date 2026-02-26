@@ -177,11 +177,40 @@ class LeetCodeApp {
             // 提取时间部分
             const timeOnly = record.date.split(' ')[1];
 
+            // 难度中文映射
+            const difficultyMap = {
+                'easy': '简单',
+                'medium': '中等',
+                'hard': '困难'
+            };
+
+            // 生成题目预览列表
+            const questionsHTML = record.questions ? record.questions.map(q => {
+                // 标题截断（最多30个字符）
+                const truncatedTitle = q.title.length > 30
+                    ? q.title.substring(0, 30) + '...'
+                    : q.title;
+
+                return `
+                    <div class="record-question-item">
+                        <span class="record-question-bullet">▪</span>
+                        <span class="record-question-number">${q.number}.</span>
+                        <span class="record-question-title">${truncatedTitle}</span>
+                        <span class="record-question-difficulty ${q.difficulty}">
+                            ${difficultyMap[q.difficulty] || '未知'}
+                        </span>
+                    </div>
+                `;
+            }).join('') : '';
+
             return `
                 <div class="record-card" onclick="app.viewRecord(${index}, '${date}')">
-                    <div class="record-time">${timeOnly}</div>
-                    <div class="record-info">共 ${record.count} 道题目</div>
-                    <div class="record-arrow">→</div>
+                    <div class="record-header">
+                        <div class="record-time">${timeOnly}</div>
+                        <div class="record-info">共 ${record.count} 道题目</div>
+                        <div class="record-arrow">→</div>
+                    </div>
+                    ${questionsHTML ? `<div class="record-questions">${questionsHTML}</div>` : ''}
                 </div>
             `;
         }).join('');
