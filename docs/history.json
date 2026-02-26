@@ -2,6 +2,31 @@
   "records": [
     {
       "date": "2026-02-26 19:55:57",
+      "record_id": "20260226_195557",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2836",
+          "title": "在传球游戏中最大化函数值",
+          "difficulty": "hard",
+          "file": "20260226_195557_q1.html"
+        },
+        {
+          "number": "1775",
+          "title": "通过最少操作次数使数组的和相等",
+          "difficulty": "medium",
+          "file": "20260226_195557_q2.html"
+        },
+        {
+          "number": "1394",
+          "title": "找出数组中的幸运数",
+          "difficulty": "easy",
+          "file": "20260226_195557_q3.html"
+        }
+      ]
+    },
+    {
+      "date": "2026-02-26 19:55:57",
       "file": "20260226_195557.html",
       "count": 3
     },
@@ -223,5 +248,5 @@
       ]
     }
   ],
-  "last_updated": "2026-02-26 19:55:57"
+  "last_updated": "2026-02-26 20:05:31"
 }

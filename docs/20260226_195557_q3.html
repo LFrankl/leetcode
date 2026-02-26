@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1394. 找出数组中的幸运数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-26 19:55:57</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1394. 找出数组中的幸运数</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/find-lucky-integer-in-an-array/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1394-找出数组中的幸运数">1394. 找出数组中的幸运数</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数组, 哈希表, 计数</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/find-lucky-integer-in-an-array/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>在整数数组中，如果一个整数的出现频次和它的数值大小相等，我们就称这个整数为「幸运数」。</p>
+
+<p>给你一个整数数组 <code>arr</code>，请你从中找出并返回一个幸运数。</p>
+
+<ul>
+    <li>如果数组中存在多个幸运数，只需返回 <strong>最大</strong> 的那个。</li>
+    <li>如果数组中不含幸运数，则返回 <strong>-1 </strong>。</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><strong>输入：</strong>arr = [2,2,3,4]
+<strong>输出：</strong>2
+<strong>解释：</strong>数组中唯一的幸运数是 2 ，因为数值 2 的出现频次也是 2 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><strong>输入：</strong>arr = [1,2,2,3,3,3]
+<strong>输出：</strong>3
+<strong>解释：</strong>1、2 以及 3 都是幸运数，只需要返回其中最大的 3 。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre><strong>输入：</strong>arr = [2,2,2,3,3]
+<strong>输出：</strong>-1
+<strong>解释：</strong>数组中不存在幸运数。
+</pre>
+
+<p><strong>示例 4：</strong></p>
+
+<pre><strong>输入：</strong>arr = [5]
+<strong>输出：</strong>-1
+</pre>
+
+<p><strong>示例 5：</strong></p>
+
+<pre><strong>输入：</strong>arr = [7,7,7,7,7,7,7]
+<strong>输出：</strong>7
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= arr.length &lt;= 500</code></li>
+    <li><code>1 &lt;= arr[i] &lt;= 500</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int findLucky(vector&lt;int&gt;&amp; arr) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int findLucky(int[] arr) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def findLucky(self, arr: List[int]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var findLucky = function(arr) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func findLucky(arr []int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Count the frequency of each integer in the array.</li>
+<li>Get all lucky numbers and return the largest of them.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[2,2,3,4]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>我们需要在数组中找到满足以下条件的数字：
+1. 数字的出现次数等于数字本身的值
+2. 如果有多个这样的数字，返回最大的那个
+3. 如果没有，返回 -1</p>
+
+<p>数组长度 ≤ 500，元素值 ≤ 500，因此我们可以使用多种方法解决。</p>
+
+<h2 id="解法一哈希表计数-遍历检查">解法一：哈希表计数 + 遍历检查</h2>
+
+<h3 id="解题思路">解题思路</h3>
+
+<ol>
+<li>使用哈希表统计每个数字出现的次数</li>
+<li>遍历哈希表，检查每个数字是否满足 <code>数字 == 出现次数</code></li>
+<li>记录满足条件的最大数字</li>
+</ol>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-实现">Go 实现</h4>
+
+<pre><code>func findLucky(arr []int) int {
+    // 统计每个数字出现的次数
+    freq := make(map[int]int)
+    for _, num := range arr {
+        freq[num]++
+    }
+
+    // 寻找最大的幸运数
+    maxLucky := -1
+    for num, count := range freq {
+        if num == count &amp;&amp; num &gt; maxLucky {
+            maxLucky = num
+        }
+    }
+
+    return maxLucky
+}
+</code></pre>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+class Solution {
+public:
+    int findLucky(vector&lt;int&gt;&amp; arr) {
+        // 统计每个数字出现的次数
+        unordered_map&lt;int, int&gt; freq;
+        for (int num : arr) {
+            freq[num]++;
+        }
+
+        // 寻找最大的幸运数
+        int maxLucky = -1;
+        for (auto&amp; [num, count] : freq) {
+            if (num == count &amp;&amp; num &gt; maxLucky) {
+                maxLucky = num;
+            }
+        }
+
+        return maxLucky;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)，其中 n 是数组长度。需要遍历数组统计频率，然后遍历哈希表检查条件。</li>
+<li><strong>空间复杂度</strong>：O(k)，其中 k 是数组中不同数字的个数，最坏情况为 O(n)。</li>
+</ul>
+
+<h2 id="解法二数组计数利用数值范围限制">解法二：数组计数（利用数值范围限制）</h2>
+
+<h3 id="解题思路-2">解题思路</h3>
+
+<p>由于题目提示 <code>1 &lt;= arr[i] &lt;= 500</code>，我们可以使用固定大小的数组来计数，避免哈希表的开销。</p>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-实现-2">Go 实现</h4>
+
+<pre><code>func findLucky(arr []int) int {
+    // 因为 arr[i] &lt;= 500，所以创建大小为 501 的数组
+    freq := make([]int, 501)
+
+    // 统计每个数字出现的次数
+    for _, num := range arr {
+        freq[num]++
+    }
+
+    // 从大到小遍历，找到第一个幸运数就是最大的
+    for i := 500; i &gt;= 1; i-- {
+        if freq[i] == i {
+            return i
+        }
+    }
+
+    return -1
+}
+</code></pre>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+using namespace std;
+
+class Solution {
+public:
+    int findLucky(vector&lt;int&gt;&amp; arr) {
+        // 因为 arr[i] &lt;= 500，所以创建大小为 501 的数组
+        vector&lt;int&gt; freq(501, 0);
+
+        // 统计每个数字出现的次数
+        for (int num : arr) {
+            freq[num]++;
+        }
+
+        // 从大到小遍历，找到第一个幸运数就是最大的
+        for (int i = 500; i &gt;= 1; i--) {
+            if (freq[i] == i) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n + 500) = O(n)，其中 n 是数组长度。遍历数组统计频率 O(n)，遍历计数数组 O(500)。</li>
+<li><strong>空间复杂度</strong>：O(500) = O(1)，使用固定大小的数组。</li>
+</ul>
+
+<h2 id="解法三排序-计数">解法三：排序 + 计数</h2>
+
+<h3 id="解题思路-3">解题思路</h3>
+
+<ol>
+<li>先对数组排序</li>
+<li>遍历排序后的数组，统计连续相同数字的个数</li>
+<li>检查是否满足幸运数条件</li>
+</ol>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<h4 id="go-实现-3">Go 实现</h4>
+
+<pre><code>func findLucky(arr []int) int {
+    // 排序
+    sort.Ints(arr)
+
+    maxLucky := -1
+    count := 1
+
+    // 遍历数组
+    for i := 1; i &lt;= len(arr); i++ {
+        if i &lt; len(arr) &amp;&amp; arr[i] == arr[i-1] {
+            count++
+        } else {
+            // 检查前一个数字是否是幸运数
+            if arr[i-1] == count &amp;&amp; count &gt; maxLucky {
+                maxLucky = count
+            }
+            count = 1
+        }
+    }
+
+    return maxLucky
+}
+</code></pre>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+class Solution {
+public:
+    int findLucky(vector&lt;int&gt;&amp; arr) {
+        // 排序
+        sort(arr.begin(), arr.end());
+
+        int maxLucky = -1;
+        int count = 1;
+
+        // 遍历数组
+        for (int i = 1; i &lt;= arr.size(); i++) {
+            if (i &lt; arr.size() &amp;&amp; arr[i] == arr[i-1]) {
+                count++;
+            } else {
+                // 检查前一个数字是否是幸运数
+                if (arr[i-1] == count &amp;&amp; count &gt; maxLucky) {
+                    maxLucky = count;
+                }
+                count = 1;
+            }
+        }
+
+        return maxLucky;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-3">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n log n)，主要是排序的时间复杂度。</li>
+<li><strong>空间复杂度</strong>：O(1) 或 O(log n)，取决于排序算法的空间复杂度。</li>
+</ul>
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>哈希表</td>
+  <td>通用性强，不依赖数值范围</td>
+  <td>有哈希表开销</td>
+  <td>通用情况，数值范围未知</td>
+</tr>
+<tr>
+  <td>数组计数</td>
+  <td>效率高，空间固定</td>
+  <td>依赖数值范围限制</td>
+  <td>数值范围已知且不大</td>
+</tr>
+<tr>
+  <td>排序+计数</td>
+  <td>不需要额外空间（原地排序）</td>
+  <td>时间复杂度较高</td>
+  <td>对空间要求严格，时间要求不高</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="推荐解法">推荐解法</h2>
+
+<p>对于本题，<strong>解法二（数组计数）是最优的</strong>，因为：
+1. 题目明确给出了数值范围限制（1 ≤ arr[i] ≤ 500）
+2. 时间复杂度 O(n)，空间复杂度 O(1)（固定大小数组）
+3. 实现简单，效率高</p>
+
+<p>在实际面试中，可以先提出哈希表解法，然后根据数值范围优化为数组计数解法，展示对问题的深入思考。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-26 19:53:18</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
