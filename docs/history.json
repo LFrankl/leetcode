@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-02-27 16:21:07",
+      "record_id": "20260227_162107",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2094",
+          "title": "找出 3 位偶数",
+          "difficulty": "easy",
+          "file": "20260227_162107_q1.html"
+        },
+        {
+          "number": "3584",
+          "title": "子序列首尾元素的最大乘积",
+          "difficulty": "medium",
+          "file": "20260227_162107_q2.html"
+        },
+        {
+          "number": "828",
+          "title": "统计子串中的唯一字符",
+          "difficulty": "hard",
+          "file": "20260227_162107_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-02-27 10:35:02",
       "record_id": "20260227_103502",
       "count": 3,
@@ -268,5 +293,5 @@
       ]
     }
   ],
-  "last_updated": "2026-02-27 10:35:02"
+  "last_updated": "2026-02-27 16:21:07"
 }
