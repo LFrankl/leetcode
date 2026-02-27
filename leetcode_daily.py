@@ -145,8 +145,9 @@ class DeepSeekAPI:
         if not self.is_available():
             return None
 
-        # 清理 HTML 标签
-        content = re.sub(r'<[^>]+>', '', question.get('content', ''))
+        # 清理 HTML 标签（处理 content 可能为 None 的情况）
+        raw_content = question.get('content') or ''
+        content = re.sub(r'<[^>]+>', '', raw_content)
         content = re.sub(r'\s+', ' ', content).strip()
 
         # 填充提示词
