@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3478. 选出和最大的 K 个元素 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-02-27 10:35:02</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3478. 选出和最大的 K 个元素</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/choose-k-elements-with-maximum-sum/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3478-选出和最大的-k-个元素">3478. 选出和最大的 K 个元素</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 数组, 排序, 堆（优先队列）</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/choose-k-elements-with-maximum-sum/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你两个整数数组，<code>nums1</code> 和 <code>nums2</code>，长度均为 <code>n</code>，以及一个正整数 <code>k</code> 。</p>
+
+<p>对从 <code>0</code> 到 <code>n - 1</code> 每个下标 <code>i</code> ，执行下述操作：</p>
+
+<ul>
+    <li>找出所有满足 <code>nums1[j]</code> 小于 <code>nums1[i]</code> 的下标 <code>j</code> 。</li>
+    <li>从这些下标对应的 <code>nums2[j]</code> 中选出 <strong>至多</strong> <code>k</code> 个，并 <strong>最大化</strong> 这些值的总和作为结果。</li>
+</ul>
+
+<p>返回一个长度为 <code>n</code> 的数组 <code>answer</code> ，其中 <code>answer[i]</code> 表示对应下标 <code>i</code> 的结果。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">nums1 = [4,2,1,5,3], nums2 = [10,20,30,40,50], k = 2</span></p>
+
+<p><strong>输出：</strong><span class="example-io">[80,30,0,80,50]</span></p>
+
+<p><strong>解释：</strong></p>
+
+<ul>
+    <li>对于 <code>i = 0</code> ：满足 <code>nums1[j] &lt; nums1[0]</code> 的下标为 <code>[1, 2, 4]</code> ，选出其中值最大的两个，结果为 <code>50 + 30 = 80</code> 。</li>
+    <li>对于 <code>i = 1</code> ：满足 <code>nums1[j] &lt; nums1[1]</code> 的下标为 <code>[2]</code> ，只能选择这个值，结果为 <code>30</code> 。</li>
+    <li>对于 <code>i = 2</code> ：不存在满足 <code>nums1[j] &lt; nums1[2]</code> 的下标，结果为 <code>0</code> 。</li>
+    <li>对于 <code>i = 3</code> ：满足 <code>nums1[j] &lt; nums1[3]</code> 的下标为 <code>[0, 1, 2, 4]</code> ，选出其中值最大的两个，结果为 <code>50 + 30 = 80</code> 。</li>
+    <li>对于 <code>i = 4</code> ：满足 <code>nums1[j] &lt; nums1[4]</code> 的下标为 <code>[1, 2]</code> ，选出其中值最大的两个，结果为 <code>30 + 20 = 50</code> 。</li>
+</ul>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">nums1 = [2,2,2,2], nums2 = [3,1,2,3], k = 1</span></p>
+
+<p><strong>输出：</strong><span class="example-io">[0,0,0,0]</span></p>
+
+<p><strong>解释：</strong>由于 <code>nums1</code> 中的所有元素相等，不存在满足条件 <code>nums1[j] &lt; nums1[i]</code>，所有位置的结果都是 0 。</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>n == nums1.length == nums2.length</code></li>
+    <li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>
+    <li><code>1 &lt;= nums1[i], nums2[i] &lt;= 10<sup>6</sup></code></li>
+    <li><code>1 &lt;= k &lt;= n</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;long long&gt; findMaxSum(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2, int k) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public long[] findMaxSum(int[] nums1, int[] nums2, int k) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def findMaxSum(self, nums1: List[int], nums2: List[int], k: int) -&gt; List[int]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @param {number} k
+ * @return {number[]}
+ */
+var findMaxSum = function(nums1, nums2, k) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func findMaxSum(nums1 []int, nums2 []int, k int) []int64 {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Sort <code>nums1</code> and its corresponding <code>nums2</code> values together based on <code>nums1</code>.</li>
+<li>Use a max heap to track the top <code>k</code> values of <code>nums2</code> as you process each element in the sorted order.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[4,2,1,5,3]
+[10,20,30,40,50]
+2
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>我们需要对每个下标 <code>i</code>，找出所有满足 <code>nums1[j] &lt; nums1[i]</code> 的 <code>j</code>，然后从对应的 <code>nums2[j]</code> 中选出至多 <code>k</code> 个最大的值，求和作为 <code>answer[i]</code>。</p>
+
+<p><strong>关键点</strong>：
+1. 对于每个 <code>i</code>，我们需要考虑所有 <code>nums1[j] &lt; nums1[i]</code> 的 <code>j</code>
+2. 从这些 <code>j</code> 对应的 <code>nums2[j]</code> 中选出至多 <code>k</code> 个最大的值求和
+3. <code>n</code> 最大为 <code>10^5</code>，需要高效算法</p>
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心思路">核心思路</h3>
+
+<ol>
+<li><strong>排序 + 数据结构维护</strong>：将元素按 <code>nums1</code> 排序，从小到大处理，这样在处理到第 <code>i</code> 个元素时，所有 <code>nums1</code> 值小于它的元素都已经被处理过</li>
+<li><strong>维护前 k 大元素的和</strong>：使用最小堆维护当前已处理元素中 <code>nums2</code> 值最大的 <code>k</code> 个元素</li>
+<li><strong>二分查找 + 数据结构</strong>：离线处理，对每个查询找到符合条件的元素范围</li>
+</ol>
+
+<hr />
+
+<h2 id="解法一排序-最小堆">解法一：排序 + 最小堆</h2>
+
+<h3 id="思路">思路</h3>
+
+<ol>
+<li>将下标按 <code>nums1</code> 值排序</li>
+<li>从小到大遍历排序后的下标，维护一个最小堆存储当前已处理元素的 <code>nums2</code> 值</li>
+<li>堆的大小不超过 <code>k</code>，堆顶是最小的元素</li>
+<li>当堆大小超过 <code>k</code> 时，弹出堆顶（最小的元素）</li>
+<li>对于每个元素，答案就是当前堆中所有元素的和</li>
+</ol>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度：O(n log n + n log k)，排序 O(n log n)，堆操作 O(n log k)</li>
+<li>空间复杂度：O(n + k)，存储排序结果和堆</li>
+</ul>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-实现">Go 实现</h4>
+
+<pre><code>func maxSum(nums1, nums2 []int, k int) []int64 {
+    n := len(nums1)
+
+    // 创建索引数组并按 nums1 排序
+    indices := make([]int, n)
+    for i := range indices {
+        indices[i] = i
+    }
+    sort.Slice(indices, func(i, j int) bool {
+        return nums1[indices[i]] &lt; nums1[indices[j]]
+    })
+
+    answer := make([]int64, n)
+    minHeap := &amp;IntHeap{}
+    heap.Init(minHeap)
+    sum := int64(0)
+
+    // 按 nums1 值从小到大处理
+    for i := 0; i &lt; n; i++ {
+        idx := indices[i]
+
+        // 对于当前元素，所有 nums1 值小于它的元素都在堆中
+        answer[idx] = sum
+
+        // 将当前元素的 nums2 值加入堆
+        heap.Push(minHeap, nums2[idx])
+        sum += int64(nums2[idx])
+
+        // 如果堆大小超过 k，移除最小的元素
+        if minHeap.Len() &gt; k {
+            smallest := heap.Pop(minHeap).(int)
+            sum -= int64(smallest)
+        }
+    }
+
+    return answer
+}
+
+// 最小堆实现
+type IntHeap []int
+
+func (h IntHeap) Len() int           { return len(h) }
+func (h IntHeap) Less(i, j int) bool { return h[i] &lt; h[j] }
+func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *IntHeap) Push(x interface{}) {
+    *h = append(*h, x.(int))
+}
+
+func (h *IntHeap) Pop() interface{} {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
+}
+</code></pre>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    vector&lt;long long&gt; maxSum(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2, int k) {
+        int n = nums1.size();
+
+        // 创建索引数组并按 nums1 排序
+        vector&lt;int&gt; indices(n);
+        iota(indices.begin(), indices.end(), 0);
+        sort(indices.begin(), indices.end(), [&amp;](int i, int j) {
+            return nums1[i] &lt; nums1[j];
+        });
+
+        vector&lt;long long&gt; answer(n, 0);
+        priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; minHeap; // 最小堆
+        long long sum = 0;
+
+        // 按 nums1 值从小到大处理
+        for (int i = 0; i &lt; n; i++) {
+            int idx = indices[i];
+
+            // 对于当前元素，所有 nums1 值小于它的元素都在堆中
+            answer[idx] = sum;
+
+            // 将当前元素的 nums2 值加入堆
+            minHeap.push(nums2[idx]);
+            sum += nums2[idx];
+
+            // 如果堆大小超过 k，移除最小的元素
+            if (minHeap.size() &gt; k) {
+                sum -= minHeap.top();
+                minHeap.pop();
+            }
+        }
+
+        return answer;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="解法二离散化-树状数组线段树">解法二：离散化 + 树状数组/线段树</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<ol>
+<li>对 <code>nums1</code> 的值进行离散化</li>
+<li>使用树状数组或线段树维护每个离散化值对应的前 k 大元素的和</li>
+<li>对于每个元素，查询所有小于当前 <code>nums1</code> 值的元素的前 k 大和</li>
+</ol>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度：O(n log n + n log n log k)，需要处理每个元素</li>
+<li>空间复杂度：O(n + n log k)，存储离散化结果和数据结构</li>
+</ul>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-实现-2">Go 实现</h4>
+
+<pre><code>func maxSum(nums1, nums2 []int, k int) []int64 {
+    n := len(nums1)
+
+    // 离散化 nums1
+    sortedVals := make([]int, n)
+    copy(sortedVals, nums1)
+    sort.Ints(sortedVals)
+
+    // 去重
+    uniqueVals := make([]int, 0, n)
+    for i := 0; i &lt; n; i++ {
+        if i == 0 || sortedVals[i] != sortedVals[i-1] {
+            uniqueVals = append(uniqueVals, sortedVals[i])
+        }
+    }
+
+    // 创建映射
+    valToIdx := make(map[int]int)
+    for i, val := range uniqueVals {
+        valToIdx[val] = i + 1 // 树状数组从1开始
+    }
+
+    // 按 nums1 值排序索引
+    indices := make([]int, n)
+    for i := range indices {
+        indices[i] = i
+    }
+    sort.Slice(indices, func(i, j int) bool {
+        return nums1[indices[i]] &lt; nums1[indices[j]]
+    })
+
+    answer := make([]int64, n)
+
+    // 树状数组，每个位置维护一个最小堆
+    fenwick := make([]*IntHeap, len(uniqueVals)+2)
+    for i := range fenwick {
+        fenwick[i] = &amp;IntHeap{}
+        heap.Init(fenwick[i])
+    }
+
+    // 辅助函数：更新树状数组
+    update := func(idx int, val int) {
+        for i := idx; i &lt; len(fenwick); i += i &amp; -i {
+            heap.Push(fenwick[i], val)
+            if fenwick[i].Len() &gt; k {
+                heap.Pop(fenwick[i])
+            }
+        }
+    }
+
+    // 辅助函数：查询前缀
+    query := func(idx int) int64 {
+        result := int64(0)
+        // 收集所有相关堆中的元素
+        allVals := &amp;IntHeap{}
+        heap.Init(allVals)
+
+        for i := idx; i &gt; 0; i -= i &amp; -i {
+            // 合并堆
+            temp := make([]int, fenwick[i].Len())
+            copy(temp, *fenwick[i])
+            for _, val := range temp {
+                heap.Push(allVals, val)
+                if allVals.Len() &gt; k {
+                    heap.Pop(allVals)
+                }
+            }
+        }
+
+        // 计算和
+        for _, val := range *allVals {
+            result += int64(val)
+        }
+        return result
+    }
+
+    // 处理每个元素
+    for i := 0; i &lt; n; i++ {
+        idx := indices[i]
+        pos := valToIdx[nums1[idx]]
+
+        // 查询所有小于当前值的元素
+        answer[idx] = query(pos - 1)
+
+        // 更新当前值
+        update(pos, nums2[idx])
+    }
+
+    return answer
+}
+</code></pre>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    vector&lt;long long&gt; maxSum(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2, int k) {
+        int n = nums1.size();
+
+        // 离散化 nums1
+        vector&lt;int&gt; sortedVals = nums1;
+        sort(sortedVals.begin(), sortedVals.end());
+        sortedVals.erase(unique(sortedVals.begin(), sortedVals.end()), sortedVals.end());
+
+        // 创建映射
+        unordered_map&lt;int, int&gt; valToIdx;
+        for (int i = 0; i &lt; sortedVals.size(); i++) {
+            valToIdx[sortedVals[i]] = i + 1; // 从1开始
+        }
+
+        // 按 nums1 值排序索引
+        vector&lt;int&gt; indices(n);
+        iota(indices.begin(), indices.end(), 0);
+        sort(indices.begin(), indices.end(), [&amp;](int i, int j) {
+            return nums1[i] &lt; nums1[j];
+        });
+
+        vector&lt;long long&gt; answer(n, 0);
+        int m = sortedVals.size();
+
+        // 树状数组，每个位置维护一个最小堆
+        vector&lt;priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt;&gt; fenwick(m + 2);
+
+        // 更新树状数组
+        auto update = [&amp;](int idx, int val) {
+            for (int i = idx; i &lt;= m + 1; i += i &amp; -i) {
+                fenwick[i].push(val);
+                if (fenwick[i].size() &gt; k) {
+                    fenwick[i].pop();
+                }
+            }
+        };
+
+        // 查询前缀
+        auto query = [&amp;](int idx) -&gt; long long {
+            priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; allVals;
+
+            for (int i = idx; i &gt; 0; i -= i &amp; -i) {
+                // 合并堆
+                auto temp = fenwick[i];
+                while (!temp.empty()) {
+                    allVals.push(temp.top());
+                    temp.pop();
+                    if (allVals.size() &gt; k) {
+                        allVals.pop();
+                    }
+                }
+            }
+
+            // 计算和
+            long long result = 0;
+            while (!allVals.empty()) {
+                result += allVals.top();
+                allVals.pop();
+            }
+            return result;
+        };
+
+        // 处理每个元素
+        for (int i = 0; i &lt; n; i++) {
+            int idx = indices[i];
+            int pos = valToIdx[nums1[idx]];
+
+            // 查询所有小于当前值的元素
+            answer[idx] = query(pos - 1);
+
+            // 更新当前值
+            update(pos, nums2[idx]);
+        }
+
+        return answer;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="解法三离线查询-平衡树">解法三：离线查询 + 平衡树</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<ol>
+<li>将所有查询离线处理</li>
+<li>使用平衡树（如红黑树）维护当前已处理元素</li>
+<li>平衡树保持最多 k 个最大元素</li>
+<li>按 <code>nums1</code> 值排序后顺序处理</li>
+</ol>
+
+<h3 id="复杂度分析-3">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度：O(n log n + n log k)</li>
+<li>空间复杂度：O(n + k)</li>
+</ul>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<h4 id="go-实现-3">Go 实现</h4>
+
+<pre><code>func maxSum(nums1, nums2 []int, k int) []int64 {
+    n := len(nums1)
+
+    // 创建索引数组并按 nums1 排序
+    indices := make([]int, n)
+    for i := range indices {
+        indices[i] = i
+    }
+    sort.Slice(indices, func(i, j int) bool {
+        return nums1[indices[i]] &lt; nums1[indices[j]]
+    })
+
+    answer := make([]int64, n)
+
+    // 使用 slice 模拟平衡树（排序）
+    sortedVals := make([]int, 0, k)
+    sum := int64(0)
+
+    // 按 nums1 值从小到大处理
+    for i := 0; i &lt; n; i++ {
+        idx := indices[i]
+
+        // 对于当前元素，所有 nums1 值小于它的元素都在 sortedVals 中
+        answer[idx] = sum
+
+        // 插入当前值到有序列表
+        val := nums2[idx]
+        pos := sort.SearchInts(sortedVals, val)
+
+        // 在正确位置插入
+        if len(sortedVals) &lt; k {
+            sortedVals = append(sortedVals, 0)
+            copy(sortedVals[pos+1:], sortedVals[pos:])
+            sortedVals[pos] = val
+            sum += int64(val)
+        } else if pos &gt; 0 {
+            // 替换最小的元素
+            sum -= int64(sortedVals[0])
+            copy(sortedVals[:pos-1], sortedVals[1:pos])
+            sortedVals[pos-1] = val
+            sum += int64(val)
+        }
+
+        // 如果超过 k 个元素，移除最小的
+        if len(sortedVals) &gt; k {
+            sum -= int64(sortedVals[0])
+            sortedVals = sortedVals[1:]
+        }
+    }
+
+    return answer
+}
+</code></pre>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<pre><code>class Solution {
+public:
+    vector&lt;long long&gt; maxSum(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2, int k) {
+        int n = nums1.size();
+
+        // 创建索引数组并按 nums1 排序
+        vector&lt;int&gt; indices(n);
+        iota(indices.begin(), indices.end(), 0);
+        sort(indices.begin(), indices.end(), [&amp;](int i, int j) {
+            return nums1[i] &lt; nums1[j];
+        });
+
+        vector&lt;long long&gt; answer(n, 0);
+        multiset&lt;int&gt; topK; // 存储最大的 k 个元素
+        long long sum = 0;
+
+        // 按 nums1 值从小到大处理
+        for (int i = 0; i &lt; n; i++) {
+            int idx = indices[i];
+
+            // 对于当前元素，所有 nums1 值小于它的元素都在 topK 中
+            answer[idx] = sum;
+
+            // 插入当前值
+            int val = nums2[idx];
+            topK.insert(val);
+            sum += val;
+
+            // 如果超过 k 个元素，移除最小的
+            if (topK.size() &gt; k) {
+                sum -= *topK.begin();
+                topK.erase(topK.begin());
+            }
+        }
+
+        return answer;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（排序+最小堆）</th>
+  <th>解法二（离散化+树状数组）</th>
+  <th>解法三（离线查询+平衡树）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>时间复杂度</td>
+  <td>O(n log n + n log k)</td>
+  <td>O(n log n + n log n log k)</td>
+  <td>O(n log n + n log k)</td>
+</tr>
+<tr>
+  <td>空间复杂度</td>
+  <td>O(n + k)</td>
+  <td>O(n + n log k)</td>
+  <td>O(n + k)</td>
+</tr>
+<tr>
+  <td>实现难度</td>
+  <td>简单</td>
+  <td>复杂</td>
+  <td>中等</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>通用，推荐</td>
+  <td>需要频繁查询区间</td>
+  <td>需要动态维护有序集合</td>
+</tr>
+<tr>
+  <td>代码简洁性</td>
+  <td>高</td>
+  <td>低</td>
+  <td>中</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="推荐解法">推荐解法</h2>
+
+<p><strong>解法一（排序+最小堆）是最推荐的</strong>，因为：
+1. 时间复杂度最优
+2. 实现简单直观
+3. 空间复杂度低
+4. 代码易于理解和维护</p>
+
+<p>对于本题，由于我们只需要按顺序处理，不需要随机查询，解法一完全满足需求且效率最高。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-02-27 10:33:54</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
