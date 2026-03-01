@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-01 18:49:46",
+      "record_id": "20260301_184946",
+      "count": 3,
+      "questions": [
+        {
+          "number": "190",
+          "title": "颠倒二进制位",
+          "difficulty": "easy",
+          "file": "20260301_184946_q1.html"
+        },
+        {
+          "number": "368",
+          "title": "最大整除子集",
+          "difficulty": "medium",
+          "file": "20260301_184946_q2.html"
+        },
+        {
+          "number": "2581",
+          "title": "统计可能的树根数目",
+          "difficulty": "hard",
+          "file": "20260301_184946_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-02-27 16:21:07",
       "record_id": "20260227_162107",
       "count": 3,
@@ -293,5 +318,5 @@
       ]
     }
   ],
-  "last_updated": "2026-02-27 16:21:07"
+  "last_updated": "2026-03-01 18:49:46"
 }

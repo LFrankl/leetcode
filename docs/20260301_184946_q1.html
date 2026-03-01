@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>190. 颠倒二进制位 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-01 18:49:46</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">190. 颠倒二进制位</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/reverse-bits/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="190-颠倒二进制位">190. 颠倒二进制位</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 位运算, 分治</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/reverse-bits/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>颠倒给定的 32 位有符号整数的二进制位。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>n = 43261596</span></p>
+
+<p><span class="example-io"><b>输出：</b>964176192</span></p>
+
+<p><strong>解释：</strong></p>
+
+<table>
+    <tbody>
+        <tr>
+            <th>整数</th>
+            <th>二进制</th>
+        </tr>
+        <tr>
+            <td>43261596</td>
+            <td>00000010100101000001111010011100</td>
+        </tr>
+        <tr>
+            <td>964176192</td>
+            <td>00111001011110000010100101000000</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>n = 2147483644</span></p>
+
+<p><span class="example-io"><b>输出：</b>1073741822</span></p>
+
+<p><strong>解释：</strong></p>
+
+<table>
+    <tbody>
+        <tr>
+            <th>整数</th>
+            <th>二进制</th>
+        </tr>
+        <tr>
+            <td>2147483644</td>
+            <td>01111111111111111111111111111100</td>
+        </tr>
+        <tr>
+            <td>1073741822</td>
+            <td>00111111111111111111111111111110</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>0 &lt;= n &lt;= 2<sup>31</sup>&nbsp;- 2</code></li>
+    <li><code>n</code>&nbsp;为偶数</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>进阶</strong>: 如果多次调用这个函数，你将如何优化你的算法？</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int reverseBits(int n) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int reverseBits(int n) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def reverseBits(self, n: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @return {number}
+ */
+var reverseBits = function(n) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func reverseBits(n int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>43261596
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答">AI 解答</h2>
+
+<p><em>DeepSeek API 未配置或调用失败</em></p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-01 17:05:07</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
