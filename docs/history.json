@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-02 20:07:56",
+      "record_id": "20260302_200756",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2255",
+          "title": "统计是给定字符串前缀的字符串数目",
+          "difficulty": "easy",
+          "file": "20260302_200756_q1.html"
+        },
+        {
+          "number": "3204",
+          "title": "按位用户权限分析",
+          "difficulty": "medium",
+          "file": "20260302_200756_q2.html"
+        },
+        {
+          "number": "928",
+          "title": "尽量减少恶意软件的传播 II",
+          "difficulty": "hard",
+          "file": "20260302_200756_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-01 18:49:46",
       "record_id": "20260301_184946",
       "count": 3,
@@ -318,5 +343,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-01 18:49:46"
+  "last_updated": "2026-03-02 20:07:56"
 }

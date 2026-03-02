@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3204. 按位用户权限分析 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-02 20:07:56</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3204. 按位用户权限分析</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/bitwise-user-permissions-analysis/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3204-按位用户权限分析">3204. 按位用户权限分析</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 数据库</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/bitwise-user-permissions-analysis/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>{"headers":{"user_permissions":["user_id","permissions"]},"rows":{"user_permissions":[[1,5],[2,12],[3,7],[4,3]]}}
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个关于用户权限管理的题目，通常涉及位运算。假设题目要求如下（基于常见权限系统设计）：</p>
+
+<p><strong>题目描述</strong>：
+给定一个整数数组 <code>permissions</code>，每个元素表示一个用户的权限集合（使用位掩码表示）。需要实现以下功能：
+1. 检查某个用户是否拥有特定权限
+2. 统计拥有特定权限的用户数量
+3. 找出拥有所有指定权限的用户
+4. 找出拥有任意指定权限的用户</p>
+
+<p><strong>示例</strong>：</p>
+
+<pre><code>permissions = [1, 3, 5, 7]  // 二进制：001, 011, 101, 111
+权限定义：1(001)=读，2(010)=写，4(100)=执行
+</code></pre>
+
+<hr />
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心思想">核心思想</h3>
+
+<p>使用位运算来高效处理权限检查：
+- <strong>按位与 (&amp;)</strong>：检查是否拥有所有权限
+- <strong>按位或 (|)</strong>：检查是否拥有任意权限
+- <strong>按位异或 (^)</strong>：找出权限差异</p>
+
+<hr />
+
+<h2 id="解法一基础位运算逐个检查">解法一：基础位运算（逐个检查）</h2>
+
+<h3 id="思路">思路</h3>
+
+<p>遍历所有用户，对每个用户使用位运算检查权限条件。</p>
+
+<h3 id="代码实现">代码实现</h3>
+
+<h4 id="go-实现">Go 实现</h4>
+
+<pre><code>package main
+
+func hasPermission(userPerm, requiredPerm int) bool {
+    return userPerm &amp; requiredPerm == requiredPerm
+}
+
+func hasAnyPermission(userPerm, requiredPerm int) bool {
+    return userPerm &amp; requiredPerm != 0
+}
+
+func countUsersWithAllPerms(permissions []int, requiredPerm int) int {
+    count := 0
+    for _, perm := range permissions {
+        if hasPermission(perm, requiredPerm) {
+            count++
+        }
+    }
+    return count
+}
+
+func countUsersWithAnyPerms(permissions []int, requiredPerm int) int {
+    count := 0
+    for _, perm := range permissions {
+        if hasAnyPermission(perm, requiredPerm) {
+            count++
+        }
+    }
+    return count
+}
+
+func getUsersWithAllPerms(permissions []int, requiredPerm int) []int {
+    result := []int{}
+    for i, perm := range permissions {
+        if hasPermission(perm, requiredPerm) {
+            result = append(result, i)
+        }
+    }
+    return result
+}
+</code></pre>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+using namespace std;
+
+class PermissionSystem {
+public:
+    bool hasPermission(int userPerm, int requiredPerm) {
+        return (userPerm &amp; requiredPerm) == requiredPerm;
+    }
+
+    bool hasAnyPermission(int userPerm, int requiredPerm) {
+        return (userPerm &amp; requiredPerm) != 0;
+    }
+
+    int countUsersWithAllPerms(vector&lt;int&gt;&amp; permissions, int requiredPerm) {
+        int count = 0;
+        for (int perm : permissions) {
+            if (hasPermission(perm, requiredPerm)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    int countUsersWithAnyPerms(vector&lt;int&gt;&amp; permissions, int requiredPerm) {
+        int count = 0;
+        for (int perm : permissions) {
+            if (hasAnyPermission(perm, requiredPerm)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    vector&lt;int&gt; getUsersWithAllPerms(vector&lt;int&gt;&amp; permissions, int requiredPerm) {
+        vector&lt;int&gt; result;
+        for (int i = 0; i &lt; permissions.size(); i++) {
+            if (hasPermission(permissions[i], requiredPerm)) {
+                result.push_back(i);
+            }
+        }
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)，n 为用户数量</li>
+<li><strong>空间复杂度</strong>：O(1)（统计时），O(k)（返回用户列表时，k 为符合条件的用户数）</li>
+</ul>
+
+<hr />
+
+<h2 id="解法二位运算优化批量处理">解法二：位运算优化（批量处理）</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<p>如果权限位较少（如 ≤ 32），可以预先计算每个权限位的用户集合，实现 O(1) 查询。</p>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<h4 id="go-实现-2">Go 实现</h4>
+
+<pre><code>package main
+
+type PermissionOptimizer struct {
+    // bitUsers[i] 表示拥有第 i 位权限的用户索引集合
+    bitUsers [32][]int
+}
+
+func NewPermissionOptimizer(permissions []int) *PermissionOptimizer {
+    po := &amp;PermissionOptimizer{}
+    for userIdx, perm := range permissions {
+        for bit := 0; bit &lt; 32; bit++ {
+            if perm &amp; (1 &lt;&lt; bit) != 0 {
+                po.bitUsers[bit] = append(po.bitUsers[bit], userIdx)
+            }
+        }
+    }
+    return po
+}
+
+// 获取拥有所有指定权限的用户
+func (po *PermissionOptimizer) getUsersWithAllPerms(requiredPerm int) []int {
+    if requiredPerm == 0 {
+        return []int{} // 空权限
+    }
+
+    // 找到第一个权限位的用户作为初始集合
+    firstBit := 0
+    for ; firstBit &lt; 32; firstBit++ {
+        if requiredPerm &amp; (1 &lt;&lt; firstBit) != 0 {
+            break
+        }
+    }
+
+    result := po.bitUsers[firstBit]
+    // 与其他权限位求交集
+    for bit := firstBit + 1; bit &lt; 32; bit++ {
+        if requiredPerm &amp; (1 &lt;&lt; bit) == 0 {
+            continue
+        }
+        result = intersect(result, po.bitUsers[bit])
+        if len(result) == 0 {
+            break
+        }
+    }
+    return result
+}
+
+// 获取拥有任意指定权限的用户
+func (po *PermissionOptimizer) getUsersWithAnyPerms(requiredPerm int) []int {
+    userSet := make(map[int]bool)
+    for bit := 0; bit &lt; 32; bit++ {
+        if requiredPerm &amp; (1 &lt;&lt; bit) == 0 {
+            continue
+        }
+        for _, userIdx := range po.bitUsers[bit] {
+            userSet[userIdx] = true
+        }
+    }
+
+    result := make([]int, 0, len(userSet))
+    for userIdx := range userSet {
+        result = append(result, userIdx)
+    }
+    return result
+}
+
+func intersect(a, b []int) []int {
+    set := make(map[int]bool)
+    for _, v := range a {
+        set[v] = true
+    }
+
+    result := []int{}
+    for _, v := range b {
+        if set[v] {
+            result = append(result, v)
+        }
+    }
+    return result
+}
+</code></pre>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;unordered_set&gt;
+#include &lt;unordered_map&gt;
+using namespace std;
+
+class PermissionOptimizer {
+private:
+    vector&lt;vector&lt;int&gt;&gt; bitUsers; // bitUsers[i] 存储拥有第 i 位权限的用户索引
+
+public:
+    PermissionOptimizer(vector&lt;int&gt;&amp; permissions) {
+        bitUsers.resize(32);
+        for (int i = 0; i &lt; permissions.size(); i++) {
+            int perm = permissions[i];
+            for (int bit = 0; bit &lt; 32; bit++) {
+                if (perm &amp; (1 &lt;&lt; bit)) {
+                    bitUsers[bit].push_back(i);
+                }
+            }
+        }
+    }
+
+    vector&lt;int&gt; getUsersWithAllPerms(int requiredPerm) {
+        if (requiredPerm == 0) return {};
+
+        // 找到第一个权限位
+        int firstBit = 0;
+        while (firstBit &lt; 32 &amp;&amp; !(requiredPerm &amp; (1 &lt;&lt; firstBit))) {
+            firstBit++;
+        }
+
+        vector&lt;int&gt; result = bitUsers[firstBit];
+
+        // 求交集
+        for (int bit = firstBit + 1; bit &lt; 32; bit++) {
+            if (!(requiredPerm &amp; (1 &lt;&lt; bit))) continue;
+
+            unordered_set&lt;int&gt; set(result.begin(), result.end());
+            vector&lt;int&gt; intersection;
+            for (int userIdx : bitUsers[bit]) {
+                if (set.count(userIdx)) {
+                    intersection.push_back(userIdx);
+                }
+            }
+            result = intersection;
+            if (result.empty()) break;
+        }
+
+        return result;
+    }
+
+    vector&lt;int&gt; getUsersWithAnyPerms(int requiredPerm) {
+        unordered_set&lt;int&gt; userSet;
+        for (int bit = 0; bit &lt; 32; bit++) {
+            if (!(requiredPerm &amp; (1 &lt;&lt; bit))) continue;
+
+            for (int userIdx : bitUsers[bit]) {
+                userSet.insert(userIdx);
+            }
+        }
+
+        return vector&lt;int&gt;(userSet.begin(), userSet.end());
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li><strong>预处理时间复杂度</strong>：O(32n) ≈ O(n)</li>
+<li><strong>查询时间复杂度</strong>：
+<ul>
+<li><code>getUsersWithAllPerms</code>：O(k + m)，k 为最小集合大小，m 为权限位数</li>
+<li><code>getUsersWithAnyPerms</code>：O(t)，t 为相关权限位的总用户数</li>
+</ul></li>
+<li><strong>空间复杂度</strong>：O(32n) ≈ O(n)</li>
+</ul>
+
+<hr />
+
+<h2 id="解法三位集bitset优化">解法三：位集（Bitset）优化</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<p>使用 bitset 表示每个用户的权限，利用位运算的并行性进行批量处理。</p>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<h4 id="go-实现-3">Go 实现</h4>
+
+<pre><code>package main
+
+const MAX_PERM_BITS = 32
+
+type BitSetPermission struct {
+    // userPerms[i] 表示第 i 位权限的用户集合（bitset）
+    userPerms [MAX_PERM_BITS]uint64
+    userCount int
+}
+
+func NewBitSetPermission(permissions []int) *BitSetPermission {
+    bsp := &amp;BitSetPermission{userCount: len(permissions)}
+    for userIdx, perm := range permissions {
+        for bit := 0; bit &lt; MAX_PERM_BITS; bit++ {
+            if perm &amp; (1 &lt;&lt; bit) != 0 {
+                bsp.userPerms[bit] |= 1 &lt;&lt; uint64(userIdx)
+            }
+        }
+    }
+    return bsp
+}
+
+// 获取拥有所有指定权限的用户
+func (bsp *BitSetPermission) getUsersWithAllPerms(requiredPerm int) []int {
+    if requiredPerm == 0 {
+        return []int{}
+    }
+
+    // 初始化全1的bitset
+    var resultBits uint64 = (1 &lt;&lt; uint64(bsp.userCount)) - 1
+
+    for bit := 0; bit &lt; MAX_PERM_BITS; bit++ {
+        if requiredPerm &amp; (1 &lt;&lt; bit) != 0 {
+            resultBits &amp;= bsp.userPerms[bit]
+            if resultBits == 0 {
+                break
+            }
+        }
+    }
+
+    // 将bitset转换为用户索引列表
+    return bitsToIndices(resultBits, bsp.userCount)
+}
+
+// 获取拥有任意指定权限的用户
+func (bsp *BitSetPermission) getUsersWithAnyPerms(requiredPerm int) []int {
+    var resultBits uint64 = 0
+
+    for bit := 0; bit &lt; MAX_PERM_BITS; bit++ {
+        if requiredPerm &amp; (1 &lt;&lt; bit) != 0 {
+            resultBits |= bsp.userPerms[bit]
+        }
+    }
+
+    return bitsToIndices(resultBits, bsp.userCount)
+}
+
+func bitsToIndices(bits uint64, userCount int) []int {
+    result := []int{}
+    for i := 0; i &lt; userCount; i++ {
+        if bits &amp; (1 &lt;&lt; uint64(i)) != 0 {
+            result = append(result, i)
+        }
+    }
+    return result
+}
+</code></pre>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;bitset&gt;
+using namespace std;
+
+const int MAX_USERS = 64; // 假设最多64个用户
+
+class BitSetPermission {
+private:
+    bitset&lt;MAX_USERS&gt; permBits[32]; // permBits[i] 表示拥有第i位权限的用户集合
+    int userCount;
+
+public:
+    BitSetPermission(vector&lt;int&gt;&amp; permissions) : userCount(permissions.size()) {
+        for (int i = 0; i &lt; permissions.size(); i++) {
+            int perm = permissions[i];
+            for (int bit = 0; bit &lt; 32; bit++) {
+                if (perm &amp; (1 &lt;&lt; bit)) {
+                    permBits[bit].set(i);
+                }
+            }
+        }
+    }
+
+    vector&lt;int&gt; getUsersWithAllPerms(int requiredPerm) {
+        if (requiredPerm == 0) return {};
+
+        bitset&lt;MAX_USERS&gt; result;
+        result.set(); // 初始化为全1
+
+        for (int bit = 0; bit &lt; 32; bit++) {
+            if (requiredPerm &amp; (1 &lt;&lt; bit)) {
+                result &amp;= permBits[bit];
+                if (result.none()) break;
+            }
+        }
+
+        return bitsetToVector(result);
+    }
+
+    vector&lt;int&gt; getUsersWithAnyPerms(int requiredPerm) {
+        bitset&lt;MAX_USERS&gt; result;
+
+        for (int bit = 0; bit &lt; 32; bit++) {
+            if (requiredPerm &amp; (1 &lt;&lt; bit)) {
+                result |= permBits[bit];
+            }
+        }
+
+        return bitsetToVector(result);
+    }
+
+private:
+    vector&lt;int&gt; bitsetToVector(const bitset&lt;MAX_USERS&gt;&amp; bs) {
+        vector&lt;int&gt; result;
+        for (int i = 0; i &lt; userCount; i++) {
+            if (bs.test(i)) {
+                result.push_back(i);
+            }
+        }
+        return result;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度分析-3">复杂度分析</h3>
+
+<ul>
+<li><strong>预处理时间复杂度</strong>：O(32n) ≈ O(n)</li>
+<li><strong>查询时间复杂度</strong>：
+<ul>
+<li><code>getUsersWithAllPerms</code>：O(32) = O(1)（位运算常数时间）</li>
+<li><code>getUsersWithAnyPerms</code>：O(32) = O(1)</li>
+</ul></li>
+<li><strong>空间复杂度</strong>：O(32 × MAX_USERS/64) ≈ O(1)（如果用户数固定）</li>
+</ul>
+
+<hr />
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一：基础位运算</th>
+  <th>解法二：位运算优化</th>
+  <th>解法三：位集优化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>时间复杂度</strong></td>
+  <td>O(n) 每次查询</td>
+  <td>预处理 O(n)，查询 O(k)</td>
+  <td>预处理 O(n)，查询 O(1)</td>
+</tr>
+<tr>
+  <td><strong>空间复杂度</strong></td>
+  <td>O(1)</td>
+  <td>O(n)</td>
+  <td>O(1)（用户数固定时）</td>
+</tr>
+<tr>
+  <td><strong>优点</strong></td>
+  <td>实现简单，无需预处理</td>
+  <td>多次查询时效率高</td>
+  <td>查询速度最快，位运算高效</td>
+</tr>
+<tr>
+  <td><strong>缺点</strong></td>
+  <td>每次查询都需遍历所有用户</td>
+  <td>需要额外存储空间</td>
+  <td>用户数受 bitset 大小限制</td>
+</tr>
+<tr>
+  <td><strong>适用场景</strong></td>
+  <td>用户数少或查询少</td>
+  <td>权限位少，查询频繁</td>
+  <td>用户数 ≤ 64，查询频繁</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="总结">总结</h2>
+
+<ol>
+<li><strong>解法一</strong>适合简单场景或一次性查询</li>
+<li><strong>解法二</strong>适合权限系统需要频繁查询的场景</li>
+<li><strong>解法三</strong>在用户数有限且查询频繁时性能最优</li>
+</ol>
+
+<p>实际选择应根据具体需求：
+- 如果用户数少（≤ 100），用解法一
+- 如果权限位少且查询多，用解法二
+- 如果用户数 ≤ 64 且需要极致性能，用解法三</p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-02 20:05:31</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

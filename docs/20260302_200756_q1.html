@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2255. 统计是给定字符串前缀的字符串数目 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-02 20:07:56</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2255. 统计是给定字符串前缀的字符串数目</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/count-prefixes-of-a-given-string/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2255-统计是给定字符串前缀的字符串数目">2255. 统计是给定字符串前缀的字符串数目</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数组, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/count-prefixes-of-a-given-string/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个字符串数组&nbsp;<code>words</code>&nbsp;和一个字符串&nbsp;<code>s</code>&nbsp;，其中&nbsp;<code>words[i]</code> 和&nbsp;<code>s</code>&nbsp;只包含 <strong>小写英文字母</strong>&nbsp;。</p>
+
+<p>请你返回 <code>words</code>&nbsp;中是字符串 <code>s</code>&nbsp;<strong>前缀&nbsp;</strong>的 <strong>字符串数目</strong>&nbsp;。</p>
+
+<p>一个字符串的 <strong>前缀</strong>&nbsp;是出现在字符串开头的子字符串。<strong>子字符串</strong>&nbsp;是一个字符串中的连续一段字符序列。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><b>输入：</b>words = ["a","b","c","ab","bc","abc"], s = "abc"
+<b>输出：</b>3
+<strong>解释：</strong>
+words 中是 s = "abc" 前缀的字符串为：
+"a" ，"ab" 和 "abc" 。
+所以 words 中是字符串 s 前缀的字符串数目为 3 。</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><b>输入：</b>words = ["a","a"], s = "aa"
+<b>输出：</b>2
+<strong>解释：
+</strong>两个字符串都是 s 的前缀。
+注意，相同的字符串可能在 words 中出现多次，它们应该被计数多次。</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= words.length &lt;= 1000</code></li>
+    <li><code>1 &lt;= words[i].length, s.length &lt;= 10</code></li>
+    <li><code>words[i]</code> 和&nbsp;<code>s</code>&nbsp;<strong>只</strong>&nbsp;包含小写英文字母。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int countPrefixes(vector&lt;string&gt;&amp; words, string s) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int countPrefixes(String[] words, String s) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def countPrefixes(self, words: List[str], s: str) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string[]} words
+ * @param {string} s
+ * @return {number}
+ */
+var countPrefixes = function(words, s) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func countPrefixes(words []string, s string) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>For each string in words, check if it is a prefix of s. If true, increment the answer by 1.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>["a","b","c","ab","bc","abc"]
+"abc"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>我们需要统计数组 <code>words</code> 中有多少个字符串是给定字符串 <code>s</code> 的前缀。<br />
+<strong>前缀</strong>：字符串 <code>s</code> 从开头开始的连续子串。<br />
+注意：<code>words</code> 中可能有重复字符串，每个都要单独计数。</p>
+
+<hr />
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心判断">核心判断</h3>
+
+<p>对于 <code>words</code> 中的每个字符串 <code>w</code>，判断它是否是 <code>s</code> 的前缀，即：
+1. <code>len(w) &lt;= len(s)</code>
+2. <code>s[0:len(w)] == w</code></p>
+
+<hr />
+
+<h2 id="解法一直接遍历比较">解法一：直接遍历比较</h2>
+
+<p>最直观的方法：遍历 <code>words</code>，对每个单词检查它是否是 <code>s</code> 的前缀。</p>
+
+<p><strong>时间复杂度</strong>：<br />
+- 每个单词长度 ≤ 10，s 长度 ≤ 10<br />
+- 每次比较最多比较 10 个字符<br />
+- 总复杂度 O(n * L)，n ≤ 1000，L ≤ 10，所以非常快。</p>
+
+<p><strong>空间复杂度</strong>：O(1)，只用了常数空间。</p>
+
+<hr />
+
+<h3 id="解法一代码实现">解法一代码实现</h3>
+
+<pre><code>func countPrefixes(words []string, s string) int {
+    count := 0
+    for _, w := range words {
+        if len(w) &lt;= len(s) &amp;&amp; s[:len(w)] == w {
+            count++
+        }
+    }
+    return count
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    int countPrefixes(vector&lt;string&gt;&amp; words, string s) {
+        int count = 0;
+        for (const string&amp; w : words) {
+            if (w.size() &lt;= s.size() &amp;&amp; s.substr(0, w.size()) == w) {
+                count++;
+            }
+        }
+        return count;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="解法二使用字符串查找函数">解法二：使用字符串查找函数</h2>
+
+<p>利用语言内置的 <code>strings.HasPrefix</code>（Go）或 <code>s.find(w) == 0</code>（C++）来判断前缀。</p>
+
+<p><strong>时间复杂度</strong>：与解法一相同 O(n * L)。<br />
+<strong>空间复杂度</strong>：O(1)。</p>
+
+<hr />
+
+<h3 id="解法二代码实现">解法二代码实现</h3>
+
+<pre><code>func countPrefixes(words []string, s string) int {
+    count := 0
+    for _, w := range words {
+        if strings.HasPrefix(s, w) {
+            count++
+        }
+    }
+    return count
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    int countPrefixes(vector&lt;string&gt;&amp; words, string s) {
+        int count = 0;
+        for (const string&amp; w : words) {
+            if (s.find(w) == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="解法三前缀哈希集合如果-s-很长且-words-很多时优化">解法三：前缀哈希集合（如果 s 很长且 words 很多时优化）</h2>
+
+<p>对于本题数据规模很小，不需要优化，但可以展示另一种思路：<br />
+预先计算 <code>s</code> 的所有前缀，存入哈希集合，然后判断每个单词是否在集合中。</p>
+
+<p><strong>时间复杂度</strong>：<br />
+- 构建前缀集合 O(L²)，L ≤ 10<br />
+- 查询每个单词 O(1)<br />
+- 总复杂度 O(L² + n)</p>
+
+<p><strong>空间复杂度</strong>：O(L²) 存储所有前缀。</p>
+
+<hr />
+
+<h3 id="解法三代码实现">解法三代码实现</h3>
+
+<pre><code>func countPrefixes(words []string, s string) int {
+    prefixSet := make(map[string]bool)
+    for i := 1; i &lt;= len(s); i++ {
+        prefixSet[s[:i]] = true
+    }
+    count := 0
+    for _, w := range words {
+        if prefixSet[w] {
+            count++
+        }
+    }
+    return count
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    int countPrefixes(vector&lt;string&gt;&amp; words, string s) {
+        unordered_set&lt;string&gt; prefixSet;
+        for (int i = 1; i &lt;= s.size(); i++) {
+            prefixSet.insert(s.substr(0, i));
+        }
+        int count = 0;
+        for (const string&amp; w : words) {
+            if (prefixSet.count(w)) {
+                count++;
+            }
+        }
+        return count;
+    }
+};
+</code></pre>
+
+<hr />
+
+<h2 id="复杂度对比">复杂度对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>时间复杂度</th>
+  <th>空间复杂度</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>O(n * L)</td>
+  <td>O(1)</td>
+  <td>简单直观，常数空间</td>
+  <td>每次比较需要取子串</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>O(n * L)</td>
+  <td>O(1)</td>
+  <td>代码简洁，利用内置函数</td>
+  <td>依赖语言内置函数</td>
+</tr>
+<tr>
+  <td>解法三</td>
+  <td>O(L² + n)</td>
+  <td>O(L²)</td>
+  <td>查询快，适合 words 很多时</td>
+  <td>空间稍大，本题数据小不必要</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="总结">总结</h2>
+
+<p>对于本题数据规模（n ≤ 1000，L ≤ 10），<strong>解法一</strong> 和 <strong>解法二</strong> 都是高效且简单的选择。<br />
+<strong>解法三</strong> 展示了预处理前缀的优化思路，适用于 <code>s</code> 较长且 <code>words</code> 很多的情况，但本题中并不需要。  </p>
+
+<p><strong>推荐使用解法一或解法二</strong>，代码简洁且效率足够。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-02 20:03:19</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

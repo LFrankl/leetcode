@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>928. 尽量减少恶意软件的传播 II - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-02 20:07:56</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">928. 尽量减少恶意软件的传播 II</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/minimize-malware-spread-ii/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="928-尽量减少恶意软件的传播-ii">928. 尽量减少恶意软件的传播 II</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 深度优先搜索, 广度优先搜索, 并查集, 图, 数组, 哈希表</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/minimize-malware-spread-ii/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给定一个由 <code>n</code> 个节点组成的网络，用 <code>n x n</code> 个邻接矩阵&nbsp;<code>graph</code>&nbsp;表示。在节点网络中，只有当&nbsp;<code>graph[i][j] = 1</code>&nbsp;时，节点&nbsp;<code>i</code>&nbsp;能够直接连接到另一个节点&nbsp;<code>j</code>。</p>
+
+<p>一些节点&nbsp;<code>initial</code>&nbsp;最初被恶意软件感染。只要两个节点直接连接，且其中至少一个节点受到恶意软件的感染，那么两个节点都将被恶意软件感染。这种恶意软件的传播将继续，直到没有更多的节点可以被这种方式感染。</p>
+
+<p>假设&nbsp;<code>M(initial)</code>&nbsp;是在恶意软件停止传播之后，整个网络中感染恶意软件的最终节点数。</p>
+
+<p>我们可以从 <code>initial</code> 中&nbsp;<strong>删除一个节点</strong>，<strong>并完全移除该节点以及从该节点到任何其他节点的任何连接。</strong></p>
+
+<p>请返回移除后能够使&nbsp;<code>M(initial)</code>&nbsp;最小化的节点。如果有多个节点满足条件，返回索引 <strong>最小的节点</strong> 。</p>
+
+<p>&nbsp;</p>
+
+<ol>
+</ol>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
+<strong>输出：</strong>0
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>graph = [[1,1,0],[1,1,1],[0,1,1]], initial = [0,1]
+<strong>输出：</strong>1
+</pre>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>graph = [[1,1,0,0],[1,1,1,0],[0,1,1,1],[0,0,1,1]], initial = [0,1]
+<strong>输出：</strong>1
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<p><meta charset="UTF-8" /></p>
+
+<ul>
+    <li><code>n == graph.length</code></li>
+    <li><code>n == graph[i].length</code></li>
+    <li><code>2 &lt;= n &lt;= 300</code></li>
+    <li><code>graph[i][j]</code>&nbsp;是&nbsp;<code>0</code>&nbsp;或&nbsp;<code>1</code>.</li>
+    <li><code>graph[i][j] == graph[j][i]</code></li>
+    <li><code>graph[i][i] == 1</code></li>
+    <li><code>1 &lt;= initial.length &lt;&nbsp;n</code></li>
+    <li><code>0 &lt;= initial[i] &lt;= n - 1</code></li>
+    <li>&nbsp;<code>initial</code>&nbsp;中每个整数都<strong>不同</strong></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int minMalwareSpread(vector&lt;vector&lt;int&gt;&gt;&amp; graph, vector&lt;int&gt;&amp; initial) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int minMalwareSpread(int[][] graph, int[] initial) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def minMalwareSpread(self, graph: List[List[int]], initial: List[int]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[][]} graph
+ * @param {number[]} initial
+ * @return {number}
+ */
+var minMalwareSpread = function(graph, initial) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func minMalwareSpread(graph [][]int, initial []int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[[1,1,0],[1,1,0],[0,0,1]]
+[0,1]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="题目分析">题目分析</h2>
+
+<p>这是一个关于网络感染传播的问题。给定一个无向图（邻接矩阵表示）和初始感染节点列表 <code>initial</code>。感染规则是：如果两个节点直接相连，且至少一个被感染，那么两个节点都会被感染。我们可以从 <code>initial</code> 中删除一个节点（移除该节点及其所有连接），目标是使最终感染的节点数 <code>M(initial)</code> 最小化。</p>
+
+<p><strong>关键点</strong>：
+- 删除一个初始感染节点会移除该节点及其所有边
+- 需要计算删除每个初始感染节点后，最终感染的节点数
+- 选择使最终感染数最小的节点，如果有多个，返回索引最小的</p>
+
+<h2 id="解题思路">解题思路</h2>
+
+<h3 id="核心观察">核心观察</h3>
+
+<ol>
+<li>删除一个初始感染节点不仅减少了感染源，还切断了该节点与其他节点的连接</li>
+<li>感染传播过程本质上是 BFS/DFS 遍历</li>
+<li>一个节点可能被多个初始感染节点感染，删除某个感染节点可能无法拯救该节点（如果它还能被其他感染节点感染）</li>
+</ol>
+
+<h3 id="关键概念">关键概念</h3>
+
+<ul>
+<li><strong>感染源</strong>：初始感染节点</li>
+<li><strong>拯救的节点数</strong>：删除某个初始感染节点后，不会感染的节点数量</li>
+<li><strong>唯一感染源</strong>：如果一个连通分量中只有一个初始感染节点，那么删除该节点可以拯救整个连通分量</li>
+</ul>
+
+<h2 id="解法一bfsdfs-感染源统计">解法一：BFS/DFS + 感染源统计</h2>
+
+<h3 id="思路">思路</h3>
+
+<ol>
+<li>对于每个初始感染节点，模拟删除它（从图中移除）</li>
+<li>从剩余的初始感染节点开始 BFS/DFS 传播感染</li>
+<li>统计最终感染节点数</li>
+<li>选择使感染数最小的节点</li>
+</ol>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度：O(k × n²)，其中 k = len(initial)，n 为节点数</li>
+<li>空间复杂度：O(n²) 用于存储图</li>
+</ul>
+
+<h3 id="代码实现">代码实现</h3>
+
+<pre><code>func minMalwareSpread(graph [][]int, initial []int) int {
+    n := len(graph)
+    sort.Ints(initial)
+
+    minInfected := n + 1
+    result := initial[0]
+
+    // 尝试删除每个初始感染节点
+    for _, removeNode := range initial {
+        // 创建感染标记数组
+        infected := make([]bool, n)
+
+        // 初始化队列
+        queue := make([]int, 0)
+        for _, node := range initial {
+            if node != removeNode {
+                infected[node] = true
+                queue = append(queue, node)
+            }
+        }
+
+        // BFS 传播感染
+        for len(queue) &gt; 0 {
+            node := queue[0]
+            queue = queue[1:]
+
+            for neighbor := 0; neighbor &lt; n; neighbor++ {
+                if graph[node][neighbor] == 1 &amp;&amp; !infected[neighbor] {
+                    infected[neighbor] = true
+                    queue = append(queue, neighbor)
+                }
+            }
+        }
+
+        // 统计感染节点数
+        count := 0
+        for i := 0; i &lt; n; i++ {
+            if infected[i] {
+                count++
+            }
+        }
+
+        // 更新最小感染数
+        if count &lt; minInfected {
+            minInfected = count
+            result = removeNode
+        }
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    int minMalwareSpread(vector&lt;vector&lt;int&gt;&gt;&amp; graph, vector&lt;int&gt;&amp; initial) {
+        int n = graph.size();
+        sort(initial.begin(), initial.end());
+
+        int minInfected = n + 1;
+        int result = initial[0];
+
+        // 尝试删除每个初始感染节点
+        for (int removeNode : initial) {
+            vector&lt;bool&gt; infected(n, false);
+            queue&lt;int&gt; q;
+
+            // 初始化感染节点（除了被删除的）
+            for (int node : initial) {
+                if (node != removeNode) {
+                    infected[node] = true;
+                    q.push(node);
+                }
+            }
+
+            // BFS 传播感染
+            while (!q.empty()) {
+                int node = q.front();
+                q.pop();
+
+                for (int neighbor = 0; neighbor &lt; n; neighbor++) {
+                    if (graph[node][neighbor] == 1 &amp;&amp; !infected[neighbor]) {
+                        infected[neighbor] = true;
+                        q.push(neighbor);
+                    }
+                }
+            }
+
+            // 统计感染节点数
+            int count = 0;
+            for (bool inf : infected) {
+                if (inf) count++;
+            }
+
+            // 更新结果
+            if (count &lt; minInfected) {
+                minInfected = count;
+                result = removeNode;
+            }
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h2 id="解法二连通分量分析-感染源计数">解法二：连通分量分析 + 感染源计数</h2>
+
+<h3 id="思路-2">思路</h3>
+
+<ol>
+<li>从图中移除所有初始感染节点，得到多个连通分量</li>
+<li>对于每个连通分量，统计有多少个初始感染节点与之相邻</li>
+<li>如果一个连通分量只与一个初始感染节点相邻，那么删除该感染节点可以拯救整个连通分量</li>
+<li>选择能拯救最多节点的感染节点</li>
+</ol>
+
+<h3 id="详细步骤">详细步骤</h3>
+
+<ol>
+<li>创建新图，移除所有初始感染节点</li>
+<li>对剩余节点进行 DFS/BFS 找到连通分量</li>
+<li>对于每个连通分量，找出与之相邻的初始感染节点</li>
+<li>如果只有一个相邻的初始感染节点，该节点可以拯救这个连通分量</li>
+<li>统计每个初始感染节点能拯救的节点数</li>
+<li>选择能拯救最多节点的感染节点</li>
+</ol>
+
+<h3 id="复杂度分析-2">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度：O(n²)</li>
+<li>空间复杂度：O(n²)</li>
+</ul>
+
+<h3 id="代码实现-2">代码实现</h3>
+
+<pre><code>func minMalwareSpread(graph [][]int, initial []int) int {
+    n := len(graph)
+    sort.Ints(initial)
+
+    // 将初始感染节点放入集合方便查找
+    initialSet := make(map[int]bool)
+    for _, node := range initial {
+        initialSet[node] = true
+    }
+
+    // 标记数组
+    visited := make([]bool, n)
+    nodeToComp := make([]int, n) // 节点所属的连通分量编号
+    for i := range nodeToComp {
+        nodeToComp[i] = -1
+    }
+
+    compSize := make([]int, 0)    // 每个连通分量的大小
+    compInfectedBy := make([][]int, 0) // 每个连通分量相邻的感染节点
+
+    // DFS 遍历非感染节点
+    var dfs func(int, int)
+    dfs = func(node, compId int) {
+        visited[node] = true
+        nodeToComp[node] = compId
+        compSize[compId]++
+
+        for neighbor := 0; neighbor &lt; n; neighbor++ {
+            if graph[node][neighbor] == 1 &amp;&amp; !visited[neighbor] &amp;&amp; !initialSet[neighbor] {
+                dfs(neighbor, compId)
+            }
+        }
+    }
+
+    // 找到所有连通分量
+    compId := 0
+    for node := 0; node &lt; n; node++ {
+        if !initialSet[node] &amp;&amp; !visited[node] {
+            compSize = append(compSize, 0)
+            compInfectedBy = append(compInfectedBy, make([]int, 0))
+            dfs(node, compId)
+            compId++
+        }
+    }
+
+    // 对于每个连通分量，找出相邻的感染节点
+    for node := 0; node &lt; n; node++ {
+        if !initialSet[node] {
+            compId := nodeToComp[node]
+            // 检查所有邻居
+            for neighbor := 0; neighbor &lt; n; neighbor++ {
+                if graph[node][neighbor] == 1 &amp;&amp; initialSet[neighbor] {
+                    // 添加感染节点到列表（去重）
+                    found := false
+                    for _, infNode := range compInfectedBy[compId] {
+                        if infNode == neighbor {
+                            found = true
+                            break
+                        }
+                    }
+                    if !found {
+                        compInfectedBy[compId] = append(compInfectedBy[compId], neighbor)
+                    }
+                }
+            }
+        }
+    }
+
+    // 统计每个感染节点能拯救的节点数
+    saveCount := make(map[int]int)
+    for i := 0; i &lt; len(compSize); i++ {
+        // 如果连通分量只被一个感染节点感染
+        if len(compInfectedBy[i]) == 1 {
+            infectedNode := compInfectedBy[i][0]
+            saveCount[infectedNode] += compSize[i]
+        }
+    }
+
+    // 找到能拯救最多节点的感染节点
+    result := initial[0]
+    maxSave := -1
+    for _, node := range initial {
+        if saveCount[node] &gt; maxSave {
+            maxSave = saveCount[node]
+            result = node
+        }
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    int minMalwareSpread(vector&lt;vector&lt;int&gt;&gt;&amp; graph, vector&lt;int&gt;&amp; initial) {
+        int n = graph.size();
+        sort(initial.begin(), initial.end());
+
+        unordered_set&lt;int&gt; initialSet(initial.begin(), initial.end());
+        vector&lt;bool&gt; visited(n, false);
+        vector&lt;int&gt; nodeToComp(n, -1);
+
+        vector&lt;int&gt; compSize;
+        vector&lt;unordered_set&lt;int&gt;&gt; compInfectedBy;
+
+        // DFS 函数
+        function&lt;void(int, int)&gt; dfs = [&amp;](int node, int compId) {
+            visited[node] = true;
+            nodeToComp[node] = compId;
+            compSize[compId]++;
+
+            for (int neighbor = 0; neighbor &lt; n; neighbor++) {
+                if (graph[node][neighbor] == 1 &amp;&amp; !visited[neighbor] &amp;&amp; 
+                    !initialSet.count(neighbor)) {
+                    dfs(neighbor, compId);
+                }
+            }
+        };
+
+        // 找到所有连通分量
+        int compId = 0;
+        for (int node = 0; node &lt; n; node++) {
+            if (!initialSet.count(node) &amp;&amp; !visited[node]) {
+                compSize.push_back(0);
+                compInfectedBy.push_back(unordered_set&lt;int&gt;());
+                dfs(node, compId);
+                compId++;
+            }
+        }
+
+        // 找出每个连通分量相邻的感染节点
+        for (int node = 0; node &lt; n; node++) {
+            if (!initialSet.count(node)) {
+                int cid = nodeToComp[node];
+                for (int neighbor = 0; neighbor &lt; n; neighbor++) {
+                    if (graph[node][neighbor] == 1 &amp;&amp; initialSet.count(neighbor)) {
+                        compInfectedBy[cid].insert(neighbor);
+                    }
+                }
+            }
+        }
+
+        // 统计每个感染节点能拯救的节点数
+        unordered_map&lt;int, int&gt; saveCount;
+        for (int i = 0; i &lt; compSize.size(); i++) {
+            if (compInfectedBy[i].size() == 1) {
+                int infectedNode = *compInfectedBy[i].begin();
+                saveCount[infectedNode] += compSize[i];
+            }
+        }
+
+        // 找到能拯救最多节点的感染节点
+        int result = initial[0];
+        int maxSave = -1;
+        for (int node : initial) {
+            if (saveCount[node] &gt; maxSave) {
+                maxSave = saveCount[node];
+                result = node;
+            }
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h2 id="解法三并查集优化">解法三：并查集优化</h2>
+
+<h3 id="思路-3">思路</h3>
+
+<p>使用并查集来高效处理连通分量，其他思路与解法二相同。</p>
+
+<h3 id="复杂度分析-3">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度：O(n² × α(n))，其中 α(n) 是阿克曼函数的反函数</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+
+<h3 id="代码实现-3">代码实现</h3>
+
+<pre><code>func minMalwareSpread(graph [][]int, initial []int) int {
+    n := len(graph)
+    sort.Ints(initial)
+
+    // 并查集
+    parent := make([]int, n)
+    size := make([]int, n)
+    for i := 0; i &lt; n; i++ {
+        parent[i] = i
+        size[i] = 1
+    }
+
+    var find func(int) int
+    find = func(x int) int {
+        if parent[x] != x {
+            parent[x] = find(parent[x])
+        }
+        return parent[x]
+    }
+
+    union := func(x, y int) {
+        rootX, rootY := find(x), find(y)
+        if rootX != rootY {
+            if size[rootX] &lt; size[rootY] {
+                rootX, rootY = rootY, rootX
+            }
+            parent[rootY] = rootX
+            size[rootX] += size[rootY]
+        }
+    }
+
+    // 构建初始感染节点集合
+    initialSet := make(map[int]bool)
+    for _, node := range initial {
+        initialSet[node] = true
+    }
+
+    // 连接所有非感染节点
+    for i := 0; i &lt; n; i++ {
+        if initialSet[i] {
+            continue
+        }
+        for j := i + 1; j &lt; n; j++ {
+            if initialSet[j] {
+                continue
+            }
+            if graph[i][j] == 1 {
+                union(i, j)
+            }
+        }
+    }
+
+    // 统计每个连通分量被哪些感染节点感染
+    compInfectedBy := make(map[int]map[int]bool) // 连通分量根节点 -&gt; 感染节点集合
+    for i := 0; i &lt; n; i++ {
+        if initialSet[i] {
+            continue
+        }
+        root := find(i)
+        if _, exists := compInfectedBy[root]; !exists {
+            compInfectedBy[root] = make(map[int]bool)
+        }
+
+        // 找出所有相邻的感染节点
+        for j := 0; j &lt; n; j++ {
+            if graph[i][j] == 1 &amp;&amp; initialSet[j] {
+                compInfectedBy[root][j] = true
+            }
+        }
+    }
+
+    // 统计每个感染节点能拯救的节点数
+    saveCount := make(map[int]int)
+    for root, infectedNodes := range compInfectedBy {
+        if len(infectedNodes) == 1 {
+            for infectedNode := range infectedNodes {
+                saveCount[infectedNode] += size[root]
+            }
+        }
+    }
+
+    // 找到能拯救最多节点的感染节点
+    result := initial[0]
+    maxSave := -1
+    for _, node := range initial {
+        if saveCount[node] &gt; maxSave {
+            maxSave = saveCount[node]
+            result = node
+        }
+    }
+
+    return result
+}
+</code></pre>
+
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; parent, compSize;
+
+    int find(int x) {
+        if (parent[x] != x) {
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    }
+
+    void unite(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            if (compSize[rootX] &lt; compSize[rootY]) {
+                swap(rootX, rootY);
+            }
+            parent[rootY] = rootX;
+            compSize[rootX] += compSize[rootY];
+        }
+    }
+
+    int minMalwareSpread(vector&lt;vector&lt;int&gt;&gt;&amp; graph, vector&lt;int&gt;&amp; initial) {
+        int n = graph.size();
+        sort(initial.begin(), initial.end());
+
+        unordered_set&lt;int&gt; initialSet(initial.begin(), initial.end());
+
+        // 初始化并查集
+        parent.resize(n);
+        compSize.resize(n, 1);
+        for (int i = 0; i &lt; n; i++) {
+            parent[i] = i;
+        }
+
+        // 连接所有非感染节点
+        for (int i = 0; i &lt; n; i++) {
+            if (initialSet.count(i)) continue;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (initialSet.count(j)) continue;
+                if (graph[i][j] == 1) {
+                    unite(i, j);
+                }
+            }
+        }
+
+        // 统计每个连通分量被哪些感染节点感染
+        unordered_map&lt;int, unordered_set&lt;int&gt;&gt; compInfectedBy;
+        for (int i = 0; i &lt; n; i++) {
+            if (initialSet.count(i)) continue;
+            int root = find(i);
+
+            // 找出所有相邻的感染节点
+            for (int j = 0; j &lt; n; j++) {
+                if (graph[i][j] == 1 &amp;&amp; initialSet.count(j)) {
+                    compInfectedBy[root].insert(j);
+                }
+            }
+        }
+
+        // 统计每个感染节点能拯救的节点数
+        unordered_map&lt;int, int&gt; saveCount;
+        for (auto&amp; [root, infectedNodes] : compInfectedBy) {
+            if (infectedNodes.size() == 1) {
+                int infectedNode = *infectedNodes.begin();
+                saveCount[infectedNode] += compSize[root];
+            }
+        }
+
+        // 找到能拯救最多节点的感染节点
+        int result = initial[0];
+        int maxSave = -1;
+        for (int node : initial) {
+            if (saveCount[node] &gt; maxSave) {
+                maxSave = saveCount[node];
+                result = node;
+            }
+        }
+
+        return result;
+    }
+};
+</code></pre>
+
+<h2 id="解法对比">解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（BFS/DFS）</th>
+  <th>解法二（连通分量分析）</th>
+  <th>解法三（并查集）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>时间复杂度</td>
+  <td>O(k × n²)</td>
+  <td>O(n²)</td>
+  <td>O(n² × α(n))</td>
+</tr>
+<tr>
+  <td>空间复杂度</td>
+  <td>O(n²)</td>
+  <td>O(n²)</td>
+  <td>O(n)</td>
+</tr>
+<tr>
+  <td>实现难度</td>
+  <td>简单</td>
+  <td>中等</td>
+  <td>中等</td>
+</tr>
+<tr>
+  <td>运行效率</td>
+  <td>较慢</td>
+  <td>较快</td>
+  <td>最快</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>小规模图</td>
+  <td>中等规模图</td>
+  <td>大规模图</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="总结">总结</h2>
+
+<ol>
+<li><strong>解法一</strong>最直观，但效率较低，适合理解问题</li>
+<li><strong>解法二</strong>通过分析连通分量和感染源的关系，显著提高了效率</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-02 20:07:56</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
