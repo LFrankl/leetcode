@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1097. 游戏玩法分析 V - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-03 19:07:56</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1097. 游戏玩法分析 V</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/game-play-analysis-v/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1097-游戏玩法分析-v">1097. 游戏玩法分析 V</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数据库</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/game-play-analysis-v/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>{"headers":{"Activity":["player_id","device_id","event_date","games_played"]},"rows":{"Activity":[[1,2,"2016-03-01",5],[1,2,"2016-03-02",6],[2,3,"2017-06-25",1],[3,1,"2016-03-01",0],[3,4,"2018-07-03",5]]}}
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：
+给定一个游戏活动记录表 <code>Activity</code>，包含玩家 ID、设备 ID、事件日期和游戏次数。需要计算：
+1. 每个日期当天首次登录的玩家数
+2. 这些首次登录玩家在第二天再次登录的比例（保留两位小数）
+3. 按日期升序输出结果</p>
+
+<p><strong>关键约束</strong>：
+- 玩家可能在多个日期登录
+- 首次登录指玩家在整个游戏历史中第一次登录的日期
+- 需要计算次日留存率 = 次日仍登录的玩家数 / 当日首次登录玩家数
+- 结果按日期升序排列</p>
+
+<p><strong>边界情况</strong>：
+- 玩家可能只登录一次（次日留存为0）
+- 可能有多个玩家在同一天首次登录
+- 数据可能为空</p>
+
+<p><strong>输入输出格式</strong>：
+输入：Activity 表（player<em>id, device</em>id, event<em>date, games</em>played）
+输出：包含三列的表（event<em>date, players, retention</em>rate）</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一窗口函数-子查询">解法一：窗口函数 + 子查询</h3>
+
+<p><strong>核心思想</strong>：
+1. 使用窗口函数找到每个玩家的首次登录日期
+2. 统计每天首次登录的玩家数
+3. 计算这些玩家次日是否登录
+4. 计算留存率</p>
+
+<p><strong>解题步骤</strong>：
+1. 使用 <code>MIN() OVER()</code> 或子查询找到每个玩家的首次登录日期
+2. 筛选出所有首次登录记录
+3. 按日期分组统计首次登录玩家数
+4. 使用自连接或窗口函数判断次日是否登录
+5. 计算留存率并格式化</p>
+
+<p><strong>注意事项</strong>：
+- 日期计算要准确（DATE_ADD）
+- 处理 NULL 值（次日未登录）
+- 保留两位小数</p>
+
+<h3 id="解法二cte-聚合函数">解法二：CTE + 聚合函数</h3>
+
+<p><strong>核心思想</strong>：
+1. 使用 CTE 分步计算，提高可读性
+2. 先找出所有首次登录记录
+3. 再计算留存情况</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一窗口函数法">解法一：窗口函数法</h3>
+
+<pre><code>-- LeetCode 1097. 游戏玩法分析 V
+SELECT 
+    first_login_date AS event_date,
+    COUNT(DISTINCT player_id) AS players,
+    ROUND(
+        SUM(CASE WHEN DATEDIFF(next_date, first_login_date) = 1 THEN 1 ELSE 0 END) 
+        / COUNT(DISTINCT player_id),
+        2
+    ) AS retention_rate
+FROM (
+    SELECT 
+        player_id,
+        event_date AS first_login_date,
+        LEAD(event_date) OVER(PARTITION BY player_id ORDER BY event_date) AS next_date
+    FROM (
+        SELECT 
+            player_id,
+            event_date,
+            ROW_NUMBER() OVER(PARTITION BY player_id ORDER BY event_date) AS rn
+        FROM Activity
+    ) t1
+    WHERE rn = 1  -- 只保留首次登录记录
+) t2
+GROUP BY first_login_date
+ORDER BY event_date;
+</code></pre>
+
+<h3 id="解法二cte-分步法">解法二：CTE 分步法</h3>
+
+<pre><code>WITH FirstLogin AS (
+    -- 找出每个玩家的首次登录日期
+    SELECT 
+        player_id,
+        MIN(event_date) AS first_login_date
+    FROM Activity
+    GROUP BY player_id
+),
+FirstLoginWithNext AS (
+    -- 获取首次登录及下一次登录日期
+    SELECT 
+        f.player_id,
+        f.first_login_date,
+        MIN(a.event_date) AS next_login_date
+    FROM FirstLogin f
+    LEFT JOIN Activity a ON f.player_id = a.player_id 
+        AND a.event_date &gt; f.first_login_date
+    GROUP BY f.player_id, f.first_login_date
+)
+SELECT 
+    first_login_date AS event_date,
+    COUNT(player_id) AS players,
+    ROUND(
+        SUM(CASE WHEN DATEDIFF(next_login_date, first_login_date) = 1 THEN 1 ELSE 0 END)
+        / COUNT(player_id),
+        2
+    ) AS retention_rate
+FROM FirstLoginWithNext
+GROUP BY first_login_date
+ORDER BY event_date;
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一窗口函数法-2">解法一：窗口函数法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n log n)
+<ul>
+<li>窗口函数排序：O(n log n)</li>
+<li>分组聚合：O(n)</li>
+<li>总体：O(n log n)，n 为记录数</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(n)
+<ul>
+<li>需要存储窗口函数的中间结果</li>
+<li>子查询创建临时表</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二cte-分步法-2">解法二：CTE 分步法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n log n)
+<ul>
+<li>首次登录分组：O(n log n)</li>
+<li>左连接操作：O(n log n)</li>
+<li>最终分组：O(n)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(n)
+<ul>
+<li>需要存储 CTE 的中间结果</li>
+<li>连接操作可能产生临时表</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（窗口函数）</th>
+  <th>解法二（CTE）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>代码简洁性</strong></td>
+  <td>较简洁</td>
+  <td>较清晰，分步明确</td>
+</tr>
+<tr>
+  <td><strong>可读性</strong></td>
+  <td>中等，需要理解窗口函数</td>
+  <td>高，逻辑分步清晰</td>
+</tr>
+<tr>
+  <td><strong>性能</strong></td>
+  <td>较好，一次扫描</td>
+  <td>稍差，多次操作</td>
+</tr>
+<tr>
+  <td><strong>适用场景</strong></td>
+  <td>数据量大，追求性能</td>
+  <td>逻辑复杂，需要调试</td>
+</tr>
+<tr>
+  <td><strong>推荐程度</strong></td>
+  <td>★★★★☆</td>
+  <td>★★★☆☆</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法一</strong>：
+- 窗口函数在大多数数据库优化良好
+- 代码更简洁
+- 性能通常更好</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="测试用例-1常规情况">测试用例 1：常规情况</h3>
+
+<pre><code>-- 输入数据
+INSERT INTO Activity VALUES
+(1, 2, '2016-03-01', 5),
+(1, 2, '2016-03-02', 6),
+(2, 3, '2017-06-25', 1),
+(3, 1, '2016-03-02', 0),
+(3, 4, '2018-07-03', 5);
+
+-- 预期输出
+-- event_date  | players | retention_rate
+-- 2016-03-01  | 1       | 1.00
+-- 2016-03-02  | 1       | 0.00
+-- 2017-06-25  | 1       | 0.00
+-- 2018-07-03  | 1       | 0.00
+</code></pre>
+
+<h3 id="测试用例-2多个玩家同一天首次登录">测试用例 2：多个玩家同一天首次登录</h3>
+
+<pre><code>-- 输入数据
+INSERT INTO Activity VALUES
+(1, 1, '2020-01-01', 10),
+(2, 2, '2020-01-01', 20),
+(1, 1, '2020-01-02', 15),
+(2, 2, '2020-01-03', 25),
+(3, 3, '2020-01-02', 5);
+
+-- 预期输出
+-- event_date  | players | retention_rate
+-- 2020-01-01  | 2       | 0.50  (只有玩家1次日登录)
+-- 2020-01-02  | 1       | 0.00
+</code></pre>
+
+<h3 id="测试用例-3边界情况-空表">测试用例 3：边界情况 - 空表</h3>
+
+<pre><code>-- 输入数据：空表
+-- 预期输出：空结果集
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><p><strong>LeetCode 511. 游戏玩法分析 I</strong> - 简单</p>
+
+<ul>
+<li>找出每个玩家的首次登录日期</li>
+</ul></li>
+<li><p><strong>LeetCode 512. 游戏玩法分析 II</strong> - 简单</p>
+
+<ul>
+<li>找出每个玩家首次登录使用的设备</li>
+</ul></li>
+<li><p><strong>LeetCode 534. 游戏玩法分析 III</strong> - 中等</p>
+
+<ul>
+<li>计算每个玩家到当前日期的累计游戏次数</li>
+</ul></li>
+<li><p><strong>LeetCode 550. 游戏玩法分析 IV</strong> - 中等</p>
+
+<ul>
+<li>计算首次登录后第二天再次登录的玩家比例</li>
+</ul></li>
+</ol>
+
+<p>这些题目都是同一系列，难度递增，适合逐步学习 SQL 窗口函数和复杂查询。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-03 19:07:56</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

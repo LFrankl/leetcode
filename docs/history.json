@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-03 19:07:56",
+      "record_id": "20260303_190756",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1179",
+          "title": "重新格式化部门表",
+          "difficulty": "easy",
+          "file": "20260303_190756_q1.html"
+        },
+        {
+          "number": "LCR 100",
+          "title": "三角形最小路径和",
+          "difficulty": "medium",
+          "file": "20260303_190756_q2.html"
+        },
+        {
+          "number": "1097",
+          "title": "游戏玩法分析 V",
+          "difficulty": "hard",
+          "file": "20260303_190756_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-02 20:07:56",
       "record_id": "20260302_200756",
       "count": 3,
@@ -343,5 +368,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-02 20:07:56"
+  "last_updated": "2026-03-03 19:07:56"
 }

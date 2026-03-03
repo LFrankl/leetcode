@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1179. 重新格式化部门表 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-03 19:07:56</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1179. 重新格式化部门表</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/reformat-department-table/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1179-重新格式化部门表">1179. 重新格式化部门表</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数据库</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/reformat-department-table/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>表&nbsp;<code>Department</code>：</p>
+
+<pre>
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| id            | int     |
+| revenue       | int     |
+| month         | varchar |
++---------------+---------+
+在 SQL 中，(id, month) 是表的联合主键。
+这个表格有关于每个部门每月收入的信息。
+月份（month）可以取下列值 ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]。
+</pre>
+
+<p>&nbsp;</p>
+
+<p>重新格式化表格，使得&nbsp;<strong>每个月&nbsp;</strong>都有一个部门 id 列和一个收入列。</p>
+
+<p>以 <strong>任意顺序</strong> 返回结果表。</p>
+
+<p>结果格式如以下示例所示。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<b>输入：</b>
+Department table:
++------+---------+-------+
+| id   | revenue | month |
++------+---------+-------+
+| 1    | 8000    | Jan   |
+| 2    | 9000    | Jan   |
+| 3    | 10000   | Feb   |
+| 1    | 7000    | Feb   |
+| 1    | 6000    | Mar   |
++------+---------+-------+
+<b>输出：</b>
++------+-------------+-------------+-------------+-----+-------------+
+| id   | Jan_Revenue | Feb_Revenue | Mar_Revenue | ... | Dec_Revenue |
++------+-------------+-------------+-------------+-----+-------------+
+| 1    | 8000        | 7000        | 6000        | ... | null        |
+| 2    | 9000        | null        | null        | ... | null        |
+| 3    | null        | 10000       | null        | ... | null        |
++------+-------------+-------------+-------------+-----+-------------+
+<b>解释：</b>四月到十二月的收入为空。 
+请注意，结果表共有 13 列（1 列用于部门 ID，其余 12 列用于各个月份）。</pre>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>{"headers":{"Department":["id","revenue","month"]},"rows":{"Department":[[1,8000,"Jan"],[2,9000,"Jan"],[3,10000,"Feb"],[1,7000,"Feb"],[1,6000,"Mar"]]}}
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：
+将部门收入表的行结构（每个部门每月一行记录）转换为列结构（每个部门一行，包含12个月份的收入列）。</p>
+
+<p><strong>关键约束</strong>：
+1. 原始表的主键是 <code>(id, month)</code>，意味着同一部门同一月份最多只有一条记录
+2. 月份值固定为12个英文缩写
+3. 结果表需要13列：1列部门ID + 12列月份收入（Jan<em>Revenue 到 Dec</em>Revenue）
+4. 如果某部门在某月没有收入，对应单元格为 <code>NULL</code>
+5. 输出顺序任意</p>
+
+<p><strong>输入输出格式</strong>：
+- 输入：Department 表，包含 id, revenue, month 三列
+- 输出：转换后的宽表，包含 id 和 Jan<em>Revenue 到 Dec</em>Revenue 共13列</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一条件聚合case-when-group-by">解法一：条件聚合（CASE WHEN + GROUP BY）</h3>
+
+<p><strong>核心思想</strong>：
+使用 <code>CASE WHEN</code> 语句将每个月份的收入值提取到单独的列中，然后通过 <code>GROUP BY id</code> 聚合，确保每个部门只有一行记录。</p>
+
+<p><strong>解题步骤</strong>：
+1. 对每个部门ID进行分组
+2. 为每个月份创建条件列：当月份匹配时取revenue值，否则为NULL
+3. 使用聚合函数（如SUM或MAX）合并数据
+4. 按部门ID排序（可选）</p>
+
+<p><strong>注意事项</strong>：
+- 必须使用聚合函数，因为GROUP BY后需要处理多行数据
+- 使用SUM或MAX都可以，因为同一部门同一月份最多一条记录</p>
+
+<h3 id="解法二pivot操作如果数据库支持">解法二：PIVOT操作（如果数据库支持）</h3>
+
+<p><strong>核心思想</strong>：
+使用数据库的PIVOT语法直接进行行列转换（但MySQL不支持，SQL Server/Oracle支持）。</p>
+
+<p><strong>解题步骤</strong>：
+1. 使用PIVOT关键字指定要转换的列
+2. 指定月份值作为新列名
+3. 指定聚合函数</p>
+
+<p><strong>注意事项</strong>：
+- 不是所有数据库都支持PIVOT语法
+- LeetCode的SQL环境通常支持标准SQL语法</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一条件聚合">解法一：条件聚合</h3>
+
+<pre><code>SELECT 
+    id,
+    MAX(CASE WHEN month = 'Jan' THEN revenue END) AS Jan_Revenue,
+    MAX(CASE WHEN month = 'Feb' THEN revenue END) AS Feb_Revenue,
+    MAX(CASE WHEN month = 'Mar' THEN revenue END) AS Mar_Revenue,
+    MAX(CASE WHEN month = 'Apr' THEN revenue END) AS Apr_Revenue,
+    MAX(CASE WHEN month = 'May' THEN revenue END) AS May_Revenue,
+    MAX(CASE WHEN month = 'Jun' THEN revenue END) AS Jun_Revenue,
+    MAX(CASE WHEN month = 'Jul' THEN revenue END) AS Jul_Revenue,
+    MAX(CASE WHEN month = 'Aug' THEN revenue END) AS Aug_Revenue,
+    MAX(CASE WHEN month = 'Sep' THEN revenue END) AS Sep_Revenue,
+    MAX(CASE WHEN month = 'Oct' THEN revenue END) AS Oct_Revenue,
+    MAX(CASE WHEN month = 'Nov' THEN revenue END) AS Nov_Revenue,
+    MAX(CASE WHEN month = 'Dec' THEN revenue END) AS Dec_Revenue
+FROM Department
+GROUP BY id
+ORDER BY id;
+</code></pre>
+
+<p><strong>Go语言模拟实现</strong>（如果需要在应用层处理）：</p>
+
+<pre><code>package main
+
+import (
+    "fmt"
+)
+
+// 模拟数据库记录
+type DepartmentRecord struct {
+    ID      int
+    Revenue int
+    Month   string
+}
+
+// 转换后的结果行
+type ResultRow struct {
+    ID          int
+    JanRevenue  *int
+    FebRevenue  *int
+    MarRevenue  *int
+    AprRevenue  *int
+    MayRevenue  *int
+    JunRevenue  *int
+    JulRevenue  *int
+    AugRevenue  *int
+    SepRevenue  *int
+    OctRevenue  *int
+    NovRevenue  *int
+    DecRevenue  *int
+}
+
+func reformatDepartment(records []DepartmentRecord) []ResultRow {
+    // 使用map按部门ID分组
+    departmentMap := make(map[int]*ResultRow)
+
+    // 月份到字段的映射
+    monthMapping := map[string]func(*ResultRow, int){
+        "Jan": func(r *ResultRow, val int) { r.JanRevenue = &amp;val },
+        "Feb": func(r *ResultRow, val int) { r.FebRevenue = &amp;val },
+        "Mar": func(r *ResultRow, val int) { r.MarRevenue = &amp;val },
+        "Apr": func(r *ResultRow, val int) { r.AprRevenue = &amp;val },
+        "May": func(r *ResultRow, val int) { r.MayRevenue = &amp;val },
+        "Jun": func(r *ResultRow, val int) { r.JunRevenue = &amp;val },
+        "Jul": func(r *ResultRow, val int) { r.JulRevenue = &amp;val },
+        "Aug": func(r *ResultRow, val int) { r.AugRevenue = &amp;val },
+        "Sep": func(r *ResultRow, val int) { r.SepRevenue = &amp;val },
+        "Oct": func(r *ResultRow, val int) { r.OctRevenue = &amp;val },
+        "Nov": func(r *ResultRow, val int) { r.NovRevenue = &amp;val },
+        "Dec": func(r *ResultRow, val int) { r.DecRevenue = &amp;val },
+    }
+
+    // 处理每条记录
+    for _, record := range records {
+        // 获取或创建该部门的行
+        if _, exists := departmentMap[record.ID]; !exists {
+            departmentMap[record.ID] = &amp;ResultRow{ID: record.ID}
+        }
+
+        // 根据月份设置对应的收入字段
+        if setter, ok := monthMapping[record.Month]; ok {
+            setter(departmentMap[record.ID], record.Revenue)
+        }
+    }
+
+    // 将map转换为切片
+    result := make([]ResultRow, 0, len(departmentMap))
+    for _, row := range departmentMap {
+        result = append(result, *row)
+    }
+
+    return result
+}
+
+func main() {
+    // 测试数据
+    records := []DepartmentRecord{
+        {1, 8000, "Jan"},
+        {2, 9000, "Jan"},
+        {3, 10000, "Feb"},
+        {1, 7000, "Feb"},
+        {1, 6000, "Mar"},
+    }
+
+    result := reformatDepartment(records)
+
+    // 打印结果
+    for _, row := range result {
+        fmt.Printf("ID: %d\n", row.ID)
+        fmt.Printf("Jan: %v, Feb: %v, Mar: %v\n", 
+            row.JanRevenue, row.FebRevenue, row.MarRevenue)
+        fmt.Println("---")
+    }
+}
+</code></pre>
+
+<h3 id="解法二pivot语法sql-server示例">解法二：PIVOT语法（SQL Server示例）</h3>
+
+<pre><code>SELECT *
+FROM Department
+PIVOT (
+    MAX(revenue)
+    FOR month IN (
+        [Jan], [Feb], [Mar], [Apr], [May], [Jun],
+        [Jul], [Aug], [Sep], [Oct], [Nov], [Dec]
+    )
+) AS PivotTable
+ORDER BY id;
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一条件聚合-2">解法一：条件聚合</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)，其中n是表中的记录数。需要扫描一次表并进行分组聚合。</li>
+<li><strong>空间复杂度</strong>：O(m)，其中m是不同部门的数量。需要为每个部门存储一行中间结果。</li>
+</ul>
+
+<h3 id="解法二pivot操作">解法二：PIVOT操作</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)，与解法一类似，需要扫描并转换数据。</li>
+<li><strong>空间复杂度</strong>：O(m)，需要存储转换后的结果。</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（条件聚合）</th>
+  <th>解法二（PIVOT）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>可移植性</td>
+  <td>⭐⭐⭐⭐⭐（所有SQL数据库都支持）</td>
+  <td>⭐⭐（仅特定数据库支持）</td>
+</tr>
+<tr>
+  <td>代码可读性</td>
+  <td>⭐⭐⭐（代码较长但清晰）</td>
+  <td>⭐⭐⭐⭐⭐（语法简洁）</td>
+</tr>
+<tr>
+  <td>维护性</td>
+  <td>⭐⭐⭐（修改月份需要改多处）</td>
+  <td>⭐⭐⭐⭐（月份集中管理）</td>
+</tr>
+<tr>
+  <td>性能</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td>LeetCode适用性</td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐（可能不支持）</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐使用解法一</strong>，因为：
+1. 它是标准SQL语法，在所有数据库中都可用
+2. LeetCode的SQL环境通常支持
+3. 逻辑清晰，易于理解和调试</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="测试用例1常规情况">测试用例1：常规情况</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Department table:
++------+---------+-------+
+| id   | revenue | month |
++------+---------+-------+
+| 1    | 8000    | Jan   |
+| 2    | 9000    | Jan   |
+| 3    | 10000   | Feb   |
+| 1    | 7000    | Feb   |
+| 1    | 6000    | Mar   |
++------+---------+-------+
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>+------+-------------+-------------+-------------+-----+
+| id   | Jan_Revenue | Feb_Revenue | Mar_Revenue | ... |
++------+-------------+-------------+-------------+-----+
+| 1    | 8000        | 7000        | 6000        | ... |
+| 2    | 9000        | null        | null        | ... |
+| 3    | null        | 10000       | null        | ... |
++------+-------------+-------------+-------------+-----+
+</code></pre>
+
+<p><strong>解释</strong>：部门1有1-3月收入，部门2只有1月收入，部门3只有2月收入。</p>
+
+<h3 id="测试用例2边界情况-空表">测试用例2：边界情况 - 空表</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Department table: (空表)
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>空结果集
+</code></pre>
+
+<h3 id="测试用例3边界情况-所有月份都有数据">测试用例3：边界情况 - 所有月份都有数据</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Department table:
++------+---------+-------+
+| id   | revenue | month |
++------+---------+-------+
+| 1    | 100     | Jan   |
+| 1    | 200     | Feb   |
+| 1    | 300     | Mar   |
+| 1    | 400     | Apr   |
+| 1    | 500     | May   |
+| 1    | 600     | Jun   |
+| 1    | 700     | Jul   |
+| 1    | 800     | Aug   |
+| 1    | 900     | Sep   |
+| 1    | 1000    | Oct   |
+| 1    | 1100    | Nov   |
+| 1    | 1200    | Dec   |
++------+---------+-------+
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>+------+-------------+-------------+-----+-------------+
+| id   | Jan_Revenue | Feb_Revenue | ... | Dec_Revenue |
++------+-------------+-------------+-----+-------------+
+| 1    | 100         | 200         | ... | 1200        |
++------+-------------+-------------+-----+-------------+
+</code></pre>
+
+<p><strong>解释</strong>：部门1在所有月份都有收入记录。</p>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>LeetCode 178. 分数排名</strong> - 使用窗口函数进行数据转换</li>
+<li><strong>LeetCode 180. 连续出现的数字</strong> - 使用自连接和条件判断</li>
+<li><strong>LeetCode 185. 部门工资前三高的所有员工</strong> - 使用窗口函数和分组</li>
+<li><strong>LeetCode 197. 上升的温度</strong> - 日期处理和自连接</li>
+<li><strong>LeetCode 601. 体育馆的人流量</strong> - 多条件查询和行转列思想</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-03 19:05:05</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
