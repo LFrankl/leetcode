@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-03 20:15:01",
+      "record_id": "20260303_201501",
+      "count": 3,
+      "questions": [
+        {
+          "number": "408",
+          "title": "有效单词缩写",
+          "difficulty": "easy",
+          "file": "20260303_201501_q1.html"
+        },
+        {
+          "number": "1996",
+          "title": "游戏中弱角色的数量",
+          "difficulty": "medium",
+          "file": "20260303_201501_q2.html"
+        },
+        {
+          "number": "2025",
+          "title": "分割数组的最多方案数",
+          "difficulty": "hard",
+          "file": "20260303_201501_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-03 19:18:06",
       "record_id": "20260303_191806",
       "count": 3,
@@ -393,5 +418,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-03 19:18:06"
+  "last_updated": "2026-03-03 20:15:01"
 }

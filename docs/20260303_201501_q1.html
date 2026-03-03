@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>408. 有效单词缩写 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-03 20:15:01</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">408. 有效单词缩写</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/valid-word-abbreviation/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="408-有效单词缩写">408. 有效单词缩写</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 双指针, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/valid-word-abbreviation/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"internationalization"
+"i12iz4n"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+给定一个字符串 <code>word</code> 和一个缩写字符串 <code>abbr</code>，判断 <code>abbr</code> 是否是 <code>word</code> 的有效缩写。<br />
+缩写规则：
+- 可以用数字表示跳过的字符数（数字不能有前导零）
+- 缩写中的字母必须与 <code>word</code> 中对应位置的字母相同
+- 缩写必须完全匹配 <code>word</code> 的所有字符</p>
+
+<p><strong>关键约束</strong>
+- <code>word</code> 只包含小写字母
+- <code>abbr</code> 只包含小写字母和数字
+- 数字不能有前导零（但可以是 <code>0</code> 表示跳过 0 个字符）
+- 缩写必须完全匹配 <code>word</code> 的长度</p>
+
+<p><strong>边界情况</strong>
+- 数字出现在末尾
+- 数字为 <code>0</code>
+- 缩写长度可能比 <code>word</code> 长或短
+- 连续数字（如 <code>"12"</code> 表示跳过 12 个字符）</p>
+
+<p><strong>输入输出格式</strong>
+- 输入：<code>string word</code>, <code>string abbr</code>
+- 输出：<code>bool</code>（是否有效）</p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一双指针扫描">解法一：双指针扫描</h3>
+
+<p><strong>核心思想</strong><br />
+使用两个指针分别遍历 <code>word</code> 和 <code>abbr</code>，遇到数字时解析数字并跳过 <code>word</code> 中对应数量的字符，遇到字母时直接比较。</p>
+
+<p><strong>步骤</strong>
+1. 初始化指针 <code>i</code>（指向 <code>word</code>）和 <code>j</code>（指向 <code>abbr</code>）
+2. 遍历 <code>abbr</code>：
+   - 如果 <code>abbr[j]</code> 是数字：
+     - 解析连续数字（注意前导零）
+     - 移动 <code>i</code> 指针跳过对应数量的字符
+   - 否则：
+     - 比较 <code>word[i]</code> 和 <code>abbr[j]</code>
+     - 不匹配则返回 <code>false</code>
+3. 最后检查 <code>i</code> 是否恰好到达 <code>word</code> 末尾</p>
+
+<p><strong>注意事项</strong>
+- 数字可能有多位
+- 数字为 <code>0</code> 时跳过 0 个字符
+- 数字不能有前导零（但 <code>"0"</code> 是允许的）</p>
+
+<h3 id="解法二正则表达式理论解法">解法二：正则表达式（理论解法）</h3>
+
+<p><strong>核心思想</strong><br />
+将 <code>abbr</code> 转换为正则表达式，然后匹配 <code>word</code>。<br />
+例如：<code>"a2e"</code> → <code>"a.{2}e"</code><br />
+但需要注意数字不能有前导零的约束，且需要完全匹配长度。</p>
+
+<p><strong>步骤</strong>
+1. 遍历 <code>abbr</code>，构建正则表达式
+2. 遇到数字时：
+   - 检查前导零
+   - 转换为 <code>.{n}</code> 模式
+3. 使用正则匹配，检查完全匹配</p>
+
+<p><strong>注意事项</strong>
+- 需要处理边界条件
+- 正则表达式可能效率较低
+- 需要额外处理长度匹配</p>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一双指针扫描-2">解法一：双指针扫描</h3>
+
+<pre><code>func validWordAbbreviation(word string, abbr string) bool {
+    i, j := 0, 0 // i 指向 word，j 指向 abbr
+    n, m := len(word), len(abbr)
+
+    for i &lt; n &amp;&amp; j &lt; m {
+        // 如果 abbr[j] 是数字
+        if abbr[j] &gt;= '0' &amp;&amp; abbr[j] &lt;= '9' {
+            // 前导零检查：数字为 0 且后面还有数字时无效
+            if abbr[j] == '0' {
+                return false
+            }
+
+            // 解析数字
+            num := 0
+            for j &lt; m &amp;&amp; abbr[j] &gt;= '0' &amp;&amp; abbr[j] &lt;= '9' {
+                num = num*10 + int(abbr[j]-'0')
+                j++
+            }
+
+            // 跳过 word 中的字符
+            i += num
+            // 如果跳过太多字符，直接返回 false
+            if i &gt; n {
+                return false
+            }
+        } else {
+            // 如果是字母，直接比较
+            if word[i] != abbr[j] {
+                return false
+            }
+            i++
+            j++
+        }
+    }
+
+    // 最后必须同时到达末尾
+    return i == n &amp;&amp; j == m
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一双指针扫描-3">解法一：双指针扫描</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n + m)<br />
+其中 n 是 <code>word</code> 长度，m 是 <code>abbr</code> 长度。每个字符最多访问一次。</li>
+<li>💾 <strong>空间复杂度</strong>：O(1)<br />
+只使用了常数级别的额外空间。</li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>双指针扫描</td>
+  <td>效率高，逻辑清晰，空间复杂度低</td>
+  <td>需要手动处理数字解析</td>
+  <td>通用场景，推荐使用</td>
+</tr>
+<tr>
+  <td>正则表达式</td>
+  <td>代码简洁，逻辑抽象</td>
+  <td>效率较低，需要处理特殊约束</td>
+  <td>快速原型，不推荐用于生产</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：双指针扫描<br />
+理由：效率高，逻辑直观，完全符合题目要求，且易于调试。</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="常规用例">常规用例</h3>
+
+<pre><code>// 用例 1
+word = "internationalization"
+abbr = "i12iz4n"
+输出: true
+解释: i + 12个字符 + i + z + 4个字符 + n
+
+// 用例 2
+word = "apple"
+abbr = "a2e"
+输出: false
+解释: a + 2个字符 + e → "aple" ≠ "apple"
+</code></pre>
+
+<h3 id="边界用例">边界用例</h3>
+
+<pre><code>// 用例 3：数字为 0
+word = "hello"
+abbr = "h2o"
+输出: false
+解释: h + 2个字符 + o → "helo" ≠ "hello"
+
+// 用例 4：前导零
+word = "hello"
+abbr = "h01lo"
+输出: false
+解释: 数字有前导零
+
+// 用例 5：完全匹配
+word = "hi"
+abbr = "2"
+输出: true
+解释: 跳过 2 个字符，正好匹配 "hi"
+</code></pre>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/valid-word-abbreviation/">408. Valid Word Abbreviation</a>（本题）</li>
+<li><a href="https://leetcode.com/problems/word-abbreviation/">527. Word Abbreviation</a>（更难，需要生成缩写）</li>
+<li><a href="https://leetcode.com/problems/unique-word-abbreviation/">288. Unique Word Abbreviation</a>（设计数据结构）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-03 20:11:36</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

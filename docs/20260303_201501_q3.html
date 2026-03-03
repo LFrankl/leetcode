@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025. 分割数组的最多方案数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-03 20:15:01</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2025. 分割数组的最多方案数</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-number-of-ways-to-partition-an-array/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2025-分割数组的最多方案数">2025. 分割数组的最多方案数</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数组, 哈希表, 计数, 枚举, 前缀和</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-number-of-ways-to-partition-an-array/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个下标从 <strong>0</strong>&nbsp;开始且长度为 <code>n</code>&nbsp;的整数数组&nbsp;<code>nums</code>&nbsp;。<strong>分割</strong>&nbsp;数组 <code>nums</code>&nbsp;的方案数定义为符合以下两个条件的 <code>pivot</code>&nbsp;数目：</p>
+
+<ul>
+    <li><code>1 &lt;= pivot &lt; n</code></li>
+    <li><code>nums[0] + nums[1] + ... + nums[pivot - 1] == nums[pivot] + nums[pivot + 1] + ... + nums[n - 1]</code></li>
+</ul>
+
+<p>同时给你一个整数&nbsp;<code>k</code>&nbsp;。你可以将&nbsp;<code>nums</code>&nbsp;中&nbsp;<strong>一个</strong>&nbsp;元素变为&nbsp;<code>k</code>&nbsp;或&nbsp;<strong>不改变</strong>&nbsp;数组。</p>
+
+<p>请你返回在 <strong>至多</strong>&nbsp;改变一个元素的前提下，<strong>最多</strong>&nbsp;有多少种方法 <strong>分割</strong>&nbsp;<code>nums</code>&nbsp;使得上述两个条件都满足。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><b>输入：</b>nums = [2,-1,2], k = 3
+<b>输出：</b>1
+<b>解释：</b>一个最优的方案是将 nums[0] 改为 k&nbsp;。数组变为 [<em><strong>3</strong></em>,-1,2] 。
+有一种方法分割数组：
+- pivot = 2 ，我们有分割 [3,-1 | 2]：3 + -1 == 2 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><b>输入：</b>nums = [0,0,0], k = 1
+<b>输出：</b>2
+<b>解释：</b>一个最优的方案是不改动数组。
+有两种方法分割数组：
+- pivot = 1 ，我们有分割 [0 | 0,0]：0 == 0 + 0 。
+- pivot = 2 ，我们有分割 [0,0 | 0]: 0 + 0 == 0 。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre><b>输入：</b>nums = [22,4,-25,-20,-15,15,-16,7,19,-10,0,-13,-14], k = -33
+<b>输出：</b>4
+<b>解释：</b>一个最优的方案是将 nums[2] 改为 k 。数组变为 [22,4,<em><strong>-33</strong></em>,-20,-15,15,-16,7,19,-10,0,-13,-14] 。
+有四种方法分割数组。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>n == nums.length</code></li>
+    <li><code>2 &lt;= n &lt;= 10<sup>5</sup></code></li>
+    <li><code>-10<sup>5</sup> &lt;= k, nums[i] &lt;= 10<sup>5</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int waysToPartition(vector&lt;int&gt;&amp; nums, int k) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int waysToPartition(int[] nums, int k) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def waysToPartition(self, nums: List[int], k: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var waysToPartition = function(nums, k) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func waysToPartition(nums []int, k int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>A pivot point splits the array into equal prefix and suffix. If no change is made to the array, the goal is to find the number of pivot p such that prefix[p-1] == suffix[p].</li>
+<li>Consider how prefix and suffix will change when we change a number nums[i] to k.</li>
+<li>When sweeping through each element, can you find the total number of pivots where the difference of prefix and suffix happens to equal to the changes of k-nums[i].</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[2,-1,2]
+3
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：
+给定一个整数数组 <code>nums</code> 和一个整数 <code>k</code>，我们可以选择将数组中的<strong>最多一个</strong>元素修改为 <code>k</code>（也可以不修改）。要求计算在修改后，数组有多少个位置 <code>pivot</code>（1 ≤ pivot &lt; n）满足：<code>nums[0] + ... + nums[pivot-1] == nums[pivot] + ... + nums[n-1]</code>。目标是最大化满足条件的 <code>pivot</code> 数量。</p>
+
+<p><strong>关键约束</strong>：
+- 只能修改<strong>最多一个</strong>元素（可以不改）
+- pivot 的取值范围是 <code>[1, n-1]</code>
+- 数组长度 n 最大为 10^5，需要 O(n) 或 O(n log n) 算法
+- 元素值范围较大，注意整数溢出（使用 int64）</p>
+
+<p><strong>输入输出</strong>：
+- 输入：<code>nums []int</code>, <code>k int</code>
+- 输出：修改后最多可能的方案数（int）</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一前缀和-哈希表统计差值变化">解法一：前缀和 + 哈希表统计差值变化</h3>
+
+<p><strong>核心思想</strong>：
+- 设原数组总和为 <code>total</code>，前缀和为 <code>prefix</code>，对于每个位置 <code>i</code>（作为 pivot），左半部分和为 <code>prefix[i]</code>，右半部分和为 <code>total - prefix[i]</code>。
+- 分割条件：<code>prefix[i] == total - prefix[i]</code> → <code>2 * prefix[i] == total</code>。
+- 如果修改某个位置 <code>j</code> 的值为 <code>k</code>，则数组总和变化为 <code>delta = k - nums[j]</code>，新的总和为 <code>total + delta</code>。
+- 修改后，对于每个 pivot 位置 <code>i</code>，新的分割条件为：
+  - 如果 <code>j &lt; i</code>（修改在左半部分）：<code>2 * (prefix[i] + delta) == total + delta</code>
+  - 如果 <code>j ≥ i</code>（修改在右半部分）：<code>2 * prefix[i] == total + delta</code>
+- 我们可以枚举每个位置 <code>i</code> 作为 pivot，计算修改每个位置 <code>j</code> 后是否满足条件，但这样是 O(n²)，不可行。
+- 优化：固定修改位置 <code>j</code>，计算它对所有 pivot 的影响。但我们可以反过来，对于每个 pivot 位置 <code>i</code>，推导出修改哪个位置 <code>j</code> 可以使得条件成立，然后统计每个 <code>j</code> 的贡献。
+- 具体推导：
+  - 设原数组在 pivot <code>i</code> 处不满足条件，即 <code>2 * prefix[i] != total</code>。
+  - 修改后新总和为 <code>total' = total + delta</code>，新前缀和为 <code>prefix'[i]</code>。
+  - 情况1：修改在左半部分（j &lt; i）：
+    - <code>prefix'[i] = prefix[i] + delta</code>
+    - 条件：<code>2 * (prefix[i] + delta) == total + delta</code>
+    - 解得：<code>delta = total - 2 * prefix[i]</code>
+    - 即需要将某个左半部分的元素 <code>nums[j]</code> 改为 <code>k</code>，使得 <code>k - nums[j] = delta</code> → <code>nums[j] = k - delta</code>
+  - 情况2：修改在右半部分（j ≥ i）：
+    - <code>prefix'[i] = prefix[i]</code>
+    - 条件：<code>2 * prefix[i] == total + delta</code>
+    - 解得：<code>delta = 2 * prefix[i] - total</code>
+    - 即需要将某个右半部分的元素 <code>nums[j]</code> 改为 <code>k</code>，使得 <code>k - nums[j] = delta</code> → <code>nums[j] = k - delta</code>
+- 因此，对于每个 pivot <code>i</code>，我们可以计算出：
+  - 如果修改左半部分，需要左半部分存在值为 <code>k - (total - 2*prefix[i])</code> 的元素
+  - 如果修改右半部分，需要右半部分存在值为 <code>k - (2*prefix[i] - total)</code> 的元素
+- 我们可以用哈希表统计左半部分和右半部分的元素值出现次数，遍历 pivot 时动态更新，从而 O(1) 判断是否存在所需值。
+- 同时，还需要统计不修改任何元素时，满足条件的 pivot 数量（即 <code>2*prefix[i] == total</code> 的数量）。</p>
+
+<p><strong>步骤</strong>：
+1. 计算前缀和数组 <code>prefix</code> 和总和 <code>total</code>。
+2. 统计不修改时的方案数 <code>base</code>。
+3. 初始化右半部分哈希表 <code>rightCount</code>，包含所有元素。
+4. 初始化左半部分哈希表 <code>leftCount</code> 为空。
+5. 遍历每个 pivot 位置 <code>i</code>（1 ≤ i &lt; n）：
+   - 将 <code>nums[i-1]</code> 从 <code>rightCount</code> 移到 <code>leftCount</code>（因为 pivot 移动，左半部分增加一个元素）。
+   - 计算左半部分修改所需值 <code>needLeft = k - (total - 2*prefix[i])</code>，如果 <code>leftCount[needLeft] &gt; 0</code>，则修改左半部分某个元素可使 pivot <code>i</code> 成立。
+   - 计算右半部分修改所需值 <code>needRight = k - (2*prefix[i] - total)</code>，如果 <code>rightCount[needRight] &gt; 0</code>，则修改右半部分某个元素可使 pivot <code>i</code> 成立。
+   - 用哈希表 <code>changeCount</code> 记录每个位置 <code>j</code> 被修改后能新增的 pivot 数量（注意：一个 pivot 可能通过修改多个不同位置实现，但一次只能改一个位置，所以每个 pivot 只能贡献给一个修改位置）。
+6. 遍历 <code>changeCount</code>，找到最大值 <code>maxChange</code>。
+7. 最终答案为 <code>base + maxChange</code>（注意：如果修改后使得原来成立的 pivot 失效？不会，因为我们可以选择不改那个位置，所以 base 一定保留）。</p>
+
+<p><strong>坑点</strong>：
+- 注意整数溢出，使用 int64。
+- 修改左半部分时，所需值 <code>needLeft</code> 可能不在左半部分；修改右半部分同理。
+- 一个 pivot 可能同时通过修改左半部分和右半部分实现，但一次只能改一个位置，所以每个 pivot 只能算一次贡献给某个修改位置。我们需要选择最优的修改位置，因此统计每个修改位置能新增的 pivot 数，取最大值。
+- 实际上，我们可以直接统计每个 pivot 能否通过修改某个位置实现，然后累加该位置的贡献。但要注意，一个 pivot 可能对应多个可修改位置，我们只能选一个，所以需要取最大值。但更简单的方法是：对于每个 pivot，如果它能通过修改某个位置实现，就给那个位置 +1，最后取最大值。因为每个 pivot 只贡献给一个位置（如果多个位置可选，我们任选一个即可，因为目标是最大化总方案数，我们只关心最大值）。</p>
+
+<p><strong>优化</strong>：
+- 不需要显式存储 <code>changeCount</code> 哈希表，可以在遍历时实时更新最大值。
+- 对于每个 pivot，如果左半部分和右半部分都有可修改位置，我们选择能增加更多方案数的位置？但每个 pivot 只能被满足一次，所以只需给任意一个可修改位置 +1 即可。为了最大化，我们优先给左半部分？但这样可能不是全局最优。实际上，我们需要统计每个修改位置能覆盖多少 pivot，然后取最大值。所以还是需要哈希表记录每个修改位置的覆盖数。</p>
+
+<p><strong>修正</strong>：
+- 对于每个 pivot，计算 <code>needLeft</code> 和 <code>needRight</code>，如果左半部分存在 <code>needLeft</code>，则所有左半部分值为 <code>needLeft</code> 的元素都可以通过修改为 <code>k</code> 使该 pivot 成立。因此，我们可以给这些元素的位置的覆盖数 +1。右半部分同理。
+- 但一个 pivot 可能同时被左半部分和右半部分的修改覆盖，如果同时给两边 +1，则相当于这个 pivot 被算了两次，而实际上一次修改只能覆盖一次。所以我们需要避免重复计数。
+- 解决方案：对于每个 pivot，如果左半部分和右半部分都有可修改位置，我们只选择其中一个（比如左半部分）来贡献，以确保每个 pivot 只被计数一次。但这样可能不是最优，因为可能左半部分的那个位置覆盖的 pivot 少，右半部分的覆盖多。所以更好的方法是：分别统计左半部分和右半部分的贡献，然后取最大值。因为一次修改只能在左半部分或右半部分，所以我们可以分别考虑修改左半部分和修改右半部分能新增的 pivot 数，取最大值。
+- 更直接的方法：枚举修改位置 <code>j</code>，计算修改后能满足的 pivot 数量。这样是 O(n²)，但我们可以优化：修改位置 <code>j</code> 后，对于所有 pivot <code>i</code>，新的分割条件可以推导为：
+  - 如果 <code>j &lt; i</code>：<code>2*(prefix[i] + delta) == total + delta</code> → <code>2*prefix[i] == total - delta</code>
+  - 如果 <code>j ≥ i</code>：<code>2*prefix[i] == total + delta</code>
+  其中 <code>delta = k - nums[j]</code>。
+  所以对于每个修改位置 <code>j</code>，我们可以计算它对应的两个等式，然后统计有多少 pivot 满足等式。但这样还是需要遍历所有 pivot。
+- 进一步优化：将等式变形为 <code>2*prefix[i]</code> 的表达式，然后用哈希表统计 <code>2*prefix[i]</code> 的出现次数。对于每个修改位置 <code>j</code>，我们可以 O(1) 得到满足条件的 pivot 数量。
+- 具体步骤：
+  1. 计算所有 <code>2*prefix[i]</code>（i 从 1 到 n-1）的出现次数，存入哈希表 <code>count2p</code>。
+  2. 计算不修改时的方案数 <code>base</code>（即 <code>2*prefix[i] == total</code> 的数量）。
+  3. 对于每个位置 <code>j</code>，计算 <code>delta = k - nums[j]</code>。
+      - 如果修改 <code>j</code>，则新的总和为 <code>total + delta</code>。
+      - 对于 pivot <code>i</code>，如果 <code>j &lt; i</code>，需要满足 <code>2*prefix[i] == total - delta</code>。
+      - 如果 <code>j ≥ i</code>，需要满足 <code>2*prefix[i] == total + delta</code>。
+      - 但同一个 pivot 可能同时满足两个条件？不可能，因为 <code>j</code> 相对于 <code>i</code> 的位置是确定的。
+      - 因此，修改 <code>j</code> 后新增的 pivot 数量 = <code>count2p[total - delta]</code>（对应 <code>j &lt; i</code>） + <code>count2p[total + delta]</code>（对应 <code>j ≥ i</code>）。
+      - 注意：如果 <code>2*prefix[i]</code> 原本就等于 <code>total</code>（即原本就满足），则修改后可能仍然满足，但我们已经计入 <code>base</code>，所以这里不需要重复计算。但我们的目标是最大化总方案数，所以应该计算修改后总共满足的 pivot 数，然后取最大值。因此，对于每个修改位置 <code>j</code>，总方案数 = <code>count2p[total - delta] + count2p[total + delta]</code>。
+      - 但这样会重复计数吗？不会，因为 <code>j &lt; i</code> 和 <code>j ≥ i</code> 是互斥的。
+  4. 遍历所有 <code>j</code>，计算总方案数，取最大值。
+  5. 注意：还需要考虑不修改的情况，即 <code>base</code>。所以最终答案是 <code>max(base, maxChange)</code>？不对，因为修改后可能使原来满足的 pivot 不再满足，所以不能直接加。我们需要重新计算修改后的总方案数。
+  6. 实际上，修改位置 <code>j</code> 后，原来满足的 pivot 可能不再满足，所以不能直接用 <code>base</code> 加上新增的。因此，对于每个修改位置 <code>j</code>，我们应该计算修改后<strong>新满足</strong>的 pivot 数量，即原来不满足但修改后满足的。但这样计算复杂。
+  7. 更简单：对于每个修改位置 <code>j</code>，我们直接计算修改后满足的 pivot 总数（包括原来就满足的和新增的），然后取所有修改位置的最大值，再与不修改的情况比较取最大值。因为不修改的情况就是 <code>base</code>。
+  8. 如何计算修改后满足的 pivot 总数？我们已经有了 <code>count2p[x]</code> 表示 <code>2*prefix[i] == x</code> 的 pivot 数量。修改后，对于 pivot <code>i</code>，如果 <code>j &lt; i</code>，需要满足 <code>2*prefix[i] == total - delta</code>；如果 <code>j ≥ i</code>，需要满足 <code>2*prefix[i] == total + delta</code>。所以修改后满足的 pivot 总数 = <code>count2p[total - delta] + count2p[total + delta]</code>。但这里有一个问题：同一个 pivot 可能被两个条件都计数？不会，因为 <code>j</code> 相对于 <code>i</code> 的位置是唯一的。
+  9. 因此，算法为：
+      - 计算 <code>count2p</code>。
+      - 计算 <code>base = count2p[total]</code>。
+      - 对于每个位置 <code>j</code>，计算 <code>delta = k - nums[j]</code>，然后 <code>cur = count2p[total - delta] + count2p[total + delta]</code>，更新最大值 <code>maxChange</code>。
+      - 答案 = <code>max(base, maxChange)</code>。
+  10. 但这样对吗？考虑一个 pivot <code>i</code>，原本 <code>2*prefix[i] == total</code>，修改后如果 <code>j &lt; i</code>，需要 <code>2*prefix[i] == total - delta</code>，即 <code>total == total - delta</code>，所以 <code>delta=0</code>，即 <code>k == nums[j]</code>。如果 <code>k == nums[j]</code>，则修改相当于没改，所以仍然满足。如果 <code>k != nums[j]</code>，则原来满足的 pivot 可能不再满足。但在我们的计算中，如果 <code>delta != 0</code>，则 <code>count2p[total - delta]</code> 不包含原来满足的 pivot，所以修改后满足的 pivot 总数可能小于 <code>base</code>。这符合实际情况。
+  11. 因此，最终算法正确。</p>
+
+<p><strong>最终算法步骤</strong>：
+1. 计算前缀和 <code>prefix</code>，总和 <code>total</code>。
+2. 构建哈希表 <code>count2p</code>，键为 <code>2*prefix[i]</code>（i 从 1 到 n-1），值为出现次数。
+3. 计算不修改的方案数 <code>base = count2p[total]</code>。
+4. 初始化 <code>maxChange = 0</code>。
+5. 遍历每个位置 <code>j</code>（0 ≤ j &lt; n）：
+   - <code>delta = int64(k) - int64(nums[j])</code>
+   - <code>cur = count2p[total - delta] + count2p[total + delta]</code>
+   - 更新 <code>maxChange = max(maxChange, cur)</code>
+6. 返回 <code>max(base, maxChange)</code>。</p>
+
+<p><strong>注意事项</strong>：
+- 使用 int64 防止溢出。
+- 哈希表用 <code>map[int64]int</code>。
+- 注意 <code>total - delta</code> 和 <code>total + delta</code> 可能超出 int64 范围？题目中元素值范围 ±10^5，n ≤ 10^5，总和最大约 10^10，在 int64 范围内。</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一哈希表统计-2prefix-出现次数">解法一：哈希表统计 2*prefix 出现次数</h3>
+
+<pre><code>func waysToPartition(nums []int, k int) int {
+    n := len(nums)
+    // 前缀和
+    prefix := make([]int64, n)
+    prefix[0] = int64(nums[0])
+    for i := 1; i &lt; n; i++ {
+        prefix[i] = prefix[i-1] + int64(nums[i])
+    }
+    total := prefix[n-1]
+
+    // 统计 2*prefix[i] 的出现次数（i 从 1 到 n-1）
+    count2p := make(map[int64]int)
+    for i := 0; i &lt; n-1; i++ {
+        key := 2 * prefix[i]
+        count2p[key]++
+    }
+
+    // 不修改的方案数
+    base := count2p[total]
+
+    // 枚举修改每个位置 j
+    maxChange := 0
+    for j := 0; j &lt; n; j++ {
+        delta := int64(k) - int64(nums[j])
+        cur := count2p[total - delta] + count2p[total + delta]
+        if cur &gt; maxChange {
+            maxChange = cur
+        }
+    }
+
+    // 返回最大值
+    if base &gt; maxChange {
+        return base
+    }
+    return maxChange
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)
+<ul>
+<li>计算前缀和：O(n)</li>
+<li>构建 count2p 哈希表：O(n)</li>
+<li>枚举修改位置 j：O(n)</li>
+<li>哈希表操作平均 O(1)</li>
+</ul></li>
+<li><strong>空间复杂度</strong>：O(n)
+<ul>
+<li>前缀和数组 O(n)</li>
+<li>哈希表存储 n-1 个键值对，O(n)</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<p>本题只有一种高效解法（O(n)），其他暴力或枚举 pivot 的解法都会超时。该解法巧妙地将问题转化为统计 <code>2*prefix[i]</code> 的出现次数，然后通过修改位置 j 推导出新的等式，利用哈希表快速计算满足条件的 pivot 数量。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<p><strong>常规用例1</strong>：</p>
+
+<pre><code>输入：nums = [2,-1,2], k = 3
+输出：1
+解释：修改 nums[0] 为 3，数组变为 [3,-1,2]，只有 pivot=2 满足条件。
+</code></pre>
+
+<p><strong>常规用例2</strong>：</p>
+
+<pre><code>输入：nums = [0,0,0], k = 1
+输出：2
+解释：不修改，pivot=1 和 pivot=2 都满足。
+</code></pre>
+
+<p><strong>边界用例</strong>：</p>
+
+<pre><code>输入：nums = [1,2,3,4,5], k = 10
+输出：0
+解释：无论怎么修改，都无法使任何 pivot 满足分割条件。
+</code></pre>
+
+<p><strong>大数组用例</strong>：
+```
+输入：nums = [1]*100000, k = </p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-03 20:15:01</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
