@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-03 19:18:06",
+      "record_id": "20260303_191806",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3099",
+          "title": "哈沙德数",
+          "difficulty": "easy",
+          "file": "20260303_191806_q1.html"
+        },
+        {
+          "number": "1410",
+          "title": "HTML 实体解析器",
+          "difficulty": "medium",
+          "file": "20260303_191806_q2.html"
+        },
+        {
+          "number": "3821",
+          "title": "二进制中恰好K个1的第N小整数",
+          "difficulty": "hard",
+          "file": "20260303_191806_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-03 19:07:56",
       "record_id": "20260303_190756",
       "count": 3,
@@ -368,5 +393,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-03 19:07:56"
+  "last_updated": "2026-03-03 19:18:06"
 }

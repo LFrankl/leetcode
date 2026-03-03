@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3099. 哈沙德数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-03 19:18:06</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3099. 哈沙德数</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/harshad-number/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3099-哈沙德数">3099. 哈沙德数</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数学</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/harshad-number/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>如果一个整数能够被其各个数位上的数字之和整除，则称之为<strong> 哈沙德数</strong>（Harshad number）。给你一个整数 <code>x</code> 。如果 <code>x</code> 是 <strong>哈沙德数 </strong>，则返回<em> </em><code>x</code> 各个数位上的数字之和，否则，返回<em> </em><code>-1</code> 。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">x = 18</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">9</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><code>x</code> 各个数位上的数字之和为 <code>9</code> 。<code>18</code> 能被 <code>9</code> 整除。因此 <code>18</code> 是哈沙德数，答案是 <code>9</code> 。</p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">x = 23</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">-1</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><code>x</code> 各个数位上的数字之和为 <code>5</code> 。<code>23</code> 不能被 <code>5</code> 整除。因此 <code>23</code> 不是哈沙德数，答案是 <code>-1</code> 。</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= x &lt;= 100</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int sumOfTheDigitsOfHarshadNumber(int x) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int sumOfTheDigitsOfHarshadNumber(int x) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def sumOfTheDigitsOfHarshadNumber(self, x: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} x
+ * @return {number}
+ */
+var sumOfTheDigitsOfHarshadNumber = function(x) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func sumOfTheDigitsOfHarshadNumber(x int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Use a while loop and divide <code>x</code> by <code>10</code> to find the sum of the digits of <code>x</code>.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>18
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：<br />
+给定一个整数 <code>x</code>，判断它是否为哈沙德数（即能否被其各位数字之和整除）。如果是，返回各位数字之和；否则返回 <code>-1</code>。</p>
+
+<p><strong>关键约束</strong>：
+- <code>1 &lt;= x &lt;= 100</code>，数据范围很小，可以直接暴力计算。
+- 注意 <code>x</code> 是正整数，无需处理负数或零。
+- 整除条件：<code>x % sumDigits == 0</code>。</p>
+
+<p><strong>输入输出</strong>：
+- 输入：整数 <code>x</code>
+- 输出：整数（数字之和 或 <code>-1</code>）</p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一直接模拟">解法一：直接模拟</h3>
+
+<ol>
+<li>计算 <code>x</code> 的各位数字之和。</li>
+<li>判断 <code>x</code> 是否能被该和整除。</li>
+<li>根据结果返回相应值。</li>
+</ol>
+
+<h3 id="解法二数学优化针对本题范围不必要但可扩展">解法二：数学优化（针对本题范围不必要，但可扩展）</h3>
+
+<ul>
+<li>对于更大范围的 <code>x</code>，计算数字之和时可以用循环取模，避免转字符串开销。</li>
+<li>本题范围很小，直接模拟即可。</li>
+</ul>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一直接模拟-2">解法一：直接模拟</h3>
+
+<pre><code>func sumOfTheDigitsOfHarshadNumber(x int) int {
+    // 计算各位数字之和
+    sum := 0
+    temp := x
+    for temp &gt; 0 {
+        sum += temp % 10
+        temp /= 10
+    }
+
+    // 判断是否为哈沙德数
+    if x % sum == 0 {
+        return sum
+    }
+    return -1
+}
+</code></pre>
+
+<h3 id="解法二使用字符串转换仅作对比不推荐">解法二：使用字符串转换（仅作对比，不推荐）</h3>
+
+<pre><code>func sumOfTheDigitsOfHarshadNumber2(x int) int {
+    // 将数字转为字符串，遍历每个字符计算和
+    s := strconv.Itoa(x)
+    sum := 0
+    for _, ch := range s {
+        sum += int(ch - '0')
+    }
+
+    if x % sum == 0 {
+        return sum
+    }
+    return -1
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一直接模拟-3">解法一：直接模拟</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(log₁₀ x)<br />
+因为循环次数等于 <code>x</code> 的十进制位数，最多 3 次（x ≤ 100）。</li>
+<li>💾 <strong>空间复杂度</strong>：O(1)<br />
+只用了常数个变量。</li>
+</ul>
+
+<h3 id="解法二字符串转换">解法二：字符串转换</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(log₁₀ x)<br />
+遍历字符串长度，同样最多 3 次。</li>
+<li>💾 <strong>空间复杂度</strong>：O(log₁₀ x)<br />
+需要额外存储字符串，但本题范围很小，可忽略。</li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>直接模拟</td>
+  <td>效率高，空间省，逻辑清晰</td>
+  <td>无</td>
+  <td>通用，尤其适合数值计算</td>
+</tr>
+<tr>
+  <td>字符串转换</td>
+  <td>代码直观，易于理解</td>
+  <td>额外空间开销，效率略低</td>
+  <td>教学或快速原型</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法一</strong>：<br />
+- 本题范围小，两种方法均可，但直接模拟更符合算法竞赛习惯。
+- 字符串转换涉及类型转换和内存分配，在性能敏感场景不推荐。</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<ol>
+<li><p><strong>常规用例</strong>  </p>
+
+<ul>
+<li>输入：<code>x = 18</code> → 输出：<code>9</code><br />
+解释：1+8=9，18%9=0，是哈沙德数。</li>
+<li>输入：<code>x = 23</code> → 输出：<code>-1</code><br />
+解释：2+3=5，23%5≠0，不是哈沙德数。</li>
+</ul></li>
+<li><p><strong>边界用例</strong>  </p>
+
+<ul>
+<li>输入：<code>x = 1</code> → 输出：<code>1</code><br />
+解释：1%1=0，是哈沙德数。</li>
+<li>输入：<code>x = 100</code> → 输出：<code>-1</code><br />
+解释：1+0+0=1，100%1=0，是哈沙德数，返回 1（注意：这里返回 1，不是 -1）。</li>
+</ul></li>
+<li><p><strong>特殊用例</strong>  </p>
+
+<ul>
+<li>输入：<code>x = 10</code> → 输出：<code>-1</code><br />
+解释：1+0=1，10%1=0，是哈沙德数，返回 1（注意：这里返回 1，不是 -1）。</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 258. 各位相加</strong>（Add Digits）<br />
+计算数字的各位之和，直到结果为一位数。</li>
+<li><strong>LeetCode 202. 快乐数</strong>（Happy Number）<br />
+涉及数字各位平方和的循环判断。</li>
+<li><strong>LeetCode 507. 完美数</strong>（Perfect Number）<br />
+判断一个数是否等于其真因子之和。</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-03 19:15:07</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
