@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2053. 数组中第 K 个独一无二的字符串 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-04 10:33:21</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2053. 数组中第 K 个独一无二的字符串</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/kth-distinct-string-in-an-array/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2053-数组中第-k-个独一无二的字符串">2053. 数组中第 K 个独一无二的字符串</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数组, 哈希表, 字符串, 计数</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/kth-distinct-string-in-an-array/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p><strong>独一无二的字符串</strong>&nbsp;指的是在一个数组中只出现过 <strong>一次</strong>&nbsp;的字符串。</p>
+
+<p>给你一个字符串数组&nbsp;<code>arr</code>&nbsp;和一个整数&nbsp;<code>k</code>&nbsp;，请你返回&nbsp;<code>arr</code>&nbsp;中第&nbsp;<code>k</code>&nbsp;个&nbsp;<strong>独一无二的字符串</strong>&nbsp;。如果&nbsp;<strong>少于</strong>&nbsp;<code>k</code>&nbsp;个独一无二的字符串，那么返回&nbsp;<strong>空字符串</strong>&nbsp;<code>""</code>&nbsp;。</p>
+
+<p>注意，按照字符串在原数组中的 <strong>顺序</strong>&nbsp;找到第 <code>k</code>&nbsp;个独一无二字符串。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1:</strong></p>
+
+<pre><b>输入：</b>arr = ["d","b","c","b","c","a"], k = 2
+<b>输出：</b>"a"
+<strong>解释：</strong>
+arr 中独一无二字符串包括 "d" 和 "a"<code>&nbsp;。</code>
+"d" 首先出现，所以它是第 1 个独一无二字符串。
+"a" 第二个出现，所以它是 2 个独一无二字符串。
+由于 k == 2 ，返回 "a" 。
+</pre>
+
+<p><strong>示例 2:</strong></p>
+
+<pre><b>输入：</b>arr = ["aaa","aa","a"], k = 1
+<b>输出：</b>"aaa"
+<strong>解释：</strong>
+arr 中所有字符串都是独一无二的，所以返回第 1 个字符串 "aaa" 。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre><b>输入：</b>arr = ["a","b","a"], k = 3
+<b>输出：</b>""
+<strong>解释：</strong>
+唯一一个独一无二字符串是 "b" 。由于少于 3 个独一无二字符串，我们返回空字符串 "" 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= k &lt;= arr.length &lt;= 1000</code></li>
+    <li><code>1 &lt;= arr[i].length &lt;= 5</code></li>
+    <li><code>arr[i]</code>&nbsp;只包含小写英文字母。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    string kthDistinct(vector&lt;string&gt;&amp; arr, int k) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public String kthDistinct(String[] arr, int k) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def kthDistinct(self, arr: List[str], k: int) -&gt; str:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string[]} arr
+ * @param {number} k
+ * @return {string}
+ */
+var kthDistinct = function(arr, k) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func kthDistinct(arr []string, k int) string {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Try 'mapping' the strings to check if they are unique or not.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>["d","b","c","b","c","a"]
+2
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：<br />
+给定一个字符串数组 <code>arr</code> 和一个整数 <code>k</code>，需要返回数组中第 <code>k</code> 个<strong>只出现一次</strong>的字符串（按原数组顺序）。如果这样的字符串少于 <code>k</code> 个，则返回空字符串 <code>""</code>。</p>
+
+<p><strong>关键约束</strong>：
+- <code>1 &lt;= k &lt;= arr.length &lt;= 1000</code>
+- <code>1 &lt;= arr[i].length &lt;= 5</code>
+- <code>arr[i]</code> 只包含小写英文字母
+- 需要<strong>保持原数组顺序</strong>来统计第 k 个独一无二的字符串</p>
+
+<p><strong>边界情况</strong>：
+- 所有字符串都是唯一的 → 直接返回第 k 个
+- 所有字符串都重复 → 返回 <code>""</code>
+- k 大于唯一字符串的数量 → 返回 <code>""</code>
+- 数组长度为 1 的情况</p>
+
+<p><strong>输入输出</strong>：
+- 输入：<code>arr []string</code>, <code>k int</code>
+- 输出：<code>string</code></p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一哈希表两次遍历">解法一：哈希表两次遍历</h3>
+
+<p><strong>核心思想</strong>：<br />
+1. 第一次遍历统计每个字符串出现的次数
+2. 第二次遍历找出第 k 个出现次数为 1 的字符串</p>
+
+<p><strong>步骤</strong>：
+1. 使用哈希表记录每个字符串的出现次数
+2. 再次遍历数组，维护一个计数器，当遇到出现次数为 1 的字符串时计数器加 1
+3. 当计数器等于 k 时，返回当前字符串
+4. 如果遍历结束计数器仍小于 k，返回空字符串</p>
+
+<p><strong>注意事项</strong>：
+- 需要保持原数组顺序，所以不能直接对哈希表操作
+- 字符串长度很短（≤5），哈希操作效率高</p>
+
+<h3 id="解法二哈希表记录索引优化版">解法二：哈希表记录索引（优化版）</h3>
+
+<p><strong>核心思想</strong>：<br />
+使用哈希表记录字符串的状态：未出现、出现一次、重复出现。通过一次遍历完成统计和查找。</p>
+
+<p><strong>步骤</strong>：
+1. 创建哈希表，值可以是整数状态：-1 表示未出现，索引表示第一次出现的位置，-2 表示已重复
+2. 遍历数组，更新哈希表状态
+3. 同时维护一个列表，记录所有只出现一次的字符串及其顺序
+4. 最后直接取第 k-1 个元素（如果存在）</p>
+
+<p><strong>注意事项</strong>：
+- 需要额外空间存储唯一字符串列表
+- 但代码逻辑更清晰</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一哈希表两次遍历-2">解法一：哈希表两次遍历</h3>
+
+<pre><code>func kthDistinct(arr []string, k int) string {
+    // 第一次遍历：统计每个字符串出现的次数
+    count := make(map[string]int)
+    for _, s := range arr {
+        count[s]++
+    }
+
+    // 第二次遍历：按顺序找到第k个只出现一次的字符串
+    distinctCount := 0
+    for _, s := range arr {
+        if count[s] == 1 {
+            distinctCount++
+            if distinctCount == k {
+                return s
+            }
+        }
+    }
+
+    // 如果少于k个唯一字符串，返回空字符串
+    return ""
+}
+</code></pre>
+
+<h3 id="解法二哈希表记录状态一次遍历">解法二：哈希表记录状态（一次遍历）</h3>
+
+<pre><code>func kthDistinct(arr []string, k int) string {
+    // 使用map记录字符串状态：
+    // 值 = -1: 未出现过
+    // 值 = index: 第一次出现的索引
+    // 值 = -2: 已重复出现
+    status := make(map[string]int)
+    // 存储所有唯一字符串，保持顺序
+    uniques := make([]string, 0)
+
+    for i, s := range arr {
+        if val, exists := status[s]; !exists {
+            // 第一次出现，记录索引
+            status[s] = i
+            uniques = append(uniques, s)
+        } else if val != -2 {
+            // 第二次出现，标记为重复
+            status[s] = -2
+            // 从uniques中移除（实际不移除，只是标记）
+            // 我们会在最后过滤掉重复的
+        }
+        // 已经是-2的情况不需要处理
+    }
+
+    // 过滤出真正的唯一字符串
+    distinctCount := 0
+    for _, s := range uniques {
+        if status[s] != -2 {
+            distinctCount++
+            if distinctCount == k {
+                return s
+            }
+        }
+    }
+
+    return ""
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一哈希表两次遍历-3">解法一：哈希表两次遍历</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)<br />
+其中 n 是数组长度。需要两次遍历，每次 O(n)，总体 O(2n) = O(n)</li>
+<li>💾 <strong>空间复杂度</strong>：O(n)<br />
+哈希表最多存储 n 个字符串的计数</li>
+</ul>
+
+<h3 id="解法二哈希表记录状态">解法二：哈希表记录状态</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)<br />
+一次遍历构建状态，一次遍历过滤结果，总体 O(2n) = O(n)</li>
+<li>💾 <strong>空间复杂度</strong>：O(n)<br />
+哈希表存储 n 个字符串状态，uniques 列表最多存储 n 个字符串</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（两次遍历）</th>
+  <th>解法二（状态记录）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>时间复杂度</strong></td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+</tr>
+<tr>
+  <td><strong>空间复杂度</strong></td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+</tr>
+<tr>
+  <td><strong>代码简洁性</strong></td>
+  <td>简单直观</td>
+  <td>稍复杂</td>
+</tr>
+<tr>
+  <td><strong>实际性能</strong></td>
+  <td>两次遍历，但每次操作简单</td>
+  <td>一次遍历但逻辑稍复杂</td>
+</tr>
+<tr>
+  <td><strong>适用场景</strong></td>
+  <td>通用场景</td>
+  <td>需要一次遍历完成的场景</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：<br />
+推荐使用<strong>解法一（两次遍历）</strong>，因为：
+1. 代码更简洁，易于理解和维护
+2. 实际性能差异不大（都是 O(n)）
+3. 逻辑清晰，不易出错
+4. 在本题数据规模（n ≤ 1000）下，性能足够</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<pre><code>输入：arr = ["d","b","c","b","c","a"], k = 2
+输出："a"
+解释：唯一字符串为 "d"（第1个）和 "a"（第2个）
+</code></pre>
+
+<h3 id="用例2所有字符串唯一">用例2：所有字符串唯一</h3>
+
+<pre><code>输入：arr = ["aaa","aa","a"], k = 1
+输出："aaa"
+解释：所有字符串都是唯一的，第1个是 "aaa"
+</code></pre>
+
+<h3 id="用例3k大于唯一字符串数量">用例3：k大于唯一字符串数量</h3>
+
+<pre><code>输入：arr = ["a","b","a"], k = 3
+输出：""
+解释：只有 "b" 是唯一的，少于3个，返回空字符串
+</code></pre>
+
+<h3 id="用例4边界情况k1第一个就是唯一的">用例4：边界情况（k=1，第一个就是唯一的）</h3>
+
+<pre><code>输入：arr = ["x","x","y","z"], k = 1
+输出："y"
+解释：第一个唯一字符串是 "y"
+</code></pre>
+
+<h3 id="用例5边界情况数组长度为1">用例5：边界情况（数组长度为1）</h3>
+
+<pre><code>输入：arr = ["single"], k = 1
+输出："single"
+解释：只有一个元素且是唯一的
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>387. 字符串中的第一个唯一字符</strong> - 类似思路，找第一个唯一字符</li>
+<li><strong>451. 根据字符出现频率排序</strong> - 统计频率并排序</li>
+<li><strong>347. 前 K 个高频元素</strong> - 统计频率并取前k个</li>
+<li><strong>136. 只出现一次的数字</strong> - 找唯一元素的简化版（数字版）</li>
+</ol>
+
+<p>这些题目都涉及<strong>统计元素频率</strong>和<strong>基于频率进行筛选</strong>的核心思想，可以一起练习。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-04 10:31:00</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
