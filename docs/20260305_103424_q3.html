@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCP 65. 舒适的湿度 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-05 10:34:24</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">LCP 65. 舒适的湿度</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/3aqs1c/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="lcp-65-舒适的湿度">LCP 65. 舒适的湿度</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数组, 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/3aqs1c/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>力扣嘉年华为了确保更舒适的游览环境条件，在会场的各处设置了湿度调节装置，这些调节装置受控于总控室中的一台控制器。
+控制器中已经预设了一些调节指令，整数数组<code>operate[i]</code> 表示第 <code>i</code> 条指令增加空气湿度的大小。现在你可以将任意数量的指令修改为降低湿度（变化的数值不变），以确保湿度尽可能的适宜：
+- 控制器会选择 <strong>一段连续的指令</strong> ，从而进行湿度调节的操作；
+- 这段指令最终对湿度影响的绝对值，即为当前操作的「不适宜度」
+- 在控制器所有可能的操作中，<strong>最大</strong> 的「不适宜度」即为「整体不适宜度」</p>
+
+<p>请返回在所有修改指令的方案中，可以得到的 <strong>最小</strong> 「整体不适宜度」。</p>
+
+<p><strong>示例 1：</strong></p>
+
+<blockquote>
+  <p>输入：<code>operate = [5,3,7]</code></p>
+  
+  <p>输出：<code>8</code></p>
+  
+  <p>解释：对于方案 <code>2</code> 的 <code>[5,3,-7]</code>
+  操作指令 <code>[5],[3],[-7]</code> 的「不适宜度」分别为 <code>5,3,7</code>
+  操作指令 <code>[5,3],[3,-7]</code> 的「不适宜度」分别为 <code>8,4</code>
+  操作指令 <code>[5,3,-7]</code> 的「不适宜度」为 <code>1</code>，
+  因此对于方案 <code>[5,3,-7]</code>的「整体不适宜度」为 <code>8</code>，其余方案的「整体不适宜度」均不小于 <code>8</code>，如下表所示：
+  <img src="https://pic.leetcode.cn/1663902759-dgDCxn-image.png" alt="image.png" />{:width=650px}</p>
+</blockquote>
+
+<p><strong>示例 2：</strong></p>
+
+<blockquote>
+  <p>输入：<code>operate = [20,10]</code></p>
+  
+  <p>输出：<code>20</code></p>
+</blockquote>
+
+<p><strong>提示：</strong>
+- <code>1 &lt;= operate.length &lt;= 1000</code>
+- <code>1 &lt;= operate[i] &lt;= 1000</code></p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int unSuitability(vector&lt;int&gt;&amp; operate) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int unSuitability(int[] operate) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def unSuitability(self, operate: List[int]) -&gt; int:
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} operate
+ * @return {number}
+ */
+var unSuitability = function(operate) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func unSuitability(operate []int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[5,3,7]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<h3 id="题目重述">题目重述</h3>
+
+<p>给定一个整数数组 <code>operate</code>，表示一系列湿度调节指令的数值。我们可以将任意数量的指令修改为降低湿度（即数值变为负数，绝对值不变）。控制器会选择一段连续的指令执行，其数值和的绝对值称为「不适宜度」。所有可能的连续子段中最大的不适宜度称为「整体不适宜度」。我们需要通过修改指令（将某些正数变为负数），使得最终的整体不适宜度尽可能小。</p>
+
+<h3 id="关键约束">关键约束</h3>
+
+<ul>
+<li>数组长度 n ≤ 1000</li>
+<li>数组元素值 1 ≤ operate[i] ≤ 1000</li>
+<li>可以修改任意数量的指令（包括0个或全部）</li>
+<li>修改方式：将 <code>operate[i]</code> 变为 <code>-operate[i]</code></li>
+<li>最终整体不适宜度 = 所有连续子段的和的绝对值的最大值</li>
+<li>目标：最小化这个最大值</li>
+</ul>
+
+<h3 id="输入输出">输入输出</h3>
+
+<ul>
+<li>输入：整数数组 <code>operate</code></li>
+<li>输出：整数，表示最小可能的整体不适宜度</li>
+</ul>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一动态规划基于最大子段和变形">解法一：动态规划（基于最大子段和变形）</h3>
+
+<p><strong>核心思想</strong>：
+- 问题等价于：给每个元素分配符号（+1或-1），使得所有连续子段的和的绝对值的最大值最小
+- 设修改后的数组为 <code>b[i] = s[i] * operate[i]</code>，其中 <code>s[i] ∈ {+1, -1}</code>
+- 整体不适宜度 = max<em>{l≤r} |∑</em>{i=l}^r b[i]|
+- 目标：min<em>{s} max</em>{l≤r} |∑_{i=l}^r b[i]|</p>
+
+<p><strong>关键观察</strong>：
+- 对于固定的符号分配，最大绝对子段和 = max(最大正子段和, |最小负子段和|)
+- 设 <code>dp_max[i]</code> 表示以 i 结尾的最大子段和，<code>dp_min[i]</code> 表示以 i 结尾的最小子段和
+- 转移方程：
+  - <code>dp_max[i] = max(b[i], dp_max[i-1] + b[i])</code>
+  - <code>dp_min[i] = min(b[i], dp_min[i-1] + b[i])</code>
+- 整体不适宜度 = max(max<em>i dp</em>max[i], |min<em>i dp</em>min[i]|)</p>
+
+<p><strong>问题转化</strong>：
+- 我们需要选择符号分配来最小化这个值
+- 由于 n ≤ 1000，可以尝试枚举所有可能的符号分配？不可行，有 2^n 种
+- 需要更聪明的动态规划</p>
+
+<p><strong>优化思路</strong>：
+- 设 <code>f[i][j]</code> 表示考虑前 i 个元素，当前前缀和为 j 时，到目前为止的最大绝对子段和的最小值
+- 但 j 的范围可能很大（-sum~sum），需要压缩状态</p>
+
+<h3 id="解法二二分答案-动态规划">解法二：二分答案 + 动态规划</h3>
+
+<p><strong>核心思想</strong>：
+- 二分答案 <code>mid</code>，检查是否存在符号分配使得所有子段和的绝对值 ≤ mid
+- 检查方法：动态规划维护可能的前缀和范围
+- 设 <code>dp[i]</code> 表示考虑前 i 个元素后，所有可能的前缀和集合
+- 转移：<code>dp[i] = {x + operate[i] | x ∈ dp[i-1]} ∪ {x - operate[i] | x ∈ dp[i-1]}</code>
+- 但需要限制所有前缀和都在 <code>[-mid, mid]</code> 范围内
+- 最终检查是否存在前缀和使得所有子段和约束满足</p>
+
+<p><strong>更高效的检查</strong>：
+- 维护前缀和的最小可能值 <code>min_pre</code> 和最大可能值 <code>max_pre</code>
+- 每次转移：新的范围是 <code>[min_pre - a[i], max_pre + a[i]]</code> 与 <code>[-mid, mid]</code> 的交集
+- 如果交集为空，则当前 mid 不可行</p>
+
+<h3 id="解法三基于最大最小子段和的动态规划">解法三：基于最大最小子段和的动态规划</h3>
+
+<p><strong>最终采用的方法</strong>：
+- 设 <code>dp[i][0]</code> 表示以 i 结尾的最大子段和的最小可能值（在所有符号分配中）
+- 设 <code>dp[i][1]</code> 表示以 i 结尾的最小子段和的最大可能值（在所有符号分配中）
+- 但实际上我们需要同时考虑全局的最大最小，所以需要更复杂的状态</p>
+
+<p><strong>实际有效的方法（来自题解）</strong>：
+- 定义 <code>f[i]</code> 表示以 i 结尾的最大子段和的最小可能值
+- 定义 <code>g[i]</code> 表示以 i 结尾的最小子段和的最大可能值
+- 转移时考虑当前元素取正或负两种情况
+- 最终答案 = min_{分配} max(全局最大子段和, |全局最小子段和|)</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一动态规划维护前缀和范围">解法一：动态规划（维护前缀和范围）</h3>
+
+<pre><code>func unSuitability(operate []int) int {
+    n := len(operate)
+    // 计算总和，确定二分范围
+    total := 0
+    for _, v := range operate {
+        total += v
+    }
+
+    // 二分答案
+    left, right := 0, total
+    for left &lt;= right {
+        mid := left + (right-left)/2
+        if check(operate, mid) {
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
+    }
+    return left
+}
+
+// 检查是否存在符号分配使得所有子段和的绝对值 &lt;= limit
+func check(operate []int, limit int) bool {
+    // 维护前缀和的最小可能值和最大可能值
+    minPre, maxPre := 0, 0
+
+    for _, x := range operate {
+        // 当前元素可以取 +x 或 -x
+        // 新的前缀和范围
+        newMin := min(minPre - x, minPre + x)
+        newMax := max(maxPre - x, maxPre + x)
+
+        // 与限制范围求交集
+        newMin = max(newMin, -limit)
+        newMax = min(newMax, limit)
+
+        // 如果交集为空，则不可行
+        if newMin &gt; newMax {
+            return false
+        }
+
+        minPre, maxPre = newMin, newMax
+    }
+    return true
+}
+
+func min(a, b int) int {
+    if a &lt; b {
+        return a
+    }
+    return b
+}
+
+func max(a, b int) int {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<h3 id="解法二优化动态规划一次遍历">解法二：优化动态规划（一次遍历）</h3>
+
+<pre><code>func unSuitability(operate []int) int {
+    // 最大可能值
+    maxVal := 0
+    for _, v := range operate {
+        if v &gt; maxVal {
+            maxVal = v
+        }
+    }
+
+    // 偏移量，将负数下标转为正数
+    offset := maxVal * 3
+    m := offset * 2 + 1
+    const INF = 1 &lt;&lt; 30
+
+    // dp[j] 表示当前前缀和为 j-offset 时，最大绝对子段和的最小值
+    dp := make([]int, m)
+    for i := range dp {
+        dp[i] = INF
+    }
+    dp[offset] = 0
+
+    for _, x := range operate {
+        ndp := make([]int, m)
+        for i := range ndp {
+            ndp[i] = INF
+        }
+
+        for j := 0; j &lt; m; j++ {
+            if dp[j] == INF {
+                continue
+            }
+            // 当前前缀和
+            curSum := j - offset
+            // 两种选择：+x 或 -x
+            for _, sign := range []int{1, -1} {
+                newSum := curSum + sign*x
+                // 新的前缀和下标
+                nj := newSum + offset
+                if nj &lt; 0 || nj &gt;= m {
+                    continue
+                }
+                // 更新最大绝对子段和
+                // 需要考虑以当前元素结尾的子段
+                newMax := max(dp[j], abs(newSum))
+                // 还需要考虑子段和本身的绝对值
+                newMax = max(newMax, abs(sign*x))
+                // 更新最小值
+                if newMax &lt; ndp[nj] {
+                    ndp[nj] = newMax
+                }
+            }
+        }
+        dp = ndp
+    }
+
+    // 找到最小值
+    ans := INF
+    for _, v := range dp {
+        if v &lt; ans {
+            ans = v
+        }
+    }
+    return ans
+}
+
+func abs(x int) int {
+    if x &lt; 0 {
+        return -x
+    }
+    return x
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一二分检查">解法一（二分+检查）</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n logS)，其中 S 是数组元素总和
+<ul>
+<li>二分次数 O(logS)</li>
+<li>每次检查 O(n)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)，只用了常数个变量</li>
+</ul>
+
+<h3 id="解法二优化动态规划">解法二（优化动态规划）</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n * M)，其中 M = 6*maxVal+1 ≈ 6000
+<ul>
+<li>外层循环 n 次</li>
+<li>内层循环 M 次</li>
+<li>总复杂度约 1000 * 6000 = 6e6，可接受</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(M)，M 为状态数量</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>二分+检查</td>
+  <td>思路直观，实现简单</td>
+  <td>需要确定二分范围，可能不是最优</td>
+  <td>n 较大时更稳定</td>
+</tr>
+<tr>
+  <td>优化DP</td>
+  <td>精确求解，不需要二分</td>
+  <td>状态数较多，常数较大</td>
+  <td>n 较小，值范围较小时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：解法一（二分+检查）
+- 实现简单，易于理解
+- 时间复杂度可接受
+- 对于 n=1000 的数据规模完全足够</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1示例1">用例1：示例1</h3>
+
+<pre><code>输入：operate = [5, 3, 7]
+输出：8
+解释：最佳方案为 [5, 3, -7]，最大绝对子段和为 8
+</code></pre>
+
+<h3 id="用例2示例2">用例2：示例2</h3>
+
+<pre><code>输入：operate = [20, 10]
+输出：20
+解释：最佳方案为 [20, -10] 或 [-20, 10]，最大绝对子段和为 20
+</code></pre>
+
+<h3 id="用例3全正数">用例3：全正数</h3>
+
+<pre><code>输入：operate = [1, 2, 3, 4, 5]
+输出：5
+解释：最佳方案是将最后一个改为 -5，最大绝对子段和为 5
+</code></pre>
+
+<h3 id="用例4边界情况">用例4：边界情况</h3>
+
+<pre><code>输入：operate = [1000]  // 单个元素
+输出：1000
+解释：只有一个元素，无论如何都是 1000
+</code></pre>
+
+<h3 id="用例5复杂情况">用例5：复杂情况</h3>
+
+<pre><code>输入：operate = [10, 5, 2, 8, 3]
+输出：10
+解释：可以通过调整符号使得最大绝对子段和为 10
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>53. 最大子数组和</strong> - 本题的基础</li>
+<li><strong>152. 乘积最大子数组</strong> - 类似的子段最值问题</li>
+<li><strong>1749. 任意子数组和的绝对值的最大值</strong> - 本题的简化版（不修改符号）</li>
+<li><strong>2272. 最大波动的子字符串</strong> - 类似的优化问题</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-05 10:34:24</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
