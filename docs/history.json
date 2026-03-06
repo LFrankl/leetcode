@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-06 18:32:28",
+      "record_id": "20260306_183228",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2119",
+          "title": "反转两次的数字",
+          "difficulty": "easy",
+          "file": "20260306_183228_q1.html"
+        },
+        {
+          "number": "1062",
+          "title": "最长重复子串的长度",
+          "difficulty": "medium",
+          "file": "20260306_183228_q2.html"
+        },
+        {
+          "number": "1987",
+          "title": "不同的好子序列数目",
+          "difficulty": "hard",
+          "file": "20260306_183228_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-05 10:34:24",
       "record_id": "20260305_103424",
       "count": 3,
@@ -468,5 +493,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-05 10:34:24"
+  "last_updated": "2026-03-06 18:32:28"
 }
