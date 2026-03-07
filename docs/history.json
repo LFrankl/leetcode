@@ -1,6 +1,25 @@
 {
   "records": [
     {
+      "date": "2026-03-07 15:35:18",
+      "record_id": "20260307_153518",
+      "count": 2,
+      "questions": [
+        {
+          "number": "836",
+          "title": "矩形重叠",
+          "difficulty": "easy",
+          "file": "20260307_153518_q1.html"
+        },
+        {
+          "number": "304",
+          "title": "二维区域和检索 - 矩阵不可变",
+          "difficulty": "medium",
+          "file": "20260307_153518_q2.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-06 18:32:28",
       "record_id": "20260306_183228",
       "count": 3,
@@ -493,5 +512,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-06 18:32:28"
+  "last_updated": "2026-03-07 15:35:18"
 }
