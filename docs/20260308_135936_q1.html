@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2160. 拆分数位后四位数字的最小和 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-08 13:59:36</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2160. 拆分数位后四位数字的最小和</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/minimum-sum-of-four-digit-number-after-splitting-digits/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2160-拆分数位后四位数字的最小和">2160. 拆分数位后四位数字的最小和</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 贪心, 数学, 排序</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/minimum-sum-of-four-digit-number-after-splitting-digits/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个四位&nbsp;<strong>正</strong>&nbsp;整数&nbsp;<code>num</code>&nbsp;。请你使用 <code>num</code>&nbsp;中的 <strong>数位</strong> ，将&nbsp;<code>num</code>&nbsp;拆成两个新的整数&nbsp;<code>new1</code>&nbsp;和&nbsp;<code>new2</code>&nbsp;。<code>new1</code> 和&nbsp;<code>new2</code>&nbsp;中可以有&nbsp;<strong>前导 0</strong>&nbsp;，且&nbsp;<code>num</code>&nbsp;中 <strong>所有</strong>&nbsp;数位都必须使用。</p>
+
+<ul>
+    <li>比方说，给你&nbsp;<code>num = 2932</code>&nbsp;，你拥有的数位包括：两个&nbsp;<code>2</code>&nbsp;，一个&nbsp;<code>9</code>&nbsp;和一个&nbsp;<code>3</code>&nbsp;。一些可能的&nbsp;<code>[new1, new2]</code>&nbsp;数对为&nbsp;<code>[22, 93]</code>，<code>[23, 92]</code>，<code>[223, 9]</code> 和&nbsp;<code>[2, 329]</code>&nbsp;。</li>
+</ul>
+
+<p>请你返回可以得到的&nbsp;<code>new1</code>&nbsp;和 <code>new2</code>&nbsp;的 <strong>最小</strong>&nbsp;和。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><b>输入：</b>num = 2932
+<b>输出：</b>52
+<b>解释：</b>可行的 [new1, new2] 数对为 [29, 23] ，[223, 9] 等等。
+最小和为数对 [29, 23] 的和：29 + 23 = 52 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><b>输入：</b>num = 4009
+<b>输出：</b>13
+<b>解释：</b>可行的 [new1, new2] 数对为 [0, 49] ，[490, 0] 等等。
+最小和为数对 [4, 9] 的和：4 + 9 = 13 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1000 &lt;= num &lt;= 9999</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int minimumSum(int num) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int minimumSum(int num) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def minimumSum(self, num: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} num
+ * @return {number}
+ */
+var minimumSum = function(num) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func minimumSum(num int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Notice that the most optimal way to obtain the minimum possible sum using 4 digits is by summing up two 2-digit numbers.</li>
+<li>We can use the two smallest digits out of the four as the digits found in the tens place respectively.</li>
+<li>Similarly, we use the final 2 larger digits as the digits found in the ones place.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>2932
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答">AI 解答</h2>
+
+<p><em>DeepSeek API 未配置或调用失败</em></p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-08 12:57:44</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

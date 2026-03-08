@@ -1,6 +1,25 @@
 {
   "records": [
     {
+      "date": "2026-03-08 13:59:36",
+      "record_id": "20260308_135936",
+      "count": 2,
+      "questions": [
+        {
+          "number": "2160",
+          "title": "拆分数位后四位数字的最小和",
+          "difficulty": "easy",
+          "file": "20260308_135936_q1.html"
+        },
+        {
+          "number": "2686",
+          "title": "即时食物配送 III",
+          "difficulty": "medium",
+          "file": "20260308_135936_q2.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-07 15:35:18",
       "record_id": "20260307_153518",
       "count": 2,
@@ -512,5 +531,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-07 15:35:18"
+  "last_updated": "2026-03-08 13:59:36"
 }
