@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3127. 构造相同颜色的正方形 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-09 10:34:43</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3127. 构造相同颜色的正方形</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/make-a-square-with-the-same-color/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3127-构造相同颜色的正方形">3127. 构造相同颜色的正方形</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数组, 枚举, 矩阵</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/make-a-square-with-the-same-color/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个二维 <code>3 x 3</code>&nbsp;的矩阵&nbsp;<code>grid</code>&nbsp;，每个格子都是一个字符，要么是&nbsp;<code>'B'</code>&nbsp;，要么是&nbsp;<code>'W'</code>&nbsp;。字符&nbsp;<code>'W'</code>&nbsp;表示白色，字符&nbsp;<code>'B'</code>&nbsp;表示黑色。</p>
+
+<p>你的任务是改变 <strong>至多一个</strong>&nbsp;格子的颜色，使得矩阵中存在一个 <code>2 x 2</code>&nbsp;颜色完全相同的正方形。<!-- notionvc: adf957e1-fa0f-40e5-9a2e-933b95e276a7 --></p>
+
+<p>如果可以得到一个相同颜色的 <code>2 x 2</code>&nbsp;正方形，那么返回 <code>true</code>&nbsp;，否则返回 <code>false</code>&nbsp;。</p>
+
+<p>&nbsp;</p>
+
+<style type="text/css">.grid-container {
+  display: grid;
+  grid-template-columns: 30px 30px 30px;
+  padding: 10px;
+}
+.grid-item {
+  background-color: black;
+  border: 1px solid gray;
+  height: 30px;
+  font-size: 30px;
+  text-align: center;
+}
+.grid-item-white {
+  background-color: white;
+}
+</style>
+
+<style class="darkreader darkreader--sync" media="screen" type="text/css">
+</style>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="grid-container">
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+</div>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>grid = [["B","W","B"],["B","W","W"],["B","W","B"]]</span></p>
+
+<p><span class="example-io"><b>输出：</b>true</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>修改&nbsp;<code>grid[0][2]</code> 的颜色，可以满足要求。</p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="grid-container">
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+</div>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>grid = [["B","W","B"],["W","B","W"],["B","W","B"]]</span></p>
+
+<p><span class="example-io"><b>输出：</b>false</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>只改变一个格子颜色无法满足要求。</p>
+</div>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<div class="grid-container">
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+
+<div class="grid-item grid-item-white">&nbsp;</div>
+</div>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>grid = [["B","W","B"],["B","W","W"],["B","W","W"]]</span></p>
+
+<p><span class="example-io"><b>输出：</b>true</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><code>grid</code>&nbsp;已经包含一个&nbsp;<code>2 x 2</code>&nbsp;颜色相同的正方形了。<!-- notionvc: 9a8b2d3d-1e73-457a-abe0-c16af51ad5c2 --></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>grid.length == 3</code></li>
+    <li><code>grid[i].length == 3</code></li>
+    <li><code>grid[i][j]</code>&nbsp;要么是&nbsp;<code>'W'</code>&nbsp;，要么是&nbsp;<code>'B'</code> 。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    bool canMakeSquare(vector&lt;vector&lt;char&gt;&gt;&amp; grid) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public boolean canMakeSquare(char[][] grid) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def canMakeSquare(self, grid: List[List[str]]) -&gt; bool:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {character[][]} grid
+ * @return {boolean}
+ */
+var canMakeSquare = function(grid) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func canMakeSquare(grid [][]byte) bool {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>It is impossible to create <code>2 x 2</code> square with the same color by changing the color of at most one cell when the number of <code>‘W'</code> or <code>'B’</code> in all squares is 2.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[["B","W","B"],["B","W","W"],["B","W","B"]]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong><br />
+给定一个 3×3 的字符矩阵，每个格子是 <code>'B'</code>（黑色）或 <code>'W'</code>（白色）。最多可以修改一个格子的颜色，判断能否在矩阵中找到一个 2×2 的子正方形，其四个格子颜色完全相同。</p>
+
+<p><strong>关键约束</strong><br />
+- 矩阵固定为 3×3，因此只有 4 个可能的 2×2 正方形（左上、右上、左下、右下）。<br />
+- 最多只能修改一个格子（也可以不修改）。<br />
+- 修改后，只要存在一个 2×2 正方形颜色完全相同即可。</p>
+
+<p><strong>输入输出</strong><br />
+- 输入：<code>grid [][]byte</code> 或 <code>[][]string</code>（LeetCode 通常用 <code>[][]byte</code>）。<br />
+- 输出：<code>bool</code>，表示是否可行。</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一暴力枚举修改位置">解法一：暴力枚举修改位置</h3>
+
+<p><strong>核心思想</strong><br />
+由于矩阵很小（3×3），我们可以枚举所有可能的修改位置（包括不修改），然后检查是否存在一个 2×2 正方形颜色相同。</p>
+
+<p><strong>步骤</strong><br />
+1. 遍历所有格子（共 9 个），对每个格子尝试修改为另一种颜色（或不修改）。<br />
+2. 对于每种修改后的矩阵，检查 4 个可能的 2×2 正方形是否颜色相同。<br />
+3. 如果找到符合条件的正方形，返回 <code>true</code>；否则返回 <code>false</code>。</p>
+
+<p><strong>注意事项</strong><br />
+- 修改后要恢复原矩阵，或者使用副本。<br />
+- 不修改的情况也要检查。</p>
+
+<h3 id="解法二直接检查-22-正方形">解法二：直接检查 2×2 正方形</h3>
+
+<p><strong>核心思想</strong><br />
+因为最多只能修改一个格子，所以我们可以直接检查每个 2×2 正方形，看它能否通过修改至多一个格子变成全同色。</p>
+
+<p><strong>步骤</strong><br />
+1. 遍历 4 个 2×2 正方形。<br />
+2. 对每个正方形，统计其中 <code>'B'</code> 和 <code>'W'</code> 的数量。<br />
+3. 如果某个正方形已经全同色（<code>countB == 4</code> 或 <code>countW == 4</code>），直接返回 <code>true</code>。<br />
+4. 否则，如果某个正方形中某一种颜色出现 3 次，另一种颜色出现 1 次，那么修改那个不同的格子即可，返回 <code>true</code>。<br />
+5. 如果所有正方形都不满足条件，返回 <code>false</code>。</p>
+
+<p><strong>为什么这样可行？</strong><br />
+- 如果正方形已经全同色，不需要修改。<br />
+- 如果正方形中有 3 个相同颜色，1 个不同颜色，修改那个不同的格子即可。<br />
+- 如果正方形中有 2 个 <code>'B'</code> 和 2 个 <code>'W'</code>，则至少需要修改两个格子才能全同色，不符合条件。</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一暴力枚举修改位置-2">解法一：暴力枚举修改位置</h3>
+
+<pre><code>func canMakeSquare(grid [][]byte) bool {
+    // 复制原矩阵，避免修改原数据
+    copyGrid := func() [][]byte {
+        g := make([][]byte, 3)
+        for i := range g {
+            g[i] = make([]byte, 3)
+            copy(g[i], grid[i])
+        }
+        return g
+    }
+
+    // 检查是否存在全同色的 2x2 正方形
+    check := func(g [][]byte) bool {
+        // 四个可能的 2x2 正方形的左上角坐标
+        positions := [][]int{{0, 0}, {0, 1}, {1, 0}, {1, 1}}
+        for _, pos := range positions {
+            r, c := pos[0], pos[1]
+            color := g[r][c]
+            if g[r][c+1] == color &amp;&amp; g[r+1][c] == color &amp;&amp; g[r+1][c+1] == color {
+                return true
+            }
+        }
+        return false
+    }
+
+    // 先检查不修改的情况
+    if check(grid) {
+        return true
+    }
+
+    // 枚举每个格子，尝试修改颜色
+    for i := 0; i &lt; 3; i++ {
+        for j := 0; j &lt; 3; j++ {
+            g := copyGrid()
+            // 修改颜色
+            if g[i][j] == 'B' {
+                g[i][j] = 'W'
+            } else {
+                g[i][j] = 'B'
+            }
+            if check(g) {
+                return true
+            }
+        }
+    }
+    return false
+}
+</code></pre>
+
+<h3 id="解法二直接检查-22-正方形-2">解法二：直接检查 2×2 正方形</h3>
+
+<pre><code>func canMakeSquare(grid [][]byte) bool {
+    // 四个可能的 2x2 正方形的左上角坐标
+    positions := [][]int{{0, 0}, {0, 1}, {1, 0}, {1, 1}}
+    for _, pos := range positions {
+        r, c := pos[0], pos[1]
+        // 统计当前正方形中 'B' 的数量
+        countB := 0
+        if grid[r][c] == 'B' {
+            countB++
+        }
+        if grid[r][c+1] == 'B' {
+            countB++
+        }
+        if grid[r+1][c] == 'B' {
+            countB++
+        }
+        if grid[r+1][c+1] == 'B' {
+            countB++
+        }
+        // 如果全黑或全白，直接返回 true
+        if countB == 4 || countB == 0 {
+            return true
+        }
+        // 如果有 3 个相同颜色，1 个不同颜色，修改一个格子即可
+        if countB == 3 || countB == 1 {
+            return true
+        }
+        // 如果 countB == 2，则需要修改至少两个格子，不符合条件
+    }
+    return false
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一暴力枚举修改位置-3">解法一：暴力枚举修改位置</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(9 × 4) = O(36) ≈ O(1)。<br />
+枚举 9 个格子（包括不修改），每次检查 4 个正方形，每个正方形检查 4 个格子，总操作次数为常数。</li>
+<li>💾 <strong>空间复杂度</strong>：O(1)（如果不考虑复制矩阵，则为 O(9) 的额外空间，仍是常数）。</li>
+</ul>
+
+<h3 id="解法二直接检查-22-正方形-3">解法二：直接检查 2×2 正方形</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(4 × 4) = O(16) ≈ O(1)。<br />
+遍历 4 个正方形，每个正方形统计 4 个格子。</li>
+<li>💾 <strong>空间复杂度</strong>：O(1)，只用了常数个变量。</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>暴力枚举</td>
+  <td>思路直接，易于理解</td>
+  <td>需要复制矩阵，代码稍长</td>
+  <td>通用性强，适用于任意大小的矩阵（但复杂度会变高）</td>
+</tr>
+<tr>
+  <td>直接检查</td>
+  <td>逻辑简洁，效率高</td>
+  <td>只适用于本题的特定条件（最多修改一个格子）</td>
+  <td>本题的最优解</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：解法二（直接检查 2×2 正方形）。<br />
+- 代码更简洁，效率更高。<br />
+- 充分利用了题目条件（最多修改一个格子），逻辑更清晰。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例-1常规">用例 1（常规）</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>grid = [["B","W","B"],["B","W","W"],["B","W","B"]]</code></li>
+<li><strong>输出</strong>：<code>true</code></li>
+<li><strong>解释</strong>：修改 <code>grid[0][2]</code> 为 <code>'W'</code>，左上角正方形全黑。</li>
+</ul>
+
+<h3 id="用例-2常规">用例 2（常规）</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>grid = [["B","W","B"],["W","B","W"],["B","W","B"]]</code></li>
+<li><strong>输出</strong>：<code>false</code></li>
+<li><strong>解释</strong>：所有 2×2 正方形都是 2 黑 2 白，至少需要修改两个格子。</li>
+</ul>
+
+<h3 id="用例-3边界">用例 3（边界）</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>grid = [["B","B","B"],["B","B","B"],["B","B","B"]]</code></li>
+<li><strong>输出</strong>：<code>true</code></li>
+<li><strong>解释</strong>：已经存在全同色正方形，不需要修改。</li>
+</ul>
+
+<h3 id="用例-4边界">用例 4（边界）</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>grid = [["B","W","B"],["B","W","W"],["B","W","W"]]</code></li>
+<li><strong>输出</strong>：<code>true</code></li>
+<li><strong>解释</strong>：右下角正方形已经全白。</li>
+</ul>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 766</strong>：托普利茨矩阵（判断矩阵中每个对角线是否元素相同）</li>
+<li><strong>LeetCode 840</strong>：矩阵中的幻方（寻找 3×3 幻方）</li>
+<li><strong>LeetCode 1275</strong>：找出井字棋的获胜者（3×3 矩阵的胜负判断）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-09 10:31:13</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

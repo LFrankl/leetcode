@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-09 10:34:43",
+      "record_id": "20260309_103443",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3127",
+          "title": "构造相同颜色的正方形",
+          "difficulty": "easy",
+          "file": "20260309_103443_q1.html"
+        },
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "medium",
+          "file": "20260309_103443_q2.html"
+        },
+        {
+          "number": "3382",
+          "title": "用点构造面积最大的矩形 II",
+          "difficulty": "hard",
+          "file": "20260309_103443_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-08 13:59:36",
       "record_id": "20260308_135936",
       "count": 2,
@@ -531,5 +556,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-08 13:59:36"
+  "last_updated": "2026-03-09 10:34:43"
 }
