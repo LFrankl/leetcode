@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-10 20:32:47",
+      "record_id": "20260310_203247",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2848",
+          "title": "与车相交的点",
+          "difficulty": "easy",
+          "file": "20260310_203247_q1.html"
+        },
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "medium",
+          "file": "20260310_203247_q2.html"
+        },
+        {
+          "number": "3764",
+          "title": "最常见的课程组合",
+          "difficulty": "hard",
+          "file": "20260310_203247_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-10 10:34:51",
       "record_id": "20260310_103451",
       "count": 3,
@@ -581,5 +606,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-10 10:34:51"
+  "last_updated": "2026-03-10 20:32:47"
 }

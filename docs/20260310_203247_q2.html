@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unknown. 未知题目 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-10 20:32:47</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Unknown. 未知题目</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/draw-line-lcci/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="面试题-0508-绘制直线">面试题 05.08. 绘制直线</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 位运算, 数组, 数学</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/draw-line-lcci/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>已知一个由像素点组成的单色屏幕，每行均有 <code>w</code> 个像素点，所有像素点初始为 <code>0</code>，左上角位置为 <code>(0,0)</code>。</p>
+
+<p>现将每行的像素点按照「每 <code>32</code> 个像素点」为一组存放在一个 <code>int</code> 中，再依次存入长度为 <code>length</code> 的一维数组中。</p>
+
+<p>我们将在屏幕上绘制一条从点 <code>(x1,y)</code> 到点 <code>(x2,y)</code> 的直线（即像素点修改为 <code>1</code>），请返回绘制过后的数组。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>注意：</strong></p>
+
+<ul>
+    <li>用例保证屏幕宽度 <code>w</code> 可被 32 整除（即一个 <code>int</code> 不会分布在两行上）</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong> 输入</strong>：length = 1, w = 32, x1 = 30, x2 = 31, y = 0
+<strong> 输出</strong>：[3]
+<strong> 解释</strong>：在第 0 行的第 30 位到第 31 位画一条直线，屏幕二进制形式表示为 [00000000000000000000000000000011]，因此返回 [3]
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong> 输入</strong>：length = 3, w = 96, x1 = 0, x2 = 95, y = 0
+<strong> 输出</strong>：[-1, -1, -1]
+<strong> 解释</strong>：由于二进制 <strong>11111111111111111111111111111111</strong> 的 int 类型代表 -1，因此返回 [-1,-1,-1]</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= length &lt;= 10^5</code></li>
+    <li><code>1 &lt;= w &lt;= 3 * 10^5</code></li>
+    <li><code>0 &lt;= x1 &lt;= x2 &lt; w</code></li>
+    <li><code>0 &lt;= y &lt;= 10</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; drawLine(int length, int w, int x1, int x2, int y) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int[] drawLine(int length, int w, int x1, int x2, int y) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def drawLine(self, length: int, w: int, x1: int, x2: int, y: int) -&gt; List[int]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} length
+ * @param {number} w
+ * @param {number} x1
+ * @param {number} x2
+ * @param {number} y
+ * @return {number[]}
+ */
+var drawLine = function(length, w, x1, x2, y) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func drawLine(length int, w int, x1 int, x2 int, y int) []int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>先试试简单解法。你能设置一个特定的“像素”吗？</li>
+<li>当你画一条长线时，你会得到即将变成1的序列的全部字节。你可以一次性设置它吗？</li>
+<li>那这条线的起点和终点呢？你需要单独设置这些像素，还是可以同时设置所有像素？</li>
+<li>当x1和x2在同一个字节中时，你的代码能否处理这种情况。</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>1
+32
+30
+31
+0
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<h3 id="核心要求">核心要求</h3>
+
+<ul>
+<li>模拟一个单色屏幕，每行有 <code>w</code> 个像素点（每个像素为 0 或 1）</li>
+<li>屏幕数据按行存储在一个一维数组 <code>screen</code> 中，每个 <code>int</code> 存储 32 个像素（从高位到低位对应像素从左到右）</li>
+<li>需要绘制一条从 <code>(x1, y)</code> 到 <code>(x2, y)</code> 的水平直线（将像素点置为 1）</li>
+<li>返回绘制后的数组</li>
+</ul>
+
+<h3 id="关键约束">关键约束</h3>
+
+<ul>
+<li><code>w</code> 能被 32 整除 → 每行的像素正好占用 <code>w/32</code> 个 <code>int</code></li>
+<li><code>length</code> 是数组总长度，<code>w/32 * (y+1) ≤ length</code>（因为数组可能包含多行）</li>
+<li><code>0 ≤ x1 ≤ x2 &lt; w</code>，<code>0 ≤ y ≤ 10</code>（y 很小）</li>
+<li>使用二进制位操作处理 <code>int</code> 中的像素</li>
+</ul>
+
+<h3 id="输入输出">输入输出</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>length</code>（数组长度），<code>w</code>（屏幕宽度），<code>x1, x2</code>（直线起止横坐标），<code>y</code>（纵坐标）</li>
+<li><strong>输出</strong>：绘制后的 <code>[]int</code> 数组</li>
+</ul>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一逐位处理朴素法">解法一：逐位处理（朴素法）</h3>
+
+<ul>
+<li><strong>核心思想</strong>：直接计算每个受影响的 <code>int</code> 在数组中的索引，然后通过位运算设置对应位</li>
+<li><strong>步骤</strong>：
+<ol>
+<li>计算每行包含的 <code>int</code> 数：<code>intsPerRow = w/32</code></li>
+<li>确定直线所在行的起始索引：<code>rowStart = y * intsPerRow</code></li>
+<li>对于 <code>x1</code> 到 <code>x2</code> 的每个像素：
+<ul>
+<li>计算它属于该行的第几个 <code>int</code>：<code>intIndex = rowStart + pixelPos/32</code></li>
+<li>计算在该 <code>int</code> 中的位偏移：<code>bitOffset = 31 - (pixelPos % 32)</code>（因为高位在左）</li>
+<li>设置对应位为 1</li>
+</ul></li>
+</ol></li>
+<li><strong>注意事项</strong>：
+<ul>
+<li>当 <code>x2-x1</code> 很大时效率低（最坏 O(w)）</li>
+<li>注意 <code>int</code> 中位的顺序（最高位对应最左像素）</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二批量处理高效法">解法二：批量处理（高效法）</h3>
+
+<ul>
+<li><strong>核心思想</strong>：将直线覆盖的连续像素分段处理，特别是完整 <code>int</code> 的部分直接设为全 1</li>
+<li><strong>步骤</strong>：
+<ol>
+<li>计算每行 <code>int</code> 数：<code>intsPerRow = w/32</code></li>
+<li>计算直线所在行的起始索引：<code>rowStart = y * intsPerRow</code></li>
+<li>确定直线覆盖的第一个和最后一个 <code>int</code> 索引：
+<ul>
+<li><code>firstInt = rowStart + x1/32</code></li>
+<li><code>lastInt = rowStart + x2/32</code></li>
+</ul></li>
+<li>分三种情况处理：
+<ul>
+<li><strong>情况 1</strong>：直线在一个 <code>int</code> 内（<code>firstInt == lastInt</code>）
+<ul>
+<li>生成掩码：从 <code>x1%32</code> 到 <code>x2%32</code> 的位设为 1</li>
+</ul></li>
+<li><strong>情况 2</strong>：直线跨多个 <code>int</code>
+<ul>
+<li>处理第一个 <code>int</code>：从 <code>x1%32</code> 到 31 的位设为 1</li>
+<li>处理中间完整 <code>int</code>：直接设为 <code>0xFFFFFFFF</code>（全 1）</li>
+<li>处理最后一个 <code>int</code>：从 0 到 <code>x2%32</code> 的位设为 1</li>
+</ul></li>
+</ul></li>
+</ol></li>
+<li><strong>优点</strong>：时间复杂度与直线长度无关，只与跨越的 <code>int</code> 数相关</li>
+</ul>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一逐位处理">解法一：逐位处理</h3>
+
+<pre><code>func drawLine(length int, w int, x1 int, x2 int, y int) []int {
+    // 初始化屏幕数组
+    screen := make([]int, length)
+
+    // 每行包含的 int 数
+    intsPerRow := w / 32
+
+    // 直线所在行的起始索引
+    rowStart := y * intsPerRow
+
+    // 遍历直线上的每个像素
+    for x := x1; x &lt;= x2; x++ {
+        // 计算该像素在数组中的索引
+        intIndex := rowStart + x/32
+
+        // 计算在该 int 中的位偏移（最高位对应最左像素）
+        bitOffset := 31 - (x % 32)
+
+        // 设置对应位为 1
+        screen[intIndex] |= (1 &lt;&lt; bitOffset)
+    }
+
+    return screen
+}
+</code></pre>
+
+<h3 id="解法二批量处理推荐">解法二：批量处理（推荐）</h3>
+
+<pre><code>func drawLine(length int, w int, x1 int, x2 int, y int) []int {
+    // 初始化屏幕数组
+    screen := make([]int, length)
+
+    // 每行包含的 int 数
+    intsPerRow := w / 32
+
+    // 直线所在行的起始索引
+    rowStart := y * intsPerRow
+
+    // 直线覆盖的第一个和最后一个 int 索引
+    firstInt := rowStart + x1/32
+    lastInt := rowStart + x2/32
+
+    // 情况 1：直线在一个 int 内
+    if firstInt == lastInt {
+        // 生成掩码：从 x1%32 到 x2%32 的位设为 1
+        mask := 0
+        for i := x1 % 32; i &lt;= x2 % 32; i++ {
+            mask |= 1 &lt;&lt; (31 - i)
+        }
+        screen[firstInt] = mask
+        return screen
+    }
+
+    // 情况 2：直线跨多个 int
+
+    // 处理第一个 int：从 x1%32 到 31 的位设为 1
+    firstMask := 0
+    for i := x1 % 32; i &lt; 32; i++ {
+        firstMask |= 1 &lt;&lt; (31 - i)
+    }
+    screen[firstInt] = firstMask
+
+    // 处理中间完整 int：设为全 1
+    for i := firstInt + 1; i &lt; lastInt; i++ {
+        screen[i] = -1 // 0xFFFFFFFF 在补码中表示 -1
+    }
+
+    // 处理最后一个 int：从 0 到 x2%32 的位设为 1
+    lastMask := 0
+    for i := 0; i &lt;= x2 % 32; i++ {
+        lastMask |= 1 &lt;&lt; (31 - i)
+    }
+    screen[lastInt] = lastMask
+
+    return screen
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一逐位处理-2">解法一：逐位处理</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(x2 - x1 + 1)
+<ul>
+<li>需要遍历直线上的每个像素点</li>
+<li>最坏情况下 w 可达 3×10^5，但 y ≤ 10，所以最坏 O(3×10^5)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(length)
+<ul>
+<li>需要创建长度为 length 的数组</li>
+<li>额外空间只有几个变量</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二批量处理">解法二：批量处理</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(k)，其中 k 是直线跨越的 int 数
+<ul>
+<li>最多处理 w/32 个 int，即 O(w/32)</li>
+<li>最坏情况下 w=3×10^5，k=9375，远小于像素数</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(length)
+<ul>
+<li>同样需要创建结果数组</li>
+<li>额外空间常数级别</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（逐位处理）</th>
+  <th>解法二（批量处理）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>时间复杂度</td>
+  <td>O(L)（L=直线长度）</td>
+  <td>O(k)（k=跨越的int数）</td>
+</tr>
+<tr>
+  <td>空间复杂度</td>
+  <td>O(length)</td>
+  <td>O(length)</td>
+</tr>
+<tr>
+  <td>代码复杂度</td>
+  <td>简单直观</td>
+  <td>稍复杂，需处理边界</td>
+</tr>
+<tr>
+  <td>性能</td>
+  <td>直线长时性能差</td>
+  <td>性能稳定高效</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>直线很短时</td>
+  <td>通用，特别是直线长时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐使用解法二</strong>：
+- 题目中 w 可达 3×10^5，直线可能很长
+- 解法二的时间复杂度与直线长度无关，只与跨越的 int 数相关
+- 实际工程中更高效，特别是处理大屏幕时</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例-1常规用例">用例 1：常规用例</h3>
+
+<pre><code>输入：length = 1, w = 32, x1 = 30, x2 = 31, y = 0
+输出：[3]
+解释：第 0 行第 30-31 位为 1，二进制 000...011 = 3
+</code></pre>
+
+<h3 id="用例-2跨多个-int">用例 2：跨多个 int</h3>
+
+<pre><code>输入：length = 3, w = 96, x1 = 0, x2 = 95, y = 0
+输出：[-1, -1, -1]
+解释：整行全为 1，每个 int 都是 0xFFFFFFFF = -1
+</code></pre>
+
+<h3 id="用例-3边界情况直线在一个-int-内">用例 3：边界情况（直线在一个 int 内）</h3>
+
+<pre><code>输入：length = 2, w = 64, x1 = 5, x2 = 10, y = 0
+输出：[0x7E000000, 0]
+解释：
+- 第 0 个 int：位 5-10 为 1，二进制 0111111000... = 0x7E000000
+- 第 1 个 int：全 0
+</code></pre>
+
+<h3 id="用例-4多行情况">用例 4：多行情况</h3>
+
+<pre><code>输入：length = 6, w = 64, x1 = 10, x2 = 50, y = 1
+输出：[0, 0, 0x3FFFFC00, 0xFFFFFFFF, 0]
+解释：
+- 第 0 行：全 0
+- 第 1 行：
+  - 第 2 个 int（索引 2）：位 10-31 为 1 → 0x3FFFFC00
+  - 第 3 个 int（索引 3）：全 1 → 0xFFFFFFFF
+  - 第 4 个 int（索引 4）：位 0-18 为 1 → 0x0007FFFF
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><p><strong>LeetCode 190. Reverse Bits</strong>（颠倒二进制位）</p>
+
+<ul>
+<li>类似位操作题目</li>
+</ul></li>
+<li><p><strong>LeetCode 191. Number of 1 Bits</strong>（位1的个数）</p>
+
+<ul>
+<li>统计二进制中 1 的个数</li>
+</ul></li>
+<li><p><strong>LeetCode 201. Bitwise AND of Numbers Range</strong>（数字范围按位与）</p>
+
+<ul>
+<li>处理连续数字的位操作</li>
+</ul></li>
+<li><p><strong>LeetCode 371. Sum of Two Integers</strong>（两整数之和）</p>
+
+<ul>
+<li>使用位运算实现加法</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-10 20:31:59</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
