@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1141. 查询近30天活跃用户数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-10 10:34:51</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1141. 查询近30天活跃用户数</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/user-activity-for-the-past-30-days-i/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1141-查询近30天活跃用户数">1141. 查询近30天活跃用户数</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数据库</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/user-activity-for-the-past-30-days-i/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>表：<code>Activity</code></p>
+
+<pre>
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| user_id       | int     |
+| session_id    | int     |
+| activity_date | date    |
+| activity_type | enum    |
++---------------+---------+
+该表可能包含重复数据。
+activity_type 列是 ENUM(category) 类型， 从 ('open_session'， 'end_session'， 'scroll_down'， 'send_message') 取值。
+该表记录社交媒体网站的用户活动。
+注意，每个会话只属于一个用户。
+</pre>
+
+<p>&nbsp;</p>
+
+<p>编写解决方案，统计截至&nbsp;<code>2019-07-27</code>（包含2019-07-27），近<strong>&nbsp;</strong><code>30</code> 天的每日活跃用户数（当天只要有一条活动记录，即为活跃用户）。</p>
+
+<p>以 <strong>任意顺序</strong> 返回结果表。</p>
+
+<p>结果示例如下。</p>
+
+<p><strong>注意</strong>：（<code>'open_session'</code>，<code>'end_session'</code>，<code>'scroll_down'</code>，<code>'send_message'</code>）中的任何活动将被视为用户在某一天活跃的有效活动。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1:</strong></p>
+
+<pre>
+<strong>输入：</strong>
+Activity table:
++---------+------------+---------------+---------------+
+| user_id | session_id | activity_date | activity_type |
++---------+------------+---------------+---------------+
+| 1       | 1          | 2019-07-20    | open_session  |
+| 1       | 1          | 2019-07-20    | scroll_down   |
+| 1       | 1          | 2019-07-20    | end_session   |
+| 2       | 4          | 2019-07-20    | open_session  |
+| 2       | 4          | 2019-07-21    | send_message  |
+| 2       | 4          | 2019-07-21    | end_session   |
+| 3       | 2          | 2019-07-21    | open_session  |
+| 3       | 2          | 2019-07-21    | send_message  |
+| 3       | 2          | 2019-07-21    | end_session   |
+| 4       | 3          | 2019-06-25    | open_session  |
+| 4       | 3          | 2019-06-25    | end_session   |
++---------+------------+---------------+---------------+
+<strong>输出：</strong>
++------------+--------------+ 
+| day        | active_users |
++------------+--------------+ 
+| 2019-07-20 | 2            |
+| 2019-07-21 | 2            |
++------------+--------------+ <strong>
+解释：</strong>注意非活跃用户的记录不需要展示。</pre>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>{"headers":{"Activity":["user_id","session_id","activity_date","activity_type"]},"rows":{"Activity":[[1,1,"2019-07-20","open_session"],[1,1,"2019-07-20","scroll_down"],[1,1,"2019-07-20","end_session"],[2,4,"2019-07-20","open_session"],[2,4,"2019-07-21","send_message"],[2,4,"2019-07-21","end_session"],[3,2,"2019-07-21","open_session"],[3,2,"2019-07-21","send_message"],[3,2,"2019-07-21","end_session"],[4,3,"2019-06-25","open_session"],[4,3,"2019-06-25","end_session"]]}}
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：
+统计截至 2019-07-27（包含当天）的近 30 天内，每天的活跃用户数。只要用户在某天有任意活动记录，就视为该天的活跃用户。</p>
+
+<p><strong>关键约束</strong>：
+1. 时间范围：<code>activity_date</code> 必须在 <code>2019-07-27</code> 之前的 30 天内（包含 2019-07-27）
+2. 活跃定义：当天有任意 <code>activity_type</code> 记录即算活跃
+3. 去重：同一用户在同一天可能有多个活动，只计一次
+4. 输出：只输出有活跃用户的日期，按任意顺序</p>
+
+<p><strong>边界情况</strong>：
+- 日期范围可能为空（无符合条件的数据）
+- 同一天同一用户有多个活动需要去重
+- 日期可能不连续，只输出有活跃用户的日期</p>
+
+<p><strong>输入输出</strong>：
+- 输入：Activity 表，包含 user<em>id, session</em>id, activity<em>date, activity</em>type
+- 输出：包含两列的表：day（日期）, active_users（活跃用户数）</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一基础筛选-分组统计">解法一：基础筛选 + 分组统计</h3>
+
+<p><strong>核心思想</strong>：
+1. 先筛选出符合日期范围的数据
+2. 按日期和用户去重
+3. 按日期分组统计用户数</p>
+
+<p><strong>步骤</strong>：
+1. WHERE 子句筛选日期范围：<code>activity_date BETWEEN '2019-06-28' AND '2019-07-27'</code>
+2. 使用 DISTINCT 或 GROUP BY 对 (activity<em>date, user</em>id) 去重
+3. 按 activity<em>date 分组，COUNT(DISTINCT user</em>id) 或 COUNT(*) 统计
+4. 重命名列并输出</p>
+
+<p><strong>注意事项</strong>：
+- 日期范围计算：2019-07-27 往前推 29 天是 2019-06-28（共30天）
+- 使用 DATE<em>SUB 或 DATE</em>ADD 函数确保日期计算准确</p>
+
+<h3 id="解法二子查询去重-分组">解法二：子查询去重 + 分组</h3>
+
+<p><strong>核心思想</strong>：
+先通过子查询获取去重后的每日活跃用户列表，再分组统计</p>
+
+<p><strong>步骤</strong>：
+1. 子查询中筛选日期并去重
+2. 外层查询按日期分组统计
+3. 更清晰但可能效率略低</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一直接筛选分组">解法一：直接筛选分组</h3>
+
+<pre><code>// SQL 实现（题目要求 SQL 查询）
+SELECT 
+    activity_date AS day,
+    COUNT(DISTINCT user_id) AS active_users
+FROM Activity
+WHERE activity_date BETWEEN DATE_SUB('2019-07-27', INTERVAL 29 DAY) AND '2019-07-27'
+GROUP BY activity_date
+ORDER BY activity_date;
+</code></pre>
+
+<h3 id="解法二子查询方式">解法二：子查询方式</h3>
+
+<pre><code>// SQL 实现
+SELECT 
+    day,
+    COUNT(*) AS active_users
+FROM (
+    SELECT DISTINCT
+        activity_date AS day,
+        user_id
+    FROM Activity
+    WHERE activity_date BETWEEN DATE_SUB('2019-07-27', INTERVAL 29 DAY) AND '2019-07-27'
+) AS distinct_users
+GROUP BY day
+ORDER BY day;
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一">解法一：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)，其中 n 是表中记录数。需要扫描一次表进行筛选和分组。</li>
+<li>💾 <strong>空间复杂度</strong>：O(m)，其中 m 是不同 (date, user_id) 组合数。分组操作需要临时存储。</li>
+</ul>
+
+<h3 id="解法二">解法二：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)，同样需要扫描表，子查询可能增加额外开销。</li>
+<li>💾 <strong>空间复杂度</strong>：O(m)，子查询需要存储去重结果。</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>简洁高效，单次扫描完成</td>
+  <td>逻辑稍紧凑</td>
+  <td>大多数情况，推荐使用</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>逻辑清晰，易于理解</td>
+  <td>可能有额外子查询开销</td>
+  <td>需要更易读的代码时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐</strong>：解法一。更简洁高效，符合 SQL 最佳实践。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Activity 表：
+user_id | session_id | activity_date | activity_type
+--------|------------|---------------|--------------
+1       | 1          | 2019-07-20    | open_session
+1       | 1          | 2019-07-20    | scroll_down
+2       | 4          | 2019-07-20    | open_session
+2       | 4          | 2019-07-21    | send_message
+3       | 2          | 2019-07-21    | open_session
+4       | 3          | 2019-06-25    | open_session  # 超出30天范围
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>day         | active_users
+------------|-------------
+2019-07-20  | 2
+2019-07-21  | 2
+</code></pre>
+
+<p><strong>解释</strong>：2019-06-25 超出范围，不统计。2019-07-20 有用户1和2，2019-07-21 有用户2和3。</p>
+
+<h3 id="用例2边界情况-无符合条件数据">用例2：边界情况 - 无符合条件数据</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Activity 表：
+user_id | session_id | activity_date | activity_type
+--------|------------|---------------|--------------
+1       | 1          | 2019-06-01    | open_session  # 超出范围
+2       | 2          | 2019-06-15    | send_message  # 超出范围
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>day | active_users
+----|-------------
+(空结果集)
+</code></pre>
+
+<p><strong>解释</strong>：所有记录都超出30天范围，输出空表。</p>
+
+<h3 id="用例3同用户同天多次活动">用例3：同用户同天多次活动</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Activity 表：
+user_id | session_id | activity_date | activity_type
+--------|------------|---------------|--------------
+1       | 1          | 2019-07-27    | open_session
+1       | 1          | 2019-07-27    | scroll_down
+1       | 1          | 2019-07-27    | send_message
+1       | 1          | 2019-07-27    | end_session
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>day         | active_users
+------------|-------------
+2019-07-27  | 1
+</code></pre>
+
+<p><strong>解释</strong>：同一用户同一天多个活动，只计为1个活跃用户。</p>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>LeetCode 1141. 查询近30天活跃用户数</strong>（本题）</li>
+<li><strong>LeetCode 1142. 过去30天的用户活动 II</strong>（类似，但计算平均会话数）</li>
+<li><strong>LeetCode 550. 游戏玩法分析 IV</strong>（用户留存分析）</li>
+<li><strong>LeetCode 1097. 游戏玩法分析 V</strong>（用户首次登录后的活动）</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-10 10:31:13</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

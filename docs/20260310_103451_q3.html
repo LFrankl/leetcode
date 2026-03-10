@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3077. K 个不相交子数组的最大能量值 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-10 10:34:51</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3077. K 个不相交子数组的最大能量值</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-strength-of-k-disjoint-subarrays/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3077-k-个不相交子数组的最大能量值">3077. K 个不相交子数组的最大能量值</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数组, 动态规划, 前缀和</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-strength-of-k-disjoint-subarrays/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个长度为 <code>n</code>&nbsp;下标从 <strong>0</strong>&nbsp;开始的整数数组&nbsp;<code>nums</code>&nbsp;和一个 <strong>正奇数</strong>&nbsp;整数&nbsp;<code>k</code>&nbsp;。</p>
+
+<p><code>x</code> 个子数组的能量值定义为&nbsp;<code>strength = sum[1] * x - sum[2] * (x - 1) + sum[3] * (x - 2) - sum[4] * (x - 3) + ... + sum[x] * 1</code> ，其中&nbsp;<code>sum[i]</code>&nbsp;是第 <code>i</code>&nbsp;个子数组的和。更正式的，能量值是满足&nbsp;<code>1 &lt;= i &lt;= x</code>&nbsp;的所有&nbsp;<code>i</code>&nbsp;对应的&nbsp;<code>(-1)<sup>i+1</sup> * sum[i] * (x - i + 1)</code>&nbsp;之和。</p>
+
+<p>你需要在 <code>nums</code>&nbsp;中选择 <code>k</code>&nbsp;个 <strong>不相交</strong><strong>子数组</strong>&nbsp;，使得&nbsp;<strong>能量值最大</strong>&nbsp;。</p>
+
+<p>请你返回可以得到的 <strong>最大</strong><strong>能量值</strong>&nbsp;。</p>
+
+<p><strong>注意</strong>，选出来的所有子数组&nbsp;<strong>不</strong>&nbsp;需要覆盖整个数组。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<pre>
+<b>输入：</b>nums = [1,2,3,-1,2], k = 3
+<b>输出：</b>22
+<b>解释：</b>选择 3 个子数组的最好方式是选择：nums[0..2] ，nums[3..3] 和 nums[4..4] 。能量值为 (1 + 2 + 3) * 3 - (-1) * 2 + 2 * 1 = 22 。
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<pre>
+<b>输入：</b>nums = [12,-2,-2,-2,-2], k = 5
+<b>输出：</b>64
+<b>解释：</b>唯一一种选 5 个不相交子数组的方案是：nums[0..0] ，nums[1..1] ，nums[2..2] ，nums[3..3] 和 nums[4..4] 。能量值为 12 * 5 - (-2) * 4 + (-2) * 3 - (-2) * 2 + (-2) * 1 = 64 。
+</pre>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<pre>
+<b>输入：</b>nums = [-1,-2,-3], k = 1
+<b>输出：</b>-1
+<b>解释：</b>选择 1 个子数组的最优方案是：nums[0..0] 。能量值为 -1 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= n &lt;= 10<sup>4</sup></code></li>
+    <li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
+    <li><code>1 &lt;= k &lt;= n</code></li>
+    <li><code>1 &lt;= n * k &lt;= 10<sup>6</sup></code></li>
+    <li><code>k</code> 是奇数。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    long long maximumStrength(vector&lt;int&gt;&amp; nums, int k) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public long maximumStrength(int[] nums, int k) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def maximumStrength(self, nums: List[int], k: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var maximumStrength = function(nums, k) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func maximumStrength(nums []int, k int) int64 {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Let <code>dp[i][j][x == 0/1]</code> be the maximum strength to select <code>j</code> disjoint subarrays from the original array’s suffix (<code>nums[i..(n - 1)]</code>), x denotes whether we select the element or not.</li>
+<li>Initially <code>dp[n][0][0] == 0</code>.</li>
+<li>We have 
+<code>dp[i][j][1] = nums[i] * get(j) + max(dp[i + 1][j - 1][0], dp[i + 1][j][1])</code> where <code>get(j) = j</code> if <code>j</code> is odd, otherwise <code>-j</code>.</li>
+<li>We can select <code>nums[i]</code> as a separate subarray or select at least <code>nums[i]</code> and <code>nums[i + 1]</code> as the first subarray.
+<code>dp[i][j][0] = max(dp[i + 1][j][0], dp[i][j][1])</code>.</li>
+<li>The answer is <code>dp[0][k][0]</code>.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[1,2,3,-1,2]
+3
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：
+- 给定一个整数数组 <code>nums</code> 和一个正奇数 <code>k</code>
+- 需要选择 <strong>k 个不相交子数组</strong>（子数组之间不重叠，且不需要覆盖整个数组）
+- 定义这 k 个子数组的 <strong>能量值</strong> 为：
+  <pre><code>strength = sum[1] * k - sum[2] * (k-1) + sum[3] * (k-2) - sum[4] * (k-3) + ... + sum[k] * 1
+  </code></pre>
+  即第 i 个子数组的贡献为 <code>(-1)^(i+1) * sum[i] * (k - i + 1)</code>
+- 目标是 <strong>最大化能量值</strong></p>
+
+<p><strong>关键约束</strong>：
+- <code>k</code> 是正奇数，因此能量值公式中符号交替：奇数位置子数组贡献为正，偶数位置贡献为负
+- 子数组不相交，但可以不连续
+- <code>n * k ≤ 10^6</code>，这意味着我们可以使用 O(nk) 的算法
+- 数组元素可为负数</p>
+
+<p><strong>边界情况</strong>：
+- <code>k = 1</code> 时，能量值就是子数组和的最大值（乘以 1）
+- 所有元素为负数时，需要选择单个最小负数子数组
+- <code>k = n</code> 时，每个子数组只能包含一个元素</p>
+
+<p><strong>输入输出</strong>：
+- 输入：<code>nums []int</code>, <code>k int</code>
+- 输出：最大能量值 <code>int64</code></p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一动态规划三维-dp">解法一：动态规划（三维 DP）</h3>
+
+<p><strong>核心思想</strong>：
+- 定义 <code>dp[i][j][0/1]</code>：
+  - <code>i</code>：考虑前 i 个元素（0-indexed）
+  - <code>j</code>：已经选择了 j 个子数组
+  - <code>0/1</code>：当前是否正在构建一个子数组（0=未在构建，1=正在构建）
+- 由于能量值公式中有符号交替，需要记录当前是第几个子数组（奇偶性）
+- 状态转移需要考虑：
+  1. 不选当前元素
+  2. 开始新的子数组
+  3. 扩展当前子数组
+  4. 结束当前子数组</p>
+
+<p><strong>解题步骤</strong>：
+1. 初始化三维 DP 数组，大小为 <code>(n+1) × (k+1) × 2</code>
+2. 初始状态：<code>dp[0][0][0] = 0</code>，其他为负无穷（表示不可达）
+3. 遍历每个位置 i，对于每个已选子数组数 j：
+   - 如果不在构建子数组（状态 0）：
+     - 不选当前元素：<code>dp[i+1][j][0] = max(dp[i+1][j][0], dp[i][j][0])</code>
+     - 开始新子数组（如果 j &lt; k）：<code>dp[i+1][j+1][1] = max(dp[i+1][j+1][1], dp[i][j][0] + sign * (k-j) * nums[i])</code>
+   - 如果在构建子数组（状态 1）：
+     - 扩展当前子数组：<code>dp[i+1][j][1] = max(dp[i+1][j][1], dp[i][j][1] + sign * (k-j) * nums[i])</code>
+     - 结束当前子数组：<code>dp[i+1][j][0] = max(dp[i+1][j][0], dp[i][j][1])</code>
+4. 符号 sign 根据当前是第几个子数组决定：<code>sign = 1</code> 当 j 为奇数，<code>sign = -1</code> 当 j 为偶数
+5. 最终答案为 <code>max(dp[n][k][0], dp[n][k][1])</code></p>
+
+<p><strong>注意事项</strong>：
+- 需要处理整数溢出，使用 int64
+- 初始负无穷要足够小（如 -1e18）
+- 由于 k 是奇数，最后一个子数组贡献为正</p>
+
+<h3 id="解法二优化空间复杂度的-dp">解法二：优化空间复杂度的 DP</h3>
+
+<p><strong>核心思想</strong>：
+- 观察发现 dp 只依赖前一行，可以滚动数组优化空间
+- 进一步优化：由于每个位置要么不选，要么属于某个子数组，可以简化状态定义
+- 定义 <code>dp[j][t]</code>：已选 j 个子数组，t=0/1 表示是否以当前位置结束一个子数组</p>
+
+<p><strong>解题步骤</strong>：
+1. 初始化二维 DP 数组 <code>dp[k+1][2]</code>，<code>dp[0][0] = 0</code>，其他为负无穷
+2. 遍历每个元素 nums[i]：
+   - 创建新的 cur 数组用于更新
+   - 对于每个 j 从 0 到 min(k, i+1)：
+     - 计算符号 sign = 1 如果 j 为奇数，否则 -1
+     - 系数 coeff = (k - j)  // 注意：这里 j 是已选数量
+     - 状态转移：
+       - 不选当前元素：<code>cur[j][0] = max(dp[j][0], dp[j][1])</code>
+       - 开始/扩展子数组：<code>cur[j][1] = max(dp[j][1] + sign*coeff*nums[i], dp[j-1][0] + sign*coeff*nums[i])</code>
+3. 更新 dp = cur
+4. 最终答案为 <code>max(dp[k][0], dp[k][1])</code></p>
+
+<p><strong>优化点</strong>：
+- 空间复杂度从 O(nk) 降为 O(k)
+- 注意 j 的遍历顺序，避免覆盖</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一三维-dp基础版">解法一：三维 DP（基础版）</h3>
+
+<pre><code>func maximumStrength(nums []int, k int) int64 {
+    n := len(nums)
+    // dp[i][j][t]: 前i个元素，选了j个子数组，t=0未在构建，t=1正在构建
+    dp := make([][][]int64, n+1)
+    for i := range dp {
+        dp[i] = make([][]int64, k+1)
+        for j := range dp[i] {
+            dp[i][j] = []int64{-1e18, -1e18}
+        }
+    }
+    dp[0][0][0] = 0
+
+    for i := 0; i &lt; n; i++ {
+        for j := 0; j &lt;= k; j++ {
+            // 当前符号：第j+1个子数组的符号（j从0开始）
+            // 注意：当我们在构建第j+1个子数组时，它的符号由j的奇偶决定
+            // j为偶数（0-based）对应第一个子数组，符号为正
+            var sign int64 = 1
+            if j%2 == 1 { // 偶数位置子数组（1-based）符号为负
+                sign = -1
+            }
+            coeff := int64(k - j) // 系数
+
+            // 状态0：不在构建子数组
+            if dp[i][j][0] &gt; -1e17 {
+                // 不选当前元素
+                dp[i+1][j][0] = max(dp[i+1][j][0], dp[i][j][0])
+                // 开始新的子数组（如果还可以选）
+                if j &lt; k {
+                    dp[i+1][j+1][1] = max(dp[i+1][j+1][1], dp[i][j][0] + sign*coeff*int64(nums[i]))
+                }
+            }
+
+            // 状态1：正在构建子数组
+            if dp[i][j][1] &gt; -1e17 {
+                // 扩展当前子数组
+                dp[i+1][j][1] = max(dp[i+1][j][1], dp[i][j][1] + sign*coeff*int64(nums[i]))
+                // 结束当前子数组
+                dp[i+1][j][0] = max(dp[i+1][j][0], dp[i][j][1])
+            }
+        }
+    }
+
+    return max(dp[n][k][0], dp[n][k][1])
+}
+
+func max(a, b int64) int64 {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<h3 id="解法二优化空间-dp推荐">解法二：优化空间 DP（推荐）</h3>
+
+<pre><code>func maximumStrength(nums []int, k int) int64 {
+    n := len(nums)
+    // dp[j][t]: 已选j个子数组，t=0表示不以当前元素结束，t=1表示以当前元素结束（或正在构建）
+    dp := make([][2]int64, k+1)
+    for j := 0; j &lt;= k; j++ {
+        dp[j][0] = -1e18
+        dp[j][1] = -1e18
+    }
+    dp[0][0] = 0
+
+    for i := 0; i &lt; n; i++ {
+        cur := make([][2]int64, k+1)
+        for j := 0; j &lt;= k; j++ {
+            cur[j][0] = -1e18
+            cur[j][1] = -1e18
+        }
+
+        for j := 0; j &lt;= k &amp;&amp; j &lt;= i+1; j++ {
+            // 计算符号和系数
+            var sign int64 = 1
+            if j%2 == 1 { // 注意：j是已选数量，第j个子数组的符号
+                sign = -1
+            }
+            coeff := int64(k - j)
+
+            // 状态转移
+            // 1. 不选当前元素（结束或不开始）
+            if j &lt;= i {
+                cur[j][0] = max(cur[j][0], max(dp[j][0], dp[j][1]))
+            }
+
+            // 2. 选择当前元素
+            // 2.1 作为新子数组的开始
+            if j &gt; 0 {
+                cur[j][1] = max(cur[j][1], dp[j-1][0] + sign*coeff*int64(nums[i]))
+            }
+            // 2.2 扩展当前子数组
+            cur[j][1] = max(cur[j][1], dp[j][1] + sign*coeff*int64(nums[i]))
+        }
+
+        dp = cur
+    }
+
+    return max(dp[k][0], dp[k][1])
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一三维-dp">解法一：三维 DP</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(nk)
+<ul>
+<li>三层循环：外层 n，中层 k，内层常数</li>
+<li>总操作数约 2nk</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(nk)
+<ul>
+<li>dp 数组大小 (n+1)×(k+1)×2</li>
+<li>当 n=10^4, k=100 时，需要约 2×10^6 个 int64，约 16MB</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二优化空间-dp">解法二：优化空间 DP</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(nk)
+<ul>
+<li>两层循环：外层 n，内层 min(k, i+1)</li>
+<li>总操作数约 nk</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(k)
+<ul>
+<li>只维护两行 dp 数组，大小 2×(k+1)×2</li>
+<li>当 k=100 时，仅需约 400 个 int64，约 3.2KB</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（三维DP）</th>
+  <th>解法二（优化空间DP）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>时间复杂度</td>
+  <td>O(nk)</td>
+  <td>O(nk)</td>
+</tr>
+<tr>
+  <td>空间复杂度</td>
+  <td>O(nk)</td>
+  <td>O(k)</td>
+</tr>
+<tr>
+  <td>代码复杂度</td>
+  <td>较高，状态转移复杂</td>
+  <td>中等，需要仔细处理状态</td>
+</tr>
+<tr>
+  <td>可读性</td>
+  <td>较好，状态定义清晰</td>
+  <td>一般，状态压缩后较难理解</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>n×k ≤ 10^6 时可用</td>
+  <td>推荐，满足题目约束</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法二的原因</strong>：
+1. 题目约束 <code>n*k ≤ 10^6</code>，但 n 最大可达 10^4，如果 k 较大，解法一可能内存超限
+2. 解法二空间复杂度更低，更安全
+3. 实际运行效率更高（缓存友好）</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<pre><code>nums := []int{1,2,3,-1,2}
+k := 3
+// 输出：22
+// 解释：选择子数组 [0..2], [3..3], [4..4]
+// 能量值 = (1+2+3)*3 - (-1)*2 + 2*1 = 6*3 + 2 + 2 = 22
+</code></pre>
+
+<h3 id="用例2全负数">用例2：全负数</h3>
+
+<pre><code>nums := []int{-1,-2,-3}
+k := 1
+// 输出：-1
+// 解释：只能选一个子数组，选最小的负数 [-1]
+</code></pre>
+
+<h3 id="用例3k等于n">用例3：k等于n</h3>
+
+<pre><code>nums := []int{12,-2,-2,-2,-2}
+k := 5
+// 输出：64
+// 解释：每个元素单独成子数组
+// 12*5 - (-2)*4 + (-2)*3 - (-2)*2 + (-2)*1 = 60+8-6+4-2 = 64
+</code></pre>
+
+<h3 id="用例4边界情况">用例4：边界情况</h3>
+
+<pre><code>nums := []int{5}
+k := 1
+// 输出：5
+// 解释：只有一个元素，必须选它
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><p><strong>Maximum Sum of 3 Non-Overlapping Subarrays</strong> (LeetCode 689)</p>
+
+<ul>
+<li>相似点：选择多个不相交子数组</li>
+<li>不同点：目标是最小子数组和之和，没有符号交替</li>
+</ul></li>
+<li><p><strong>Best Time to Buy and Sell Stock IV</strong> (LeetCode 188)</p>
+
+<ul>
+<li>相似点：动态规划，选择多个不相交区间</li>
+<li>不同点：股票买卖问题，状态定义不同</li>
+</ul></li>
+<li><p><strong>Maximum Subarray Sum with One Deletion</strong> (LeetCode 1186)</p>
+
+<ul>
+<li>相似点：处理子数组和，带特殊约束</li>
+<li>不同点：只删除一个元素，不是选择多个子数组</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-10 10:34:51</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

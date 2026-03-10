@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-10 10:34:51",
+      "record_id": "20260310_103451",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1141",
+          "title": "查询近30天活跃用户数",
+          "difficulty": "easy",
+          "file": "20260310_103451_q1.html"
+        },
+        {
+          "number": "3604",
+          "title": "有向图中到达终点的最少时间",
+          "difficulty": "medium",
+          "file": "20260310_103451_q2.html"
+        },
+        {
+          "number": "3077",
+          "title": "K 个不相交子数组的最大能量值",
+          "difficulty": "hard",
+          "file": "20260310_103451_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-09 10:34:43",
       "record_id": "20260309_103443",
       "count": 3,
@@ -556,5 +581,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-09 10:34:43"
+  "last_updated": "2026-03-10 10:34:51"
 }
