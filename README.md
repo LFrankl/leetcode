@@ -69,14 +69,7 @@ ls leetcode_questions/
 
 ### 6. 启用 GitHub Pages（可选）⭐️
 
-发布到网站，随时随地在线查看题目：
-
-```bash
-# 运行配置脚本
-./setup_github.sh
-```
-
-**详细步骤**: 查看 [QUICKSTART_GITHUB.md](QUICKSTART_GITHUB.md)
+发布到网站，随时随地在线查看题目。
 
 **你的网站地址**: https://LFrankl.github.io/leetcode/
 
@@ -95,7 +88,6 @@ leetcodejob/
 ├── install.sh                  # 一键安装定时任务
 ├── reload.sh                   # 重新加载定时任务
 ├── uninstall.sh                # 一键卸载定时任务
-├── setup_github.sh             # GitHub Pages 配置脚本 ⭐️
 ├── .gitignore                  # Git 忽略文件
 ├── logs/                       # launchd 日志目录
 ├── leetcode_questions/         # 题目 Markdown 保存目录
@@ -104,9 +96,7 @@ leetcodejob/
 │   ├── css/style.css           # 样式文件
 │   └── YYYYMMDD.html           # 每日题目 HTML 页面
 ├── README.md                   # 本文档
-├── CHANGELOG.md                # 更新日志
-├── QUICKSTART_GITHUB.md        # GitHub Pages 快速开始 ⭐️
-└── GITHUB_PAGES_SETUP.md       # GitHub Pages 详细配置 ⭐️
+└── CHANGELOG.md                # 更新日志
 ```
 
 ## 配置说明

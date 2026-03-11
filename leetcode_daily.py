@@ -11,6 +11,7 @@ import os
 import random
 import re
 import subprocess
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Optional
@@ -20,8 +21,13 @@ try:
     MARKDOWN2_AVAILABLE = True
 except ImportError:
     MARKDOWN2_AVAILABLE = False
-    print("警告: markdown2 未安装，HTML 生成功能将被禁用")
-    print("安装命令: pip3 install markdown2")
+    print(f"[info:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 警告: markdown2 未安装，HTML 生成功能将被禁用")
+    print(f"[info:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 安装命令: pip3 install markdown2")
+
+def log_info(message: str):
+    """输出带时间戳的日志"""
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"[info:{timestamp}] {message}")
 
 def load_config():
     """加载配置文件"""
@@ -30,7 +36,7 @@ def load_config():
         with open(config_file, 'r', encoding='utf-8') as f:
             return json.load(f)
     except Exception as e:
-        print(f"❌ 加载配置文件失败: {e}")
+        log_info(f"❌ 加载配置文件失败: {e}")
         return None
 
 def send_notification(title: str, message: str):
@@ -41,7 +47,7 @@ def send_notification(title: str, message: str):
         '''
         subprocess.run(['osascript', '-e', script], check=True)
     except Exception as e:
-        print(f"警告: 发送通知失败: {e}")
+        log_info(f"警告: 发送通知失败: {e}")
 
 class ExecutionLogger:
     """执行日志记录"""
@@ -76,7 +82,7 @@ class ExecutionLogger:
             with open(self.log_file, 'a', encoding='utf-8') as f:
                 f.write(log_msg)
         except Exception as e:
-            print(f"警告: 保存执行日志失败: {e}")
+            log_info(f"警告: 保存执行日志失败: {e}")
 
 class QuestionHistory:
     """题目历史记录管理"""
@@ -90,9 +96,9 @@ class QuestionHistory:
             try:
                 with open(self.history_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                    return data.get('selected_questions', [])
+                    return data.get('selected_questions') or []
             except Exception as e:
-                print(f"警告: 加载历史记录失败: {e}")
+                log_info(f"警告: 加载历史记录失败: {e}")
         return []
 
     def save(self):
@@ -104,7 +110,7 @@ class QuestionHistory:
                     'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 }, f, ensure_ascii=False, indent=2)
         except Exception as e:
-            print(f"警告: 保存历史记录失败: {e}")
+            log_info(f"警告: 保存历史记录失败: {e}")
 
     def add(self, question_id: str):
         """添加题目到历史记录"""
@@ -130,7 +136,8 @@ class DeepSeekAPI:
         self.base_url = config.get('base_url', 'https://api.deepseek.com/v1')
         self.model = config.get('model', 'deepseek-chat')
         self.prompt_template = config.get('prompt_template', '')
-        self.timeout = config.get('timeout', 180)  # 默认 180 秒（3 分钟）
+        self.timeout = config.get('timeout', 300)  # 默认 300 秒（5 分钟）
+        self.max_retries = config.get('max_retries', 3)  # 最大重试次数
 
     def is_available(self) -> bool:
         """检查 API 是否可用"""
@@ -141,7 +148,7 @@ class DeepSeekAPI:
         return True
 
     def generate_solution(self, question: Dict) -> Optional[str]:
-        """生成题目解答"""
+        """生成题目解答（带重试机制）"""
         if not self.is_available():
             return None
 
@@ -171,22 +178,68 @@ class DeepSeekAPI:
             'max_tokens': 4000
         }
 
-        try:
-            response = requests.post(
-                f'{self.base_url}/chat/completions',
-                headers=headers,
-                json=payload,
-                timeout=self.timeout
-            )
-            response.raise_for_status()
-            data = response.json()
-            return data['choices'][0]['message']['content']
-        except requests.exceptions.Timeout:
-            print(f"  ⚠ DeepSeek API 超时（超过 {self.timeout} 秒）")
-            return None
-        except Exception as e:
-            print(f"  ⚠ DeepSeek API 调用失败: {e}")
-            return None
+        # 重试机制（指数退避）
+        for attempt in range(self.max_retries):
+            try:
+                response = requests.post(
+                    f'{self.base_url}/chat/completions',
+                    headers=headers,
+                    json=payload,
+                    timeout=self.timeout
+                )
+                response.raise_for_status()
+                data = response.json()
+                return data['choices'][0]['message']['content']
+
+            except requests.exceptions.Timeout:
+                wait_time = 2 ** attempt  # 指数退避：1秒, 2秒, 4秒
+                if attempt < self.max_retries - 1:
+                    log_info(f"  ⚠ DeepSeek API 超时（超过 {self.timeout} 秒），{wait_time}秒后重试... ({attempt + 1}/{self.max_retries})")
+                    time.sleep(wait_time)
+                else:
+                    log_info(f"  ❌ DeepSeek API 超时，已重试 {self.max_retries} 次，放弃")
+                    return None
+
+            except requests.exceptions.HTTPError as e:
+                # HTTP 错误（如 401, 429, 500 等）
+                status_code = e.response.status_code if e.response else None
+                if status_code == 429:  # Rate limit
+                    wait_time = 2 ** attempt
+                    if attempt < self.max_retries - 1:
+                        log_info(f"  ⚠ 触发速率限制，{wait_time}秒后重试... ({attempt + 1}/{self.max_retries})")
+                        time.sleep(wait_time)
+                    else:
+                        log_info(f"  ❌ 触发速率限制，已重试 {self.max_retries} 次，放弃")
+                        return None
+                elif status_code in [500, 502, 503, 504]:  # 服务器错误，可以重试
+                    wait_time = 2 ** attempt
+                    if attempt < self.max_retries - 1:
+                        log_info(f"  ⚠ 服务器错误 ({status_code})，{wait_time}秒后重试... ({attempt + 1}/{self.max_retries})")
+                        time.sleep(wait_time)
+                    else:
+                        log_info(f"  ❌ 服务器错误 ({status_code})，已重试 {self.max_retries} 次，放弃")
+                        return None
+                else:
+                    # 其他 HTTP 错误（401, 403 等）不重试
+                    log_info(f"  ❌ DeepSeek API 调用失败 (HTTP {status_code}): {e}")
+                    return None
+
+            except requests.exceptions.ConnectionError as e:
+                # 网络连接错误，可以重试
+                wait_time = 2 ** attempt
+                if attempt < self.max_retries - 1:
+                    log_info(f"  ⚠ 网络连接错误，{wait_time}秒后重试... ({attempt + 1}/{self.max_retries})")
+                    time.sleep(wait_time)
+                else:
+                    log_info(f"  ❌ 网络连接错误，已重试 {self.max_retries} 次，放弃: {e}")
+                    return None
+
+            except Exception as e:
+                # 其他未知错误，不重试
+                log_info(f"  ❌ DeepSeek API 调用失败（未知错误）: {e}")
+                return None
+
+        return None
 
 class LeetCodeFetcher:
     """LeetCode 题目获取"""
@@ -212,7 +265,7 @@ class LeetCodeFetcher:
             data = response.json()
 
             questions = []
-            for q in data.get('stat_status_pairs', []):
+            for q in (data.get('stat_status_pairs') or []):
                 stat = q.get('stat', {})
                 difficulty_map = {1: 'Easy', 2: 'Medium', 3: 'Hard'}
                 questions.append({
@@ -226,7 +279,7 @@ class LeetCodeFetcher:
 
             return questions
         except Exception as e:
-            print(f"获取题目列表失败: {e}")
+            log_info(f"获取题目列表失败: {e}")
             return []
 
     def get_question_detail(self, title_slug: str) -> Optional[Dict]:
@@ -281,13 +334,13 @@ class LeetCodeFetcher:
             if question.get('translatedContent'):
                 question['content'] = question['translatedContent']
 
-            for tag in question.get('topicTags', []):
+            for tag in (question.get('topicTags') or []):
                 if tag.get('translatedName'):
                     tag['name'] = tag['translatedName']
 
             return question
         except Exception as e:
-            print(f"  获取详情失败: {e}")
+            log_info(f"  获取详情失败: {e}")
             return None
 
 def filter_by_difficulty(questions: List[Dict], difficulty: str) -> List[Dict]:
@@ -310,7 +363,7 @@ def select_questions_by_difficulty(
         available = [q for q in available if not history.contains(q['questionId'])]
 
         if len(available) < count:
-            print(f"  ⚠ {difficulty_key} 难度可用题目不足 ({len(available)}/{count})")
+            log_info(f"  ⚠ {difficulty_key} 难度可用题目不足 ({len(available)}/{count})")
             count = len(available)
 
         if count > 0:
@@ -343,14 +396,14 @@ def save_as_markdown(
     filepath = os.path.join(output_dir, filename)
 
     if os.path.exists(filepath):
-        print(f"  题目已存在，跳过: {filename}")
+        log_info(f"  题目已存在，跳过: {filename}")
         return False
 
     content = f"""# {question['questionFrontendId']}. {question['title']}
 
 **难度**: {question['difficulty']}
 
-**标签**: {', '.join([tag['name'] for tag in question.get('topicTags', [])])}
+**标签**: {', '.join([tag['name'] for tag in (question.get('topicTags') or [])])}
 
 **链接**: https://leetcode.cn/problems/{question['titleSlug']}/
 
@@ -366,13 +419,15 @@ def save_as_markdown(
 
 """
 
-    for snippet in question.get('codeSnippets', []):
+    # 使用 or [] 来处理 None 值
+    for snippet in (question.get('codeSnippets') or []):
         if snippet['langSlug'] in ['python3', 'java', 'cpp', 'javascript', 'golang']:
             content += f"\n### {snippet['lang']}\n\n```{snippet['langSlug']}\n{snippet['code']}\n```\n"
 
-    if question.get('hints'):
+    hints = question.get('hints') or []
+    if hints:
         content += "\n---\n\n## 提示\n\n"
-        for i, hint in enumerate(question['hints'], 1):
+        for i, hint in enumerate(hints, 1):
             content += f"{i}. {hint}\n"
 
     if question.get('sampleTestCase'):
@@ -390,7 +445,7 @@ def save_as_markdown(
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
 
-    print(f"  ✓ 已保存: {filename}")
+    log_info(f"  ✓ 已保存: {filename}")
     return True
 
 class HTMLGenerator:
@@ -439,7 +494,7 @@ class HTMLGenerator:
             }
 
         except Exception as e:
-            print(f"  ⚠️ 解析失败 {md_file_path}: {e}")
+            log_info(f"  ⚠️ 解析失败 {md_file_path}: {e}")
             return None
 
     def generate_question_html(self, question_info: Dict, record_id: str, question_index: int, date_str: str, time_str: str) -> Optional[str]:
@@ -533,13 +588,13 @@ class HTMLGenerator:
                 f.write(full_html)
             return html_filename
         except Exception as e:
-            print(f"  ✗ 生成 HTML 失败: {e}")
+            log_info(f"  ✗ 生成 HTML 失败: {e}")
             return None
 
     def convert_markdown_to_html(self, md_files: List[str], date_str: str, time_str: str) -> Optional[List[Dict]]:
         """将当天的 markdown 文件转换为独立的题目 HTML 文件（三层架构）"""
         if not MARKDOWN2_AVAILABLE:
-            print("  ⚠ markdown2 未安装，跳过 HTML 生成")
+            log_info("  ⚠ markdown2 未安装，跳过 HTML 生成")
             return None
 
         if not md_files:
@@ -568,7 +623,7 @@ class HTMLGenerator:
                         'difficulty': question_info['difficulty'],
                         'file': html_filename
                     })
-                    print(f"  ✓ 已生成题目 {q_idx}: {html_filename}")
+                    log_info(f"  ✓ 已生成题目 {q_idx}: {html_filename}")
 
         if questions:
             return questions
@@ -598,7 +653,7 @@ class HTMLGenerator:
             if history_file.exists():
                 with open(history_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                    records = data.get('records', [])
+                    records = data.get('records') or []
             else:
                 records = []
 
@@ -612,11 +667,11 @@ class HTMLGenerator:
                     'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 }, f, ensure_ascii=False, indent=2)
 
-            print(f"  ✓ 已更新历史记录")
+            log_info(f"  ✓ 已更新历史记录")
             return True
 
         except Exception as e:
-            print(f"  ✗ 更新历史记录失败: {e}")
+            log_info(f"  ✗ 更新历史记录失败: {e}")
             return False
 
 class GitHubPagesPublisher:
@@ -651,12 +706,12 @@ class GitHubPagesPublisher:
     def git_add_commit_push(self, date_str: str, questions: List[Dict] = None) -> bool:
         """添加、提交并推送到 GitHub"""
         if not self.is_available():
-            print("  ⚠ GitHub Pages 未启用或未配置")
+            log_info("  ⚠ GitHub Pages 未启用或未配置")
             return False
 
         if not self.check_git_initialized():
-            print("  ⚠ Git 仓库未初始化，请先运行 git init")
-            print("  提示: 查看 GITHUB_PAGES_SETUP.md 了解详细配置步骤")
+            log_info("  ⚠ Git 仓库未初始化，请先运行 git init")
+            log_info("  提示: 查看 GITHUB_PAGES_SETUP.md 了解详细配置步骤")
             return False
 
         formatted_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
@@ -707,7 +762,7 @@ class GitHubPagesPublisher:
 
         try:
             for cmd in commands:
-                print(f"  执行: {' '.join(cmd)}")
+                log_info(f"  执行: {' '.join(cmd)}")
                 result = subprocess.run(
                     cmd,
                     capture_output=True,
@@ -718,29 +773,29 @@ class GitHubPagesPublisher:
                 if result.returncode != 0:
                     # git commit 如果没有变更会返回非 0，这是正常的
                     if 'nothing to commit' in result.stdout or 'nothing to commit' in result.stderr:
-                        print(f"  ℹ️  没有需要提交的变更")
+                        log_info(f"  ℹ️  没有需要提交的变更")
                         continue
                     else:
-                        print(f"  ✗ 命令失败: {result.stderr}")
+                        log_info(f"  ✗ 命令失败: {result.stderr}")
                         return False
 
-            print(f"  ✓ 已推送到 GitHub")
+            log_info(f"  ✓ 已推送到 GitHub")
             if self.site_url:
-                print(f"  🌐 访问: {self.site_url}")
+                log_info(f"  🌐 访问: {self.site_url}")
             return True
 
         except subprocess.TimeoutExpired:
-            print(f"  ✗ Git 操作超时")
+            log_info(f"  ✗ Git 操作超时")
             return False
         except Exception as e:
-            print(f"  ✗ Git 操作失败: {e}")
+            log_info(f"  ✗ Git 操作失败: {e}")
             return False
 
 def main():
-    print("=" * 60)
-    print("LeetCode 每日题目获取脚本 (DeepSeek AI 增强版)")
-    print("=" * 60)
-    print()
+    log_info("=" * 60)
+    log_info("LeetCode 每日题目获取脚本 (DeepSeek AI 增强版)")
+    log_info("=" * 60)
+    log_info("")
 
     # 加载配置
     config = load_config()
@@ -753,27 +808,27 @@ def main():
     # 初始化历史记录
     history = QuestionHistory(config['history_file'])
     stats = history.get_stats()
-    print(f"历史记录: 已选择 {stats['total_selected']} 道题目")
+    log_info(f"历史记录: 已选择 {stats['total_selected']} 道题目")
 
     # 初始化 DeepSeek API
     deepseek = DeepSeekAPI(config.get('deepseek', {}))
     if deepseek.is_available():
-        print(f"DeepSeek API: 已启用 (模型: {deepseek.model})")
+        log_info(f"DeepSeek API: 已启用 (模型: {deepseek.model})")
     else:
-        print(f"DeepSeek API: 未配置或已禁用")
+        log_info(f"DeepSeek API: 未配置或已禁用")
 
-    print()
+    log_info("")
 
     # 获取题目列表
     fetcher = LeetCodeFetcher()
-    print("正在获取题目列表...")
+    log_info("正在获取题目列表...")
     all_questions = fetcher.get_all_questions()
 
     if not all_questions:
-        print("❌ 无法获取题目列表")
+        log_info("❌ 无法获取题目列表")
         return
 
-    print(f"✓ 共获取 {len(all_questions)} 道题目")
+    log_info(f"✓ 共获取 {len(all_questions)} 道题目")
 
     # 按难度选择题目
     selected_questions = select_questions_by_difficulty(
@@ -783,11 +838,11 @@ def main():
     )
 
     if not selected_questions:
-        print("❌ 没有可选的题目（可能都已被选过）")
+        log_info("❌ 没有可选的题目（可能都已被选过）")
         return
 
-    print(f"✓ 随机选择 {len(selected_questions)} 道题目")
-    print()
+    log_info(f"✓ 随机选择 {len(selected_questions)} 道题目")
+    log_info("")
 
     # 获取详情并保存
     saved_count = 0
@@ -795,22 +850,22 @@ def main():
     date_str = datetime.now().strftime("%Y%m%d")
 
     for i, q in enumerate(selected_questions, 1):
-        print(f"[{i}/{len(selected_questions)}] {q['difficulty']} - {q['questionFrontendId']}. {q['title']}")
+        log_info(f"[{i}/{len(selected_questions)}] {q['difficulty']} - {q['questionFrontendId']}. {q['title']}")
 
         # 获取详情
         detail = fetcher.get_question_detail(q['titleSlug'])
         if not detail:
-            print(f"  ✗ 跳过（获取失败）")
+            log_info(f"  ✗ 跳过（获取失败）")
             logger.add_result(i, False, q['title'])
             continue
 
         # 获取 AI 解答
         ai_solution = None
         if deepseek.is_available():
-            print(f"  正在生成 AI 解答...")
+            log_info(f"  正在生成 AI 解答...")
             ai_solution = deepseek.generate_solution(detail)
             if ai_solution:
-                print(f"  ✓ AI 解答已生成")
+                log_info(f"  ✓ AI 解答已生成")
 
         # 保存 Markdown
         if save_as_markdown(detail, ai_solution, config['output_dir']):
@@ -828,22 +883,22 @@ def main():
         else:
             logger.add_result(i, False, q['title'])
 
-        print()
+        log_info("")
 
     # 保存执行日志
     logger.save()
 
-    print("=" * 60)
-    print(f"完成! 成功保存 {saved_count} 道题目")
-    print(f"保存位置: {os.path.abspath(config['output_dir'])}")
-    print(f"历史记录: 累计已选择 {len(history.history)} 道题目")
-    print("=" * 60)
-    print()
+    log_info("=" * 60)
+    log_info(f"完成! 成功保存 {saved_count} 道题目")
+    log_info(f"保存位置: {os.path.abspath(config['output_dir'])}")
+    log_info(f"历史记录: 累计已选择 {len(history.history)} 道题目")
+    log_info("=" * 60)
+    log_info("")
 
     # GitHub Pages 发布
     github_config = config.get('github_pages', {})
     if github_config.get('enabled', False) and saved_files:
-        print("正在生成 GitHub Pages...")
+        log_info("正在生成 GitHub Pages...")
 
         # 获取当前时间戳（时分秒）
         time_str = datetime.now().strftime("%H%M%S")
@@ -859,15 +914,15 @@ def main():
             # 推送到 GitHub
             publisher = GitHubPagesPublisher(github_config)
             if publisher.is_available():
-                print()
-                print("正在推送到 GitHub...")
+                log_info("")
+                log_info("正在推送到 GitHub...")
                 publisher.git_add_commit_push(date_str, selected_questions)
             else:
-                print("  ⚠ GitHub Pages 未完全配置，跳过推送")
-                print("  提示: 查看 GITHUB_PAGES_SETUP.md 了解配置步骤")
+                log_info("  ⚠ GitHub Pages 未完全配置，跳过推送")
+                log_info("  提示: 查看 GITHUB_PAGES_SETUP.md 了解配置步骤")
 
-        print()
-        print("=" * 60)
+        log_info("")
+        log_info("=" * 60)
 
     # 发送系统通知
     send_notification("LeetCode Job", "job 执行完毕")
