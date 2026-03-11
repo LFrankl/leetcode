@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-11 10:32:29",
+      "record_id": "20260311_103229",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3360",
+          "title": "移除石头游戏",
+          "difficulty": "easy",
+          "file": "20260311_103229_q1.html"
+        },
+        {
+          "number": "3528",
+          "title": "单位转换 I",
+          "difficulty": "medium",
+          "file": "20260311_103229_q2.html"
+        },
+        {
+          "number": "1298",
+          "title": "你能从盒子里获得的最大糖果数",
+          "difficulty": "hard",
+          "file": "20260311_103229_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-11 08:51:35",
       "record_id": "20260311_085135",
       "count": 3,
@@ -631,5 +656,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-11 08:51:35"
+  "last_updated": "2026-03-11 10:32:29"
 }

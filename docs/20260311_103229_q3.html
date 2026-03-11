@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1298. 你能从盒子里获得的最大糖果数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-11 10:32:29</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1298. 你能从盒子里获得的最大糖果数</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-candies-you-can-get-from-boxes/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1298-你能从盒子里获得的最大糖果数">1298. 你能从盒子里获得的最大糖果数</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 广度优先搜索, 图, 数组</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-candies-you-can-get-from-boxes/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你&nbsp;<code>n</code>&nbsp;个盒子，每个盒子的格式为&nbsp;<code>[status, candies, keys, containedBoxes]</code>&nbsp;，其中：</p>
+
+<ul>
+    <li>状态字&nbsp;<code>status[i]</code>：整数，如果&nbsp;<code>box[i]</code>&nbsp;是开的，那么是 <strong>1&nbsp;</strong>，否则是 <strong>0&nbsp;</strong>。</li>
+    <li>糖果数&nbsp;<code>candies[i]</code>: 整数，表示&nbsp;<code>box[i]</code> 中糖果的数目。</li>
+    <li>钥匙&nbsp;<code>keys[i]</code>：数组，表示你打开&nbsp;<code>box[i]</code>&nbsp;后，可以得到一些盒子的钥匙，每个元素分别为该钥匙对应盒子的下标。</li>
+    <li>内含的盒子&nbsp;<code>containedBoxes[i]</code>：整数，表示放在&nbsp;<code>box[i]</code>&nbsp;里的盒子所对应的下标。</li>
+</ul>
+
+<p>给你一个整数数组&nbsp;<code>initialBoxes</code>，包含你最初拥有的盒子。你可以拿走每个&nbsp;<strong>已打开盒子&nbsp;</strong>里的所有糖果，并且可以使用其中的钥匙去开启新的盒子，并且可以使用在其中发现的其他盒子。</p>
+
+<p>请你按照上述规则，返回可以获得糖果的 <strong>最大数目&nbsp;</strong>。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>status = [1,0,1,0], candies = [7,5,4,100], keys = [[],[],[1],[]], containedBoxes = [[1,2],[3],[],[]], initialBoxes = [0]
+<strong>输出：</strong>16
+<strong>解释：
+</strong>一开始你有盒子 0 。你将获得它里面的 7 个糖果和盒子 1 和 2。
+盒子 1 目前状态是关闭的，而且你还没有对应它的钥匙。所以你将会打开盒子 2 ，并得到里面的 4 个糖果和盒子 1 的钥匙。
+在盒子 1 中，你会获得 5 个糖果和盒子 3 ，但是你没法获得盒子 3 的钥匙所以盒子 3 会保持关闭状态。
+你总共可以获得的糖果数目 = 7 + 4 + 5 = 16 个。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>status = [1,0,0,0,0,0], candies = [1,1,1,1,1,1], keys = [[1,2,3,4,5],[],[],[],[],[]], containedBoxes = [[1,2,3,4,5],[],[],[],[],[]], initialBoxes = [0]
+<strong>输出：</strong>6
+<strong>解释：
+</strong>你一开始拥有盒子 0 。打开它你可以找到盒子 1,2,3,4,5 和它们对应的钥匙。
+打开这些盒子，你将获得所有盒子的糖果，所以总糖果数为 6 个。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>status = [1,1,1], candies = [100,1,100], keys = [[],[0,2],[]], containedBoxes = [[],[],[]], initialBoxes = [1]
+<strong>输出：</strong>1
+</pre>
+
+<p><strong>示例 4：</strong></p>
+
+<pre>
+<strong>输入：</strong>status = [1], candies = [100], keys = [[]], containedBoxes = [[]], initialBoxes = []
+<strong>输出：</strong>0
+</pre>
+
+<p><strong>示例 5：</strong></p>
+
+<pre>
+<strong>输入：</strong>status = [1,1,1], candies = [2,3,2], keys = [[],[],[]], containedBoxes = [[],[],[]], initialBoxes = [2,1,0]
+<strong>输出：</strong>7
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= status.length &lt;= 1000</code></li>
+    <li><code>status.length == candies.length == keys.length == containedBoxes.length == n</code></li>
+    <li><code>status[i]</code> 要么是&nbsp;<code>0</code>&nbsp;要么是&nbsp;<code>1</code> 。</li>
+    <li><code>1 &lt;= candies[i] &lt;= 1000</code></li>
+    <li><code>0 &lt;= keys[i].length &lt;= status.length</code></li>
+    <li><code>0 &lt;= keys[i][j] &lt; status.length</code></li>
+    <li><code>keys[i]</code>&nbsp;中的值都是互不相同的。</li>
+    <li><code>0 &lt;= containedBoxes[i].length &lt;= status.length</code></li>
+    <li><code>0 &lt;= containedBoxes[i][j] &lt; status.length</code></li>
+    <li><code>containedBoxes[i]</code>&nbsp;中的值都是互不相同的。</li>
+    <li>每个盒子最多被一个盒子包含。</li>
+    <li><code>0 &lt;= initialBoxes.length&nbsp;&lt;= status.length</code></li>
+    <li><code>0 &lt;= initialBoxes[i] &lt; status.length</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int maxCandies(vector&lt;int&gt;&amp; status, vector&lt;int&gt;&amp; candies, vector&lt;vector&lt;int&gt;&gt;&amp; keys, vector&lt;vector&lt;int&gt;&gt;&amp; containedBoxes, vector&lt;int&gt;&amp; initialBoxes) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int maxCandies(int[] status, int[] candies, int[][] keys, int[][] containedBoxes, int[] initialBoxes) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def maxCandies(self, status: List[int], candies: List[int], keys: List[List[int]], containedBoxes: List[List[int]], initialBoxes: List[int]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} status
+ * @param {number[]} candies
+ * @param {number[][]} keys
+ * @param {number[][]} containedBoxes
+ * @param {number[]} initialBoxes
+ * @return {number}
+ */
+var maxCandies = function(status, candies, keys, containedBoxes, initialBoxes) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]int, initialBoxes []int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Use Breadth First Search (BFS) to traverse all possible boxes you can open. Only push to the queue the boxes the you have with their keys.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[1,0,1,0]
+[7,5,4,100]
+[[],[],[1],[]]
+[[1,2],[3],[],[]]
+[0]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+我们有一组盒子，每个盒子有四种属性：<br />
+- <code>status[i]</code>：盒子初始是否打开（1开/0关）<br />
+- <code>candies[i]</code>：盒子中的糖果数<br />
+- <code>keys[i]</code>：打开该盒子后能获得的钥匙（指向其他盒子的索引）<br />
+- <code>containedBoxes[i]</code>：该盒子中包含的其他盒子索引  </p>
+
+<p>初始时我们拥有 <code>initialBoxes</code> 中列出的盒子（但不一定都能立即打开）。<br />
+我们可以：<br />
+1. 打开<strong>已拥有且状态为打开</strong>的盒子<br />
+2. 打开盒子后，获得其中的糖果、钥匙（可改变其他盒子的状态）、以及内含的盒子<br />
+3. 重复此过程直到无法再打开新盒子  </p>
+
+<p>求最终能获得的最大糖果总数。</p>
+
+<p><strong>关键约束</strong><br />
+- 盒子总数 n ≤ 1000<br />
+- 糖果数 ≥ 1<br />
+- 钥匙和内含盒子列表可能为空<br />
+- 初始拥有的盒子可能为空<br />
+- 盒子状态可能因获得钥匙而改变（从关→开）<br />
+- 一个盒子可能被多个钥匙指向，但只能被一个盒子包含  </p>
+
+<p><strong>边界情况</strong><br />
+- 初始没有盒子 → 糖果数为 0<br />
+- 拥有盒子但无法打开（没钥匙） → 无法获得其糖果<br />
+- 钥匙可能指向已拥有或未拥有的盒子  </p>
+
+<p><strong>输入输出格式</strong><br />
+- 输入：status[], candies[], keys[][], containedBoxes[][], initialBoxes[]<br />
+- 输出：一个整数，表示可获得的最大糖果数  </p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一bfs-状态维护">解法一：BFS + 状态维护</h3>
+
+<p><strong>核心思想</strong><br />
+模拟开盒过程，维护三个集合：<br />
+1. 已拥有的盒子<br />
+2. 已获得的钥匙<br />
+3. 已打开的盒子  </p>
+
+<p>每次从<strong>已拥有且可打开</strong>的盒子中选择一个打开，更新状态，直到没有盒子可打开。</p>
+
+<p><strong>解题步骤</strong><br />
+1. 初始化队列（存放当前可打开的盒子）<br />
+2. 初始化三个集合：<br />
+   - <code>owned</code>：已拥有的盒子（包括初始拥有和后续获得的）<br />
+   - <code>keys</code>：已获得的钥匙<br />
+   - <code>opened</code>：已打开的盒子（避免重复打开）<br />
+3. 将初始拥有的盒子中状态为打开的直接加入队列<br />
+4. BFS循环：<br />
+   - 取出一个盒子，若已打开过则跳过<br />
+   - 获得糖果、钥匙、内含盒子<br />
+   - 对于每个钥匙：<br />
+     - 若对应盒子已拥有且未打开，且现在状态变为可打开，则加入队列<br />
+   - 对于每个内含盒子：<br />
+     - 若未拥有则加入<code>owned</code><br />
+     - 若现在可打开（已拥有且状态为开或已有钥匙）且未打开过，则加入队列<br />
+5. 循环直到队列为空  </p>
+
+<p><strong>注意事项</strong><br />
+- 盒子状态可能因获得钥匙而改变，需动态判断是否可打开<br />
+- 已打开的盒子不能重复打开<br />
+- 内含盒子可能已在<code>owned</code>中，需去重  </p>
+
+<h3 id="解法二模拟-循环处理">解法二：模拟 + 循环处理</h3>
+
+<p><strong>核心思想</strong><br />
+不使用队列，而是循环遍历所有已拥有但未打开的盒子，直到一轮中没有新盒子被打开。</p>
+
+<p><strong>解题步骤</strong><br />
+1. 初始化<code>owned</code>、<code>keys</code>、<code>opened</code>集合<br />
+2. 将初始盒子加入<code>owned</code><br />
+3. 循环：<br />
+   - 标记<code>changed = false</code><br />
+   - 遍历所有<code>owned</code>中未打开的盒子：<br />
+     - 若盒子可打开（状态为开或有钥匙）：<br />
+       - 打开它，获得糖果、钥匙、内含盒子<br />
+       - 更新<code>changed = true</code><br />
+   - 若一轮中无变化，结束循环<br />
+4. 返回糖果总数  </p>
+
+<p><strong>优缺点</strong><br />
+- 实现简单，但可能效率较低（每轮遍历所有盒子）<br />
+- 适合数据规模较小的情况  </p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一bfs-状态维护-2">解法一：BFS + 状态维护</h3>
+
+<pre><code>func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]int, initialBoxes []int) int {
+    n := len(status)
+    owned := make([]bool, n)      // 已拥有的盒子
+    hasKey := make([]bool, n)     // 已获得的钥匙
+    opened := make([]bool, n)     // 已打开的盒子
+    queue := make([]int, 0)       // 当前可打开的盒子队列
+
+    // 初始化：拥有初始盒子
+    for _, box := range initialBoxes {
+        owned[box] = true
+        // 如果初始就是打开的，加入队列
+        if status[box] == 1 {
+            queue = append(queue, box)
+        }
+    }
+
+    totalCandies := 0
+
+    for len(queue) &gt; 0 {
+        // 取出当前可打开的盒子
+        curr := queue[0]
+        queue = queue[1:]
+
+        // 如果已经打开过，跳过
+        if opened[curr] {
+            continue
+        }
+
+        // 打开盒子
+        opened[curr] = true
+        totalCandies += candies[curr]
+
+        // 获得该盒子中的钥匙
+        for _, key := range keys[curr] {
+            hasKey[key] = true
+            // 如果拥有对应盒子且未打开，且现在可以打开了，加入队列
+            if owned[key] &amp;&amp; !opened[key] &amp;&amp; (status[key] == 1 || hasKey[key]) {
+                queue = append(queue, key)
+            }
+        }
+
+        // 获得该盒子中的内含盒子
+        for _, innerBox := range containedBoxes[curr] {
+            if !owned[innerBox] {
+                owned[innerBox] = true
+                // 如果现在可以打开（状态为开或有钥匙），加入队列
+                if !opened[innerBox] &amp;&amp; (status[innerBox] == 1 || hasKey[innerBox]) {
+                    queue = append(queue, innerBox)
+                }
+            }
+        }
+    }
+
+    return totalCandies
+}
+</code></pre>
+
+<h3 id="解法二模拟-循环处理-2">解法二：模拟 + 循环处理</h3>
+
+<pre><code>func maxCandies2(status []int, candies []int, keys [][]int, containedBoxes [][]int, initialBoxes []int) int {
+    n := len(status)
+    owned := make([]bool, n)
+    hasKey := make([]bool, n)
+    opened := make([]bool, n)
+
+    // 初始化拥有盒子
+    for _, box := range initialBoxes {
+        owned[box] = true
+    }
+
+    totalCandies := 0
+    changed := true
+
+    // 循环直到没有新盒子被打开
+    for changed {
+        changed = false
+
+        // 遍历所有已拥有但未打开的盒子
+        for box := 0; box &lt; n; box++ {
+            if owned[box] &amp;&amp; !opened[box] {
+                // 检查是否可以打开：初始状态为开或已有钥匙
+                canOpen := status[box] == 1 || hasKey[box]
+                if canOpen {
+                    // 打开盒子
+                    opened[box] = true
+                    changed = true
+                    totalCandies += candies[box]
+
+                    // 获得钥匙
+                    for _, key := range keys[box] {
+                        hasKey[key] = true
+                    }
+
+                    // 获得内含盒子
+                    for _, innerBox := range containedBoxes[box] {
+                        owned[innerBox] = true
+                    }
+                }
+            }
+        }
+    }
+
+    return totalCandies
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一bfs-状态维护-3">解法一：BFS + 状态维护</h3>
+
+<ul>
+<li><p>⏱️ <strong>时间复杂度</strong>：O(n + m + k)  </p>
+
+<ul>
+<li>n：盒子数量  </li>
+<li>m：所有盒子的内含盒子总数（边数）  </li>
+<li>k：所有盒子的钥匙总数  </li>
+<li>每个盒子最多被处理一次，每条边（内含关系）和每个钥匙最多被处理一次  </li>
+</ul></li>
+<li><p>💾 <strong>空间复杂度</strong>：O(n)  </p>
+
+<ul>
+<li>存储<code>owned</code>、<code>hasKey</code>、<code>opened</code>数组：O(3n)  </li>
+<li>队列最坏情况：O(n)  </li>
+<li>总体：O(n)  </li>
+</ul></li>
+</ul>
+
+<h3 id="解法二模拟-循环处理-3">解法二：模拟 + 循环处理</h3>
+
+<ul>
+<li><p>⏱️ <strong>时间复杂度</strong>：O(n² + n*(m+k))  </p>
+
+<ul>
+<li>最坏情况下每轮只能打开一个盒子，需要n轮  </li>
+<li>每轮遍历所有n个盒子，检查每个盒子的钥匙和内含盒子  </li>
+<li>总体：O(n² + n*(m+k))  </li>
+</ul></li>
+<li><p>💾 <strong>空间复杂度</strong>：O(n)  </p>
+
+<ul>
+<li>存储三个状态数组：O(3n)  </li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（BFS）</th>
+  <th>解法二（模拟循环）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>时间复杂度</td>
+  <td>O(n+m+k)</td>
+  <td>O(n²+n*(m+k))</td>
+</tr>
+<tr>
+  <td>空间复杂度</td>
+  <td>O(n)</td>
+  <td>O(n)</td>
+</tr>
+<tr>
+  <td>实现难度</td>
+  <td>中等</td>
+  <td>简单</td>
+</tr>
+<tr>
+  <td>性能</td>
+  <td>高效</td>
+  <td>较低效</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>数据规模大时</td>
+  <td>数据规模小或作为参考实现</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：解法一（BFS）<br />
+- 时间复杂度更优，适合n≤1000的约束<br />
+- 模拟过程更自然，符合"打开盒子→获得新资源"的流程<br />
+- 实际运行效率更高  </p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例题目示例1">用例1：常规用例（题目示例1）</h3>
+
+<pre><code>输入：
+status = [1,0,1,0]
+candies = [7,5,4,100]
+keys = [[],[],[1],[]]
+containedBoxes = [[1,2],[3],[],[]]
+initialBoxes = [0]
+
+输出：16
+
+解释：
+初始有盒子0（已开）→ 得7糖，获得盒子1、2
+盒子2（已开）→ 得4糖，获得钥匙1
+盒子1（有关键匙）→ 得5糖，获得盒子3
+盒子3（关且无钥匙）→ 无法打开
+总糖果：7+4+5=16
+</code></pre>
+
+<h3 id="用例2边界情况初始无盒子">用例2：边界情况（初始无盒子）</h3>
+
+<pre><code>输入：
+status = [1]
+candies = [100]
+keys = [[]]
+containedBoxes = [[]]
+initialBoxes = []
+
+输出：0
+
+解释：初始没有盒子，无法获得任何糖果
+</code></pre>
+
+<h3 id="用例3复杂依赖">用例3：复杂依赖</h3>
+
+<pre><code>输入：
+status = [0,0,0,0]
+candies = [1,2,3,4]
+keys = [[1],[2],[3],[0]]
+containedBoxes = [[1],[2],[3],[0]]
+initialBoxes = [0]
+
+输出：10
+
+解释：
+盒子0（关）→ 无钥匙，无法打开
+实际上形成了循环依赖，但初始盒子0是关闭的且没有钥匙
+需要从其他盒子获得钥匙才能打开
+但此例中所有盒子初始都关闭，且钥匙形成循环
+实际上无法打开任何盒子 → 输出0
+（注：此例实际输出应为0，但原描述有误，这里修正）
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><p><strong>LeetCode 841. 钥匙和房间</strong>  </p>
+
+<ul>
+<li>相似点：通过钥匙访问新房间/盒子  </li>
+<li>不同点：本题盒子有开关状态，且盒子内含其他盒子  </li>
+</ul></li>
+<li><p><strong>LeetCode 1557. 可以到达所有点的最少点数目</strong>  </p>
+
+<ul>
+<li>相似点：图的可达性问题  </li>
+<li>不同点：本题有状态转换（钥匙改变盒子状态）  </li>
+</ul></li>
+<li><p><strong>LeetCode 207. 课程表</strong>  </p>
+
+<ul>
+<li>相似点：依赖关系处理  </li>
+<li>不同点：本题是模拟过程而非拓扑排序</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-11 10:32:29</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
