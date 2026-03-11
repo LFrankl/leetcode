@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1163. 按字典序排在最后的子串 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-11 08:51:35</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1163. 按字典序排在最后的子串</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/last-substring-in-lexicographical-order/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1163-按字典序排在最后的子串">1163. 按字典序排在最后的子串</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 双指针, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/last-substring-in-lexicographical-order/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个字符串&nbsp;<code>s</code>&nbsp;，找出它的所有子串并按字典序排列，返回排在最后的那个子串。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>s = "abab"
+<strong>输出：</strong>"bab"
+<strong>解释：</strong>我们可以找出 7 个子串 ["a", "ab", "aba", "abab", "b", "ba", "bab"]。按字典序排在最后的子串是 "bab"。
+</pre>
+
+<p><strong>示例&nbsp;2：</strong></p>
+
+<pre>
+<strong>输入：</strong>s = "leetcode"
+<strong>输出：</strong>"tcode"
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= s.length &lt;= 4 * 10<sup>5</sup></code></li>
+    <li><code>s</code> 仅含有小写英文字符。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    string lastSubstring(string s) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public String lastSubstring(String s) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def lastSubstring(self, s: str) -&gt; str:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string} s
+ * @return {string}
+ */
+var lastSubstring = function(s) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func lastSubstring(s string) string {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Assume that the answer is a sub-string from index i to j. If you add the character at index j+1 you get a better answer.</li>
+<li>The answer is always a suffix of the given string.</li>
+<li>Since the limits are high, we need an efficient data structure.</li>
+<li>Use suffix array.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"abab"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+给定一个字符串 <code>s</code>，找出它的所有子串中<strong>字典序最大</strong>的那个子串，并返回该子串。</p>
+
+<p><strong>关键约束与边界</strong><br />
+- 字符串长度可达 4×10⁵，要求高效算法（O(n) 或 O(n log n)）。
+- 仅包含小写英文字母。
+- 子串是连续的字符序列。
+- 字典序比较：从第一个字符开始逐字符比较 ASCII 码，直到出现不同或结束。</p>
+
+<p><strong>输入输出格式</strong><br />
+- 输入：字符串 <code>s</code>
+- 输出：字典序最大的子串</p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一暴力枚举不可行">解法一：暴力枚举（不可行）</h3>
+
+<ul>
+<li>枚举所有子串，比较字典序。</li>
+<li>子串数量 O(n²)，比较 O(n)，总 O(n³)，不可行。</li>
+</ul>
+
+<h3 id="解法二双指针最大后缀">解法二：双指针（最大后缀）</h3>
+
+<p><strong>核心思想</strong><br />
+字典序最大的子串一定是<strong>从某个位置开始到末尾的后缀</strong>。<br />
+证明：若非后缀，可在其后追加字符使字典序更大。</p>
+
+<p>因此问题转化为：<strong>找出所有后缀中字典序最大的那个</strong>。</p>
+
+<p><strong>优化思路</strong><br />
+直接比较所有后缀仍为 O(n²)，需优化。<br />
+使用双指针 <code>i</code> 和 <code>j</code>，其中 <code>i</code> 是当前候选最大后缀起点，<code>j</code> 是待比较后缀起点，<code>k</code> 是当前比较的偏移量。</p>
+
+<p><strong>步骤</strong><br />
+1. 初始化 <code>i=0, j=1, k=0</code>。
+2. 比较 <code>s[i+k]</code> 和 <code>s[j+k]</code>：
+   - 若相等，<code>k++</code>，继续比较。
+   - 若 <code>s[i+k] &lt; s[j+k]</code>：说明 <code>i</code> 开头的后缀小于 <code>j</code> 开头的后缀，更新 <code>i = max(i+k+1, j)</code>，<code>j = i+1</code>，<code>k=0</code>。
+   - 若 <code>s[i+k] &gt; s[j+k]</code>：说明 <code>j</code> 开头的后缀更小，更新 <code>j = j+k+1</code>，<code>k=0</code>。
+3. 重复直到 <code>j+k &gt;= n</code>。
+4. 返回 <code>s[i:]</code>。</p>
+
+<p><strong>注意事项</strong><br />
+- 更新 <code>i</code> 时取 <code>max(i+k+1, j)</code> 避免回退。
+- 保证 <code>i &lt; j</code>。</p>
+
+<h3 id="解法三后缀数组sa">解法三：后缀数组（SA）</h3>
+
+<ul>
+<li>构建后缀数组，最后一个后缀即为答案。</li>
+<li>可用 DC3 或 SA-IS 算法 O(n) 构建，但实现复杂。</li>
+<li>本题可简化为求最大后缀，无需完整后缀数组。</li>
+</ul>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法二双指针最大后缀-2">解法二：双指针（最大后缀）</h3>
+
+<pre><code>func lastSubstring(s string) string {
+    n := len(s)
+    i, j, k := 0, 1, 0
+    for j+k &lt; n {
+        if s[i+k] == s[j+k] {
+            k++
+            continue
+        }
+        if s[i+k] &lt; s[j+k] {
+            // i 开头的后缀更小，更新 i
+            i = max(i+k+1, j)
+            j = i + 1
+        } else {
+            // j 开头的后缀更小，更新 j
+            j = j + k + 1
+        }
+        k = 0
+    }
+    return s[i:]
+}
+
+func max(a, b int) int {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法二双指针">解法二：双指针</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n)<br />
+每次比较至少移动 <code>i</code> 或 <code>j</code>，且 <code>i</code> 和 <code>j</code> 只增不减，最多比较 2n 次。</li>
+<li><strong>空间复杂度</strong>：O(1)<br />
+仅使用常数变量。</li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>双指针</td>
+  <td>O(n) 时间，O(1) 空间，实现简单</td>
+  <td>逻辑较绕，需仔细处理边界</td>
+  <td>本题最佳选择</td>
+</tr>
+<tr>
+  <td>后缀数组</td>
+  <td>通用性强，可解多种后缀问题</td>
+  <td>实现复杂，空间 O(n)</td>
+  <td>需要完整后缀排序时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法二</strong>：针对本题特化，效率高，代码简洁。</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<pre><code>func main() {
+    // 常规用例
+    fmt.Println(lastSubstring("abab"))     // "bab"
+    fmt.Println(lastSubstring("leetcode")) // "tcode"
+
+    // 边界用例
+    fmt.Println(lastSubstring("z"))        // "z"
+    fmt.Println(lastSubstring("aaaa"))     // "aaaa"
+    fmt.Println(lastSubstring("cacacb"))   // "cb"
+}
+</code></pre>
+
+<p><strong>解释</strong><br />
+- <code>"abab"</code>：后缀有 <code>"abab"</code>, <code>"bab"</code>, <code>"ab"</code>, <code>"b"</code>，最大为 <code>"bab"</code>。
+- <code>"leetcode"</code>：最大后缀为 <code>"tcode"</code>。
+- <code>"z"</code>：只有一个字符。
+- <code>"aaaa"</code>：所有后缀字典序相同，取最长（即本身）。
+- <code>"cacacb"</code>：最大后缀为 <code>"cb"</code>。</p>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/longest-duplicate-substring/">1044. 最长重复子串</a>（后缀数组/二分+哈希）</li>
+<li><a href="https://leetcode.com/problems/last-substring-in-lexicographical-order/">1163. 按字典序排在最后的子串</a>（本题）</li>
+<li><a href="https://leetcode.com/problems/remove-duplicate-letters/">316. 去除重复字母</a>（字典序+栈）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-11 08:51:35</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

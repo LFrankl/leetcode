@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-11 08:51:35",
+      "record_id": "20260311_085135",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1656",
+          "title": "设计有序流",
+          "difficulty": "easy",
+          "file": "20260311_085135_q1.html"
+        },
+        {
+          "number": "3305",
+          "title": "元音辅音字符串计数 I",
+          "difficulty": "medium",
+          "file": "20260311_085135_q2.html"
+        },
+        {
+          "number": "1163",
+          "title": "按字典序排在最后的子串",
+          "difficulty": "hard",
+          "file": "20260311_085135_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-10 20:32:47",
       "record_id": "20260310_203247",
       "count": 3,
@@ -606,5 +631,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-10 20:32:47"
+  "last_updated": "2026-03-11 08:51:35"
 }

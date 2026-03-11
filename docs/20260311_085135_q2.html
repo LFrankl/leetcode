@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3305. 元音辅音字符串计数 I - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-11 08:51:35</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3305. 元音辅音字符串计数 I</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/count-of-substrings-containing-every-vowel-and-k-consonants-i/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3305-元音辅音字符串计数-i">3305. 元音辅音字符串计数 I</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 哈希表, 字符串, 滑动窗口</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/count-of-substrings-containing-every-vowel-and-k-consonants-i/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个字符串 <code>word</code> 和一个 <strong>非负 </strong>整数 <code>k</code>。</p>
+
+<p>返回 <code>word</code> 的 <span data-keyword="substring-nonempty">子字符串</span> 中，每个元音字母（<code>'a'</code>、<code>'e'</code>、<code>'i'</code>、<code>'o'</code>、<code>'u'</code>）<strong>至少</strong> 出现一次，并且 <strong>恰好 </strong>包含 <code>k</code> 个辅音字母的子字符串的总数。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">word = "aeioqq", k = 1</span></p>
+
+<p><strong>输出：</strong><span class="example-io">0</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>不存在包含所有元音字母的子字符串。</p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">word = "aeiou", k = 0</span></p>
+
+<p><strong>输出：</strong><span class="example-io">1</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>唯一一个包含所有元音字母且不含辅音字母的子字符串是 <code>word[0..4]</code>，即 <code>"aeiou"</code>。</p>
+</div>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">word = "ieaouqqieaouqq", k = 1</span></p>
+
+<p><strong>输出：</strong>3</p>
+
+<p><strong>解释：</strong></p>
+
+<p>包含所有元音字母并且恰好含有一个辅音字母的子字符串有：</p>
+
+<ul>
+    <li><code>word[0..5]</code>，即 <code>"ieaouq"</code>。</li>
+    <li><code>word[6..11]</code>，即 <code>"qieaou"</code>。</li>
+    <li><code>word[7..12]</code>，即 <code>"ieaouq"</code>。</li>
+</ul>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>5 &lt;= word.length &lt;= 250</code></li>
+    <li><code>word</code> 仅由小写英文字母组成。</li>
+    <li><code>0 &lt;= k &lt;= word.length - 5</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int countOfSubstrings(string word, int k) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int countOfSubstrings(String word, int k) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def countOfSubstrings(self, word: str, k: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string} word
+ * @param {number} k
+ * @return {number}
+ */
+var countOfSubstrings = function(word, k) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func countOfSubstrings(word string, k int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Use a HashMap and check all the substrings.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"aeioqq"
+1
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：
+给定一个字符串 <code>word</code> 和一个非负整数 <code>k</code>，统计满足以下条件的子字符串数量：
+1. 子字符串包含所有五个元音字母（a, e, i, o, u）
+2. 子字符串中恰好包含 <code>k</code> 个辅音字母（即非元音字母）</p>
+
+<p><strong>关键约束</strong>：
+- 字符串长度 5 ≤ word.length ≤ 250
+- 字符均为小写英文字母
+- 0 ≤ k ≤ word.length - 5（因为至少需要5个元音字母）
+- 元音字母在子字符串中至少出现一次，不要求连续出现
+- 辅音字母数量必须恰好等于 k</p>
+
+<p><strong>边界情况</strong>：
+- k=0 时，子字符串只能包含元音字母
+- 字符串长度较小时，可能没有符合条件的子字符串
+- 元音字母可能重复出现</p>
+
+<p><strong>输入输出</strong>：
+- 输入：字符串 word，整数 k
+- 输出：满足条件的子字符串数量</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一滑动窗口-状态压缩">解法一：滑动窗口 + 状态压缩</h3>
+
+<p><strong>核心思想</strong>：
+- 使用滑动窗口枚举所有可能的子字符串
+- 用位掩码记录元音字母的出现情况（5位二进制，1表示出现）
+- 维护窗口内辅音字母的数量
+- 当窗口满足条件时，尝试收缩左边界以统计所有以当前右边界结尾的有效子字符串</p>
+
+<p><strong>解题步骤</strong>：
+1. 定义元音集合，创建元音映射表
+2. 初始化左指针 l=0，元音状态 mask=0，辅音计数 cons=0，结果 ans=0
+3. 遍历右指针 r 从 0 到 n-1：
+   - 如果 word[r] 是元音，更新 mask 的对应位
+   - 否则，cons++
+   - 当 cons &gt; k 时，移动左指针直到 cons ≤ k
+   - 当 mask == 31（所有元音都出现）且 cons == k 时：
+     - 记录当前左指针位置 tmp = l
+     - 尝试收缩左边界，统计所有有效子字符串
+     - 恢复左指针</p>
+
+<p><strong>注意事项</strong>：
+- 需要处理元音重复出现的情况
+- 收缩左边界时要小心处理辅音计数
+- 位掩码操作要准确</p>
+
+<h3 id="解法二双指针优化">解法二：双指针优化</h3>
+
+<p><strong>核心思想</strong>：
+- 解法一的优化版本，避免重复收缩左边界
+- 当窗口满足条件时，找到最小的满足条件的左边界，然后直接计算数量</p>
+
+<p><strong>解题步骤</strong>：
+1. 同解法一初始化
+2. 遍历右指针 r：
+   - 更新元音状态和辅音计数
+   - 当 cons &gt; k 时，移动左指针
+   - 当满足条件时：
+     - 记录当前左边界 left<em>boundary = l
+     - 移动左指针直到条件不满足，记录 right</em>boundary = l-1
+     - 计算有效子字符串数：(left<em>boundary - last</em>l + 1) * (right<em>boundary - left</em>boundary + 1)
+     - 更新 last_l</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一滑动窗口-状态压缩-2">解法一：滑动窗口 + 状态压缩</h3>
+
+<pre><code>func countOfSubstrings(word string, k int) int {
+    n := len(word)
+    // 元音映射：a-&gt;0, e-&gt;1, i-&gt;2, o-&gt;3, u-&gt;4
+    vowelMap := map[byte]int{
+        'a': 0, 'e': 1, 'i': 2, 'o': 3, 'u': 4,
+    }
+
+    ans := 0
+    // 遍历所有可能的左边界
+    for l := 0; l &lt; n; l++ {
+        mask := 0    // 5位二进制，记录元音出现情况
+        cons := 0    // 辅音计数
+
+        // 扩展右边界
+        for r := l; r &lt; n; r++ {
+            ch := word[r]
+            if idx, isVowel := vowelMap[ch]; isVowel {
+                mask |= 1 &lt;&lt; idx  // 设置对应位
+            } else {
+                cons++
+                // 如果辅音超过k，可以提前结束
+                if cons &gt; k {
+                    break
+                }
+            }
+
+            // 检查是否满足条件
+            if mask == 31 &amp;&amp; cons == k {  // 31 = 0b11111
+                ans++
+            }
+        }
+    }
+
+    return ans
+}
+</code></pre>
+
+<h3 id="解法二双指针优化-2">解法二：双指针优化</h3>
+
+<pre><code>func countOfSubstrings(word string, k int) int {
+    n := len(word)
+    vowelMap := map[byte]int{
+        'a': 0, 'e': 1, 'i': 2, 'o': 3, 'u': 4,
+    }
+
+    ans := 0
+    // 遍历所有可能的右边界
+    for r := 0; r &lt; n; r++ {
+        mask := 0
+        cons := 0
+
+        // 从右边界向左扩展左边界
+        for l := r; l &gt;= 0; l-- {
+            ch := word[l]
+            if idx, isVowel := vowelMap[ch]; isVowel {
+                mask |= 1 &lt;&lt; idx
+            } else {
+                cons++
+                if cons &gt; k {
+                    break
+                }
+            }
+
+            if mask == 31 &amp;&amp; cons == k {
+                ans++
+            }
+        }
+    }
+
+    return ans
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一">解法一：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n²)
+<ul>
+<li>外层循环 O(n)</li>
+<li>内层循环最多 O(n)</li>
+<li>总复杂度 O(n²)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了常数个变量</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二">解法二：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n²)
+<ul>
+<li>同样需要双重循环</li>
+<li>但实际运行可能比解法一稍快，因为提前break</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了常数个变量</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>逻辑清晰，易于理解</td>
+  <td>时间复杂度较高</td>
+  <td>小规模数据 (n≤250)</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>提前剪枝，效率稍高</td>
+  <td>代码稍复杂</td>
+  <td>同解法一，但更高效</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：
+对于本题的数据范围 (n≤250)，O(n²) 的解法完全足够。推荐使用<strong>解法一</strong>，因为：
+1. 代码更简洁，易于理解和调试
+2. 250² = 62500，完全在可接受范围内
+3. 逻辑清晰，不易出错</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<pre><code>输入：word = "ieaouqqieaouqq", k = 1
+输出：3
+解释：如题目示例3所示
+</code></pre>
+
+<h3 id="用例2边界用例-k0">用例2：边界用例 (k=0)</h3>
+
+<pre><code>输入：word = "aeiou", k = 0
+输出：1
+解释：只有"aeiou"本身满足条件
+</code></pre>
+
+<h3 id="用例3无解情况">用例3：无解情况</h3>
+
+<pre><code>输入：word = "aeioqq", k = 1
+输出：0
+解释：没有包含所有元音的子字符串
+</code></pre>
+
+<h3 id="用例4复杂情况">用例4：复杂情况</h3>
+
+<pre><code>输入：word = "aaeioubbc", k = 2
+输出：2
+解释：子字符串"aaeioub"和"aeioubb"满足条件
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><p><strong>LeetCode 1358. Number of Substrings Containing All Three Characters</strong></p>
+
+<ul>
+<li>统计包含所有三种字符的子字符串数量</li>
+<li>类似思路，但只需要三种字符</li>
+</ul></li>
+<li><p><strong>LeetCode 992. Subarrays with K Different Integers</strong></p>
+
+<ul>
+<li>统计恰好包含K个不同整数的子数组数量</li>
+<li>使用滑动窗口的进阶技巧</li>
+</ul></li>
+<li><p><strong>LeetCode 1248. Count Number of Nice Subarrays</strong></p>
+
+<ul>
+<li>统计包含恰好k个奇数的子数组数量</li>
+<li>类似的计数问题</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-11 08:51:08</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
