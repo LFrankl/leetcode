@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-12 10:33:01",
+      "record_id": "20260312_103301",
+      "count": 3,
+      "questions": [
+        {
+          "number": "876",
+          "title": "链表的中间结点",
+          "difficulty": "easy",
+          "file": "20260312_103301_q1.html"
+        },
+        {
+          "number": "2787",
+          "title": "将一个数字表示成幂的和的方案数",
+          "difficulty": "medium",
+          "file": "20260312_103301_q2.html"
+        },
+        {
+          "number": "1697",
+          "title": "检查边长度限制的路径是否存在",
+          "difficulty": "hard",
+          "file": "20260312_103301_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-11 10:32:29",
       "record_id": "20260311_103229",
       "count": 3,
@@ -656,5 +681,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-11 10:32:29"
+  "last_updated": "2026-03-12 10:33:01"
 }

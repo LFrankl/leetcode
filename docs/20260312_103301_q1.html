@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>876. 链表的中间结点 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-12 10:33:01</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">876. 链表的中间结点</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/middle-of-the-linked-list/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="876-链表的中间结点">876. 链表的中间结点</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 链表, 双指针</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/middle-of-the-linked-list/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你单链表的头结点 <code>head</code> ，请你找出并返回链表的中间结点。</p>
+
+<p>如果有两个中间结点，则返回第二个中间结点。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/07/23/lc-midlist1.jpg" style="width: 544px; height: 65px;" /></p>
+
+<pre>
+<strong>输入：</strong>head = [1,2,3,4,5]
+<strong>输出：</strong>[3,4,5]
+<strong>解释：</strong>链表只有一个中间结点，值为 3 。
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/07/23/lc-midlist2.jpg" style="width: 664px; height: 65px;" /></p>
+
+<pre>
+<strong>输入：</strong>head = [1,2,3,4,5,6]
+<strong>输出：</strong>[4,5,6]
+<strong>解释：</strong>该链表有两个中间结点，值分别为 3 和 4 ，返回第二个结点。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li>链表的结点数范围是 <code>[1, 100]</code></li>
+    <li><code>1 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode middleNode(ListNode head) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code># Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -&gt; Optional[ListNode]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function(head) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func middleNode(head *ListNode) *ListNode {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[1,2,3,4,5]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h1 id="链表的中间结点-解题分析">链表的中间结点 - 解题分析</h1>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：
+给定一个单链表的头节点 <code>head</code>，需要找到并返回链表的中间节点。如果链表有偶数个节点（即存在两个中间节点），则返回<strong>第二个</strong>中间节点。</p>
+
+<p><strong>关键约束</strong>：
+- 链表节点数范围：<code>[1, 100]</code>
+- 节点值范围：<code>[1, 100]</code>
+- 链表非空（至少有一个节点）</p>
+
+<p><strong>边界情况</strong>：
+1. 链表只有一个节点：直接返回该节点
+2. 链表有两个节点：返回第二个节点
+3. 链表有偶数个节点：返回第二个中间节点
+4. 链表有奇数个节点：返回唯一的中间节点</p>
+
+<p><strong>输入输出格式</strong>：
+- 输入：单链表的头节点 <code>head</code>
+- 输出：中间节点（从该节点开始的后半部分链表）</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一两次遍历法">解法一：两次遍历法</h3>
+
+<p><strong>核心思想</strong>：先遍历一次链表获取长度，再遍历到中间位置
+- 第一次遍历：计算链表长度 <code>n</code>
+- 第二次遍历：移动到第 <code>n/2</code> 个节点（从0开始计数）</p>
+
+<h3 id="解法二快慢指针法推荐">解法二：快慢指针法（推荐）</h3>
+
+<p><strong>核心思想</strong>：使用两个指针，快指针每次走两步，慢指针每次走一步
+- 当快指针到达链表末尾时，慢指针正好在中间位置
+- 对于偶数个节点的情况，快指针会停在最后一个节点，慢指针停在第二个中间节点</p>
+
+<h3 id="解法三数组存储法">解法三：数组存储法</h3>
+
+<p><strong>核心思想</strong>：将链表节点存储到数组中，直接通过索引访问中间节点
+- 遍历链表，将每个节点存入数组
+- 通过数组长度计算中间索引：<code>len(arr)/2</code></p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一两次遍历法-2">解法一：两次遍历法</h3>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func middleNode(head *ListNode) *ListNode {
+    // 第一次遍历：计算链表长度
+    length := 0
+    current := head
+    for current != nil {
+        length++
+        current = current.Next
+    }
+
+    // 第二次遍历：移动到中间位置
+    middleIndex := length / 2
+    current = head
+    for i := 0; i &lt; middleIndex; i++ {
+        current = current.Next
+    }
+
+    return current
+}
+</code></pre>
+
+<h3 id="解法二快慢指针法推荐-2">解法二：快慢指针法（推荐）</h3>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func middleNode(head *ListNode) *ListNode {
+    // 初始化快慢指针
+    slow, fast := head, head
+
+    // 快指针每次走两步，慢指针每次走一步
+    // 当快指针到达末尾时，慢指针就在中间
+    for fast != nil &amp;&amp; fast.Next != nil {
+        slow = slow.Next      // 慢指针走一步
+        fast = fast.Next.Next // 快指针走两步
+    }
+
+    return slow
+}
+</code></pre>
+
+<h3 id="解法三数组存储法-2">解法三：数组存储法</h3>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func middleNode(head *ListNode) *ListNode {
+    // 将链表节点存储到数组中
+    nodes := make([]*ListNode, 0)
+    current := head
+
+    for current != nil {
+        nodes = append(nodes, current)
+        current = current.Next
+    }
+
+    // 直接通过索引访问中间节点
+    return nodes[len(nodes)/2]
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一两次遍历法-3">解法一：两次遍历法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>第一次遍历：O(n) 计算长度</li>
+<li>第二次遍历：O(n/2) ≈ O(n) 移动到中间</li>
+<li>总时间复杂度：O(n) + O(n) = O(n)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了常数级别的额外空间（几个指针变量）</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二快慢指针法">解法二：快慢指针法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>只需要遍历一次链表</li>
+<li>快指针走到末尾时，慢指针正好在中间</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了两个指针变量，常数空间</li>
+</ul></li>
+</ul>
+
+<h3 id="解法三数组存储法-3">解法三：数组存储法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>遍历一次链表存储节点</li>
+<li>索引访问是O(1)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(n)
+<ul>
+<li>需要额外的数组存储所有节点</li>
+<li>空间复杂度与链表长度成正比</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>两次遍历法</td>
+  <td>思路简单直观，容易实现</td>
+  <td>需要遍历两次链表，效率较低</td>
+  <td>教学示例，小规模数据</td>
+</tr>
+<tr>
+  <td>快慢指针法</td>
+  <td><strong>只需遍历一次</strong>，效率高，空间最优</td>
+  <td>指针移动逻辑需要理解</td>
+  <td><strong>推荐使用</strong>，各种规模数据</td>
+</tr>
+<tr>
+  <td>数组存储法</td>
+  <td>实现简单，直接索引访问</td>
+  <td>需要额外O(n)空间</td>
+  <td>需要多次访问中间节点的情况</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：快慢指针法
+- 时间复杂度最优（只需一次遍历）
+- 空间复杂度最优（O(1)）
+- 代码简洁优雅
+- 是链表中间节点问题的标准解法</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="测试用例1奇数长度链表">测试用例1：奇数长度链表</h3>
+
+<pre><code>输入：1 → 2 → 3 → 4 → 5
+输出：3 → 4 → 5
+解释：链表有5个节点，中间节点是第3个节点（值为3）
+</code></pre>
+
+<h3 id="测试用例2偶数长度链表">测试用例2：偶数长度链表</h3>
+
+<pre><code>输入：1 → 2 → 3 → 4 → 5 → 6
+输出：4 → 5 → 6
+解释：链表有6个节点，有两个中间节点（3和4），返回第二个中间节点（值为4）
+</code></pre>
+
+<h3 id="测试用例3最小边界情况">测试用例3：最小边界情况</h3>
+
+<pre><code>输入：1
+输出：1
+解释：链表只有一个节点，该节点就是中间节点
+</code></pre>
+
+<h3 id="测试用例4两个节点的情况">测试用例4：两个节点的情况</h3>
+
+<pre><code>输入：1 → 2
+输出：2
+解释：链表有两个节点，返回第二个节点
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>876. 链表的中间结点</strong>（本题）</li>
+<li><strong>234. 回文链表</strong> - 需要找到中间节点，然后反转后半部分进行比较</li>
+<li><strong>141. 环形链表</strong> - 同样使用快慢指针法判断链表是否有环</li>
+<li><strong>142. 环形链表 II</strong> - 快慢指针法的进阶应用，需要找到环的入口</li>
+<li><strong>143. 重排链表</strong> - 需要找到中间节点，然后合并两个链表</li>
+</ol>
+
+<p>这些题目都涉及链表的遍历和指针操作，特别是快慢指针技巧在链表问题中非常常用。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-12 10:31:06</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

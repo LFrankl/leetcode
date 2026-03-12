@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1697. 检查边长度限制的路径是否存在 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-12 10:33:01</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1697. 检查边长度限制的路径是否存在</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/checking-existence-of-edge-length-limited-paths/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1697-检查边长度限制的路径是否存在">1697. 检查边长度限制的路径是否存在</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 并查集, 图, 数组, 双指针, 排序</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/checking-existence-of-edge-length-limited-paths/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个 <code>n</code> 个点组成的无向图边集 <code>edgeList</code> ，其中 <code>edgeList[i] = [u<sub>i</sub>, v<sub>i</sub>, dis<sub>i</sub>]</code> 表示点 <code>u<sub>i</sub></code> 和点 <code>v<sub>i</sub></code> 之间有一条长度为 <code>dis<sub>i</sub></code> 的边。请注意，两个点之间可能有 <strong>超过一条边 </strong>。</p>
+
+<p>给你一个查询数组<code>queries</code> ，其中 <code>queries[j] = [p<sub>j</sub>, q<sub>j</sub>, limit<sub>j</sub>]</code> ，你的任务是对于每个查询 <code>queries[j]</code> ，判断是否存在从 <code>p<sub>j</sub></code> 到 <code>q<sub>j</sub></code><sub> </sub>的路径，且这条路径上的每一条边都 <strong>严格小于</strong> <code>limit<sub>j</sub></code> 。</p>
+
+<p>请你返回一个 <b>布尔数组</b><em> </em><code>answer</code><em> </em>，其中<em> </em><code>answer.length == queries.length</code> ，当 <code>queries[j]</code> 的查询结果为 <code>true</code> 时， <code>answer</code> 第<em> </em><code>j</code> 个值为<em> </em><code>true</code><em> </em>，否则为 <code>false</code> 。</p>
+
+<p> </p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.cn/aliyun-lc-upload/uploads/2020/12/19/h.png" style="width: 267px; height: 262px;" /></p>
+
+<pre>
+<b>输入：</b>n = 3, edgeList = [[0,1,2],[1,2,4],[2,0,8],[1,0,16]], queries = [[0,1,2],[0,2,5]]
+<b>输出：</b>[false,true]
+<b>解释：</b>上图为给定的输入数据。注意到 0 和 1 之间有两条重边，分别为 2 和 16 。
+对于第一个查询，0 和 1 之间没有小于 2 的边，所以我们返回 false 。
+对于第二个查询，有一条路径（0 -> 1 -> 2）两条边都小于 5 ，所以这个查询我们返回 true 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.cn/aliyun-lc-upload/uploads/2020/12/19/q.png" style="width: 390px; height: 358px;" /></p>
+
+<pre>
+<b>输入：</b>n = 5, edgeList = [[0,1,10],[1,2,5],[2,3,9],[3,4,13]], queries = [[0,4,14],[1,4,13]]
+<b>输出：</b>[true,false]
+<b>解释：</b>上图为给定数据。
+</pre>
+
+<p> </p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>2 <= n <= 10<sup>5</sup></code></li>
+    <li><code>1 <= edgeList.length, queries.length <= 10<sup>5</sup></code></li>
+    <li><code>edgeList[i].length == 3</code></li>
+    <li><code>queries[j].length == 3</code></li>
+    <li><code>0 <= u<sub>i</sub>, v<sub>i</sub>, p<sub>j</sub>, q<sub>j</sub> <= n - 1</code></li>
+    <li><code>u<sub>i</sub> != v<sub>i</sub></code></li>
+    <li><code>p<sub>j</sub> != q<sub>j</sub></code></li>
+    <li><code>1 <= dis<sub>i</sub>, limit<sub>j</sub> <= 10<sup>9</sup></code></li>
+    <li>两个点之间可能有 <strong>多条</strong> 边。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;bool&gt; distanceLimitedPathsExist(int n, vector&lt;vector&lt;int&gt;&gt;&amp; edgeList, vector&lt;vector&lt;int&gt;&gt;&amp; queries) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public boolean[] distanceLimitedPathsExist(int n, int[][] edgeList, int[][] queries) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def distanceLimitedPathsExist(self, n: int, edgeList: List[List[int]], queries: List[List[int]]) -&gt; List[bool]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @param {number[][]} edgeList
+ * @param {number[][]} queries
+ * @return {boolean[]}
+ */
+var distanceLimitedPathsExist = function(n, edgeList, queries) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func distanceLimitedPathsExist(n int, edgeList [][]int, queries [][]int) []bool {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>All the queries are given in advance. Is there a way you can reorder the queries to avoid repeated computations?</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>3
+[[0,1,2],[1,2,4],[2,0,8],[1,0,16]]
+[[0,1,2],[0,2,5]]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+给定一个无向图（可能有重边），每个查询要求判断：是否存在一条从节点 <code>p</code> 到节点 <code>q</code> 的路径，使得路径上<strong>每条边的长度都严格小于</strong>给定的限制值 <code>limit</code>。</p>
+
+<p><strong>关键约束</strong><br />
+- 两个节点之间可能有<strong>多条边</strong>（重边），查询时只关心边权是否小于 limit<br />
+- 路径不要求最短，只要求存在性<br />
+- 边权严格小于 limit（不能等于）<br />
+- 节点数 n ≤ 10^5，边数 m ≤ 10^5，查询数 q ≤ 10^5，要求高效处理</p>
+
+<p><strong>输入输出格式</strong><br />
+- 输入：<br />
+  - <code>n</code>：节点数<br />
+  - <code>edgeList</code>：边列表，每条边 <code>[u, v, dis]</code><br />
+  - <code>queries</code>：查询列表，每个查询 <code>[p, q, limit]</code><br />
+- 输出：<br />
+  - <code>answer</code>：布尔数组，长度等于查询数，每个元素表示对应查询是否存在满足条件的路径</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一离线查询-并查集union-find">解法一：离线查询 + 并查集（Union-Find）</h3>
+
+<p><strong>核心思想</strong><br />
+将查询按 <code>limit</code> 从小到大排序，同时将边按边权从小到大排序。<br />
+按顺序处理查询：对于当前查询的 <code>limit</code>，将所有边权小于 <code>limit</code> 的边加入并查集，然后判断 <code>p</code> 和 <code>q</code> 是否连通。<br />
+因为查询是离线的，所以可以复用并查集状态，避免重复计算。</p>
+
+<p><strong>步骤</strong><br />
+1. 将边按边权升序排序<br />
+2. 将查询按 <code>limit</code> 升序排序，并记录原始索引<br />
+3. 初始化并查集<br />
+4. 遍历排序后的查询：<br />
+   - 将边权小于当前 <code>limit</code> 的边加入并查集（双指针推进）<br />
+   - 检查 <code>p</code> 和 <code>q</code> 是否连通<br />
+   - 将结果存入原始索引位置<br />
+5. 返回结果数组</p>
+
+<p><strong>注意事项</strong><br />
+- 查询排序后要记录原始索引，以便正确输出<br />
+- 边权严格小于 limit，所以加入并查集的边权必须 <code>&lt; limit</code><br />
+- 并查集需要路径压缩和按秩合并以保证效率</p>
+
+<h3 id="解法二在线查询-二分-bfsdfs不推荐">解法二：在线查询 + 二分 + BFS/DFS（不推荐）</h3>
+
+<p><strong>核心思想</strong><br />
+对每个查询，构建一个只包含边权 <code>&lt; limit</code> 的子图，然后检查 <code>p</code> 和 <code>q</code> 是否连通。<br />
+由于查询数多，每次重新建图会超时，但可以结合二分优化：<br />
+- 预处理所有边权，对每个查询二分查找满足条件的边集<br />
+- 但连通性检查仍需遍历，整体复杂度高，不适用于本题规模</p>
+
+<p><strong>步骤</strong><br />
+1. 将边按边权排序<br />
+2. 对每个查询：<br />
+   - 二分找到所有边权 <code>&lt; limit</code> 的边<br />
+   - 用 BFS/DFS 检查连通性<br />
+3. 返回结果</p>
+
+<p><strong>缺点</strong><br />
+- 每个查询都要重新建图或遍历，复杂度 O(q * (m + n))，会超时</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一离线查询-并查集">解法一：离线查询 + 并查集</h3>
+
+<pre><code>func distanceLimitedPathsExist(n int, edgeList [][]int, queries [][]int) []bool {
+    m := len(edgeList)
+    q := len(queries)
+
+    // 1. 将边按边权升序排序
+    sort.Slice(edgeList, func(i, j int) bool {
+        return edgeList[i][2] &lt; edgeList[j][2]
+    })
+
+    // 2. 将查询按 limit 升序排序，并记录原始索引
+    queryIdx := make([][]int, q)
+    for i := range queries {
+        queryIdx[i] = []int{queries[i][0], queries[i][1], queries[i][2], i}
+    }
+    sort.Slice(queryIdx, func(i, j int) bool {
+        return queryIdx[i][2] &lt; queryIdx[j][2]
+    })
+
+    // 3. 初始化并查集
+    parent := make([]int, n)
+    rank := make([]int, n)
+    for i := 0; i &lt; n; i++ {
+        parent[i] = i
+    }
+
+    // 4. 处理查询
+    ans := make([]bool, q)
+    edgeIdx := 0
+    for _, query := range queryIdx {
+        p, q, limit, idx := query[0], query[1], query[2], query[3]
+        // 将所有边权小于 limit 的边加入并查集
+        for edgeIdx &lt; m &amp;&amp; edgeList[edgeIdx][2] &lt; limit {
+            u, v := edgeList[edgeIdx][0], edgeList[edgeIdx][1]
+            union(parent, rank, u, v)
+            edgeIdx++
+        }
+        // 检查 p 和 q 是否连通
+        ans[idx] = find(parent, p) == find(parent, q)
+    }
+    return ans
+}
+
+// 并查集查找（带路径压缩）
+func find(parent []int, x int) int {
+    if parent[x] != x {
+        parent[x] = find(parent, parent[x])
+    }
+    return parent[x]
+}
+
+// 并查集合并（带按秩合并）
+func union(parent, rank []int, x, y int) {
+    rootX := find(parent, x)
+    rootY := find(parent, y)
+    if rootX != rootY {
+        if rank[rootX] &lt; rank[rootY] {
+            parent[rootX] = rootY
+        } else if rank[rootX] &gt; rank[rootY] {
+            parent[rootY] = rootX
+        } else {
+            parent[rootY] = rootX
+            rank[rootX]++
+        }
+    }
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一离线查询-并查集-2">解法一：离线查询 + 并查集</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O((m + q) * α(n) + m log m + q log q)  
+<ul>
+<li>排序边：O(m log m)  </li>
+<li>排序查询：O(q log q)  </li>
+<li>并查集操作：O((m + q) * α(n))，其中 α(n) 是反阿克曼函数，近似常数  </li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(n + m + q)  
+<ul>
+<li>并查集数组：O(n)  </li>
+<li>排序查询的额外存储：O(q)  </li>
+<li>边列表和查询列表：O(m + q)</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二在线查询-二分-bfsdfs不推荐-2">解法二：在线查询 + 二分 + BFS/DFS（不推荐）</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(q * (m + n))  
+<ul>
+<li>每个查询都要遍历边和节点  </li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(m + n)  
+<ul>
+<li>存储图和访问数组</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>离线查询 + 并查集</td>
+  <td>高效，复用并查集状态，适合大规模数据</td>
+  <td>需要离线处理，不能实时回答查询</td>
+  <td>查询可离线，n, m, q 都很大（10^5 级别）</td>
+</tr>
+<tr>
+  <td>在线查询 + 二分 + BFS/DFS</td>
+  <td>直观，可实时回答查询</td>
+  <td>每个查询都要重新检查，超时</td>
+  <td>查询数很少或数据规模小</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：离线查询 + 并查集<br />
+原因：本题 n, m, q 最大可达 10^5，必须使用高效算法。离线查询将复杂度从 O(q * (m + n)) 降为 O((m + q) log (m + q))，能够通过所有测试。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例-1常规用例">用例 1：常规用例</h3>
+
+<pre><code>输入：
+n = 3
+edgeList = [[0,1,2],[1,2,4],[2,0,8],[1,0,16]]
+queries = [[0,1,2],[0,2,5]]
+
+输出：[false, true]
+
+解释：
+- 查询 [0,1,2]：需要边权 &lt; 2，没有这样的边，返回 false
+- 查询 [0,2,5]：路径 0→1(2) →2(4) 边权都 &lt; 5，返回 true
+</code></pre>
+
+<h3 id="用例-2边界用例重边">用例 2：边界用例（重边）</h3>
+
+<pre><code>输入：
+n = 2
+edgeList = [[0,1,1],[0,1,2],[0,1,3]]
+queries = [[0,1,1],[0,1,2],[0,1,3],[0,1,4]]
+
+输出：[false, true, true, true]
+
+解释：
+- limit=1：没有边权 &lt; 1 的边，false
+- limit=2：有边权 1 的边，true
+- limit=3：有边权 1,2 的边，true
+- limit=4：所有边都满足，true
+</code></pre>
+
+<h3 id="用例-3边界用例不连通图">用例 3：边界用例（不连通图）</h3>
+
+<pre><code>输入：
+n = 4
+edgeList = [[0,1,1],[2,3,2]]
+queries = [[0,3,3],[1,2,3]]
+
+输出：[false, false]
+
+解释：
+- 图分为两个连通分量 {0,1} 和 {2,3}
+- 任何查询都无法跨分量连通
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths/">LeetCode 1697. Checking Existence of Edge Length Limited Paths</a>（本题）</li>
+<li><a href="https://leetcode.com/problems/path-with-minimum-effort/">LeetCode 1631. Path With Minimum Effort</a>（类似离线查询 + 并查集思想）</li>
+<li><a href="https://leetcode.com/problems/min-cost-to-connect-all-points/">LeetCode 1584. Min Cost to Connect All Points</a>（最小生成树 + 并查集）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-12 10:33:01</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

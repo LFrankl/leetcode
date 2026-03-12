@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2787. 将一个数字表示成幂的和的方案数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-12 10:33:01</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2787. 将一个数字表示成幂的和的方案数</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/ways-to-express-an-integer-as-sum-of-powers/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2787-将一个数字表示成幂的和的方案数">2787. 将一个数字表示成幂的和的方案数</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/ways-to-express-an-integer-as-sum-of-powers/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你两个 <strong>正</strong>&nbsp;整数&nbsp;<code>n</code> 和&nbsp;<code>x</code>&nbsp;。</p>
+
+<p>请你返回将<em>&nbsp;</em><code>n</code>&nbsp;表示成一些&nbsp;<strong>互不相同</strong>&nbsp;正整数的<em>&nbsp;</em><code>x</code>&nbsp;次幂之和的方案数。换句话说，你需要返回互不相同整数&nbsp;<code>[n<sub>1</sub>, n<sub>2</sub>, ..., n<sub>k</sub>]</code>&nbsp;的集合数目，满足&nbsp;<code>n = n<sub>1</sub><sup>x</sup> + n<sub>2</sub><sup>x</sup> + ... + n<sub>k</sub><sup>x</sup></code>&nbsp;。</p>
+
+<p>由于答案可能非常大，请你将它对&nbsp;<code>10<sup>9</sup> + 7</code>&nbsp;取余后返回。</p>
+
+<p>比方说，<code>n = 160</code> 且&nbsp;<code>x = 3</code>&nbsp;，一个表示&nbsp;<code>n</code>&nbsp;的方法是&nbsp;<code>n = 2<sup>3</sup> + 3<sup>3</sup> + 5<sup>3</sup></code><sup>&nbsp;</sup>。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><b>输入：</b>n = 10, x = 2
+<b>输出：</b>1
+<b>解释：</b>我们可以将 n 表示为：n = 3<sup>2</sup> + 1<sup>2</sup> = 10 。
+这是唯一将 10 表达成不同整数 2 次方之和的方案。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><b>输入：</b>n = 4, x = 1
+<b>输出：</b>2
+<b>解释：</b>我们可以将 n 按以下方案表示：
+- n = 4<sup>1</sup> = 4 。
+- n = 3<sup>1</sup> + 1<sup>1</sup> = 4 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= n &lt;= 300</code></li>
+    <li><code>1 &lt;= x &lt;= 5</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int numberOfWays(int n, int x) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int numberOfWays(int n, int x) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def numberOfWays(self, n: int, x: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @param {number} x
+ * @return {number}
+ */
+var numberOfWays = function(n, x) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func numberOfWays(n int, x int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>You can use dynamic programming, where dp[k][j] represents the number of ways to express k as the sum of the x-th power of unique positive integers such that the biggest possible number we use is j.</li>
+<li>To calculate dp[k][j], you can iterate over the numbers smaller than j and try to use each one as a power of x to make our sum k.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>10
+2
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：<br />
+给定正整数 <code>n</code> 和 <code>x</code>，计算将 <code>n</code> 表示为 <strong>互不相同</strong> 的正整数的 <code>x</code> 次幂之和的方案数。<br />
+例如：<code>n = 10, x = 2</code>，可以表示为 <code>3² + 1² = 10</code>，且每个底数必须不同。</p>
+
+<p><strong>关键约束</strong>：
+- <code>1 ≤ n ≤ 300</code>
+- <code>1 ≤ x ≤ 5</code>
+- 底数必须互不相同（即每个正整数最多使用一次）
+- 方案数可能很大，需要对 <code>10⁹ + 7</code> 取模</p>
+
+<p><strong>边界情况</strong>：
+- <code>x = 1</code> 时，问题退化为“将 n 表示为不同正整数之和”的方案数（类似整数划分但要求互不相同）
+- <code>n</code> 较小但 <code>x</code> 较大时，可选的底数很少（例如 <code>n=5, x=3</code> 只有 <code>1³=1</code> 和 <code>2³=8</code>，8>5 不可用）</p>
+
+<p><strong>输入输出</strong>：
+- 输入：<code>int n, int x</code>
+- 输出：<code>int</code> 方案数（模 <code>10⁹+7</code>）</p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一动态规划0-1背包变种">解法一：动态规划（0-1背包变种）</h3>
+
+<p><strong>核心思想</strong>：<br />
+将每个底数的 <code>x</code> 次幂视为一个物品，其“重量”为幂值，价值为方案数。<br />
+问题转化为：从这些物品中选取若干，总重量恰好为 <code>n</code>，且每个物品最多选一次（0-1背包）。<br />
+由于底数互不相同，相当于物品编号就是底数本身。</p>
+
+<p><strong>步骤</strong>：
+1. 预处理所有可能的底数 <code>i</code>，计算 <code>power = i^x</code>，直到 <code>power &gt; n</code> 停止。
+2. 定义 <code>dp[j]</code> 表示总幂和为 <code>j</code> 的方案数。
+3. 遍历每个底数 <code>i</code>，从 <code>n</code> 向下遍历 <code>j</code>，更新 <code>dp[j] += dp[j - power]</code>（避免重复使用同一底数）。
+4. 最终 <code>dp[n]</code> 即为答案。</p>
+
+<p><strong>注意事项</strong>：
+- 需要模运算避免溢出。
+- 遍历顺序必须从 <code>n</code> 到 <code>power</code>，确保每个底数只用一次（0-1背包）。</p>
+
+<hr />
+
+<h3 id="解法二记忆化搜索dfs-剪枝">解法二：记忆化搜索（DFS + 剪枝）</h3>
+
+<p><strong>核心思想</strong>：<br />
+递归枚举每个底数选或不选，用记忆化缓存 <code>(idx, sum)</code> 的状态，避免重复计算。</p>
+
+<p><strong>步骤</strong>：
+1. 预处理所有底数的幂值列表 <code>powers</code>。
+2. 定义 <code>dfs(idx, sum)</code> 表示从第 <code>idx</code> 个底数开始，当前和为 <code>sum</code> 的方案数。
+3. 递归时，可以选择跳过当前底数，或选择当前底数（如果 <code>sum + powers[idx] ≤ n</code>）。
+4. 用哈希表或数组缓存结果。</p>
+
+<p><strong>注意事项</strong>：
+- 递归深度可能较大，但 <code>n ≤ 300</code> 且 <code>x ≥ 1</code> 时底数最多约 <code>√n</code> 或 <code>n^(1/x)</code> 个，可接受。
+- 需要剪枝：当 <code>sum &gt; n</code> 时直接返回 0。</p>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一动态规划0-1背包">解法一：动态规划（0-1背包）</h3>
+
+<pre><code>func numberOfWays(n int, x int) int {
+    const MOD = 1_000_000_007
+    // dp[j] 表示总幂和为 j 的方案数
+    dp := make([]int, n+1)
+    dp[0] = 1 // 空集方案数为1
+
+    // 遍历所有可能的底数 i
+    for i := 1; ; i++ {
+        power := pow(i, x)
+        if power &gt; n {
+            break
+        }
+        // 0-1背包：从后向前更新，避免重复使用同一底数
+        for j := n; j &gt;= power; j-- {
+            dp[j] = (dp[j] + dp[j-power]) % MOD
+        }
+    }
+    return dp[n]
+}
+
+// 快速幂计算 i^x
+func pow(a, b int) int {
+    res := 1
+    for b &gt; 0 {
+        if b&amp;1 == 1 {
+            res *= a
+        }
+        a *= a
+        b &gt;&gt;= 1
+    }
+    return res
+}
+</code></pre>
+
+<h3 id="解法二记忆化搜索dfs-剪枝-2">解法二：记忆化搜索（DFS + 剪枝）</h3>
+
+<pre><code>func numberOfWays(n int, x int) int {
+    const MOD = 1_000_000_007
+    // 预处理所有可能的幂值
+    powers := []int{}
+    for i := 1; ; i++ {
+        val := pow(i, x)
+        if val &gt; n {
+            break
+        }
+        powers = append(powers, val)
+    }
+
+    // 记忆化缓存
+    memo := make([][]int, len(powers))
+    for i := range memo {
+        memo[i] = make([]int, n+1)
+        for j := range memo[i] {
+            memo[i][j] = -1
+        }
+    }
+
+    var dfs func(idx, sum int) int
+    dfs = func(idx, sum int) int {
+        if sum == n {
+            return 1
+        }
+        if idx == len(powers) || sum &gt; n {
+            return 0
+        }
+        if memo[idx][sum] != -1 {
+            return memo[idx][sum]
+        }
+        // 不选当前底数
+        res := dfs(idx+1, sum)
+        // 选当前底数
+        if sum+powers[idx] &lt;= n {
+            res = (res + dfs(idx+1, sum+powers[idx])) % MOD
+        }
+        memo[idx][sum] = res
+        return res
+    }
+
+    return dfs(0, 0)
+}
+
+func pow(a, b int) int {
+    res := 1
+    for b &gt; 0 {
+        if b&amp;1 == 1 {
+            res *= a
+        }
+        a *= a
+        b &gt;&gt;= 1
+    }
+    return res
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一动态规划">解法一：动态规划</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(n * m)<br />
+其中 m 是满足 <code>i^x ≤ n</code> 的底数个数，最大约为 <code>n^(1/x)</code>。<br />
+当 <code>x=1</code> 时，m ≈ n，复杂度 O(n²)；当 <code>x=5</code> 时，m ≈ n^(1/5) ≈ 3（n≤300），复杂度接近 O(n)。<br />
+实际最坏情况 O(n * n^(1/x))。</li>
+<li><strong>空间复杂度</strong>：O(n)<br />
+只使用一维 dp 数组。</li>
+</ul>
+
+<h3 id="解法二记忆化搜索">解法二：记忆化搜索</h3>
+
+<ul>
+<li><strong>时间复杂度</strong>：O(m * n)<br />
+状态数为 <code>(m+1)*(n+1)</code>，每个状态计算一次。</li>
+<li><strong>空间复杂度</strong>：O(m * n)<br />
+用于存储记忆化表。</li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>动态规划</td>
+  <td>代码简洁，效率高，空间优化好</td>
+  <td>状态转移需要小心遍历顺序</td>
+  <td>推荐，尤其 n 较大时</td>
+</tr>
+<tr>
+  <td>记忆化搜索</td>
+  <td>思路直观，易于理解</td>
+  <td>递归开销，空间占用较大</td>
+  <td>适合教学或小规模数据</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法一（动态规划）</strong>：<br />
+- 本题 n ≤ 300，动态规划效率高且代码简单。
+- 0-1背包模型是经典解法，不易出错。</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<pre><code>func main() {
+    // 示例1
+    fmt.Println(numberOfWays(10, 2)) // 输出: 1
+    // 解释: 10 = 3^2 + 1^2
+
+    // 示例2
+    fmt.Println(numberOfWays(4, 1)) // 输出: 2
+    // 解释: 4 = 4^1 或 3^1 + 1^1
+
+    // 边界用例: n=1, x=5
+    fmt.Println(numberOfWays(1, 5)) // 输出: 1
+    // 解释: 1 = 1^5
+
+    // 较大用例: n=300, x=2
+    fmt.Println(numberOfWays(300, 2)) // 输出: 102
+    // 验证程序效率
+}
+</code></pre>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/combination-sum-iv/">LeetCode 377. Combination Sum IV</a><br />
+（可重复使用的完全背包，本题是不可重复的0-1背包）</li>
+<li><a href="https://leetcode.com/problems/target-sum/">LeetCode 494. Target Sum</a><br />
+（类似背包问题，但涉及正负号）</li>
+<li><a href="https://leetcode.com/problems/perfect-squares/">LeetCode 279. Perfect Squares</a><br />
+（完全平方数，可重复使用，本题是不同整数）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-12 10:32:01</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
