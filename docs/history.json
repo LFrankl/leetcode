@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-13 10:34:35",
+      "record_id": "20260313_103435",
+      "count": 3,
+      "questions": [
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "easy",
+          "file": "20260313_103435_q1.html"
+        },
+        {
+          "number": "3400",
+          "title": "右移后的最大匹配索引数",
+          "difficulty": "medium",
+          "file": "20260313_103435_q2.html"
+        },
+        {
+          "number": "2911",
+          "title": "得到 K 个半回文串的最少修改次数",
+          "difficulty": "hard",
+          "file": "20260313_103435_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-12 10:33:01",
       "record_id": "20260312_103301",
       "count": 3,
@@ -681,5 +706,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-12 10:33:01"
+  "last_updated": "2026-03-13 10:34:35"
 }
