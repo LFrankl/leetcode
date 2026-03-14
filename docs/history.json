@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-14 17:42:28",
+      "record_id": "20260314_174228",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2806",
+          "title": "取整购买后的账户余额",
+          "difficulty": "easy",
+          "file": "20260314_174228_q1.html"
+        },
+        {
+          "number": "861",
+          "title": "翻转矩阵后的得分",
+          "difficulty": "medium",
+          "file": "20260314_174228_q2.html"
+        },
+        {
+          "number": "3268",
+          "title": "查找重叠的班次 II",
+          "difficulty": "hard",
+          "file": "20260314_174228_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-13 10:34:35",
       "record_id": "20260313_103435",
       "count": 3,
@@ -706,5 +731,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-13 10:34:35"
+  "last_updated": "2026-03-14 17:42:28"
 }

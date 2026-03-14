@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>861. 翻转矩阵后的得分 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-14 17:42:28</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">861. 翻转矩阵后的得分</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/score-after-flipping-matrix/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="861-翻转矩阵后的得分">861. 翻转矩阵后的得分</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 贪心, 位运算, 数组, 矩阵</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/score-after-flipping-matrix/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个大小为 <code>m x n</code> 的二元矩阵 <code>grid</code> ，矩阵中每个元素的值为 <code>0</code> 或 <code>1</code> 。</p>
+
+<p>一次 <strong>移动</strong> 是指选择任一行或列，并转换该行或列中的每一个值：将所有 <code>0</code> 都更改为 <code>1</code>，将所有 <code>1</code> 都更改为 <code>0</code>。</p>
+
+<p>在做出任意次数的移动后，将该矩阵的每一行都按照二进制数来解释，矩阵的 <strong>得分</strong> 就是这些数字的总和。</p>
+
+<p>在执行任意次 <strong>移动</strong> 后（含 0 次），返回可能的最高分数。</p>
+
+<p>&nbsp;</p>
+
+<ol>
+</ol>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/07/23/lc-toogle1.jpg" style="width: 500px; height: 299px;" /></p>
+
+<pre>
+<strong>输入：</strong>grid = [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
+<strong>输出：</strong>39
+<strong>解释：</strong>0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>grid = [[0]]
+<strong>输出：</strong>1
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>m == grid.length</code></li>
+    <li><code>n == grid[i].length</code></li>
+    <li><code>1 &lt;= m, n &lt;= 20</code></li>
+    <li><code>grid[i][j]</code> 为 <code>0</code> 或 <code>1</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int matrixScore(vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int matrixScore(int[][] grid) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def matrixScore(self, grid: List[List[int]]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var matrixScore = function(grid) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func matrixScore(grid [][]int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[[0,0,1,1],[1,0,1,0],[1,1,0,0]]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：<br />
+给定一个 m×n 的二进制矩阵，我们可以对任意行或列进行“翻转”操作（将 0 变 1，1 变 0），目标是使矩阵的“得分”最大化。得分定义为将每一行视为二进制数，求和得到的总和。</p>
+
+<p><strong>关键约束</strong>：
+- 矩阵元素仅为 0 或 1
+- 可以执行任意次行/列翻转（包括 0 次）
+- 矩阵大小 m, n ≤ 20</p>
+
+<p><strong>边界情况</strong>：
+- 矩阵为 1×1 时，翻转或不翻转，最大得分为 1
+- 矩阵只有一行时，只需考虑该行翻转与否
+- 矩阵只有一列时，只需考虑该列翻转与否</p>
+
+<p><strong>输入输出</strong>：
+- 输入：二维整数数组 <code>grid</code>，元素为 0 或 1
+- 输出：整数，表示最大得分</p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一贪心算法逐位最大化">解法一：贪心算法（逐位最大化）</h3>
+
+<p><strong>核心思想</strong>：
+1. <strong>行翻转策略</strong>：确保第一列全为 1（因为二进制数的最高位权重最大）
+2. <strong>列翻转策略</strong>：从第二列开始，每列尽可能多地让 1 的数量最多（因为列翻转影响该列所有行）
+3. <strong>贪心依据</strong>：高位权重远大于低位，优先保证高位为 1</p>
+
+<p><strong>步骤</strong>：
+1. 遍历每一行，如果该行第一个元素为 0，则翻转整行
+2. 遍历每一列（从第二列开始），统计该列中 1 的数量
+3. 如果该列 1 的数量少于一半（即少于 m/2），则翻转该列
+4. 计算最终矩阵的得分</p>
+
+<p><strong>注意事项</strong>：
+- 行翻转只影响当前行，列翻转影响所有行
+- 列翻转时，1 的数量 = 原始数量（如果该行未翻转）或 m - 原始数量（如果该行已翻转）
+- 实际计算得分时，可以不用真正修改矩阵，直接按权重计算</p>
+
+<hr />
+
+<h3 id="解法二数学优化直接计算">解法二：数学优化（直接计算）</h3>
+
+<p><strong>核心思想</strong>：
+1. 第一列必须全为 1（通过行翻转实现）
+2. 对于后续每一列，该列贡献的得分 = <code>max(该列1的数量, m - 该列1的数量) * 该列权重</code>
+3. 权重从最高位到最低位递减：<code>2^(n-1-j)</code></p>
+
+<p><strong>步骤</strong>：
+1. 遍历每一行，如果 <code>grid[i][0] == 0</code>，则翻转该行（实际只需记录翻转状态）
+2. 对于每一列 j：
+   - 统计该列在行翻转后的 1 的数量
+   - 该列贡献 = <code>max(cnt, m - cnt) * (1 &lt;&lt; (n-1-j))</code>
+3. 累加所有列贡献得到总分</p>
+
+<p><strong>优势</strong>：
+- 无需真正修改矩阵
+- 一次遍历即可完成计算</p>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一贪心算法显式翻转">解法一：贪心算法（显式翻转）</h3>
+
+<pre><code>func matrixScore(grid [][]int) int {
+    m, n := len(grid), len(grid[0])
+
+    // 第一步：确保第一列全为1（通过行翻转）
+    for i := 0; i &lt; m; i++ {
+        if grid[i][0] == 0 {
+            // 翻转整行
+            for j := 0; j &lt; n; j++ {
+                grid[i][j] ^= 1 // 0变1，1变0
+            }
+        }
+    }
+
+    // 第二步：从第二列开始，确保每列1的数量尽可能多
+    for j := 1; j &lt; n; j++ {
+        cnt := 0
+        for i := 0; i &lt; m; i++ {
+            cnt += grid[i][j]
+        }
+        // 如果该列1的数量少于一半，则翻转该列
+        if cnt &lt; m-cnt {
+            for i := 0; i &lt; m; i++ {
+                grid[i][j] ^= 1
+            }
+        }
+    }
+
+    // 第三步：计算得分
+    score := 0
+    for i := 0; i &lt; m; i++ {
+        rowVal := 0
+        for j := 0; j &lt; n; j++ {
+            rowVal = rowVal*2 + grid[i][j] // 二进制转十进制
+        }
+        score += rowVal
+    }
+    return score
+}
+</code></pre>
+
+<h3 id="解法二数学优化直接计算-2">解法二：数学优化（直接计算）</h3>
+
+<pre><code>func matrixScore(grid [][]int) int {
+    m, n := len(grid), len(grid[0])
+    score := 0
+
+    // 第一列权重：2^(n-1)
+    // 通过行翻转，第一列必然全为1，贡献为 m * (1 &lt;&lt; (n-1))
+    score += m * (1 &lt;&lt; (n-1))
+
+    // 处理后续列
+    for j := 1; j &lt; n; j++ {
+        cnt := 0 // 统计该列1的数量（考虑行翻转后）
+        for i := 0; i &lt; m; i++ {
+            // 如果该行第一个元素是0，说明该行被翻转了
+            // 因此当前元素的实际值 = grid[i][j] ^ grid[i][0]
+            // 因为如果grid[i][0]原来是0，行翻转后grid[i][j]也翻转了
+            // 等价于：如果grid[i][0]==1，取原值；否则取反
+            if grid[i][0] == 1 {
+                cnt += grid[i][j]
+            } else {
+                cnt += 1 - grid[i][j] // 翻转后的值
+            }
+        }
+        // 该列贡献 = max(cnt, m-cnt) * 权重
+        maxCnt := cnt
+        if m-cnt &gt; maxCnt {
+            maxCnt = m - cnt
+        }
+        score += maxCnt * (1 &lt;&lt; (n-1-j))
+    }
+    return score
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一">解法一：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m×n)
+<ul>
+<li>第一次遍历行：O(m×n)</li>
+<li>统计每列1的数量：O(m×n)</li>
+<li>翻转列（如果需要）：O(m×n)</li>
+<li>计算得分：O(m×n)</li>
+<li>总体 O(m×n)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了常数额外空间</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二">解法二：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m×n)
+<ul>
+<li>遍历所有元素一次，统计每列1的数量</li>
+<li>总体 O(m×n)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了常数变量</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（显式翻转）</th>
+  <th>解法二（直接计算）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>思路</td>
+  <td>模拟翻转过程</td>
+  <td>数学推导直接计算</td>
+</tr>
+<tr>
+  <td>实现复杂度</td>
+  <td>中等</td>
+  <td>简单</td>
+</tr>
+<tr>
+  <td>可读性</td>
+  <td>直观，易于理解</td>
+  <td>需要理解数学原理</td>
+</tr>
+<tr>
+  <td>空间使用</td>
+  <td>原地修改矩阵</td>
+  <td>不修改原矩阵</td>
+</tr>
+<tr>
+  <td>推荐度</td>
+  <td>⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法二</strong>：
+- 更简洁高效
+- 不修改原矩阵，更安全
+- 一次遍历完成计算
+- 适合面试和实际应用</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<pre><code>输入：grid = [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
+输出：39
+解释：
+原始矩阵：
+0 0 1 1
+1 0 1 0
+1 1 0 0
+翻转后：
+1 1 0 0  → 1111 (15)
+1 0 1 0  → 1001 (9)
+1 1 0 0  → 1111 (15)
+总和 = 39
+</code></pre>
+
+<h3 id="用例2边界用例11矩阵">用例2：边界用例（1×1矩阵）</h3>
+
+<pre><code>输入：grid = [[0]]
+输出：1
+解释：翻转后变为 [[1]]，得分为1
+</code></pre>
+
+<h3 id="用例3边界用例只有一行">用例3：边界用例（只有一行）</h3>
+
+<pre><code>输入：grid = [[1,0,1,0,1]]
+输出：31
+解释：二进制数 10101 = 21，但翻转第一列后变为 01010 = 10，翻转所有列后得 11111 = 31
+</code></pre>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>LeetCode 861. Score After Flipping Matrix</strong>（本题）</li>
+<li><strong>LeetCode 1284. Minimum Number of Flips to Convert Binary Matrix to Zero Matrix</strong>（类似翻转操作）</li>
+<li><strong>LeetCode 782. Transform to Chessboard</strong>（矩阵变换问题）</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-14 14:58:30</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
