@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2710. 移除字符串中的尾随零 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-16 10:33:46</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2710. 移除字符串中的尾随零</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/remove-trailing-zeros-from-a-string/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2710-移除字符串中的尾随零">2710. 移除字符串中的尾随零</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/remove-trailing-zeros-from-a-string/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个用字符串表示的正整数 <code>num</code> ，请你以字符串形式返回不含尾随零的整数<em> </em><code>num</code><em> </em>。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><strong>输入：</strong>num = "51230100"
+<strong>输出：</strong>"512301"
+<strong>解释：</strong>整数 "51230100" 有 2 个尾随零，移除并返回整数 "512301" 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><strong>输入：</strong>num = "123"
+<strong>输出：</strong>"123"
+<strong>解释：</strong>整数 "123" 不含尾随零，返回整数 "123" 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= num.length &lt;= 1000</code></li>
+    <li><code>num</code> 仅由数字 <code>0</code> 到 <code>9</code> 组成</li>
+    <li><code>num</code> 不含前导零</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    string removeTrailingZeros(string num) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public String removeTrailingZeros(String num) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def removeTrailingZeros(self, num: str) -&gt; str:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string} num
+ * @return {string}
+ */
+var removeTrailingZeros = function(num) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func removeTrailingZeros(num string) string {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Find the last non-zero digit in num.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"51230100"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+给定一个表示正整数的字符串 <code>num</code>，要求移除字符串末尾的所有零（尾随零），并以字符串形式返回结果。</p>
+
+<p><strong>关键约束</strong><br />
+- 字符串长度范围：1 ≤ num.length ≤ 1000<br />
+- 字符串仅包含数字 '0'-'9'<br />
+- 字符串不含前导零（即不会出现 "0123" 这样的输入）<br />
+- 需要保留非零部分，如果整个字符串都是零（如 "0"），应返回 "0"（但题目保证是正整数，所以不会出现全零）</p>
+
+<p><strong>边界情况</strong><br />
+1. 字符串末尾没有零 → 直接返回原字符串<br />
+2. 字符串末尾有多个零 → 移除所有尾随零<br />
+3. 字符串全为零 → 但题目说 num 是正整数，所以不会出现<br />
+4. 字符串长度为 1 → 直接返回  </p>
+
+<p><strong>输入输出格式</strong><br />
+- 输入：字符串 <code>num</code><br />
+- 输出：移除尾随零后的字符串  </p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一反向遍历">解法一：反向遍历</h3>
+
+<p><strong>核心思想</strong><br />
+从字符串末尾开始向前遍历，找到第一个非零字符的位置，然后截取从开头到该位置的子串。</p>
+
+<p><strong>步骤</strong><br />
+1. 初始化指针 <code>i</code> 指向字符串末尾<br />
+2. 从后向前移动指针，跳过所有零字符<br />
+3. 当遇到非零字符或到达字符串开头时停止<br />
+4. 截取 <code>num[0:i+1]</code> 作为结果<br />
+5. 如果全部是零（理论上不会发生），返回 "0"</p>
+
+<p><strong>注意事项</strong><br />
+- 注意索引边界，避免越界<br />
+- 如果字符串全零，需要特殊处理（但题目保证不会出现）</p>
+
+<hr />
+
+<h3 id="解法二内置函数字符串处理">解法二：内置函数/字符串处理</h3>
+
+<p><strong>核心思想</strong><br />
+利用字符串处理函数（如 <code>strings.TrimRight</code>）直接移除尾随零。</p>
+
+<p><strong>步骤</strong><br />
+1. 使用 <code>strings.TrimRight(num, "0")</code> 移除所有尾随零<br />
+2. 如果结果为空字符串（全零情况），返回 "0"<br />
+3. 否则返回处理后的字符串</p>
+
+<p><strong>注意事项</strong><br />
+- 需要处理全零的特殊情况<br />
+- 虽然代码简单，但依赖语言内置函数</p>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一反向遍历-2">解法一：反向遍历</h3>
+
+<pre><code>func removeTrailingZeros(num string) string {
+    // 从末尾开始找到第一个非零字符的位置
+    i := len(num) - 1
+    for i &gt;= 0 &amp;&amp; num[i] == '0' {
+        i--
+    }
+    // 如果 i &lt; 0 说明整个字符串都是零（理论上不会发生）
+    if i &lt; 0 {
+        return "0"
+    }
+    // 截取从开头到第一个非零尾随字符的子串
+    return num[:i+1]
+}
+</code></pre>
+
+<h3 id="解法二内置函数">解法二：内置函数</h3>
+
+<pre><code>import "strings"
+
+func removeTrailingZeros(num string) string {
+    // 使用 TrimRight 移除所有尾随零
+    result := strings.TrimRight(num, "0")
+    // 如果结果为空，说明原字符串全是零
+    if result == "" {
+        return "0"
+    }
+    return result
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一反向遍历-3">解法一：反向遍历</h3>
+
+<ul>
+<li><p>⏱️ <strong>时间复杂度</strong>：O(n)<br />
+最坏情况下需要遍历整个字符串（当没有尾随零时），平均情况只需遍历尾随零部分。</p></li>
+<li><p>💾 <strong>空间复杂度</strong>：O(1)<br />
+只使用了常数级别的额外空间（指针 i），返回的子串是原字符串的切片（Go 中字符串切片不分配新内存）。</p></li>
+</ul>
+
+<h3 id="解法二内置函数-2">解法二：内置函数</h3>
+
+<ul>
+<li><p>⏱️ <strong>时间复杂度</strong>：O(n)<br />
+<code>strings.TrimRight</code> 内部实现也是遍历字符串，时间复杂度为 O(n)。</p></li>
+<li><p>💾 <strong>空间复杂度</strong>：O(n)<br />
+<code>strings.TrimRight</code> 返回的是新字符串，需要分配新内存，空间复杂度为 O(n)。</p></li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>反向遍历</td>
+  <td>空间效率高（O(1)），不依赖内置函数</td>
+  <td>需要手动处理边界条件</td>
+  <td>对内存敏感的场景，需要最优空间复杂度</td>
+</tr>
+<tr>
+  <td>内置函数</td>
+  <td>代码简洁，可读性强</td>
+  <td>空间复杂度较高（O(n)），依赖语言特性</td>
+  <td>快速实现，代码可维护性要求高</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong><br />
+推荐使用<strong>解法一（反向遍历）</strong>，因为：<br />
+1. 空间复杂度最优（O(1)）<br />
+2. 不依赖语言内置函数，更通用<br />
+3. 对于本题的简单需求，手动实现更直观  </p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="常规用例">常规用例</h3>
+
+<ol>
+<li><p><strong>输入</strong>：<code>"51230100"</code><br />
+<strong>输出</strong>：<code>"512301"</code><br />
+<strong>解释</strong>：移除末尾两个零</p></li>
+<li><p><strong>输入</strong>：<code>"123"</code><br />
+<strong>输出</strong>：<code>"123"</code><br />
+<strong>解释</strong>：没有尾随零，直接返回</p></li>
+</ol>
+
+<h3 id="边界用例">边界用例</h3>
+
+<ol start="3">
+<li><p><strong>输入</strong>：<code>"1000"</code><br />
+<strong>输出</strong>：<code>"1"</code><br />
+<strong>解释</strong>：移除所有三个尾随零</p></li>
+<li><p><strong>输入</strong>：<code>"0"</code>（虽然题目说正整数，但测试代码健壮性）<br />
+<strong>输出</strong>：<code>"0"</code><br />
+<strong>解释</strong>：全零情况，返回 "0"</p></li>
+</ol>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 67. Add Binary</strong>（二进制加法，涉及字符串处理和进位）  </li>
+<li><strong>LeetCode 415. Add Strings</strong>（字符串相加，类似处理尾随零）  </li>
+<li><strong>LeetCode 43. Multiply Strings</strong>（字符串相乘，涉及数字字符串处理）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-16 10:30:59</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

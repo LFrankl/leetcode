@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2297. 跳跃游戏 VIII - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-16 10:33:46</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2297. 跳跃游戏 VIII</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/jump-game-viii/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2297-跳跃游戏-viii">2297. 跳跃游戏 VIII</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 栈, 图, 数组, 动态规划, 最短路, 单调栈</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/jump-game-viii/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>For each index, find the indexes that you can jump to.</li>
+<li>We can do this by using a monotonic stack and iterating through the array backwards.</li>
+<li>Create another integer array of length n called dp where dp[i] is the minimum cost of getting to index i.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[3,2,4,4,1]
+[3,7,6,4,2]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：
+给定一个整数数组 <code>nums</code> 和一个整数 <code>minJump</code>、<code>maxJump</code>。初始位置在索引 0 处。如果满足以下条件，可以从位置 <code>i</code> 跳跃到位置 <code>j</code>：
+1. <code>i &lt; j</code>
+2. <code>minJump &lt;= j - i &lt;= maxJump</code>
+3. <code>nums[j] == 0</code></p>
+
+<p>目标是判断是否能从位置 0 到达最后一个位置（<code>n-1</code>）。注意：位置 0 和位置 <code>n-1</code> 的 <code>nums</code> 值保证为 0。</p>
+
+<p><strong>关键约束</strong>：
+- <code>2 &lt;= nums.length &lt;= 10^5</code>
+- <code>nums[i]</code> 为 0 或 1
+- <code>1 &lt;= minJump &lt;= maxJump &lt;= nums.length</code>
+- 只能跳到值为 0 的位置
+- 跳跃距离必须在 <code>[minJump, maxJump]</code> 范围内</p>
+
+<p><strong>边界情况</strong>：
+- 数组长度为 2 时，只需检查 <code>minJump</code> 是否 ≤ 1
+- 如果 <code>nums[0] != 0</code> 或 <code>nums[n-1] != 0</code>，直接返回 false（但题目保证为 0）
+- 连续多个位置为 1 可能导致无法到达</p>
+
+<p><strong>输入输出</strong>：
+- 输入：<code>nums []int</code>, <code>minJump int</code>, <code>maxJump int</code>
+- 输出：<code>bool</code>（是否能到达最后一个位置）</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一bfs-滑动窗口优化">解法一：BFS + 滑动窗口优化</h3>
+
+<p><strong>核心思想</strong>：将问题转化为图论中的可达性问题。每个位置是节点，合法的跳跃是边。使用 BFS 遍历，但需要优化避免重复访问。</p>
+
+<p><strong>解题步骤</strong>：
+1. 初始化队列，将位置 0 入队
+2. 使用 visited 数组记录已访问位置
+3. 使用指针 <code>right</code> 记录当前已处理的最远右边界，避免重复入队
+4. 对于每个出队的位置 <code>i</code>，计算可跳范围 <code>[l, r]</code>
+5. 只处理 <code>[max(right+1, l), r]</code> 范围内的位置（避免重复）
+6. 将范围内值为 0 的位置入队，更新 <code>right</code>
+7. 如果遇到 <code>n-1</code> 则返回 true</p>
+
+<p><strong>注意事项</strong>：
+- 需要及时更新 <code>right</code> 指针，否则会超时
+- 位置 0 需要预先检查是否为 0</p>
+
+<h3 id="解法二动态规划-前缀和优化">解法二：动态规划 + 前缀和优化</h3>
+
+<p><strong>核心思想</strong>：定义 <code>dp[i]</code> 表示是否能到达位置 i。状态转移：<code>dp[i] = (nums[i]==0) &amp;&amp; (dp[i-maxJump]到dp[i-minJump]中有true)</code>。使用前缀和优化区间查询。</p>
+
+<p><strong>解题步骤</strong>：
+1. 初始化 <code>dp[0]=true</code>，<code>prefix[0]=1</code>
+2. 遍历位置 i 从 1 到 n-1
+3. 如果 <code>nums[i]==1</code>，则 <code>dp[i]=false</code>
+4. 否则计算可转移的区间 <code>[i-maxJump, i-minJump]</code>
+5. 使用前缀和快速判断区间内是否有 true
+6. 更新前缀和数组
+7. 返回 <code>dp[n-1]</code></p>
+
+<p><strong>注意事项</strong>：
+- 区间边界需要 clamp 到 [0, n-1]
+- 前缀和数组大小应为 n+1 方便计算</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一bfs-滑动窗口优化-2">解法一：BFS + 滑动窗口优化</h3>
+
+<pre><code>func canReach(nums []int, minJump int, maxJump int) bool {
+    n := len(nums)
+    if nums[0] == 1 || nums[n-1] == 1 {
+        return false
+    }
+
+    queue := make([]int, 0)
+    queue = append(queue, 0)
+    visited := make([]bool, n)
+    visited[0] = true
+
+    // 记录已处理的最远右边界
+    right := 0
+
+    for len(queue) &gt; 0 {
+        i := queue[0]
+        queue = queue[1:]
+
+        // 计算当前可跳范围
+        l := i + minJump
+        r := min(i+maxJump, n-1)
+
+        // 只处理 [max(right+1, l), r] 范围内的位置，避免重复
+        start := max(right+1, l)
+        for j := start; j &lt;= r; j++ {
+            if nums[j] == 0 &amp;&amp; !visited[j] {
+                if j == n-1 {
+                    return true
+                }
+                visited[j] = true
+                queue = append(queue, j)
+            }
+        }
+        // 更新右边界
+        right = max(right, r)
+    }
+
+    return visited[n-1]
+}
+
+func min(a, b int) int {
+    if a &lt; b {
+        return a
+    }
+    return b
+}
+
+func max(a, b int) int {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<h3 id="解法二动态规划-前缀和优化-2">解法二：动态规划 + 前缀和优化</h3>
+
+<pre><code>func canReach(nums []int, minJump int, maxJump int) bool {
+    n := len(nums)
+    if nums[0] == 1 || nums[n-1] == 1 {
+        return false
+    }
+
+    // dp[i] 表示是否能到达位置 i
+    dp := make([]bool, n)
+    dp[0] = true
+
+    // prefix[i] 表示 dp[0] 到 dp[i-1] 中 true 的数量
+    prefix := make([]int, n+1)
+    prefix[1] = 1 // dp[0] = true
+
+    for i := 1; i &lt; n; i++ {
+        if nums[i] == 1 {
+            dp[i] = false
+            prefix[i+1] = prefix[i]
+            continue
+        }
+
+        // 可转移的区间 [i-maxJump, i-minJump]
+        l := max(0, i-maxJump)
+        r := i - minJump
+
+        if r &lt; 0 {
+            dp[i] = false
+            prefix[i+1] = prefix[i]
+            continue
+        }
+
+        // 使用前缀和判断区间内是否有 true
+        // sum = prefix[r+1] - prefix[l]
+        sum := prefix[r+1] - prefix[l]
+        dp[i] = sum &gt; 0
+
+        // 更新前缀和
+        if dp[i] {
+            prefix[i+1] = prefix[i] + 1
+        } else {
+            prefix[i+1] = prefix[i]
+        }
+    }
+
+    return dp[n-1]
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一bfs-滑动窗口优化-3">解法一：BFS + 滑动窗口优化</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>每个位置最多入队一次，出队一次</li>
+<li>内层循环的 <code>right</code> 指针保证每个位置只被处理一次</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(n)
+<ul>
+<li>队列最多存储 n 个元素</li>
+<li>visited 数组需要 O(n) 空间</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二动态规划-前缀和优化-3">解法二：动态规划 + 前缀和优化</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>遍历数组一次，每次操作 O(1)</li>
+<li>前缀和查询是 O(1)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(n)
+<ul>
+<li>dp 数组 O(n)</li>
+<li>prefix 数组 O(n)</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BFS+滑动窗口</td>
+  <td>直观，容易理解</td>
+  <td>需要维护指针，实现稍复杂</td>
+  <td>适合需要实际路径的场景</td>
+</tr>
+<tr>
+  <td>DP+前缀和</td>
+  <td>代码简洁，效率稳定</td>
+  <td>需要额外空间存储前缀和</td>
+  <td>大规模数据，只需判断可达性</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：<strong>解法二（DP+前缀和）</strong>
+- 时间复杂度相同，但实现更简洁
+- 没有队列操作，常数因子更小
+- 更适合本题只需判断是否可达的需求</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<pre><code>输入：nums = [0,0,0,0,0], minJump = 2, maxJump = 3
+输出：true
+解释：0 → 2 → 4 或 0 → 3 → 4
+</code></pre>
+
+<h3 id="用例2无法到达">用例2：无法到达</h3>
+
+<pre><code>输入：nums = [0,1,0,1,0], minJump = 2, maxJump = 3
+输出：false
+解释：从0只能跳到2或3，但位置3是1，位置2只能跳到4或5（越界）
+</code></pre>
+
+<h3 id="用例3边界情况最小长度">用例3：边界情况（最小长度）</h3>
+
+<pre><code>输入：nums = [0,0], minJump = 1, maxJump = 1
+输出：true
+解释：0 → 1 距离为1，符合要求
+</code></pre>
+
+<h3 id="用例4边界情况最大跳跃距离">用例4：边界情况（最大跳跃距离）</h3>
+
+<pre><code>输入：nums = [0,0,0,0,0,0,0], minJump = 3, maxJump = 5
+输出：true
+解释：0 → 3 → 6 或 0 → 4 → 6 等
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><p><strong>跳跃游戏</strong> (Jump Game, #55)</p>
+
+<ul>
+<li>更简单的版本，没有 minJump 限制</li>
+</ul></li>
+<li><p><strong>跳跃游戏 II</strong> (Jump Game II, #45)</p>
+
+<ul>
+<li>求到达最后位置的最少跳跃次数</li>
+</ul></li>
+<li><p><strong>跳跃游戏 III</strong> (Jump Game III, #1306)</p>
+
+<ul>
+<li>可以向前或向后跳，但有限制</li>
+</ul></li>
+<li><p><strong>跳跃游戏 IV</strong> (Jump Game IV, #1345)</p>
+
+<ul>
+<li>更复杂的跳跃规则，需要 BFS</li>
+</ul></li>
+<li><p><strong>跳跃游戏 V</strong> (Jump Game V, #1340)</p>
+
+<ul>
+<li>带高度限制的跳跃，需要 DP</li>
+</ul></li>
+<li><p><strong>跳跃游戏 VI</strong> (Jump Game VI, #1696)</p>
+
+<ul>
+<li>带得分的跳跃，需要单调队列优化</li>
+</ul></li>
+<li><p><strong>跳跃游戏 VII</strong> (Jump Game VII, #1871)</p>
+
+<ul>
+<li>与本题类似，但规则不同</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-16 10:32:33</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
