@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-16 09:32:27",
+      "record_id": "20260316_093227",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2656",
+          "title": "K 个元素的最大和",
+          "difficulty": "easy",
+          "file": "20260316_093227_q1.html"
+        },
+        {
+          "number": "1339",
+          "title": "分裂二叉树的最大乘积",
+          "difficulty": "medium",
+          "file": "20260316_093227_q2.html"
+        },
+        {
+          "number": "3651",
+          "title": "带传送的最小路径成本",
+          "difficulty": "hard",
+          "file": "20260316_093227_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-14 17:42:28",
       "record_id": "20260314_174228",
       "count": 3,
@@ -731,5 +756,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-14 17:42:28"
+  "last_updated": "2026-03-16 09:32:27"
 }

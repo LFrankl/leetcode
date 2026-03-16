@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1339. 分裂二叉树的最大乘积 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-16 09:32:27</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1339. 分裂二叉树的最大乘积</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-product-of-splitted-binary-tree/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1339-分裂二叉树的最大乘积">1339. 分裂二叉树的最大乘积</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 树, 深度优先搜索, 二叉树</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-product-of-splitted-binary-tree/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一棵二叉树，它的根为&nbsp;<code>root</code> 。请你删除 1 条边，使二叉树分裂成两棵子树，且它们子树和的乘积尽可能大。</p>
+
+<p>由于答案可能会很大，请你将结果对 10^9 + 7 取模后再返回。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><strong><img alt="" src="https://assets.leetcode.cn/aliyun-lc-upload/uploads/2020/02/02/sample_1_1699.png" style="height: 200px; width: 495px;"></strong></p>
+
+<pre><strong>输入：</strong>root = [1,2,3,4,5,6]
+<strong>输出：</strong>110
+<strong>解释：</strong>删除红色的边，得到 2 棵子树，和分别为 11 和 10 。它们的乘积是 110 （11*10）
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.cn/aliyun-lc-upload/uploads/2020/02/02/sample_2_1699.png" style="height: 200px; width: 495px;"></p>
+
+<pre><strong>输入：</strong>root = [1,null,2,3,4,null,null,5,6]
+<strong>输出：</strong>90
+<strong>解释：</strong>移除红色的边，得到 2 棵子树，和分别是 15 和 6 。它们的乘积为 90 （15*6）
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre><strong>输入：</strong>root = [2,3,9,10,7,8,6,5,4,11,1]
+<strong>输出：</strong>1025
+</pre>
+
+<p><strong>示例 4：</strong></p>
+
+<pre><strong>输入：</strong>root = [1,1]
+<strong>输出：</strong>1
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li>每棵树最多有&nbsp;<code>50000</code>&nbsp;个节点，且至少有&nbsp;<code>2</code>&nbsp;个节点。</li>
+    <li>每个节点的值在&nbsp;<code>[1, 10000]</code>&nbsp;之间。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int maxProduct(TreeNode* root) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int maxProduct(TreeNode root) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code># Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxProduct(self, root: Optional[TreeNode]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxProduct = function(root) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func maxProduct(root *TreeNode) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>If we know the sum of a subtree, the answer is max( (total<em>sum - subtree</em>sum) * subtree_sum) in each node.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[1,2,3,4,5,6]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：<br />
+给定一棵二叉树，通过删除一条边将其分裂成两棵子树，使得两棵子树的节点值之和的乘积最大化，结果对 (10^9+7) 取模。</p>
+
+<p><strong>关键约束</strong>：
+- 树节点数：(2 \leq n \leq 50000)
+- 节点值范围：([1, 10000])
+- 只能删除一条边
+- 结果需要取模 (10^9+7)</p>
+
+<p><strong>边界情况</strong>：
+- 树为链状结构
+- 节点值较大，求和可能溢出
+- 乘积可能超过 64 位整数范围</p>
+
+<p><strong>输入输出</strong>：
+- 输入：二叉树的根节点 <code>root</code>
+- 输出：最大乘积对 (10^9+7) 取模的结果</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一两次遍历先求总和再枚举切割">解法一：两次遍历（先求总和，再枚举切割）</h3>
+
+<p><strong>核心思想</strong>：
+1. 第一次遍历计算整棵树的总和 <code>totalSum</code>
+2. 第二次遍历，对于每个节点，计算以该节点为根的子树和 <code>subtreeSum</code>
+3. 删除该节点与其父节点之间的边时，分裂出的两棵子树和分别为：
+   - <code>subtreeSum</code>
+   - <code>totalSum - subtreeSum</code>
+4. 乘积为 <code>subtreeSum * (totalSum - subtreeSum)</code>，取最大值</p>
+
+<p><strong>注意事项</strong>：
+- 使用 <code>int64</code> 避免中间结果溢出
+- 取模只在最后结果进行，比较最大值时用原始值
+- 遍历时注意空节点处理</p>
+
+<h3 id="解法二一次遍历dfs-同时计算">解法二：一次遍历（DFS 同时计算）</h3>
+
+<p><strong>核心思想</strong>：
+在 DFS 过程中同时计算子树和并更新最大乘积，避免两次遍历。</p>
+
+<p><strong>步骤</strong>：
+1. 先计算整棵树的总和（必须的，因为需要知道总和）
+2. 实际上还是需要先知道总和，所以严格来说无法完全一次遍历完成总和计算和切割枚举</p>
+
+<p><strong>优化</strong>：
+可以在 DFS 返回子树和的同时，用闭包或全局变量记录 <code>totalSum</code> 并更新最大乘积。</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一两次遍历推荐">解法一：两次遍历（推荐）</h3>
+
+<pre><code>/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
+func maxProduct(root *TreeNode) int {
+    const mod = 1_000_000_007
+
+    // 第一步：计算整棵树的总和
+    var totalSum int64
+    var dfsSum func(node *TreeNode) int64
+    dfsSum = func(node *TreeNode) int64 {
+        if node == nil {
+            return 0
+        }
+        left := dfsSum(node.Left)
+        right := dfsSum(node.Right)
+        return left + right + int64(node.Val)
+    }
+    totalSum = dfsSum(root)
+
+    // 第二步：遍历每个节点，计算删除该节点与父节点之间边时的乘积
+    var maxProd int64 = 0
+    var dfsProd func(node *TreeNode) int64
+    dfsProd = func(node *TreeNode) int64 {
+        if node == nil {
+            return 0
+        }
+        // 计算当前子树和
+        left := dfsProd(node.Left)
+        right := dfsProd(node.Right)
+        subtreeSum := left + right + int64(node.Val)
+
+        // 计算乘积：subtreeSum * (totalSum - subtreeSum)
+        product := subtreeSum * (totalSum - subtreeSum)
+        if product &gt; maxProd {
+            maxProd = product
+        }
+
+        return subtreeSum
+    }
+    dfsProd(root)
+
+    return int(maxProd % mod)
+}
+</code></pre>
+
+<h3 id="解法二一次遍历优化版">解法二：一次遍历（优化版）</h3>
+
+<pre><code>func maxProduct(root *TreeNode) int {
+    const mod = 1_000_000_007
+
+    // 先计算总和
+    var totalSum int64
+    var sumDFS func(node *TreeNode) int64
+    sumDFS = func(node *TreeNode) int64 {
+        if node == nil {
+            return 0
+        }
+        return sumDFS(node.Left) + sumDFS(node.Right) + int64(node.Val)
+    }
+    totalSum = sumDFS(root)
+
+    var maxProd int64 = 0
+    // 第二次遍历同时计算乘积
+    var dfs func(node *TreeNode) int64
+    dfs = func(node *TreeNode) int64 {
+        if node == nil {
+            return 0
+        }
+        left := dfs(node.Left)
+        right := dfs(node.Right)
+        subtreeSum := left + right + int64(node.Val)
+
+        product := subtreeSum * (totalSum - subtreeSum)
+        if product &gt; maxProd {
+            maxProd = product
+        }
+
+        return subtreeSum
+    }
+    dfs(root)
+
+    return int(maxProd % mod)
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一">解法一：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>第一次遍历计算总和：O(n)</li>
+<li>第二次遍历枚举切割：O(n)</li>
+<li>总时间复杂度 O(2n) = O(n)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(h)
+<ul>
+<li>h 为树的高度，递归栈空间</li>
+<li>最坏情况（链状树）O(n)，平均 O(log n)</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二">解法二：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>计算总和：O(n)</li>
+<li>遍历计算乘积：O(n)</li>
+<li>总时间复杂度 O(2n) = O(n)</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(h)
+<ul>
+<li>与解法一相同</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>逻辑清晰，易于理解</td>
+  <td>需要两次遍历</td>
+  <td>通用场景</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>代码稍简洁</td>
+  <td>实际仍需先计算总和</td>
+  <td>同解法一</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法一</strong>：<br />
+虽然两种方法时间复杂度相同，但解法一逻辑更清晰，便于理解和调试。在实际编码中，两种方法性能差异极小，选择更易读的代码更重要。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例-1常规用例">用例 1：常规用例</h3>
+
+<pre><code>输入：[1,2,3,4,5,6]
+输出：110
+解释：删除节点2和节点4之间的边，得到子树和11和10，乘积110
+</code></pre>
+
+<h3 id="用例-2链状树">用例 2：链状树</h3>
+
+<pre><code>输入：[1,null,2,null,3,null,4]
+输出：20
+解释：删除节点2和节点3之间的边，得到子树和3和7，乘积21（实际计算：总和10，切割后3*7=21）
+</code></pre>
+
+<h3 id="用例-3大值节点">用例 3：大值节点</h3>
+
+<pre><code>输入：[10000,10000,10000]
+输出：200000000
+解释：删除根节点与左子节点之间的边，得到子树和10000和20000，乘积200000000
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/diameter-of-binary-tree/">LeetCode 543. 二叉树的直径</a></li>
+<li><a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">LeetCode 124. 二叉树中的最大路径和</a></li>
+<li><a href="https://leetcode.com/problems/house-robber-iii/">LeetCode 337. 打家劫舍 III</a></li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-16 09:30:21</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
