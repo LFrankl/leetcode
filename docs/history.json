@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-17 10:32:11",
+      "record_id": "20260317_103211",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1565",
+          "title": "按月统计订单数与顾客数",
+          "difficulty": "easy",
+          "file": "20260317_103211_q1.html"
+        },
+        {
+          "number": "788",
+          "title": "旋转数字",
+          "difficulty": "medium",
+          "file": "20260317_103211_q2.html"
+        },
+        {
+          "number": "LCP 25",
+          "title": "古董键盘",
+          "difficulty": "hard",
+          "file": "20260317_103211_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-16 10:33:46",
       "record_id": "20260316_103346",
       "count": 3,
@@ -781,5 +806,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-16 10:33:46"
+  "last_updated": "2026-03-17 10:32:11"
 }

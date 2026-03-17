@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>788. 旋转数字 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-17 10:32:11</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">788. 旋转数字</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/rotated-digits/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="788-旋转数字">788. 旋转数字</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 数学, 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/rotated-digits/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>我们称一个数 X 为好数, 如果它的每位数字逐个地被旋转 180 度后，我们仍可以得到一个有效的，且和 X 不同的数。要求每位数字都要被旋转。</p>
+
+<p>如果一个数的每位数字被旋转以后仍然还是一个数字，&nbsp;则这个数是有效的。0, 1, 和 8 被旋转后仍然是它们自己；2 和 5 可以互相旋转成对方（在这种情况下，它们以不同的方向旋转，换句话说，2 和 5 互为镜像）；6 和 9 同理，除了这些以外其他的数字旋转以后都不再是有效的数字。</p>
+
+<p>现在我们有一个正整数&nbsp;<code>N</code>, 计算从&nbsp;<code>1</code> 到&nbsp;<code>N</code> 中有多少个数&nbsp;X 是好数？</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例：</strong></p>
+
+<pre><strong>输入:</strong> 10
+<strong>输出:</strong> 4
+<strong>解释:</strong> 
+在[1, 10]中有四个好数： 2, 5, 6, 9。
+注意 1 和 10 不是好数, 因为他们在旋转之后不变。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li>N&nbsp;的取值范围是&nbsp;<code>[1, 10000]</code>。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int rotatedDigits(int n) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int rotatedDigits(int n) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def rotatedDigits(self, n: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @return {number}
+ */
+var rotatedDigits = function(n) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func rotatedDigits(n int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>10
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：<br />
+给定正整数 N，统计 1 到 N 中“好数”的个数。<br />
+- 好数定义：将数字每一位旋转 180° 后，得到的新数字是有效的且与原数字不同。<br />
+- 旋转规则：<br />
+  - 0、1、8 旋转后仍为自身<br />
+  - 2 和 5 互相旋转<br />
+  - 6 和 9 互相旋转<br />
+  - 其他数字（3、4、7）旋转后无效<br />
+- 要求：每一位数字都必须旋转后有效，且最终结果不能与原数相同。</p>
+
+<p><strong>关键约束</strong>：<br />
+- N ∈ [1, 10000]<br />
+- 数字旋转后必须每一位都有效，且整体不能与原数相同<br />
+- 数字中不能包含 3、4、7，否则无效<br />
+- 数字中必须至少包含一个 2、5、6、9 中的一个，否则旋转后与原数相同</p>
+
+<p><strong>输入输出</strong>：<br />
+- 输入：整数 N<br />
+- 输出：1 到 N 中好数的个数</p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一暴力枚举-逐位判断">解法一：暴力枚举 + 逐位判断</h3>
+
+<ul>
+<li><strong>核心思想</strong>：遍历 1 到 N 的每个数，检查其每一位是否符合旋转规则，并判断旋转后是否与原数不同。</li>
+<li><strong>步骤</strong>：
+<ol>
+<li>定义旋转映射表：0→0, 1→1, 8→8, 2→5, 5→2, 6→9, 9→6，其他数字无效。</li>
+<li>对每个数，逐位旋转：
+<ul>
+<li>若遇到无效数字（3、4、7），直接跳过该数</li>
+<li>否则记录旋转后的数字</li>
+</ul></li>
+<li>比较旋转后的数字与原数字，若不同则计数加一。</li>
+</ol></li>
+<li><strong>注意事项</strong>：
+<ul>
+<li>旋转后数字可能位数不同？不会，因为每一位都映射到另一个有效数字。</li>
+<li>注意数字为 0 的情况，但题目从 1 开始。</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二数位-dp动态规划">解法二：数位 DP（动态规划）</h3>
+
+<ul>
+<li><strong>核心思想</strong>：使用动态规划统计满足条件的数字个数，适用于 N 很大时（本题 N ≤ 10000，暴力足够，但 DP 可扩展）。</li>
+<li><strong>步骤</strong>：
+<ol>
+<li>将 N 转为字符串，从高位向低位 DP。</li>
+<li>状态设计：<code>dp[pos][hasDiff][tight]</code> 表示：
+<ul>
+<li><code>pos</code>：当前处理到的位置</li>
+<li><code>hasDiff</code>：是否已包含 2/5/6/9（保证旋转后不同）</li>
+<li><code>tight</code>：是否受 N 的限制（前缀是否与 N 相同）</li>
+</ul></li>
+<li>递归或迭代计算，只选择有效数字（0、1、2、5、6、8、9），并更新 hasDiff。</li>
+<li>最终统计 hasDiff = true 的数字个数。</li>
+</ol></li>
+<li><strong>注意事项</strong>：
+<ul>
+<li>注意前导零的处理，因为数字不能有前导零（除了 0 本身，但题目从 1 开始）。</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一暴力枚举">解法一：暴力枚举</h3>
+
+<pre><code>func rotatedDigits(N int) int {
+    count := 0
+    for i := 1; i &lt;= N; i++ {
+        if isValid(i) {
+            count++
+        }
+    }
+    return count
+}
+
+func isValid(num int) bool {
+    rotateMap := map[int]int{
+        0: 0, 1: 1, 8: 8,
+        2: 5, 5: 2,
+        6: 9, 9: 6,
+    }
+    original := num
+    rotated := 0
+    base := 1
+    for num &gt; 0 {
+        digit := num % 10
+        if newDigit, ok := rotateMap[digit]; ok {
+            rotated = newDigit*base + rotated
+            base *= 10
+            num /= 10
+        } else {
+            return false // 包含无效数字
+        }
+    }
+    return rotated != original
+}
+</code></pre>
+
+<h3 id="解法二数位-dp">解法二：数位 DP</h3>
+
+<pre><code>func rotatedDigits(N int) int {
+    s := strconv.Itoa(N)
+    n := len(s)
+    memo := make([][2][2]int, n)
+    for i := range memo {
+        memo[i] = [2][2]int{{-1, -1}, {-1, -1}}
+    }
+    var dfs func(pos int, hasDiff bool, tight bool) int
+    dfs = func(pos int, hasDiff bool, tight bool) int {
+        if pos == n {
+            if hasDiff {
+                return 1
+            }
+            return 0
+        }
+        if memo[pos][boolToInt(hasDiff)][boolToInt(tight)] != -1 {
+            return memo[pos][boolToInt(hasDiff)][boolToInt(tight)]
+        }
+        limit := 9
+        if tight {
+            limit = int(s[pos] - '0')
+        }
+        res := 0
+        for d := 0; d &lt;= limit; d++ {
+            if d == 3 || d == 4 || d == 7 {
+                continue
+            }
+            nextTight := tight &amp;&amp; (d == limit)
+            nextHasDiff := hasDiff || d == 2 || d == 5 || d == 6 || d == 9
+            res += dfs(pos+1, nextHasDiff, nextTight)
+        }
+        memo[pos][boolToInt(hasDiff)][boolToInt(tight)] = res
+        return res
+    }
+    return dfs(0, false, true)
+}
+
+func boolToInt(b bool) int {
+    if b {
+        return 1
+    }
+    return 0
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一暴力枚举-2">解法一：暴力枚举</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(N * log N)<br />
+遍历 N 个数，每个数处理其位数（约 log₁₀ N 位），故总复杂度 O(N log N)。<br />
+当 N=10000 时，log N ≈ 4，完全可行。</li>
+<li>💾 <strong>空间复杂度</strong>：O(1)<br />
+只使用常数空间。</li>
+</ul>
+
+<h3 id="解法二数位-dp-2">解法二：数位 DP</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(log N * 2 * 2 * 10) ≈ O(log N)<br />
+状态数：位置数 × hasDiff(2) × tight(2) ≈ 4 * log N，每个状态枚举 0~9 共 10 种可能。</li>
+<li>💾 <strong>空间复杂度</strong>：O(log N)<br />
+用于存储 memo 数组。</li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>暴力枚举</td>
+  <td>实现简单，直观易懂</td>
+  <td>N 很大时效率低</td>
+  <td>N ≤ 10⁵ 左右</td>
+</tr>
+<tr>
+  <td>数位 DP</td>
+  <td>高效，可处理超大 N（如 10¹⁸）</td>
+  <td>实现复杂，状态设计需谨慎</td>
+  <td>N 非常大时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐</strong>：<br />
+本题 N ≤ 10000，暴力枚举完全足够，且代码简洁，易于理解和调试。<br />
+数位 DP 可作为扩展学习，适用于更一般化的问题（如统计区间内满足某种数位条件的数字个数）。</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="常规用例">常规用例</h3>
+
+<ol>
+<li><p><strong>输入</strong>：10<br />
+<strong>输出</strong>：4<br />
+<strong>解释</strong>：好数为 2, 5, 6, 9</p></li>
+<li><p><strong>输入</strong>：20<br />
+<strong>输出</strong>：9<br />
+<strong>解释</strong>：好数为 2,5,6,9,12,15,16,19,20（20→05→5≠20）</p></li>
+</ol>
+
+<h3 id="边界用例">边界用例</h3>
+
+<ol>
+<li><p><strong>输入</strong>：1<br />
+<strong>输出</strong>：0<br />
+<strong>解释</strong>：1 旋转后仍为 1，不是好数</p></li>
+<li><p><strong>输入</strong>：10000<br />
+<strong>输出</strong>：2320<br />
+<strong>解释</strong>：暴力枚举可快速得出结果，验证 DP 正确性</p></li>
+</ol>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/rotated-digits/">LeetCode 788. Rotated Digits</a>（本题）</li>
+<li><a href="https://leetcode.com/problems/numbers-at-most-n-given-digit-set/">LeetCode 902. Numbers At Most N Given Digit Set</a>（类似数位 DP）</li>
+<li><a href="https://leetcode.com/problems/numbers-with-repeated-digits/">LeetCode 1012. Numbers With Repeated Digits</a>（数位 DP 统计不含重复数字的数）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-17 10:31:18</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

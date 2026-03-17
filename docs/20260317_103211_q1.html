@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1565. 按月统计订单数与顾客数 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-17 10:32:11</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1565. 按月统计订单数与顾客数</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/unique-orders-and-customers-per-month/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1565-按月统计订单数与顾客数">1565. 按月统计订单数与顾客数</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数据库</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/unique-orders-and-customers-per-month/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>{"headers":{"Orders":["order_id","order_date","customer_id","invoice"]},"rows":{"Orders":[[1,"2020-09-15",1,30],[2,"2020-09-17",2,90],[3,"2020-10-06",3,20],[4,"2020-10-20",3,21],[5,"2020-11-10",1,10],[6,"2020-11-21",2,15],[7,"2020-12-01",4,55],[8,"2020-12-03",4,77],[9,"2021-01-07",3,31],[10,"2021-01-15",2,20]]}}
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h1 id="leetcode-题目1517-查找拥有有效邮箱的用户">LeetCode 题目：1517. 查找拥有有效邮箱的用户</h1>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：
+题目要求从 <code>Orders</code> 表中，按月统计每个月的订单总数和下单的顾客数。其中，顾客数需要去重统计（即同一个顾客在一个月内多次下单只算一次）。统计结果按月份升序排列。</p>
+
+<p><strong>关键约束与边界</strong>：
+- 输入表 <code>Orders</code> 包含字段：<code>order_id</code>, <code>customer_id</code>, <code>order_date</code>。
+- 统计月份格式为 <code>'YYYY-MM'</code>。
+- 需要处理可能存在的重复订单（同月同一顾客多次下单）。
+- 如果某个月没有订单，则不需要出现在结果中。
+- 结果按月份升序排序。</p>
+
+<p><strong>输入输出格式</strong>：
+- 输入：<code>Orders</code> 表（假设已存在）。
+- 输出：包含三列的表：<code>month</code>（月份），<code>order_count</code>（订单总数），<code>customer_count</code>（去重顾客数）。</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一基础聚合-日期格式化">解法一：基础聚合 + 日期格式化</h3>
+
+<p><strong>核心思想</strong>：
+1. 从 <code>order_date</code> 中提取出 <code>'YYYY-MM'</code> 格式的月份。
+2. 按月份分组，统计每个月的订单总数（<code>COUNT(*)</code>）和去重顾客数（<code>COUNT(DISTINCT customer_id)</code>）。
+3. 按月份升序排序。</p>
+
+<p><strong>步骤</strong>：
+1. 使用 <code>DATE_FORMAT(order_date, '%Y-%m')</code> 或 <code>LEFT(order_date, 7)</code> 提取月份。
+2. 按提取的月份分组。
+3. 在分组内计算 <code>order_count</code> 和 <code>customer_count</code>。
+4. 按月份排序。</p>
+
+<p><strong>注意事项</strong>：
+- 确保 <code>order_date</code> 是日期或时间类型，否则需要转换。
+- 使用 <code>DISTINCT</code> 对顾客去重。
+- 月份格式必须为 <code>'YYYY-MM'</code>。</p>
+
+<h3 id="解法二使用-year-和-month-函数">解法二：使用 YEAR 和 MONTH 函数</h3>
+
+<p><strong>核心思想</strong>：
+与解法一类似，但使用 <code>YEAR()</code> 和 <code>MONTH()</code> 函数分别提取年份和月份，然后拼接成 <code>'YYYY-MM'</code> 格式。</p>
+
+<p><strong>步骤</strong>：
+1. 使用 <code>CONCAT(YEAR(order_date), '-', LPAD(MONTH(order_date), 2, '0'))</code> 生成月份字符串。
+2. 后续步骤同解法一。</p>
+
+<p><strong>注意事项</strong>：
+- 月份需要补零到两位（<code>LPAD</code> 或 <code>DATE_FORMAT</code>）。
+- 确保拼接后的格式正确。</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一基础聚合-日期格式化-2">解法一：基础聚合 + 日期格式化</h3>
+
+<pre><code>SELECT 
+    DATE_FORMAT(order_date, '%Y-%m') AS month,
+    COUNT(*) AS order_count,
+    COUNT(DISTINCT customer_id) AS customer_count
+FROM 
+    Orders
+GROUP BY 
+    DATE_FORMAT(order_date, '%Y-%m')
+ORDER BY 
+    month;
+</code></pre>
+
+<h3 id="解法二使用-year-和-month-函数-2">解法二：使用 YEAR 和 MONTH 函数</h3>
+
+<pre><code>SELECT 
+    CONCAT(YEAR(order_date), '-', LPAD(MONTH(order_date), 2, '0')) AS month,
+    COUNT(*) AS order_count,
+    COUNT(DISTINCT customer_id) AS customer_count
+FROM 
+    Orders
+GROUP BY 
+    YEAR(order_date), MONTH(order_date)
+ORDER BY 
+    month;
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一">解法一：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(N)，其中 N 是 <code>Orders</code> 表的行数。需要扫描全表并进行分组聚合。</li>
+<li>💾 <strong>空间复杂度</strong>：O(M)，其中 M 是不同月份的数量。需要存储分组中间结果。</li>
+</ul>
+
+<h3 id="解法二">解法二：</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(N)，与解法一相同。</li>
+<li>💾 <strong>空间复杂度</strong>：O(M)，与解法一相同。</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一</td>
+  <td>代码简洁，直接使用 <code>DATE_FORMAT</code> 函数</td>
+  <td>依赖数据库的日期格式化函数</td>
+  <td>大多数数据库支持</td>
+</tr>
+<tr>
+  <td>解法二</td>
+  <td>使用标准 SQL 函数，可移植性好</td>
+  <td>代码稍长，需要手动补零</td>
+  <td>需要跨数据库兼容时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：解法一。因为代码更简洁，且 <code>DATE_FORMAT</code> 函数在主流数据库（如 MySQL）中广泛支持。如果考虑数据库兼容性，可选择解法二。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="测试用例-1常规用例">测试用例 1：常规用例</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Orders 表：
++----------+-------------+------------+
+| order_id | customer_id | order_date |
++----------+-------------+------------+
+| 1        | 1           | 2020-01-01 |
+| 2        | 2           | 2020-01-02 |
+| 3        | 1           | 2020-01-02 |
+| 4        | 3           | 2020-02-01 |
+| 5        | 4           | 2020-02-02 |
+| 6        | 4           | 2020-03-01 |
+| 7        | 5           | 2020-03-01 |
++----------+-------------+------------+
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>+---------+-------------+----------------+
+| month   | order_count | customer_count |
++---------+-------------+----------------+
+| 2020-01 | 3           | 2              |
+| 2020-02 | 2           | 2              |
+| 2020-03 | 2           | 2              |
++---------+-------------+----------------+
+</code></pre>
+
+<p><strong>解释</strong>：
+- 2020-01 月有 3 个订单，顾客 1 和 2（顾客 1 有 2 个订单，但只算一次）。
+- 2020-02 月有 2 个订单，顾客 3 和 4。
+- 2020-03 月有 2 个订单，顾客 4 和 5。</p>
+
+<h3 id="测试用例-2边界用例单月单顾客多订单">测试用例 2：边界用例（单月单顾客多订单）</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Orders 表：
++----------+-------------+------------+
+| order_id | customer_id | order_date |
++----------+-------------+------------+
+| 1        | 1           | 2020-01-01 |
+| 2        | 1           | 2020-01-02 |
+| 3        | 1           | 2020-01-03 |
++----------+-------------+------------+
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>+---------+-------------+----------------+
+| month   | order_count | customer_count |
++---------+-------------+----------------+
+| 2020-01 | 3           | 1              |
++---------+-------------+----------------+
+</code></pre>
+
+<p><strong>解释</strong>：同一顾客在同一月多次下单，订单数计为 3，顾客数计为 1。</p>
+
+<h3 id="测试用例-3边界用例空表">测试用例 3：边界用例（空表）</h3>
+
+<p><strong>输入</strong>：</p>
+
+<pre><code>Orders 表为空
+</code></pre>
+
+<p><strong>输出</strong>：</p>
+
+<pre><code>空结果集
+</code></pre>
+
+<p><strong>解释</strong>：没有订单，不输出任何行。</p>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li>LeetCode 1821. 寻找今年具有正收入的客户（类似的分组聚合）</li>
+<li>LeetCode 1084. 销售分析 III（分组统计）</li>
+<li>LeetCode 1693. 每天的领导和合伙人（分组去重计数）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-17 10:30:36</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
