@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1458. 两个子序列的最大点积 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-18 10:33:05</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1458. 两个子序列的最大点积</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/max-dot-product-of-two-subsequences/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1458-两个子序列的最大点积">1458. 两个子序列的最大点积</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数组, 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/max-dot-product-of-two-subsequences/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你两个数组&nbsp;<code>nums1</code>&nbsp;和&nbsp;<code>nums2</code>&nbsp;。</p>
+
+<p>请你返回 <code>nums1</code> 和 <code>nums2</code> 中两个长度相同的 <strong>非空</strong> 子序列的最大点积。</p>
+
+<p>数组的非空子序列是通过删除原数组中某些元素（可能一个也不删除）后剩余数字组成的序列，但不能改变数字间相对顺序。比方说，<code>[2,3,5]</code>&nbsp;是&nbsp;<code>[1,2,3,4,5]</code>&nbsp;的一个子序列而&nbsp;<code>[1,5,3]</code>&nbsp;不是。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums1 = [2,1,-2,5], nums2 = [3,0,-6]
+<strong>输出：</strong>18
+<strong>解释：</strong>从 nums1 中得到子序列 [2,-2] ，从 nums2 中得到子序列 [3,-6] 。
+它们的点积为 (2*3 + (-2)*(-6)) = 18 。</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums1 = [3,-2], nums2 = [2,-6,7]
+<strong>输出：</strong>21
+<strong>解释：</strong>从 nums1 中得到子序列 [3] ，从 nums2 中得到子序列 [7] 。
+它们的点积为 (3*7) = 21 。</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums1 = [-1,-1], nums2 = [1,1]
+<strong>输出：</strong>-1
+<strong>解释：</strong>从 nums1 中得到子序列 [-1] ，从 nums2 中得到子序列 [1] 。
+它们的点积为 -1 。</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= nums1.length, nums2.length &lt;= 500</code></li>
+    <li><code>-1000 &lt;= nums1[i], nums2[i] &lt;= 1000</code></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>点积：</strong></p>
+
+<pre>
+定义 <code><strong>a</strong>&nbsp;= [<em>a</em><sub>1</sub>,&nbsp;<em>a</em><sub>2</sub>,…,&nbsp;<em>a</em><sub><em>n</em></sub>]</code> 和<strong> <code>b</code></strong><code>&nbsp;= [<em>b</em><sub>1</sub>,&nbsp;<em>b</em><sub>2</sub>,…,&nbsp;<em>b</em><sub><em>n</em></sub>]</code> 的点积为：
+
+<img alt="\mathbf{a}\cdot \mathbf{b} = \sum_{i=1}^n a_ib_i = a_1b_1 + a_2b_2 + \cdots + a_nb_n " class="tex" src="https://pic.leetcode.cn/1666164309-PBJMQp-image.png" />
+
+这里的 <strong>Σ</strong> 指示总和符号。
+</pre>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int maxDotProduct(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int maxDotProduct(int[] nums1, int[] nums2) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def maxDotProduct(self, nums1: List[int], nums2: List[int]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var maxDotProduct = function(nums1, nums2) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func maxDotProduct(nums1 []int, nums2 []int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Use dynamic programming, define DP[i][j] as the maximum dot product of two subsequences starting in the position i of nums1 and position j of nums2.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[2,1,-2,5]
+[3,0,-6]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+给定两个数组 <code>nums1</code> 和 <code>nums2</code>，需要从每个数组中分别选出一个<strong>长度相同</strong>的<strong>非空子序列</strong>，使得这两个子序列的<strong>点积</strong>（对应位置元素乘积之和）最大。</p>
+
+<p><strong>关键约束</strong><br />
+- 子序列：保持原数组顺序，但不要求连续<br />
+- 两个子序列长度必须相同<br />
+- 子序列必须非空<br />
+- 数组长度 ≤ 500，元素值范围 [-1000, 1000]<br />
+- 点积可能为负数（如示例3）</p>
+
+<p><strong>输入输出格式</strong><br />
+- 输入：两个整数数组 <code>nums1</code> 和 <code>nums2</code><br />
+- 输出：一个整数，表示最大点积</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一动态规划二维dp">解法一：动态规划（二维DP）</h3>
+
+<p><strong>核心思想</strong><br />
+类似最长公共子序列（LCS）的DP思路，但状态转移时计算点积。<br />
+定义 <code>dp[i][j]</code> 表示 <code>nums1[0..i-1]</code> 和 <code>nums2[0..j-1]</code> 中选出的两个等长子序列的最大点积。<br />
+状态转移考虑四种情况：
+1. 选择 <code>nums1[i-1]</code> 和 <code>nums2[j-1]</code> 配对，点积为 <code>nums1[i-1]*nums2[j-1]</code>，可能加上之前的最大点积 <code>dp[i-1][j-1]</code>（若为正）
+2. 不选 <code>nums1[i-1]</code>，即 <code>dp[i-1][j]</code>
+3. 不选 <code>nums2[j-1]</code>，即 <code>dp[i][j-1]</code>
+4. 只选当前两个数配对（相当于重新开始选子序列）</p>
+
+<p><strong>注意事项</strong><br />
+- 初始化时 <code>dp[0][j]</code> 和 <code>dp[i][0]</code> 设为负无穷（因为子序列必须非空）<br />
+- 最终答案可能为负数（如示例3）<br />
+- 需要处理负数的乘积可能使点积变大的情况</p>
+
+<h3 id="解法二动态规划空间优化">解法二：动态规划（空间优化）</h3>
+
+<p><strong>核心思想</strong><br />
+由于 <code>dp[i][j]</code> 只依赖于 <code>dp[i-1][j-1]</code>、<code>dp[i-1][j]</code> 和 <code>dp[i][j-1]</code>，可以用滚动数组优化空间。</p>
+
+<p><strong>注意事项</strong><br />
+- 需要保存 <code>dp[i-1][j-1]</code> 的值，因为会被覆盖<br />
+- 注意更新顺序</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一二维动态规划">解法一：二维动态规划</h3>
+
+<pre><code>func maxDotProduct(nums1 []int, nums2 []int) int {
+    m, n := len(nums1), len(nums2)
+    // dp[i][j] 表示 nums1[0..i-1] 和 nums2[0..j-1] 的最大点积
+    dp := make([][]int, m+1)
+    for i := range dp {
+        dp[i] = make([]int, n+1)
+        for j := range dp[i] {
+            dp[i][j] = -1 &lt;&lt; 31 // 初始化为极小值
+        }
+    }
+
+    for i := 1; i &lt;= m; i++ {
+        for j := 1; j &lt;= n; j++ {
+            // 情况1：只选当前两个数配对
+            cur := nums1[i-1] * nums2[j-1]
+            // 情况2：当前两个数配对，并加上之前的最大点积（如果为正）
+            if dp[i-1][j-1] &gt; 0 {
+                cur += dp[i-1][j-1]
+            }
+            // 情况3：不选 nums1[i-1]
+            // 情况4：不选 nums2[j-1]
+            dp[i][j] = max(cur, max(dp[i-1][j], dp[i][j-1]))
+        }
+    }
+    return dp[m][n]
+}
+
+func max(a, b int) int {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<h3 id="解法二空间优化动态规划">解法二：空间优化动态规划</h3>
+
+<pre><code>func maxDotProduct(nums1 []int, nums2 []int) int {
+    m, n := len(nums1), len(nums2)
+    // 使用一维数组，dp[j] 表示当前行
+    dp := make([]int, n+1)
+    for j := range dp {
+        dp[j] = -1 &lt;&lt; 31
+    }
+
+    for i := 1; i &lt;= m; i++ {
+        // pre 保存 dp[i-1][j-1]
+        pre := dp[0]
+        dp[0] = -1 &lt;&lt; 31 // 每行开始重置
+        for j := 1; j &lt;= n; j++ {
+            tmp := dp[j] // 保存当前 dp[i-1][j] 给下一轮作为 pre
+            cur := nums1[i-1] * nums2[j-1]
+            if pre &gt; 0 {
+                cur += pre
+            }
+            dp[j] = max(cur, max(dp[j], dp[j-1]))
+            pre = tmp // 更新 pre 为 dp[i-1][j]
+        }
+    }
+    return dp[n]
+}
+
+func max(a, b int) int {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一二维dp">解法一：二维DP</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m×n)，其中 m 和 n 分别为两个数组的长度。需要填充 m×n 的DP表。</li>
+<li>💾 <strong>空间复杂度</strong>：O(m×n)，用于存储DP表。</li>
+</ul>
+
+<h3 id="解法二空间优化dp">解法二：空间优化DP</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m×n)，与解法一相同。</li>
+<li>💾 <strong>空间复杂度</strong>：O(n)，只使用一维数组，n 为第二个数组的长度。</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>二维DP</td>
+  <td>逻辑清晰，易于理解和调试</td>
+  <td>空间占用较大</td>
+  <td>数组长度较小（≤500）时完全可行</td>
+</tr>
+<tr>
+  <td>空间优化DP</td>
+  <td>空间效率高，适合内存敏感场景</td>
+  <td>代码稍复杂，状态转移需要小心处理</td>
+  <td>数组长度较大或内存受限时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐</strong><br />
+本题数组长度最大为500，二维DP的空间复杂度 O(500×500) = O(250k) 在可接受范围内。推荐使用<strong>解法一</strong>，因为它逻辑更清晰，不易出错。在实际面试中，可以先实现解法一，再优化到解法二，展示优化能力。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<pre><code>输入：nums1 = [2,1,-2,5], nums2 = [3,0,-6]
+输出：18
+解释：子序列 [2,-2] 和 [3,-6] 点积为 2*3 + (-2)*(-6) = 6 + 12 = 18
+</code></pre>
+
+<h3 id="用例2全负数情况">用例2：全负数情况</h3>
+
+<pre><code>输入：nums1 = [-1,-1], nums2 = [1,1]
+输出：-1
+解释：只能选单个元素配对，最大点积为 (-1)*1 = -1
+</code></pre>
+
+<h3 id="用例3包含零和正负数">用例3：包含零和正负数</h3>
+
+<pre><code>输入：nums1 = [3,-2], nums2 = [2,-6,7]
+输出：21
+解释：子序列 [3] 和 [7] 点积为 21
+</code></pre>
+
+<h3 id="用例4边界情况长数组">用例4：边界情况（长数组）</h3>
+
+<pre><code>输入：nums1 = [1000]*500, nums2 = [1000]*500
+输出：500000000
+解释：每个数组选全部元素，点积 = 500 * (1000*1000) = 5e8
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 1143</strong>：最长公共子序列（LCS）——类似DP结构</li>
+<li><strong>LeetCode 1035</strong>：不相交的线——本质也是LCS</li>
+<li><strong>LeetCode 72</strong>：编辑距离——二维DP状态转移</li>
+<li><strong>LeetCode 152</strong>：乘积最大子数组——处理负数乘积的思路</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-18 10:33:05</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

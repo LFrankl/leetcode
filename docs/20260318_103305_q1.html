@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1114. 按序打印 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-18 10:33:05</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1114. 按序打印</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/print-in-order/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1114-按序打印">1114. 按序打印</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 多线程</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/print-in-order/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个类：</p>
+
+<pre>
+public class Foo {
+&nbsp; public void first() { print("first"); }
+&nbsp; public void second() { print("second"); }
+&nbsp; public void third() { print("third"); }
+}</pre>
+
+<p>三个不同的线程 A、B、C 将会共用一个&nbsp;<code>Foo</code>&nbsp;实例。</p>
+
+<ul>
+    <li>线程 A 将会调用 <code>first()</code> 方法</li>
+    <li>线程 B 将会调用&nbsp;<code>second()</code> 方法</li>
+    <li>线程 C 将会调用 <code>third()</code> 方法</li>
+</ul>
+
+<p>请设计修改程序，以确保 <code>second()</code> 方法在 <code>first()</code> 方法之后被执行，<code>third()</code> 方法在 <code>second()</code> 方法之后被执行。</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li>尽管输入中的数字似乎暗示了顺序，但是我们并不保证线程在操作系统中的调度顺序。</li>
+    <li>你看到的输入格式主要是为了确保测试的全面性。</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [1,2,3]
+<strong>输出：</strong>"firstsecondthird"
+<strong>解释：</strong>
+有三个线程会被异步启动。输入 [1,2,3] 表示线程 A 将会调用 first() 方法，线程 B 将会调用 second() 方法，线程 C 将会调用 third() 方法。正确的输出是 "firstsecondthird"。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [1,3,2]
+<strong>输出：</strong>"firstsecondthird"
+<strong>解释：</strong>
+输入 [1,3,2] 表示线程 A 将会调用 first() 方法，线程 B 将会调用 third() 方法，线程 C 将会调用 second() 方法。正确的输出是 "firstsecondthird"。</pre>
+
+<p>&nbsp;</p>
+
+<ul>
+</ul>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>nums</code> 是 <code>[1, 2, 3]</code> 的一组排列</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Foo {
+public:
+    Foo() {
+
+    }
+
+    void first(function&lt;void()&gt; printFirst) {
+
+        // printFirst() outputs "first". Do not change or remove this line.
+        printFirst();
+    }
+
+    void second(function&lt;void()&gt; printSecond) {
+
+        // printSecond() outputs "second". Do not change or remove this line.
+        printSecond();
+    }
+
+    void third(function&lt;void()&gt; printThird) {
+
+        // printThird() outputs "third". Do not change or remove this line.
+        printThird();
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Foo {
+
+    public Foo() {
+
+    }
+
+    public void first(Runnable printFirst) throws InterruptedException {
+
+        // printFirst.run() outputs "first". Do not change or remove this line.
+        printFirst.run();
+    }
+
+    public void second(Runnable printSecond) throws InterruptedException {
+
+        // printSecond.run() outputs "second". Do not change or remove this line.
+        printSecond.run();
+    }
+
+    public void third(Runnable printThird) throws InterruptedException {
+
+        // printThird.run() outputs "third". Do not change or remove this line.
+        printThird.run();
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Foo:
+    def __init__(self):
+        pass
+
+
+    def first(self, printFirst: 'Callable[[], None]') -&gt; None:
+
+        # printFirst() outputs "first". Do not change or remove this line.
+        printFirst()
+
+
+    def second(self, printSecond: 'Callable[[], None]') -&gt; None:
+
+        # printSecond() outputs "second". Do not change or remove this line.
+        printSecond()
+
+
+    def third(self, printThird: 'Callable[[], None]') -&gt; None:
+
+        # printThird() outputs "third". Do not change or remove this line.
+        printThird()
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>type Foo struct {
+
+}
+
+func NewFoo() *Foo {
+    return &amp;Foo{
+    }
+}
+
+func (f *Foo) First(printFirst func()) {
+    // Do not change this line
+    printFirst()
+}
+
+func (f *Foo) Second(printSecond func()) {
+    /// Do not change this line
+    printSecond()
+}
+
+func (f *Foo) Third(printThird func()) {
+    // Do not change this line
+    printThird()
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[1,2,3]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h1 id="按序打印-多线程顺序控制">按序打印 - 多线程顺序控制</h1>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：
+- 三个线程 A、B、C 分别调用 <code>first()</code>、<code>second()</code>、<code>third()</code> 方法
+- 必须保证执行顺序：<code>first()</code> → <code>second()</code> → <code>third()</code>
+- 无论操作系统如何调度线程，都要保证这个顺序</p>
+
+<p><strong>关键约束</strong>：
+- 线程启动顺序不确定（由输入数组 <code>nums</code> 决定）
+- 需要线程同步机制来保证执行顺序
+- 不能简单地在方法内部使用 <code>sleep</code> 等不可靠方式</p>
+
+<p><strong>输入输出</strong>：
+- 输入：数组 <code>nums</code>，是 <code>[1,2,3]</code> 的排列，表示三个线程的调用顺序
+- 输出：字符串 "firstsecondthird"</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一信号量条件变量">解法一：信号量/条件变量</h3>
+
+<p><strong>核心思想</strong>：使用两个同步原语（信号量或条件变量）作为"门"，控制线程的执行顺序。</p>
+
+<p><strong>步骤</strong>：
+1. 创建两个同步原语（如信号量、互斥锁+条件变量）
+2. <code>first()</code> 执行后，释放第一个信号，允许 <code>second()</code> 执行
+3. <code>second()</code> 执行后，释放第二个信号，允许 <code>third()</code> 执行</p>
+
+<h3 id="解法二原子变量自旋锁">解法二：原子变量+自旋锁</h3>
+
+<p><strong>核心思想</strong>：使用原子变量作为计数器，线程通过检查计数器的值来决定是否执行。</p>
+
+<p><strong>步骤</strong>：
+1. 使用原子变量记录当前应该执行哪个方法
+2. 每个方法执行前检查计数器值
+3. 执行完成后递增计数器</p>
+
+<h3 id="解法三通道go特有">解法三：通道（Go特有）</h3>
+
+<p><strong>核心思想</strong>：利用 Go 的通道（channel）作为同步机制，通道的阻塞特性天然适合线程同步。</p>
+
+<p><strong>步骤</strong>：
+1. 创建两个无缓冲通道
+2. <code>first()</code> 执行后向第一个通道发送信号
+3. <code>second()</code> 等待第一个通道的信号，执行后向第二个通道发送信号
+4. <code>third()</code> 等待第二个通道的信号</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一使用-synccond条件变量">解法一：使用 sync.Cond（条件变量）</h3>
+
+<pre><code>package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+type Foo struct {
+    firstDone  *sync.Cond
+    secondDone *sync.Cond
+}
+
+func NewFoo() *Foo {
+    return &amp;Foo{
+        firstDone:  sync.NewCond(&amp;sync.Mutex{}),
+        secondDone: sync.NewCond(&amp;sync.Mutex{}),
+    }
+}
+
+func (f *Foo) first(printFirst func()) {
+    // 执行 first
+    printFirst()
+
+    // 通知 second 可以执行
+    f.firstDone.L.Lock()
+    f.firstDone.Broadcast()
+    f.firstDone.L.Unlock()
+}
+
+func (f *Foo) second(printSecond func()) {
+    // 等待 first 执行完成
+    f.firstDone.L.Lock()
+    f.firstDone.Wait()
+    f.firstDone.L.Unlock()
+
+    // 执行 second
+    printSecond()
+
+    // 通知 third 可以执行
+    f.secondDone.L.Lock()
+    f.secondDone.Broadcast()
+    f.secondDone.L.Unlock()
+}
+
+func (f *Foo) third(printThird func()) {
+    // 等待 second 执行完成
+    f.secondDone.L.Lock()
+    f.secondDone.Wait()
+    f.secondDone.L.Unlock()
+
+    // 执行 third
+    printThird()
+}
+</code></pre>
+
+<h3 id="解法二使用原子变量">解法二：使用原子变量</h3>
+
+<pre><code>package main
+
+import (
+    "fmt"
+    "sync/atomic"
+)
+
+type Foo struct {
+    step int32 // 原子计数器，0:等待first，1:等待second，2:等待third
+}
+
+func NewFoo() *Foo {
+    return &amp;Foo{step: 0}
+}
+
+func (f *Foo) first(printFirst func()) {
+    // 执行 first
+    printFirst()
+
+    // 将计数器设置为1，允许second执行
+    atomic.StoreInt32(&amp;f.step, 1)
+}
+
+func (f *Foo) second(printSecond func()) {
+    // 自旋等待，直到step变为1
+    for atomic.LoadInt32(&amp;f.step) != 1 {
+        // 让出CPU，避免忙等待消耗过多资源
+        // runtime.Gosched()
+    }
+
+    // 执行 second
+    printSecond()
+
+    // 将计数器设置为2，允许third执行
+    atomic.StoreInt32(&amp;f.step, 2)
+}
+
+func (f *Foo) third(printThird func()) {
+    // 自旋等待，直到step变为2
+    for atomic.LoadInt32(&amp;f.step) != 2 {
+        // runtime.Gosched()
+    }
+
+    // 执行 third
+    printThird()
+}
+</code></pre>
+
+<h3 id="解法三使用通道go推荐方式">解法三：使用通道（Go推荐方式）</h3>
+
+<pre><code>package main
+
+import (
+    "fmt"
+)
+
+type Foo struct {
+    firstChan  chan struct{} // 无缓冲通道，用于 first -&gt; second 同步
+    secondChan chan struct{} // 无缓冲通道，用于 second -&gt; third 同步
+}
+
+func NewFoo() *Foo {
+    return &amp;Foo{
+        firstChan:  make(chan struct{}),
+        secondChan: make(chan struct{}),
+    }
+}
+
+func (f *Foo) first(printFirst func()) {
+    // 执行 first
+    printFirst()
+
+    // 关闭通道，通知 second 可以执行
+    // 关闭通道比发送数据更安全，避免重复发送
+    close(f.firstChan)
+}
+
+func (f *Foo) second(printSecond func()) {
+    // 等待 first 执行完成（阻塞直到通道关闭）
+    &lt;-f.firstChan
+
+    // 执行 second
+    printSecond()
+
+    // 关闭通道，通知 third 可以执行
+    close(f.secondChan)
+}
+
+func (f *Foo) third(printThird func()) {
+    // 等待 second 执行完成
+    &lt;-f.secondChan
+
+    // 执行 third
+    printThird()
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一synccond">解法一：sync.Cond</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(1)
+<ul>
+<li>每个方法都是常数时间操作</li>
+<li>等待操作由操作系统调度，不消耗CPU时间</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了两个条件变量和对应的互斥锁</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二原子变量">解法二：原子变量</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(1) 平均情况
+<ul>
+<li>每个方法执行时间固定</li>
+<li><code>second()</code> 和 <code>third()</code> 可能有自旋等待，但等待时间取决于线程调度</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了一个原子变量</li>
+</ul></li>
+</ul>
+
+<h3 id="解法三通道">解法三：通道</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(1)
+<ul>
+<li>通道操作是常数时间</li>
+<li>等待时线程被阻塞，不消耗CPU</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>创建了两个无缓冲通道</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>sync.Cond</th>
+  <th>原子变量</th>
+  <th>通道</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>实现复杂度</strong></td>
+  <td>中等</td>
+  <td>简单</td>
+  <td>简单</td>
+</tr>
+<tr>
+  <td><strong>性能</strong></td>
+  <td>高（操作系统级阻塞）</td>
+  <td>中等（可能忙等待）</td>
+  <td>高（Go运行时优化）</td>
+</tr>
+<tr>
+  <td><strong>资源消耗</strong></td>
+  <td>低</td>
+  <td>可能高（忙等待时）</td>
+  <td>低</td>
+</tr>
+<tr>
+  <td><strong>可读性</strong></td>
+  <td>一般</td>
+  <td>较好</td>
+  <td>最好</td>
+</tr>
+<tr>
+  <td><strong>Go风格</strong></td>
+  <td>一般</td>
+  <td>一般</td>
+  <td>最符合</td>
+</tr>
+<tr>
+  <td><strong>适用场景</strong></td>
+  <td>通用多线程</td>
+  <td>简单同步</td>
+  <td>Go语言特有</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐使用解法三（通道）</strong>：
+1. 最符合 Go 语言的并发哲学
+2. 代码简洁，易于理解和维护
+3. 性能优秀，由 Go 运行时优化
+4. 避免忙等待，节省CPU资源</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1正常顺序">用例1：正常顺序</h3>
+
+<pre><code>// 输入：nums = [1,2,3]
+// 线程启动顺序：A(first) → B(second) → C(third)
+// 预期输出："firstsecondthird"
+</code></pre>
+
+<h3 id="用例2乱序启动">用例2：乱序启动</h3>
+
+<pre><code>// 输入：nums = [1,3,2]
+// 线程启动顺序：A(first) → C(third) → B(second)
+// 预期输出："firstsecondthird"
+// 注意：third会在second之前启动，但必须等待second执行
+</code></pre>
+
+<h3 id="用例3完全逆序">用例3：完全逆序</h3>
+
+<pre><code>// 输入：nums = [3,2,1]
+// 线程启动顺序：C(third) → B(second) → A(first)
+// 预期输出："firstsecondthird"
+// 最极端情况：所有线程都在等待前驱
+</code></pre>
+
+<h3 id="测试代码示例">测试代码示例</h3>
+
+<pre><code>func testFoo(nums []int) string {
+    foo := NewFoo()
+    var result string
+    var wg sync.WaitGroup
+    wg.Add(3)
+
+    // 根据nums顺序启动线程
+    for _, num := range nums {
+        go func(n int) {
+            defer wg.Done()
+            switch n {
+            case 1:
+                foo.first(func() { result += "first" })
+            case 2:
+                foo.second(func() { result += "second" })
+            case 3:
+                foo.third(func() { result += "third" })
+            }
+        }(num)
+    }
+
+    wg.Wait()
+    return result
+}
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>1114. Print in Order</strong> - 本题的LeetCode编号</li>
+<li><strong>1115. Print FooBar Alternately</strong> - 两个线程交替打印</li>
+<li><strong>1116. Print Zero Even Odd</strong> - 三个线程按特定顺序打印</li>
+<li><strong>1195. Fizz Buzz Multithreaded</strong> - 多线程FizzBuzz问题</li>
+<li><strong>1226. The Dining Philosophers</strong> - 经典的哲学家就餐问题</li>
+</ol>
+
+<p>这些题目都是多线程同步的经典问题，掌握本题的解法有助于解决更复杂的线程同步问题。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-18 10:31:09</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

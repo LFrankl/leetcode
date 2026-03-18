@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3409. 最长相邻绝对差递减子序列 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-18 10:33:05</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3409. 最长相邻绝对差递减子序列</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/longest-subsequence-with-decreasing-adjacent-difference/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3409-最长相邻绝对差递减子序列">3409. 最长相邻绝对差递减子序列</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 数组, 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/longest-subsequence-with-decreasing-adjacent-difference/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个整数数组&nbsp;<code>nums</code>&nbsp;。</p>
+
+<p>你的任务是找到 <code>nums</code>&nbsp;中的 <strong>最长 <span data-keyword="subsequence-array">子序列</span></strong>&nbsp;<code>seq</code>&nbsp;，这个子序列中相邻元素的 <strong>绝对差</strong>&nbsp;构成一个 <strong>非递增</strong>&nbsp;整数序列。换句话说，<code>nums</code>&nbsp;中的序列&nbsp;<code>seq<sub>0</sub></code>, <code>seq<sub>1</sub></code>, <code>seq<sub>2</sub></code>, ..., <code>seq<sub>m</sub></code>&nbsp;满足&nbsp;<code>|seq<sub>1</sub> - seq<sub>0</sub>| &gt;= |seq<sub>2</sub> - seq<sub>1</sub>| &gt;= ... &gt;= |seq<sub>m</sub> - seq<sub>m - 1</sub>|</code>&nbsp;。</p>
+
+<p>请你返回这个子序列的长度。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">nums = [16,6,3]</span></p>
+
+<p><span class="example-io"><b>输出：</b>3</span></p>
+
+<p><b>解释：</b></p>
+
+<p>最长子序列是&nbsp;<code>[16, 6, 3]</code>&nbsp;，相邻绝对差值为&nbsp;<code>[10, 3]</code>&nbsp;。</p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>nums = [6,5,3,4,2,1]</span></p>
+
+<p><span class="example-io"><b>输出：</b>4</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>最长子序列是&nbsp;<code>[6, 4, 2, 1]</code>&nbsp;，相邻绝对差值为&nbsp;<code>[2, 2, 1]</code>&nbsp;。</p>
+</div>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>nums = [10,20,10,19,10,20]</span></p>
+
+<p><span class="example-io"><b>输出：</b>5</span></p>
+
+<p><b>解释：</b></p>
+
+<p>最长子序列是&nbsp;<code>[10, 20, 10, 19, 10]</code>&nbsp;，相邻绝对差值为&nbsp;<code>[10, 10, 9, 9]</code>&nbsp;。</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>2 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+    <li><code>1 &lt;= nums[i] &lt;= 300</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int longestSubsequence(vector&lt;int&gt;&amp; nums) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int longestSubsequence(int[] nums) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def longestSubsequence(self, nums: List[int]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestSubsequence = function(nums) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func longestSubsequence(nums []int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Use dynamic programming.</li>
+<li>Store the maximum answer for each index and every possible difference.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[16,6,3]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：
+给定一个整数数组 <code>nums</code>，需要找到一个最长的子序列（不要求连续），使得子序列中相邻元素的绝对差构成的序列是<strong>非递增</strong>的（即后一个绝对差 ≤ 前一个绝对差）。</p>
+
+<p><strong>关键约束</strong>：
+- 子序列不要求连续，但必须保持原数组中的相对顺序。
+- 绝对差序列必须非递增。
+- 数组长度 ≤ 10^4，元素值 ≤ 300。</p>
+
+<p><strong>边界情况</strong>：
+- 数组长度为 2 时，直接返回 2。
+- 所有元素相等时，绝对差为 0，满足非递增。
+- 数组严格递增或递减时，需要动态规划处理。</p>
+
+<p><strong>输入输出</strong>：
+- 输入：整数数组 <code>nums</code>
+- 输出：最长满足条件的子序列长度</p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一动态规划朴素-dp">解法一：动态规划（朴素 DP）</h3>
+
+<p><strong>核心思想</strong>：
+定义 <code>dp[i][d]</code> 表示以 <code>nums[i]</code> 结尾，且最后一个绝对差为 <code>d</code> 的最长子序列长度。由于绝对差需要非递增，我们需要记录最后一个绝对差的值。</p>
+
+<p><strong>步骤</strong>：
+1. 初始化 <code>dp[i][d] = 1</code>（至少包含自己）。
+2. 遍历 <code>i</code> 从 0 到 n-1，对于每个 <code>i</code>，遍历 <code>j</code> 从 0 到 i-1：
+   - 计算 <code>diff = |nums[i] - nums[j]|</code>
+   - 对于所有可能的绝对差 <code>prevDiff</code>（0 ≤ prevDiff ≤ diff），更新：
+     <code>dp[i][diff] = max(dp[i][diff], dp[j][prevDiff] + 1)</code>
+3. 最终答案是所有 <code>dp[i][d]</code> 的最大值。</p>
+
+<p><strong>坑点</strong>：
+- 绝对差最大为 299（因为元素值 ≤ 300），所以 <code>d</code> 的范围是 0~299。
+- 需要遍历 <code>prevDiff</code>，导致复杂度较高。</p>
+
+<hr />
+
+<h3 id="解法二动态规划-前缀最大值优化">解法二：动态规划 + 前缀最大值优化</h3>
+
+<p><strong>核心思想</strong>：
+在解法一的基础上，注意到对于固定的 <code>j</code>，我们需要的是 <code>dp[j][prevDiff]</code> 在 <code>prevDiff ≥ diff</code> 时的最大值。因此可以维护一个前缀最大值数组 <code>maxDiff[j][d]</code> 表示以 <code>nums[j]</code> 结尾，且最后一个绝对差 ≥ d 的最长子序列长度。</p>
+
+<p><strong>步骤</strong>：
+1. 定义 <code>dp[i][d]</code> 同上。
+2. 定义 <code>maxDiff[i][d]</code> 表示以 <code>nums[i]</code> 结尾，且最后一个绝对差 ≥ d 的最长子序列长度。
+3. 遍历 <code>i</code>，对于每个 <code>i</code>，遍历 <code>j</code>：
+   - 计算 <code>diff = |nums[i] - nums[j]|</code>
+   - 从 <code>maxDiff[j][diff]</code> 中获取最优值（因为需要 <code>prevDiff ≥ diff</code>）
+   - 更新 <code>dp[i][diff] = max(dp[i][diff], maxDiff[j][diff] + 1)</code>
+4. 更新 <code>maxDiff[i][d]</code> 为后缀最大值。</p>
+
+<p><strong>优化</strong>：
+- 将 <code>maxDiff[i][d]</code> 改为从大往小遍历，避免重复计算。</p>
+
+<hr />
+
+<h3 id="解法三动态规划-差分数组优化推荐">解法三：动态规划 + 差分数组优化（推荐）</h3>
+
+<p><strong>核心思想</strong>：
+由于元素值 ≤ 300，绝对差 ≤ 299，我们可以将状态定义为 <code>dp[i][d]</code> 表示以 <code>nums[i]</code> 结尾，且最后一个绝对差为 <code>d</code> 的最长子序列长度。对于每个 <code>i</code>，我们只需要知道所有 <code>j &lt; i</code> 的 <code>dp[j][prevDiff]</code> 在 <code>prevDiff ≥ diff</code> 时的最大值。这可以通过维护一个二维数组 <code>best[j][d]</code> 实现，其中 <code>best[j][d]</code> 表示以 <code>nums[j]</code> 结尾，且最后一个绝对差 ≥ d 的最长子序列长度。</p>
+
+<p><strong>步骤</strong>：
+1. 初始化 <code>dp[i][d] = 1</code>。
+2. 对于每个 <code>i</code>，遍历 <code>j</code> 从 0 到 i-1：
+   - 计算 <code>diff = |nums[i] - nums[j]|</code>
+   - 从 <code>best[j][diff]</code> 中获取最大值（因为需要 <code>prevDiff ≥ diff</code>）
+   - 更新 <code>dp[i][diff] = max(dp[i][diff], best[j][diff] + 1)</code>
+3. 更新 <code>best[i][d]</code>：
+   - 从 d = 299 到 0，<code>best[i][d] = max(dp[i][d], best[i][d+1])</code>
+4. 最终答案是所有 <code>dp[i][d]</code> 的最大值。</p>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法三动态规划-差分数组优化">解法三：动态规划 + 差分数组优化</h3>
+
+<pre><code>func longestDecreasingDiffSubsequence(nums []int) int {
+    n := len(nums)
+    if n == 0 {
+        return 0
+    }
+    // 最大绝对差为 299
+    maxDiff := 300
+    // dp[i][d] 表示以 nums[i] 结尾，且最后一个绝对差为 d 的最长子序列长度
+    dp := make([][]int, n)
+    // best[i][d] 表示以 nums[i] 结尾，且最后一个绝对差 &gt;= d 的最长子序列长度
+    best := make([][]int, n)
+    for i := 0; i &lt; n; i++ {
+        dp[i] = make([]int, maxDiff)
+        best[i] = make([]int, maxDiff)
+        for d := 0; d &lt; maxDiff; d++ {
+            dp[i][d] = 1 // 至少包含自己
+        }
+    }
+
+    ans := 1
+    for i := 0; i &lt; n; i++ {
+        for j := 0; j &lt; i; j++ {
+            diff := abs(nums[i] - nums[j])
+            // 从 best[j][diff] 中获取最优值（prevDiff &gt;= diff）
+            dp[i][diff] = max(dp[i][diff], best[j][diff]+1)
+        }
+        // 更新 best[i][d] 为后缀最大值
+        best[i][maxDiff-1] = dp[i][maxDiff-1]
+        for d := maxDiff - 2; d &gt;= 0; d-- {
+            best[i][d] = max(dp[i][d], best[i][d+1])
+        }
+        // 更新答案
+        for d := 0; d &lt; maxDiff; d++ {
+            ans = max(ans, dp[i][d])
+        }
+    }
+    return ans
+}
+
+func abs(x int) int {
+    if x &lt; 0 {
+        return -x
+    }
+    return x
+}
+
+func max(a, b int) int {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<p><strong>解法三</strong>：
+- ⏱️ <strong>时间复杂度</strong>：O(n² * D)，其中 D = 300（最大绝对差）。内层循环中更新 <code>dp[i][diff]</code> 是 O(1)，更新 <code>best[i][d]</code> 是 O(D)，总复杂度 O(n² * D)。在本题中 n ≤ 10^4，D=300，最坏情况可能达到 10^8，但实际常数较小，可以通过。
+- 💾 <strong>空间复杂度</strong>：O(n * D)，存储 <code>dp</code> 和 <code>best</code> 数组。</p>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>朴素 DP</td>
+  <td>思路直观，易于实现</td>
+  <td>时间复杂度高 O(n³ * D)</td>
+  <td>小规模数据</td>
+</tr>
+<tr>
+  <td>前缀最大值优化</td>
+  <td>优化了 prevDiff 的查找</td>
+  <td>实现稍复杂</td>
+  <td>中等规模数据</td>
+</tr>
+<tr>
+  <td>差分数组优化（推荐）</td>
+  <td>利用元素值范围小的特点，高效处理绝对差</td>
+  <td>空间占用较大</td>
+  <td>本题数据范围（元素值 ≤ 300）</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法三</strong>，因为本题元素值范围小（≤300），绝对差范围有限，可以利用差分数组优化，将时间复杂度中的 D 因子降低到常数级别。</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<p><strong>常规用例 1</strong>：</p>
+
+<pre><code>输入：[16, 6, 3]
+输出：3
+解释：子序列 [16, 6, 3]，绝对差 [10, 3] 非递增。
+</code></pre>
+
+<p><strong>常规用例 2</strong>：</p>
+
+<pre><code>输入：[6, 5, 3, 4, 2, 1]
+输出：4
+解释：子序列 [6, 4, 2, 1]，绝对差 [2, 2, 1] 非递增。
+</code></pre>
+
+<p><strong>边界用例</strong>：</p>
+
+<pre><code>输入：[10, 20, 10, 19, 10, 20]
+输出：5
+解释：子序列 [10, 20, 10, 19, 10]，绝对差 [10, 10, 9, 9] 非递增。
+</code></pre>
+
+<p><strong>特殊用例（全相等）</strong>：</p>
+
+<pre><code>输入：[5, 5, 5, 5]
+输出：4
+解释：任意子序列都满足，绝对差全为 0。
+</code></pre>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 300. 最长递增子序列</strong>（LIS）：经典 DP 问题。</li>
+<li><strong>LeetCode 354. 俄罗斯套娃信封问题</strong>：二维 LIS 问题。</li>
+<li><strong>LeetCode 1027. 最长等差数列</strong>：类似绝对差约束的 DP 问题。</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-18 10:32:12</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
