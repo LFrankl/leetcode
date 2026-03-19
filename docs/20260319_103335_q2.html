@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1257. 最小公共区域 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-19 10:33:35</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1257. 最小公共区域</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/smallest-common-region/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1257-最小公共区域">1257. 最小公共区域</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 树, 深度优先搜索, 广度优先搜索, 数组, 哈希表, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/smallest-common-region/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Try to model the problem as a graph problem.</li>
+<li>The given graph is a tree.</li>
+<li>The problem is reduced to finding the lowest common ancestor of two nodes in a tree.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[["Earth","North America","South America"],["North America","United States","Canada"],["United States","New York","Boston"],["Canada","Ontario","Quebec"],["South America","Brazil"]]
+"Quebec"
+"New York"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h1 id="最小公共区域-解题分析">最小公共区域 - 解题分析</h1>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<h3 id="题目重述">题目重述</h3>
+
+<p>给定一个区域列表 <code>regions</code>，每个区域包含一个主区域和若干子区域。同时给定两个区域名 <code>region1</code> 和 <code>region2</code>，要求找到包含这两个区域的最小公共区域。</p>
+
+<h3 id="关键约束">关键约束</h3>
+
+<ol>
+<li>区域关系构成一棵树（有向无环图），每个区域最多有一个父区域</li>
+<li>区域名是唯一的字符串</li>
+<li>第一个区域是每个列表的主区域（父区域）</li>
+<li>保证 <code>region1</code> 和 <code>region2</code> 都在区域关系中</li>
+<li>保证存在公共区域</li>
+</ol>
+
+<h3 id="输入输出格式">输入输出格式</h3>
+
+<p><strong>输入</strong>：
+- <code>regions</code>: <code>[][]string</code>，每个子数组第一个元素是主区域，后面是子区域
+- <code>region1</code>: <code>string</code>，要查找的第一个区域
+- <code>region2</code>: <code>string</code>，要查找的第二个区域</p>
+
+<p><strong>输出</strong>：
+- <code>string</code>：最小公共区域的名称</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一哈希表-路径记录">解法一：哈希表 + 路径记录</h3>
+
+<p><strong>核心思想</strong>：
+1. 构建从子区域到父区域的映射关系
+2. 分别找到 <code>region1</code> 和 <code>region2</code> 到根节点的路径
+3. 从根节点开始比较两条路径，找到最后一个相同的节点</p>
+
+<p><strong>解题步骤</strong>：
+1. 遍历 <code>regions</code>，为每个子区域建立到父区域的映射
+2. 从 <code>region1</code> 开始向上遍历，记录到根节点的路径
+3. 从 <code>region2</code> 开始向上遍历，记录到根节点的路径
+4. 从路径末尾（根节点）开始向前比较，找到第一个不同的节点
+5. 返回该节点的父节点（即最小公共区域）</p>
+
+<p><strong>注意事项</strong>：
+- 路径记录时注意顺序（从当前节点到根节点）
+- 比较路径时要从根节点开始比较
+- 注意处理两个区域相同的情况</p>
+
+<h3 id="解法二哈希表-集合查找">解法二：哈希表 + 集合查找</h3>
+
+<p><strong>核心思想</strong>：
+1. 构建从子区域到父区域的映射
+2. 先遍历 <code>region1</code> 的所有祖先节点并存入集合
+3. 再遍历 <code>region2</code> 的祖先节点，第一个在集合中出现的节点就是最小公共区域</p>
+
+<p><strong>解题步骤</strong>：
+1. 构建父节点映射
+2. 遍历 <code>region1</code> 的所有祖先节点，存入哈希集合
+3. 遍历 <code>region2</code> 的祖先节点，检查是否在集合中
+4. 第一个在集合中出现的节点即为答案</p>
+
+<p><strong>注意事项</strong>：
+- 集合查找比路径比较更直观
+- 注意遍历顺序，第一个找到的就是最小公共区域</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一路径记录法">解法一：路径记录法</h3>
+
+<pre><code>func findSmallestRegion(regions [][]string, region1 string, region2 string) string {
+    // 构建子区域到父区域的映射
+    parent := make(map[string]string)
+    for _, regionList := range regions {
+        mainRegion := regionList[0]
+        for i := 1; i &lt; len(regionList); i++ {
+            parent[regionList[i]] = mainRegion
+        }
+    }
+
+    // 获取 region1 到根节点的路径
+    path1 := make([]string, 0)
+    cur := region1
+    for cur != "" {
+        path1 = append(path1, cur)
+        cur = parent[cur]
+    }
+
+    // 获取 region2 到根节点的路径
+    path2 := make([]string, 0)
+    cur = region2
+    for cur != "" {
+        path2 = append(path2, cur)
+        cur = parent[cur]
+    }
+
+    // 从路径末尾（根节点）开始向前比较
+    i, j := len(path1)-1, len(path2)-1
+    for i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp; path1[i] == path2[j] {
+        i--
+        j--
+    }
+
+    // 返回最后一个相同的节点
+    return path1[i+1]
+}
+</code></pre>
+
+<h3 id="解法二集合查找法">解法二：集合查找法</h3>
+
+<pre><code>func findSmallestRegion(regions [][]string, region1 string, region2 string) string {
+    // 构建子区域到父区域的映射
+    parent := make(map[string]string)
+    for _, regionList := range regions {
+        mainRegion := regionList[0]
+        for i := 1; i &lt; len(regionList); i++ {
+            parent[regionList[i]] = mainRegion
+        }
+    }
+
+    // 记录 region1 的所有祖先节点
+    ancestors := make(map[string]bool)
+    cur := region1
+    for cur != "" {
+        ancestors[cur] = true
+        cur = parent[cur]
+    }
+
+    // 查找 region2 的祖先节点中第一个在 ancestors 中的节点
+    cur = region2
+    for cur != "" {
+        if ancestors[cur] {
+            return cur
+        }
+        cur = parent[cur]
+    }
+
+    return "" // 根据题目保证，不会执行到这里
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一路径记录法-2">解法一：路径记录法</h3>
+
+<ul>
+<li><p>⏱️ <strong>时间复杂度</strong>：O(N + H)</p>
+
+<ul>
+<li>N: 区域总数，用于构建映射 O(N)</li>
+<li>H: 树的高度，最坏情况 O(N)，用于遍历路径 O(H)</li>
+<li>总复杂度 O(N)</li>
+</ul></li>
+<li><p>💾 <strong>空间复杂度</strong>：O(N)</p>
+
+<ul>
+<li>父节点映射需要 O(N) 空间</li>
+<li>两条路径最多需要 O(H) 空间，最坏情况 O(N)</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二集合查找法-2">解法二：集合查找法</h3>
+
+<ul>
+<li><p>⏱️ <strong>时间复杂度</strong>：O(N + H)</p>
+
+<ul>
+<li>N: 区域总数，用于构建映射 O(N)</li>
+<li>H: 树的高度，最坏情况 O(N)，用于遍历祖先节点 O(H)</li>
+<li>总复杂度 O(N)</li>
+</ul></li>
+<li><p>💾 <strong>空间复杂度</strong>：O(N)</p>
+
+<ul>
+<li>父节点映射需要 O(N) 空间</li>
+<li>祖先集合最多需要 O(H) 空间，最坏情况 O(N)</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（路径记录）</th>
+  <th>解法二（集合查找）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>思路复杂度</td>
+  <td>中等，需要理解路径比较</td>
+  <td>简单直观</td>
+</tr>
+<tr>
+  <td>代码实现</td>
+  <td>稍复杂，需要处理路径比较</td>
+  <td>简洁明了</td>
+</tr>
+<tr>
+  <td>空间使用</td>
+  <td>需要存储两条完整路径</td>
+  <td>只需要存储一条路径的集合</td>
+</tr>
+<tr>
+  <td>时间复杂度</td>
+  <td>相同 O(N)</td>
+  <td>相同 O(N)</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>适合需要完整路径信息的场景</td>
+  <td>适合只需要找到公共节点的场景</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：解法二（集合查找法）
+- 思路更直观，代码更简洁
+- 实际运行效率相当
+- 更容易理解和维护</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="测试用例-1常规用例">测试用例 1：常规用例</h3>
+
+<pre><code>输入：
+regions = [
+    ["Earth","North America","South America"],
+    ["North America","United States","Canada"],
+    ["United States","New York","Boston"],
+    ["Canada","Ontario","Quebec"],
+    ["South America","Brazil"]
+]
+region1 = "Quebec"
+region2 = "New York"
+
+输出："North America"
+
+解释：Quebec 和 New York 的最小公共区域是 North America
+</code></pre>
+
+<h3 id="测试用例-2一个区域是另一个的祖先">测试用例 2：一个区域是另一个的祖先</h3>
+
+<pre><code>输入：
+regions = [
+    ["Earth","North America","South America"],
+    ["North America","United States","Canada"],
+    ["United States","New York","Boston"]
+]
+region1 = "Earth"
+region2 = "New York"
+
+输出："Earth"
+
+解释：Earth 是 New York 的祖先，所以最小公共区域是 Earth
+</code></pre>
+
+<h3 id="测试用例-3两个区域相同">测试用例 3：两个区域相同</h3>
+
+<pre><code>输入：
+regions = [
+    ["Earth","North America","South America"],
+    ["North America","United States","Canada"]
+]
+region1 = "Canada"
+region2 = "Canada"
+
+输出："Canada"
+
+解释：两个区域相同，最小公共区域就是它自己
+</code></pre>
+
+<h3 id="测试用例-4边界情况深度较大">测试用例 4：边界情况（深度较大）</h3>
+
+<pre><code>输入：
+regions = [
+    ["A","B"],
+    ["B","C"],
+    ["C","D"],
+    ["D","E"],
+    ["E","F"]
+]
+region1 = "F"
+region2 = "D"
+
+输出："D"
+
+解释：D 是 F 的祖先，最小公共区域是 D
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>236. 二叉树的最近公共祖先</strong> - 类似思路，但数据结构不同</li>
+<li><strong>1650. 二叉树的最近公共祖先 III</strong> - 有父指针的情况</li>
+<li><strong>160. 相交链表</strong> - 类似的双指针/路径比较思想</li>
+<li><strong>235. 二叉搜索树的最近公共祖先</strong> - 利用BST特性的变体</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-19 10:32:02</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

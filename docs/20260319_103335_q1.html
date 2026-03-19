@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCR 019. 验证回文串 II - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-19 10:33:35</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">LCR 019. 验证回文串 II</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/RQku0D/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="lcr-019-验证回文串-ii">LCR 019. 验证回文串 II</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 贪心, 双指针, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/RQku0D/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给定一个非空字符串&nbsp;<code>s</code>，请判断如果&nbsp;<strong>最多 </strong>从字符串中删除一个字符能否得到一个回文字符串。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入:</strong> s = &quot;aba&quot;
+<strong>输出:</strong> true
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入:</strong> s = &quot;abca&quot;
+<strong>输出:</strong> true
+<strong>解释:</strong> 可以删除 &quot;c&quot; 字符 或者 &quot;b&quot; 字符
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入:</strong> s = &quot;abc&quot;
+<strong>输出:</strong> false</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+    <li><code>s</code> 由小写英文字母组成</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><meta charset="UTF-8" />注意：本题与主站 680&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/valid-palindrome-ii/">https://leetcode.cn/problems/valid-palindrome-ii/</a></p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    bool validPalindrome(string s) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public boolean validPalindrome(String s) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def validPalindrome(self, s: str) -&gt; bool:
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var validPalindrome = function(s) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func validPalindrome(s string) bool {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"aba"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+给定一个字符串 <code>s</code>，判断在<strong>最多删除一个字符</strong>的情况下，能否将其变为回文串。删除操作只能进行一次（或不进行）。</p>
+
+<p><strong>关键约束</strong><br />
+- 字符串长度范围：1 ≤ s.length ≤ 10^5<br />
+- 字符串仅由小写英文字母组成<br />
+- 最多只能删除一个字符（即允许跳过一对不匹配的字符）</p>
+
+<p><strong>边界情况</strong><br />
+- 字符串本身已经是回文串 → 直接返回 true<br />
+- 字符串长度为 1 → 一定是回文串<br />
+- 需要删除的字符可能在左侧或右侧</p>
+
+<p><strong>输入输出格式</strong><br />
+- 输入：字符串 <code>s</code><br />
+- 输出：布尔值 <code>true</code> 或 <code>false</code></p>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一双指针-递归回溯">解法一：双指针 + 递归/回溯</h3>
+
+<p><strong>核心思想</strong><br />
+使用双指针从两端向中间检查，遇到不匹配时，尝试删除左字符或右字符，然后递归检查剩余部分是否回文。</p>
+
+<p><strong>步骤</strong><br />
+1. 定义辅助函数 <code>isPalindrome(l, r)</code> 检查子串 <code>s[l:r+1]</code> 是否回文<br />
+2. 主函数中使用双指针 <code>left</code> 和 <code>right</code> 从两端向中间移动<br />
+3. 当 <code>s[left] != s[right]</code> 时，尝试两种情况：<br />
+   - 删除左字符：检查 <code>s[left+1:right+1]</code> 是否回文<br />
+   - 删除右字符：检查 <code>s[left:right]</code> 是否回文<br />
+4. 如果两种情况有一种成立，则返回 true，否则 false</p>
+
+<p><strong>注意事项</strong><br />
+- 递归深度最多一层（因为只允许删除一次）<br />
+- 注意索引边界</p>
+
+<h3 id="解法二双指针-直接判断">解法二：双指针 + 直接判断</h3>
+
+<p><strong>核心思想</strong><br />
+在双指针遍历过程中，遇到不匹配时，直接尝试跳过左或右字符，继续检查剩余部分，避免显式递归。</p>
+
+<p><strong>步骤</strong><br />
+1. 双指针 <code>i, j</code> 从两端向中间移动<br />
+2. 当 <code>s[i] != s[j]</code> 时：<br />
+   - 调用 <code>isPalindrome(i+1, j)</code> 检查跳过左字符<br />
+   - 调用 <code>isPalindrome(i, j-1)</code> 检查跳过右字符<br />
+3. 如果两种情况有一种成立，则返回 true<br />
+4. 如果遍历完成未遇到不匹配，返回 true</p>
+
+<p><strong>注意事项</strong><br />
+- 辅助函数 <code>isPalindrome</code> 只需简单循环检查<br />
+- 时间复杂度仍为 O(n)，但常数较小</p>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一双指针-递归回溯-2">解法一：双指针 + 递归/回溯</h3>
+
+<pre><code>func validPalindrome(s string) bool {
+    // 辅助函数：判断子串 s[l:r+1] 是否为回文
+    isPalindrome := func(l, r int) bool {
+        for l &lt; r {
+            if s[l] != s[r] {
+                return false
+            }
+            l++
+            r--
+        }
+        return true
+    }
+
+    left, right := 0, len(s)-1
+    for left &lt; right {
+        if s[left] != s[right] {
+            // 尝试删除左字符或右字符
+            return isPalindrome(left+1, right) || isPalindrome(left, right-1)
+        }
+        left++
+        right--
+    }
+    return true
+}
+</code></pre>
+
+<h3 id="解法二双指针-直接判断优化版">解法二：双指针 + 直接判断（优化版）</h3>
+
+<pre><code>func validPalindrome(s string) bool {
+    // 辅助函数：判断子串 s[l:r+1] 是否为回文
+    isPalindrome := func(l, r int) bool {
+        for l &lt; r {
+            if s[l] != s[r] {
+                return false
+            }
+            l++
+            r--
+        }
+        return true
+    }
+
+    i, j := 0, len(s)-1
+    for i &lt; j {
+        if s[i] != s[j] {
+            // 尝试跳过左字符或右字符
+            return isPalindrome(i+1, j) || isPalindrome(i, j-1)
+        }
+        i++
+        j--
+    }
+    return true
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一-解法二">解法一 &amp; 解法二</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)<br />
+最坏情况下需要遍历整个字符串两次（一次主循环，一次辅助函数检查），因此是 O(2n) = O(n)  </li>
+<li>💾 <strong>空间复杂度</strong>：O(1)<br />
+只使用了常数级别的额外空间（指针变量）</li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一（递归/回溯）</td>
+  <td>逻辑清晰，易于理解</td>
+  <td>递归调用可能带来额外开销</td>
+  <td>教学或代码可读性优先</td>
+</tr>
+<tr>
+  <td>解法二（直接判断）</td>
+  <td>常数时间更优，无递归开销</td>
+  <td>与解法一差异不大</td>
+  <td>实际编码推荐</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong><br />
+解法二（双指针 + 直接判断），因为：<br />
+1. 代码简洁，无递归栈开销<br />
+2. 时间复杂度相同，常数更小<br />
+3. 更符合实际工程实现</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<pre><code>func main() {
+    // 测试用例
+    tests := []struct {
+        s        string
+        expected bool
+    }{
+        {"aba", true},      // 本身是回文
+        {"abca", true},     // 删除 'c' 或 'b' 可成回文
+        {"abc", false},     // 删除一个字符也无法成回文
+        {"a", true},        // 边界：长度为1
+        {"ab", true},       // 删除一个字符后成回文
+        {"deeee", true},    // 删除 'd' 后成回文
+        {"eeeed", true},    // 删除 'd' 后成回文
+        {"abcddcba", true}, // 删除 'd' 后成回文
+    }
+
+    for _, test := range tests {
+        result := validPalindrome(test.s)
+        fmt.Printf("输入: %-10s 输出: %-5v 预期: %-5v %s\n",
+            test.s, result, test.expected,
+            map[bool]string{true: "✓", false: "✗"}[result == test.expected])
+    }
+}
+</code></pre>
+
+<p>输出示例：</p>
+
+<pre><code>输入: aba        输出: true  预期: true  ✓
+输入: abca       输出: true  预期: true  ✓
+输入: abc        输出: false 预期: false ✓
+输入: a          输出: true  预期: true  ✓
+输入: ab         输出: true  预期: true  ✓
+输入: deeee      输出: true  预期: true  ✓
+输入: eeeed      输出: true  预期: true  ✓
+输入: abcddcba   输出: true  预期: true  ✓
+</code></pre>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 125. 验证回文串</strong>（简单）<br />
+直接判断字符串是否为回文，忽略非字母数字字符  </li>
+<li><strong>LeetCode 680. 验证回文串 II</strong>（简单）<br />
+本题原题  </li>
+<li><strong>LeetCode 1216. 验证回文串 III</strong>（困难）<br />
+允许最多删除 k 个字符，判断是否能成为回文串  </li>
+<li><strong>LeetCode 1312. 让字符串成为回文串的最少插入次数</strong>（困难）<br />
+通过插入字符使字符串成为回文串的最小操作数</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-19 10:31:01</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

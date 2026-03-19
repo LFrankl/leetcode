@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1606. 找到处理最多请求的服务器 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-19 10:33:35</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1606. 找到处理最多请求的服务器</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/find-servers-that-handled-most-number-of-requests/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1606-找到处理最多请求的服务器">1606. 找到处理最多请求的服务器</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数组, 有序集合, 模拟, 堆（优先队列）</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/find-servers-that-handled-most-number-of-requests/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>你有 <code>k</code>&nbsp;个服务器，编号为 <code>0</code>&nbsp;到 <code>k-1</code>&nbsp;，它们可以同时处理多个请求组。每个服务器有无穷的计算能力但是 <strong>不能同时处理超过一个请求</strong>&nbsp;。请求分配到服务器的规则如下：</p>
+
+<ul>
+    <li>第&nbsp;<code>i</code>&nbsp;（序号从 0 开始）个请求到达。</li>
+    <li>如果所有服务器都已被占据，那么该请求被舍弃（完全不处理）。</li>
+    <li>如果第&nbsp;<code>(i % k)</code>&nbsp;个服务器空闲，那么对应服务器会处理该请求。</li>
+    <li>否则，将请求安排给下一个空闲的服务器（服务器构成一个环，必要的话可能从第 0 个服务器开始继续找下一个空闲的服务器）。比方说，如果第 <code>i</code>&nbsp;个服务器在忙，那么会查看第 <code>(i+1)</code>&nbsp;个服务器，第 <code>(i+2)</code>&nbsp;个服务器等等。</li>
+</ul>
+
+<p>给你一个 <strong>严格递增</strong>&nbsp;的正整数数组&nbsp;<code>arrival</code>&nbsp;，表示第&nbsp;<code>i</code>&nbsp;个任务的到达时间，和另一个数组&nbsp;<code>load</code>&nbsp;，其中&nbsp;<code>load[i]</code>&nbsp;表示第&nbsp;<code>i</code>&nbsp;个请求的工作量（也就是服务器完成它所需要的时间）。你的任务是找到 <strong>最繁忙的服务器</strong>&nbsp;。最繁忙定义为一个服务器处理的请求数是所有服务器里最多的。</p>
+
+<p>请你返回包含所有&nbsp;<strong>最繁忙服务器</strong>&nbsp;序号的列表，你可以以任意顺序返回这个列表。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.cn/aliyun-lc-upload/uploads/2020/10/03/load-1.png" style="height: 221px; width: 389px;" /></p>
+
+<pre>
+<strong>输入：</strong>k = 3, arrival = [1,2,3,4,5], load = [5,2,3,3,3] 
+<strong>输出：</strong>[1] 
+<strong>解释：</strong>
+所有服务器一开始都是空闲的。
+前 3 个请求分别由前 3 台服务器依次处理。
+请求 3 进来的时候，服务器 0 被占据，所以它被安排到下一台空闲的服务器，也就是服务器 1 。
+请求 4 进来的时候，由于所有服务器都被占据，该请求被舍弃。
+服务器 0 和 2 分别都处理了一个请求，服务器 1 处理了两个请求。所以服务器 1 是最忙的服务器。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>k = 3, arrival = [1,2,3,4], load = [1,2,1,2]
+<strong>输出：</strong>[0]
+<strong>解释：</strong>
+前 3 个请求分别被前 3 个服务器处理。
+请求 3 进来，由于服务器 0 空闲，它被服务器 0 处理。
+服务器 0 处理了两个请求，服务器 1 和 2 分别处理了一个请求。所以服务器 0 是最忙的服务器。
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>k = 3, arrival = [1,2,3], load = [10,12,11]
+<strong>输出：</strong>[0,1,2]
+<strong>解释：</strong>每个服务器分别处理了一个请求，所以它们都是最忙的服务器。
+</pre>
+
+<p><strong>示例 4：</strong></p>
+
+<pre>
+<strong>输入：</strong>k = 3, arrival = [1,2,3,4,8,9,10], load = [5,2,10,3,1,2,2]
+<strong>输出：</strong>[1]
+</pre>
+
+<p><strong>示例 5：</strong></p>
+
+<pre>
+<strong>输入：</strong>k = 1, arrival = [1], load = [1]
+<strong>输出：</strong>[0]
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= k &lt;= 10<sup>5</sup></code></li>
+    <li><code>1 &lt;= arrival.length, load.length &lt;= 10<sup>5</sup></code></li>
+    <li><code>arrival.length == load.length</code></li>
+    <li><code>1 &lt;= arrival[i], load[i] &lt;= 10<sup>9</sup></code></li>
+    <li><code>arrival</code>&nbsp;保证 <strong>严格递增</strong>&nbsp;。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; busiestServers(int k, vector&lt;int&gt;&amp; arrival, vector&lt;int&gt;&amp; load) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public List&lt;Integer&gt; busiestServers(int k, int[] arrival, int[] load) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def busiestServers(self, k: int, arrival: List[int], load: List[int]) -&gt; List[int]:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} k
+ * @param {number[]} arrival
+ * @param {number[]} load
+ * @return {number[]}
+ */
+var busiestServers = function(k, arrival, load) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func busiestServers(k int, arrival []int, load []int) []int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>To speed up the next available server search, keep track of the available servers in a sorted structure such as an ordered set.</li>
+<li>To determine if a server is available, keep track of the end times for each task in a heap and add the server to the available set once the soonest task ending time is less than or equal to the next task to add.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>3
+[1,2,3,4,5]
+[5,2,3,3,3]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<h3 id="题目重述">题目重述</h3>
+
+<p>我们有 k 个服务器，编号从 0 到 k-1。每个服务器一次只能处理一个请求。<br />
+请求按顺序到达，第 i 个请求的到达时间为 <code>arrival[i]</code>，处理时长为 <code>load[i]</code>。<br />
+分配规则：
+1. 如果所有服务器都忙，请求被丢弃。
+2. 否则，从 <code>i % k</code> 号服务器开始，按环状顺序（0→1→...→k-1→0→...）寻找第一个空闲的服务器来处理该请求。</p>
+
+<p>目标：找出处理请求数最多的服务器（可能有多个），返回它们的编号列表。</p>
+
+<h3 id="关键约束">关键约束</h3>
+
+<ul>
+<li><code>arrival</code> 严格递增。</li>
+<li>服务器数量 k 可达 10^5。</li>
+<li>请求数量 n 可达 10^5。</li>
+<li>到达时间和负载可达 10^9。</li>
+<li>服务器空闲判断基于请求到达时间：如果某个服务器正在处理请求的完成时间 ≤ 当前请求到达时间，则它空闲。</li>
+</ul>
+
+<h3 id="输入输出">输入输出</h3>
+
+<ul>
+<li>输入：<code>k</code>（服务器数），<code>arrival []int</code>（到达时间），<code>load []int</code>（处理时长）</li>
+<li>输出：<code>[]int</code>（最繁忙服务器的编号列表）</li>
+</ul>
+
+<hr />
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一有序集合-优先队列堆">解法一：有序集合 + 优先队列（堆）</h3>
+
+<p><strong>核心思想</strong>：
+- 用优先队列（最小堆）维护<strong>正在忙碌的服务器</strong>，堆中元素为 <code>(完成时间, 服务器编号)</code>，按完成时间排序。
+- 用有序集合（如红黑树）维护<strong>当前空闲的服务器编号</strong>，便于快速查找环状顺序中的下一个空闲服务器。
+- 遍历每个请求，先将所有完成时间 ≤ 当前到达时间的服务器从堆中弹出，加入空闲集合。
+- 如果空闲集合为空，丢弃请求。
+- 否则，在空闲集合中查找 <code>≥ i % k</code> 的第一个服务器，若找不到则取集合中最小编号（环状）。</p>
+
+<p><strong>步骤</strong>：
+1. 初始化空闲集合（包含所有服务器编号）。
+2. 初始化忙碌堆（空）。
+3. 初始化计数器 <code>count</code> 记录每个服务器处理的请求数。
+4. 遍历每个请求：
+   - 弹出堆中所有完成时间 ≤ 当前到达时间的服务器，加入空闲集合。
+   - 如果空闲集合为空，跳过该请求。
+   - 在空闲集合中查找 <code>≥ i % k</code> 的第一个服务器。
+   - 若找到，分配请求，更新计数器，将该服务器从空闲集合移除，推入堆中（完成时间 = 到达时间 + 负载）。
+   - 若未找到，取空闲集合中最小编号的服务器（环状回到开头）。
+5. 遍历计数器，找出最大值对应的服务器编号列表。</p>
+
+<p><strong>注意事项</strong>：
+- 空闲集合需要支持有序查找和删除，Go 中可用 <code>redblacktree</code> 或手动用 <code>TreeSet</code> 模拟。
+- 环状查找时注意边界情况（找不到时取最小编号）。</p>
+
+<hr />
+
+<h3 id="解法二双优先队列堆-懒惰删除">解法二：双优先队列（堆） + 懒惰删除</h3>
+
+<p><strong>核心思想</strong>：
+- 用两个堆：
+  - <code>busy</code> 堆：<code>(完成时间, 服务器编号)</code>，按完成时间排序。
+  - <code>free</code> 堆：存储空闲服务器编号，但为了环状查找，需要特殊处理。
+- 由于环状查找需要从 <code>i % k</code> 开始找第一个空闲服务器，我们可以将空闲服务器编号分为两部分：
+  - 编号 <code>≥ i % k</code> 的
+  - 编号 <code>&lt; i % k</code> 的
+- 用两个有序结构（如两个小根堆）分别存储这两部分空闲服务器，查找时先找第一部分，再找第二部分。</p>
+
+<p><strong>步骤</strong>：
+1. 初始化两个空闲堆：<code>free1</code>（存储 <code>≥ i % k</code> 的编号），<code>free2</code>（存储 <code>&lt; i % k</code> 的编号）。
+2. 遍历请求时，先弹出 <code>busy</code> 堆中所有完成的服务器，根据其编号与当前 <code>i % k</code> 的关系放入 <code>free1</code> 或 <code>free2</code>。
+3. 分配时，先尝试从 <code>free1</code> 取最小编号，若 <code>free1</code> 为空则从 <code>free2</code> 取最小编号（环状回绕）。
+4. 若两者都空，丢弃请求。</p>
+
+<p><strong>优点</strong>：
+- 避免使用复杂的平衡树，仅用堆实现。
+- 懒惰删除：从 <code>busy</code> 堆弹出的服务器直接加入空闲堆，无需额外标记。</p>
+
+<hr />
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一有序集合-优先队列使用-githubcomemirpasicgodstreesredblacktree">解法一：有序集合 + 优先队列（使用 <code>github.com/emirpasic/gods/trees/redblacktree</code>）</h3>
+
+<pre><code>import (
+    "container/heap"
+    "github.com/emirpasic/gods/trees/redblacktree"
+)
+
+func busiestServers(k int, arrival []int, load []int) []int {
+    n := len(arrival)
+    count := make([]int, k)
+
+    // 空闲服务器集合（有序）
+    free := redblacktree.NewWithIntComparator()
+    for i := 0; i &lt; k; i++ {
+        free.Put(i, nil)
+    }
+
+    // 忙碌服务器堆（完成时间, 服务器编号）
+    busy := &amp;minHeap{}
+    heap.Init(busy)
+
+    for i := 0; i &lt; n; i++ {
+        start := arrival[i]
+        end := start + load[i]
+
+        // 释放已完成请求的服务器
+        for busy.Len() &gt; 0 &amp;&amp; (*busy)[0].endTime &lt;= start {
+            node := heap.Pop(busy).(*server)
+            free.Put(node.id, nil)
+        }
+
+        if free.Size() == 0 {
+            continue // 无空闲服务器，丢弃请求
+        }
+
+        // 查找 &gt;= i%k 的第一个空闲服务器
+        target := i % k
+        var assignNode *redblacktree.Node
+        if node, found := free.Ceiling(target); found {
+            assignNode = node
+        } else {
+            // 环状回绕，取最小的编号
+            assignNode = free.Left()
+        }
+
+        assignID := assignNode.Key.(int)
+        free.Remove(assignID)
+        count[assignID]++
+        heap.Push(busy, &amp;server{endTime: end, id: assignID})
+    }
+
+    // 找出最大请求数的服务器
+    maxReq := 0
+    for _, c := range count {
+        if c &gt; maxReq {
+            maxReq = c
+        }
+    }
+    res := []int{}
+    for i, c := range count {
+        if c == maxReq {
+            res = append(res, i)
+        }
+    }
+    return res
+}
+
+type server struct {
+    endTime int
+    id      int
+}
+
+type minHeap []*server
+
+func (h minHeap) Len() int           { return len(h) }
+func (h minHeap) Less(i, j int) bool { return h[i].endTime &lt; h[j].endTime }
+func (h minHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *minHeap) Push(x interface{}) {
+    *h = append(*h, x.(*server))
+}
+func (h *minHeap) Pop() interface{} {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
+}
+</code></pre>
+
+<hr />
+
+<h3 id="解法二双优先队列堆-懒惰删除纯标准库">解法二：双优先队列（堆） + 懒惰删除（纯标准库）</h3>
+
+<pre><code>import "container/heap"
+
+func busiestServers(k int, arrival []int, load []int) []int {
+    n := len(arrival)
+    count := make([]int, k)
+
+    // 空闲服务器堆：free1 存储 &gt;= target 的编号，free2 存储 &lt; target 的编号
+    free1 := &amp;intHeap{}
+    free2 := &amp;intHeap{}
+    heap.Init(free1)
+    heap.Init(free2)
+    for i := 0; i &lt; k; i++ {
+        heap.Push(free1, i)
+    }
+
+    // 忙碌服务器堆
+    busy := &amp;serverHeap{}
+    heap.Init(busy)
+
+    for i := 0; i &lt; n; i++ {
+        start := arrival[i]
+        // 释放已完成请求的服务器
+        for busy.Len() &gt; 0 &amp;&amp; (*busy)[0].endTime &lt;= start {
+            node := heap.Pop(busy).(*serverNode)
+            id := node.id
+            target := i % k
+            if id &gt;= target {
+                heap.Push(free1, id)
+            } else {
+                heap.Push(free2, id)
+            }
+        }
+
+        // 选择服务器
+        var assignID int
+        if free1.Len() &gt; 0 {
+            assignID = heap.Pop(free1).(int)
+        } else if free2.Len() &gt; 0 {
+            assignID = heap.Pop(free2).(int)
+        } else {
+            continue // 无空闲服务器
+        }
+
+        count[assignID]++
+        heap.Push(busy, &amp;serverNode{endTime: start + load[i], id: assignID})
+    }
+
+    // 找出最大请求数的服务器
+    maxReq := 0
+    for _, c := range count {
+        if c &gt; maxReq {
+            maxReq = c
+        }
+    }
+    res := []int{}
+    for i, c := range count {
+        if c == maxReq {
+            res = append(res, i)
+        }
+    }
+    return res
+}
+
+type serverNode struct {
+    endTime int
+    id      int
+}
+
+type serverHeap []*serverNode
+
+func (h serverHeap) Len() int           { return len(h) }
+func (h serverHeap) Less(i, j int) bool { return h[i].endTime &lt; h[j].endTime }
+func (h serverHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *serverHeap) Push(x interface{}) {
+    *h = append(*h, x.(*serverNode))
+}
+func (h *serverHeap) Pop() interface{} {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
+}
+
+type intHeap []int
+
+func (h intHeap) Len() int           { return len(h) }
+func (h intHeap) Less(i, j int) bool { return h[i] &lt; h[j] }
+func (h intHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *intHeap) Push(x interface{}) {
+    *h = append(*h, x.(int))
+}
+func (h *intHeap) Pop() interface{} {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
+}
+</code></pre>
+
+<hr />
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一有序集合-优先队列">解法一（有序集合 + 优先队列）</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n log k)<br />
+每个请求最多入堆一次、出堆一次（O(log k)），在有序集合中查找和删除 O(log k)。总 O(n log k)。</li>
+<li>💾 <strong>空间复杂度</strong>：O(k)<br />
+堆和有序集合最多存储 k 个元素，计数器 O(k)。</li>
+</ul>
+
+<h3 id="解法二双优先队列-懒惰删除">解法二（双优先队列 + 懒惰删除）</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n log k)<br />
+每个请求在堆中操作 O(log k)，查找空闲服务器 O(log k)。</li>
+<li>💾 <strong>空间复杂度</strong>：O(k)<br />
+两个空闲堆和一个忙碌堆总大小 O(k)，计数器 O(k)。</li>
+</ul>
+
+<hr />
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>解法一（有序集合）</td>
+  <td>逻辑清晰，直接利用有序集合查找，代码简洁</td>
+  <td>依赖外部库（如 <code>redblacktree</code>）或需手动实现平衡树</td>
+  <td>需要快速查找和删除的场景，适合对代码简洁性要求高的情况</td>
+</tr>
+<tr>
+  <td>解法二（双堆）</td>
+  <td>仅用标准库，无需外部依赖，效率高</td>
+  <td>逻辑稍复杂，需要维护两个堆</td>
+  <td>竞赛或面试中要求纯标准库实现，性能要求高</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法二</strong>，因为：
+1. 仅用标准库，更通用。
+2. 时间复杂度相同，实际运行效率高。
+3. 面试/竞赛中更常见。</p>
+
+<hr />
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1示例1">用例1（示例1）</h3>
+
+<pre><code>输入：k = 3, arrival = [1,2,3,4,5], load = [5,2,3,3,3]
+输出：[1]
+解释：服务器1处理了2个请求，其他处理1个。
+</code></pre>
+
+<h3 id="用例2边界k1">用例2（边界：k=1）</h3>
+
+<pre><code>输入：k = 1, arrival = [1], load = [1]
+输出：[0]
+解释：只有一个服务器，处理唯一请求。
+</code></pre>
+
+<h3 id="用例3所有请求被丢弃">用例3（所有请求被丢弃）</h3>
+
+<pre><code>输入：k = 2, arrival = [1,1,1], load = [5,5,5]
+输出：[0,1]
+解释：第一个请求分配给服务器0，第二个给服务器1，第三个到达时两者都忙，丢弃。两个服务器各处理1个请求。
+</code></pre>
+
+<hr />
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 1606. 找到处理最多请求的服务器</strong>（本题）</li>
+<li><strong>LeetCode 1834. 单线程 CPU</strong>（类似的任务调度，用堆模拟）</li>
+<li><strong>LeetCode 1882. 使用服务器处理任务</strong>（类似服务器分配）</li>
+<li><strong>LeetCode 2402. 会议室 III</strong>（类似资源分配与调度）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-19 10:33:35</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
