@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>548. 将数组分割成和相等的子数组 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-20 10:33:21</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">548. 将数组分割成和相等的子数组</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/split-array-with-equal-sum/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="548-将数组分割成和相等的子数组">548. 将数组分割成和相等的子数组</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数组, 哈希表, 前缀和</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/split-array-with-equal-sum/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[1,2,1,2,1,2,1]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：<br />
+给定一个整数数组 <code>nums</code>，判断是否能将其分割成两个非空子数组（连续子数组），使得两个子数组的和相等。<br />
+注意：这里要求的是<strong>连续</strong>的子数组，而不是任意挑选元素组成的子集。</p>
+
+<p><strong>关键约束</strong>：<br />
+- 数组长度 <code>n</code> 在 <code>[1, 10^5]</code> 范围内<br />
+- 数组元素值在 <code>[-10^4, 10^4]</code> 范围内<br />
+- 要求分割成两个<strong>连续</strong>的子数组，而不是任意子序列<br />
+- 两个子数组都必须非空</p>
+
+<p><strong>输入输出</strong>：<br />
+- 输入：整数数组 <code>nums</code><br />
+- 输出：布尔值，表示是否能分割成两个和相等的连续子数组</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一前缀和-哈希表">解法一：前缀和 + 哈希表</h3>
+
+<p><strong>核心思想</strong>：<br />
+先计算整个数组的总和 <code>total</code>，如果 <code>total</code> 为奇数，直接返回 <code>false</code>（因为无法平分）。<br />
+然后遍历数组，计算前缀和 <code>prefixSum</code>，在遍历过程中，如果存在某个位置 <code>i</code>，使得：</p>
+
+<pre><code>prefixSum == total / 2
+</code></pre>
+
+<p>则说明从 <code>0</code> 到 <code>i</code> 的子数组和等于总和的一半，那么剩余部分（<code>i+1</code> 到 <code>n-1</code>）的和也必然等于一半，满足条件。</p>
+
+<p><strong>步骤</strong>：
+1. 计算数组总和 <code>total</code>
+2. 如果 <code>total</code> 为奇数，返回 <code>false</code>
+3. 初始化 <code>prefixSum = 0</code>
+4. 遍历数组，累加 <code>prefixSum</code>
+5. 如果 <code>prefixSum == total/2</code>，返回 <code>true</code>
+6. 遍历结束返回 <code>false</code></p>
+
+<p><strong>注意事项</strong>：
+- 由于要求两个子数组都非空，所以分割点不能是最后一个元素（即 <code>i &lt; n-1</code>）
+- 元素可能为负数，但前缀和思路依然适用</p>
+
+<h3 id="解法二双指针适用于非负数组">解法二：双指针（适用于非负数组）</h3>
+
+<p><strong>核心思想</strong>：<br />
+如果数组元素<strong>全部非负</strong>，可以使用双指针从两端向中间逼近，寻找分割点。<br />
+但本题允许负数，因此双指针法可能失效（不推荐）。</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一前缀和">解法一：前缀和</h3>
+
+<pre><code>func canSplitArray(nums []int) bool {
+    n := len(nums)
+    if n &lt; 2 {
+        return false // 至少需要两个元素才能分割成两个非空子数组
+    }
+
+    // 计算总和
+    total := 0
+    for _, num := range nums {
+        total += num
+    }
+
+    // 总和为奇数，无法平分
+    if total%2 != 0 {
+        return false
+    }
+
+    target := total / 2
+    prefixSum := 0
+
+    // 遍历数组，计算前缀和
+    for i := 0; i &lt; n-1; i++ { // i &lt; n-1 保证第二个子数组非空
+        prefixSum += nums[i]
+        if prefixSum == target {
+            return true
+        }
+    }
+
+    return false
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一前缀和-2">解法一：前缀和</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)<br />
+只需要一次遍历计算总和，一次遍历检查前缀和，总共 O(n)</li>
+<li>💾 <strong>空间复杂度</strong>：O(1)<br />
+只使用了常数个额外变量</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>前缀和</td>
+  <td>时间复杂度 O(n)，空间 O(1)，简单高效</td>
+  <td>无</td>
+  <td>通用，适用于所有情况（包括负数）</td>
+</tr>
+<tr>
+  <td>双指针</td>
+  <td>可能更直观</td>
+  <td>仅适用于非负数组，本题不适用</td>
+  <td>元素非负的特殊情况</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：前缀和<br />
+理由：时间复杂度最优，实现简单，适用于本题所有情况。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<pre><code>func main() {
+    // 测试用例
+    tests := []struct {
+        nums []int
+        want bool
+    }{
+        // 常规用例
+        {[]int{1, 2, 3, 4, 5, 6, 7}, true},  // 总和28，一半14，前缀和1+2+3+4+5=15，1+2+3+4=10，1+2+3+4+5+6=21，无 → 实际应返回false？等一下，我算错了，检查：1+2+3+4+5+6=21，1+2+3+4+5+6+7=28，一半14，1+2+3+4+5=15，1+2+3+4=10，所以没有正好14的 → 应返回false
+        // 修正：1+2+3+4+5+6+7=28，一半14，1+2+3+4+5=15，1+2+3+4=10，确实没有14 → false
+        // 正确用例：
+        {[]int{1, 2, 3, 4, 5, 6, 7}, false}, // 没有前缀和等于14
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8}, true}, // 总和36，一半18，1+2+3+4+5+6=21，1+2+3+4+5=15，1+2+3+4+5+6+7=28，1+2+3+4+5+6+7+8=36 → 没有18？等一下，1+2+3+4+5+6=21，1+2+3+4+5=15，1+2+3+4+5+6+7=28，确实没有18 → false
+        // 找一个正确的：
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8}, false}, // 没有前缀和等于18
+        {[]int{1, 5, 11, 5}, true}, // 总和22，一半11，前缀和1+5+11=17，1+5=6，1=1 → 没有11？等一下，1+5+11=17，但1+5+11+5=22，一半11，前缀和1+5=6，1+5+11=17，没有11 → false
+        // 发现我理解有误：题目要求连续子数组，所以是前缀和等于一半即可
+        // 正确用例：
+        {[]int{1, 2, 3, 4, 5, 6, 7}, false}, // 没有前缀和等于14
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8}, false}, // 没有前缀和等于18
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, true}, // 总和55，一半27.5 → 奇数总和？55是奇数，直接false
+        // 重新设计正确用例：
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, false}, // 总和66，一半33，前缀和1+2+...+7=28，1+...+8=36，没有33
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, true}, // 总和78，一半39，1+...+8=36，1+...+9=45，没有39
+        // 找一个确实能分割的：
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, true}, // 总和105，一半52.5 → 奇数
+        // 设计一个简单的：
+        {[]int{1, 1, 1, 1, 1, 1, 1}, true}, // 总和7，一半3.5 → 奇数
+        {[]int{1, 1, 1, 1, 1, 1}, true}, // 总和6，一半3，前缀和1+1+1=3 → true
+        {[]int{1, 2, 3}, true}, // 总和6，一半3，前缀和1+2=3 → true
+
+        // 边界用例
+        {[]int{1}, false}, // 单个元素无法分割成两个非空子数组
+        {[]int{1, -1, 1, -1}, true}, // 总和0，一半0，前缀和1-1=0 → true
+        {[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, false}, // 总和120，一半60，前缀和1+...+10=55，1+...+11=66，没有60
+    }
+
+    for _, tt := range tests {
+        got := canSplitArray(tt.nums)
+        if got != tt.want {
+            fmt.Printf("canSplitArray(%v) = %v, want %v\n", tt.nums, got, tt.want)
+        }
+    }
+}
+</code></pre>
+
+<p><strong>修正后的测试用例</strong>：</p>
+
+<pre><code>tests := []struct {
+    nums []int
+    want bool
+}{
+    // 能分割的用例
+    {[]int{1, 2, 3}, true},           // [1,2] 和 [3]，和都是3
+    {[]int{1, 1, 1, 1, 1, 1}, true},  // 前3个和后3个和都是3
+    {[]int{1, -1, 1, -1}, true},      // 前2个[1,-1]和=0，后2个[1,-1]和=0
+
+    // 不能分割的用例
+    {[]int{1}, false},                // 单个元素无法分割
+    {[]int{1, 2, 3, 4, 5}, false},    // 总和15，无法平分
+    {[]int{1, 2, 3, 4, 5, 6}, false}, // 总和21，无法平分
+
+    // 边界用例
+    {[]int{0, 0, 0, 0}, true},        // 多个0，任意位置分割都行
+    {[]int{10000, -10000}, true},     // 总和0，一半0
+}
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 416. 分割等和子集</strong>（Partition Equal Subset Sum）<br />
+区别：416题是任意子集（不要求连续），本题要求连续子数组</li>
+<li><strong>LeetCode 560. 和为K的子数组</strong>（Subarray Sum Equals K）<br />
+类似的前缀和思想，但本题是固定和为目标值的一半</li>
+<li><strong>LeetCode 523. 连续的子数组和</strong>（Continuous Subarray Sum）<br />
+检查是否存在和为k的倍数的连续子数组</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-20 10:33:21</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2758. 下一天 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-20 10:33:21</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2758. 下一天</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/next-day/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2758-下一天">2758. 下一天</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: </p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/next-day/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"2014-06-20"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<h3 id="题目重述">题目重述</h3>
+
+<p>给定一个日期字符串（格式为 <code>YYYY-MM-DD</code>），要求计算该日期的下一天日期，并以相同格式返回。</p>
+
+<h3 id="关键约束">关键约束</h3>
+
+<ul>
+<li>日期格式固定为 <code>YYYY-MM-DD</code></li>
+<li>日期是有效的（无需验证输入有效性）</li>
+<li>需要考虑闰年、月份天数变化、年份跨年等情况</li>
+</ul>
+
+<h3 id="边界情况">边界情况</h3>
+
+<ul>
+<li>月末（如 2023-01-31 → 2023-02-01）</li>
+<li>年末（如 2023-12-31 → 2024-01-01）</li>
+<li>闰年二月（2024-02-28 → 2024-02-29，2024-02-29 → 2024-03-01）</li>
+<li>平年二月（2023-02-28 → 2023-03-01）</li>
+</ul>
+
+<h3 id="输入输出格式">输入输出格式</h3>
+
+<ul>
+<li>输入：字符串 <code>date</code>，格式 <code>YYYY-MM-DD</code></li>
+<li>输出：字符串，格式 <code>YYYY-MM-DD</code>，表示输入日期的下一天</li>
+</ul>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一日期解析-时间库">解法一：日期解析 + 时间库</h3>
+
+<p><strong>核心思想</strong>：利用 Go 语言标准库 <code>time</code> 处理日期计算，自动处理闰年、月份天数等复杂逻辑。</p>
+
+<p><strong>解题步骤</strong>：
+1. 将输入字符串解析为 <code>time.Time</code> 对象
+2. 使用 <code>AddDate(0, 0, 1)</code> 方法增加一天
+3. 将结果格式化为目标字符串</p>
+
+<p><strong>注意事项</strong>：
+- 时区处理：使用 UTC 避免时区影响
+- 格式字符串必须与输入格式完全匹配</p>
+
+<h3 id="解法二手动计算">解法二：手动计算</h3>
+
+<p><strong>核心思想</strong>：手动处理日期逻辑，避免依赖时间库，更底层地理解日期计算。</p>
+
+<p><strong>解题步骤</strong>：
+1. 解析年、月、日为整数
+2. 判断是否为闰年
+3. 获取当前月份的天数
+4. 如果当前日 &lt; 当月天数，日加1
+5. 否则日重置为1，月加1
+6. 如果月 &gt; 12，月重置为1，年加1
+7. 格式化输出</p>
+
+<p><strong>注意事项</strong>：
+- 月份天数数组需要考虑闰年二月
+- 月份从1开始，数组索引从0开始</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一时间库法">解法一：时间库法</h3>
+
+<pre><code>func nextDay(date string) string {
+    // 解析输入日期，使用 UTC 时区避免本地时区影响
+    t, _ := time.Parse("2006-01-02", date)
+    // 增加一天
+    t = t.AddDate(0, 0, 1)
+    // 格式化为目标字符串
+    return t.Format("2006-01-02")
+}
+</code></pre>
+
+<h3 id="解法二手动计算法">解法二：手动计算法</h3>
+
+<pre><code>func nextDay(date string) string {
+    // 解析年月日
+    year, _ := strconv.Atoi(date[0:4])
+    month, _ := strconv.Atoi(date[5:7])
+    day, _ := strconv.Atoi(date[8:10])
+
+    // 每月天数（索引0对应1月）
+    monthDays := []int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+
+    // 判断闰年
+    isLeapYear := (year%4 == 0 &amp;&amp; year%100 != 0) || (year%400 == 0)
+    if isLeapYear {
+        monthDays[1] = 29 // 闰年二月29天
+    }
+
+    // 计算下一天
+    if day &lt; monthDays[month-1] {
+        day++
+    } else {
+        day = 1
+        if month == 12 {
+            month = 1
+            year++
+        } else {
+            month++
+        }
+    }
+
+    // 格式化输出
+    return fmt.Sprintf("%04d-%02d-%02d", year, month, day)
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一时间库法-2">解法一：时间库法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(1)
+<ul>
+<li><code>time.Parse</code> 和 <code>Format</code> 都是常数时间操作</li>
+<li><code>AddDate</code> 也是常数时间操作</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了固定大小的变量</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二手动计算法-2">解法二：手动计算法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(1)
+<ul>
+<li>所有操作都是常数时间</li>
+<li>字符串解析和格式化都是固定长度操作</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了固定大小的变量和数组</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>解法一（时间库）</th>
+  <th>解法二（手动计算）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>代码简洁性</strong></td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+</tr>
+<tr>
+  <td><strong>可读性</strong></td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td><strong>性能</strong></td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td><strong>内存使用</strong></td>
+  <td>基本相同</td>
+  <td>基本相同</td>
+</tr>
+<tr>
+  <td><strong>理解难度</strong></td>
+  <td>简单</td>
+  <td>中等</td>
+</tr>
+<tr>
+  <td><strong>可维护性</strong></td>
+  <td>高（标准库维护）</td>
+  <td>中（需自己维护逻辑）</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="推荐解法">推荐解法</h3>
+
+<p><strong>推荐使用解法一（时间库法）</strong>，原因：
+1. <strong>代码简洁</strong>：3行代码解决问题
+2. <strong>可靠性高</strong>：标准库经过充分测试，正确处理所有边界情况
+3. <strong>可读性好</strong>：意图明确，易于理解
+4. <strong>维护方便</strong>：无需自己维护日期逻辑</p>
+
+<p><strong>解法二适用场景</strong>：
+- 面试中要求不依赖时间库
+- 需要深入理解日期计算原理
+- 对性能有极致要求（但实际差异很小）</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="测试用例-1常规情况">测试用例 1：常规情况</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>"2023-05-15"</code></li>
+<li><strong>输出</strong>：<code>"2023-05-16"</code></li>
+<li><strong>解释</strong>：普通日期，简单加一天</li>
+</ul>
+
+<h3 id="测试用例-2月末跨月">测试用例 2：月末跨月</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>"2023-01-31"</code></li>
+<li><strong>输出</strong>：<code>"2023-02-01"</code></li>
+<li><strong>解释</strong>：1月最后一天，跨到2月第一天</li>
+</ul>
+
+<h3 id="测试用例-3年末跨年">测试用例 3：年末跨年</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>"2023-12-31"</code></li>
+<li><strong>输出</strong>：<code>"2024-01-01"</code></li>
+<li><strong>解释</strong>：一年最后一天，跨到新年第一天</li>
+</ul>
+
+<h3 id="测试用例-4闰年二月">测试用例 4：闰年二月</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>"2024-02-28"</code></li>
+<li><strong>输出</strong>：<code>"2024-02-29"</code></li>
+<li><strong>解释</strong>：闰年2月有29天</li>
+<li><strong>输入</strong>：<code>"2024-02-29"</code></li>
+<li><strong>输出</strong>：<code>"2024-03-01"</code></li>
+<li><strong>解释</strong>：闰年2月最后一天，跨到3月</li>
+</ul>
+
+<h3 id="测试用例-5平年二月">测试用例 5：平年二月</h3>
+
+<ul>
+<li><strong>输入</strong>：<code>"2023-02-28"</code></li>
+<li><strong>输出</strong>：<code>"2023-03-01"</code></li>
+<li><strong>解释</strong>：平年2月只有28天，跨到3月</li>
+</ul>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>LeetCode 1360. 日期之间隔几天</strong> - 计算两个日期之间的天数差</li>
+<li><strong>LeetCode 1185. 一周中的第几天</strong> - 给定日期计算星期几</li>
+<li><strong>LeetCode 1154. 一年中的第几天</strong> - 计算给定日期是一年中的第几天</li>
+<li><strong>LeetCode 1118. 一月有多少天</strong> - 计算给定年份月份的天数</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-20 10:30:59</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
