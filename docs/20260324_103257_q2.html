@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1937. 扣分后的最大得分 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-24 10:32:57</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1937. 扣分后的最大得分</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-number-of-points-with-cost/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1937-扣分后的最大得分">1937. 扣分后的最大得分</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 数组, 动态规划, 矩阵</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-number-of-points-with-cost/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个 <code>m x n</code> 的整数矩阵 <code>points</code> （下标从 <strong>0</strong> 开始）。一开始你的得分为 <code>0</code> ，你想最大化从矩阵中得到的分数。</p>
+
+<p>你的得分方式为：<strong>每一行</strong> 中选取一个格子，选中坐标为 <code>(r, c)</code> 的格子会给你的总得分 <strong>增加</strong> <code>points[r][c]</code> 。</p>
+
+<p>然而，相邻行之间被选中的格子如果隔得太远，你会失去一些得分。对于相邻行 <code>r</code> 和 <code>r + 1</code> （其中 <code>0 <= r < m - 1</code>），选中坐标为 <code>(r, c<sub>1</sub>)</code> 和 <code>(r + 1, c<sub>2</sub>)</code> 的格子，你的总得分 <b>减少</b> <code>abs(c<sub>1</sub> - c<sub>2</sub>)</code> 。</p>
+
+<p>请你返回你能得到的 <strong>最大</strong> 得分。</p>
+
+<p><code>abs(x)</code> 定义为：</p>
+
+<ul>
+    <li>如果 <code>x >= 0</code> ，那么值为 <code>x</code> 。</li>
+    <li>如果 <code>x < 0</code> ，那么值为 <code>-x</code> 。</li>
+</ul>
+
+<p> </p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/07/12/screenshot-2021-07-12-at-13-40-26-diagram-drawio-diagrams-net.png" style="width: 300px; height: 300px;" /></p>
+
+<pre>
+<b>输入：</b>points = [[1,2,3],[1,5,1],[3,1,1]]
+<b>输出：</b>9
+<strong>解释：</strong>
+蓝色格子是最优方案选中的格子，坐标分别为 (0, 2)，(1, 1) 和 (2, 0) 。
+你的总得分增加 3 + 5 + 3 = 11 。
+但是你的总得分需要扣除 abs(2 - 1) + abs(1 - 0) = 2 。
+你的最终得分为 11 - 2 = 9 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/07/12/screenshot-2021-07-12-at-13-42-14-diagram-drawio-diagrams-net.png" style="width: 200px; height: 299px;" /></p>
+
+<pre>
+<b>输入：</b>points = [[1,5],[2,3],[4,2]]
+<b>输出：</b>11
+<strong>解释：</strong>
+蓝色格子是最优方案选中的格子，坐标分别为 (0, 1)，(1, 1) 和 (2, 0) 。
+你的总得分增加 5 + 3 + 4 = 12 。
+但是你的总得分需要扣除 abs(1 - 1) + abs(1 - 0) = 1 。
+你的最终得分为 12 - 1 = 11 。
+</pre>
+
+<p> </p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>m == points.length</code></li>
+    <li><code>n == points[r].length</code></li>
+    <li><code>1 <= m, n <= 10<sup>5</sup></code></li>
+    <li><code>1 <= m * n <= 10<sup>5</sup></code></li>
+    <li><code>0 <= points[r][c] <= 10<sup>5</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    long long maxPoints(vector&lt;vector&lt;int&gt;&gt;&amp; points) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public long maxPoints(int[][] points) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def maxPoints(self, points: List[List[int]]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[][]} points
+ * @return {number}
+ */
+var maxPoints = function(points) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func maxPoints(points [][]int) int64 {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Try using dynamic programming.</li>
+<li>dp[i][j] is the maximum number of points you can have if points[i][j] is the most recent cell you picked.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[[1,2,3],[1,5,1],[3,1,1]]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<h3 id="题目重述">题目重述</h3>
+
+<p>我们有一个 <code>m x n</code> 的矩阵 <code>points</code>，需要从每一行中选取一个格子，选取 <code>(r, c)</code> 会获得 <code>points[r][c]</code> 的分数。但是，相邻两行选取的格子列坐标差的绝对值会作为扣分。目标是最大化总得分（每行得分之和减去相邻行列坐标差的绝对值之和）。</p>
+
+<h3 id="关键约束">关键约束</h3>
+
+<ul>
+<li>必须从每一行选且只选一个格子</li>
+<li>相邻行之间的扣分 = <code>abs(c1 - c2)</code></li>
+<li>最终得分 = 所有选中格子的 <code>points</code> 值之和 - 所有相邻行扣分之和</li>
+</ul>
+
+<h3 id="输入输出">输入输出</h3>
+
+<ul>
+<li><strong>输入</strong>：二维整数数组 <code>points</code>，<code>m</code> 行 <code>n</code> 列</li>
+<li><strong>输出</strong>：一个整数，表示最大得分</li>
+</ul>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一动态规划朴素版">解法一：动态规划（朴素版）</h3>
+
+<p><strong>核心思想</strong>：<br />
+定义 <code>dp[i][j]</code> 表示处理到第 <code>i</code> 行，且第 <code>i</code> 行选择第 <code>j</code> 列时的最大得分。状态转移需要考虑上一行的所有可能列选择，并扣除列坐标差的绝对值。</p>
+
+<p><strong>步骤</strong>：
+1. 初始化 <code>dp[0][j] = points[0][j]</code>
+2. 对于 <code>i = 1 to m-1</code>，对于每个 <code>j = 0 to n-1</code>：
+   - <code>dp[i][j] = points[i][j] + max_{k=0..n-1} (dp[i-1][k] - abs(j - k))</code>
+3. 最终答案为 <code>max(dp[m-1][j])</code></p>
+
+<p><strong>坑点</strong>：
+- 直接计算需要三重循环，时间复杂度 O(m·n²)，在 n 较大时会超时</p>
+
+<h3 id="解法二动态规划-左右预处理优化">解法二：动态规划 + 左右预处理优化</h3>
+
+<p><strong>核心思想</strong>：<br />
+对于固定的 <code>j</code>，我们需要计算 <code>max(dp[i-1][k] - abs(j - k))</code>。<br />
+将绝对值拆分为两种情况：
+- 当 <code>k ≤ j</code> 时，<code>abs(j - k) = j - k</code>，所以表达式为 <code>dp[i-1][k] + k - j</code>
+- 当 <code>k ≥ j</code> 时，<code>abs(j - k) = k - j</code>，所以表达式为 <code>dp[i-1][k] - k + j</code></p>
+
+<p>因此，我们可以预处理两个数组：
+- <code>left_max[k] = max_{t ≤ k} (dp[i-1][t] + t)</code>
+- <code>right_max[k] = max_{t ≥ k} (dp[i-1][t] - t)</code></p>
+
+<p>那么对于每个 <code>j</code>：
+<code>max_val = max(left_max[j] - j, right_max[j] + j)</code></p>
+
+<p><strong>步骤</strong>：
+1. 初始化 <code>dp</code> 为 <code>points[0]</code>
+2. 对于每一行 <code>i = 1 to m-1</code>：
+   - 计算 <code>left_max</code> 和 <code>right_max</code> 数组
+   - 对于每个 <code>j</code>，<code>dp[i][j] = points[i][j] + max(left_max[j] - j, right_max[j] + j)</code>
+3. 返回 <code>max(dp[m-1])</code></p>
+
+<p><strong>注意事项</strong>：
+- 注意数组索引边界
+- 使用滚动数组可优化空间复杂度</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一朴素动态规划会超时仅作理解用">解法一：朴素动态规划（会超时，仅作理解用）</h3>
+
+<pre><code>func maxPoints(points [][]int) int64 {
+    m, n := len(points), len(points[0])
+    dp := make([][]int64, m)
+    for i := range dp {
+        dp[i] = make([]int64, n)
+    }
+    // 初始化第一行
+    for j := 0; j &lt; n; j++ {
+        dp[0][j] = int64(points[0][j])
+    }
+    // 动态规划
+    for i := 1; i &lt; m; i++ {
+        for j := 0; j &lt; n; j++ {
+            best := int64(-1 &lt;&lt; 63)
+            for k := 0; k &lt; n; k++ {
+                val := dp[i-1][k] - int64(abs(j-k))
+                if val &gt; best {
+                    best = val
+                }
+            }
+            dp[i][j] = int64(points[i][j]) + best
+        }
+    }
+    // 找出最后一行最大值
+    ans := dp[m-1][0]
+    for j := 1; j &lt; n; j++ {
+        if dp[m-1][j] &gt; ans {
+            ans = dp[m-1][j]
+        }
+    }
+    return ans
+}
+
+func abs(x int) int {
+    if x &lt; 0 {
+        return -x
+    }
+    return x
+}
+</code></pre>
+
+<h3 id="解法二优化动态规划推荐">解法二：优化动态规划（推荐）</h3>
+
+<pre><code>func maxPoints(points [][]int) int64 {
+    m, n := len(points), len(points[0])
+    // 使用滚动数组，prev 表示上一行的 dp 值
+    prev := make([]int64, n)
+    for j := 0; j &lt; n; j++ {
+        prev[j] = int64(points[0][j])
+    }
+
+    for i := 1; i &lt; m; i++ {
+        // 计算 left_max: left_max[j] = max_{k&lt;=j} (prev[k] + k)
+        leftMax := make([]int64, n)
+        leftMax[0] = prev[0] // 注意：这里应该是 prev[0] + 0，但0可以省略
+        for j := 1; j &lt; n; j++ {
+            leftMax[j] = max(leftMax[j-1], prev[j]+int64(j))
+        }
+
+        // 计算 right_max: right_max[j] = max_{k&gt;=j} (prev[k] - k)
+        rightMax := make([]int64, n)
+        rightMax[n-1] = prev[n-1] - int64(n-1)
+        for j := n-2; j &gt;= 0; j-- {
+            rightMax[j] = max(rightMax[j+1], prev[j]-int64(j))
+        }
+
+        // 计算当前行的 dp 值
+        curr := make([]int64, n)
+        for j := 0; j &lt; n; j++ {
+            // 两种情况取最大值
+            best := max(leftMax[j]-int64(j), rightMax[j]+int64(j))
+            curr[j] = int64(points[i][j]) + best
+        }
+
+        // 滚动数组
+        prev = curr
+    }
+
+    // 找出最大值
+    ans := prev[0]
+    for j := 1; j &lt; n; j++ {
+        if prev[j] &gt; ans {
+            ans = prev[j]
+        }
+    }
+    return ans
+}
+
+func max(a, b int64) int64 {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一朴素动态规划">解法一：朴素动态规划</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m·n²)<br />
+三重循环：外层 m-1 次，中层 n 次，内层 n 次</li>
+<li>💾 <strong>空间复杂度</strong>：O(m·n)<br />
+需要存储整个 dp 表</li>
+</ul>
+
+<h3 id="解法二优化动态规划">解法二：优化动态规划</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m·n)<br />
+对每一行：计算 leftMax 需要 O(n)，计算 rightMax 需要 O(n)，计算 curr 需要 O(n)</li>
+<li>💾 <strong>空间复杂度</strong>：O(n)<br />
+使用滚动数组，只需要存储 prev、leftMax、rightMax、curr 四个长度为 n 的数组</li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>朴素DP</td>
+  <td>思路直观，易于理解</td>
+  <td>时间复杂度高，n 较大时超时</td>
+  <td>仅适用于 n 很小的情况</td>
+</tr>
+<tr>
+  <td>优化DP</td>
+  <td>时间复杂度最优，可处理较大数据</td>
+  <td>实现稍复杂，需要理解绝对值拆分技巧</td>
+  <td>推荐使用，适用于所有数据范围</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法二</strong>：<br />
+在 LeetCode 的约束下（m, n ≤ 10^5），朴素解法必然超时。优化解法将时间复杂度从 O(m·n²) 降为 O(m·n)，是解决此问题的标准方法。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例1常规用例">用例1：常规用例</h3>
+
+<pre><code>输入：points = [[1,2,3],[1,5,1],[3,1,1]]
+输出：9
+解释：选择 (0,2)=3, (1,1)=5, (2,0)=3，扣分 abs(2-1)+abs(1-0)=2，总分 11-2=9
+</code></pre>
+
+<h3 id="用例2常规用例">用例2：常规用例</h3>
+
+<pre><code>输入：points = [[1,5],[2,3],[4,2]]
+输出：11
+解释：选择 (0,1)=5, (1,1)=3, (2,0)=4，扣分 abs(1-1)+abs(1-0)=1，总分 12-1=11
+</code></pre>
+
+<h3 id="用例3边界用例单行">用例3：边界用例（单行）</h3>
+
+<pre><code>输入：points = [[5,10,15,20]]
+输出：20
+解释：只有一行，直接选最大值 20，无需扣分
+</code></pre>
+
+<h3 id="用例4边界用例单列">用例4：边界用例（单列）</h3>
+
+<pre><code>输入：points = [[1],[2],[3],[4]]
+输出：10
+解释：只有一列，每行只能选第0列，扣分均为0，总分 1+2+3+4=10
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><strong>LeetCode 1937. Maximum Number of Points with Cost</strong>（本题）</li>
+<li><strong>LeetCode 256. Paint House</strong>（类似相邻约束的DP）</li>
+<li><strong>LeetCode 265. Paint House II</strong>（扩展到k种颜色）</li>
+<li><strong>LeetCode 1473. Paint House III</strong>（更复杂的相邻约束）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-24 10:32:04</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

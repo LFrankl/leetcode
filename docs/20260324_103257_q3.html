@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2218. 从栈中取出 K 个硬币的最大面值和 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-24 10:32:57</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2218. 从栈中取出 K 个硬币的最大面值和</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-value-of-k-coins-from-piles/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2218-从栈中取出-k-个硬币的最大面值和">2218. 从栈中取出 K 个硬币的最大面值和</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数组, 动态规划, 前缀和</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-value-of-k-coins-from-piles/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>一张桌子上总共有 <code>n</code>&nbsp;个硬币 <b>栈</b>&nbsp;。每个栈有 <strong>正整数</strong>&nbsp;个带面值的硬币。</p>
+
+<p>每一次操作中，你可以从任意一个栈的 <strong>顶部</strong>&nbsp;取出 1 个硬币，从栈中移除它，并放入你的钱包里。</p>
+
+<p>给你一个列表&nbsp;<code>piles</code>&nbsp;，其中&nbsp;<code>piles[i]</code>&nbsp;是一个整数数组，分别表示第 <code>i</code>&nbsp;个栈里 <strong>从顶到底</strong>&nbsp;的硬币面值。同时给你一个正整数&nbsp;<code>k</code>&nbsp;，请你返回在&nbsp;<strong>恰好</strong>&nbsp;进行&nbsp;<code>k</code>&nbsp;次操作的前提下，你钱包里硬币面值之和&nbsp;<strong>最大为多少</strong>&nbsp;。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2019/11/09/e1.png" style="width: 600px; height: 243px;" /></p>
+
+<pre>
+<b>输入：</b>piles = [[1,100,3],[7,8,9]], k = 2
+<b>输出：</b>101
+<strong>解释：</strong>
+上图展示了几种选择 k 个硬币的不同方法。
+我们可以得到的最大面值为 101 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<b>输入：</b>piles = [[100],[100],[100],[100],[100],[100],[1,1,1,1,1,1,700]], k = 7
+<b>输出：</b>706
+<strong>解释：
+</strong>如果我们所有硬币都从最后一个栈中取，可以得到最大面值和。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>n == piles.length</code></li>
+    <li><code>1 &lt;= n &lt;= 1000</code></li>
+    <li><code>1 &lt;= piles[i][j] &lt;= 10<sup>5</sup></code></li>
+    <li><code>1 &lt;= k &lt;= sum(piles[i].length) &lt;= 2000</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int maxValueOfCoins(vector&lt;vector&lt;int&gt;&gt;&amp; piles, int k) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int maxValueOfCoins(List&lt;List&lt;Integer&gt;&gt; piles, int k) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def maxValueOfCoins(self, piles: List[List[int]], k: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[][]} piles
+ * @param {number} k
+ * @return {number}
+ */
+var maxValueOfCoins = function(piles, k) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func maxValueOfCoins(piles [][]int, k int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>For each pile i, what will be the total value of coins we can collect if we choose the first j coins?</li>
+<li>How can we use dynamic programming to combine the results from different piles to find the most optimal answer?</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[[1,100,3],[7,8,9]]
+2
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong><br />
+我们有 <code>n</code> 个栈，每个栈里从上到下放着若干枚硬币，每枚硬币有一个面值。我们可以从任意一个栈的顶部取出一枚硬币（移除并放入钱包），最多进行 <code>k</code> 次操作。目标是：在恰好取 <code>k</code> 枚硬币的情况下，使钱包中硬币面值之和最大。</p>
+
+<p><strong>关键约束</strong><br />
+- 每个栈的硬币数量可能不同，但总硬币数不超过 2000。
+- 只能从栈顶取硬币，即每个栈取硬币的顺序是固定的（从上到下）。
+- <code>k</code> 不超过总硬币数。
+- 硬币面值均为正整数。</p>
+
+<p><strong>输入输出格式</strong><br />
+- 输入：<code>piles</code> 是一个二维整数数组，<code>piles[i]</code> 表示第 <code>i</code> 个栈从上到下的硬币面值；<code>k</code> 为整数。
+- 输出：一个整数，表示最大面值和。</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="核心思想">核心思想</h3>
+
+<p>这是一个<strong>分组背包</strong>问题：
+- 每个栈是一个“组”，我们可以从这个组中取 <code>0</code> 到 <code>min(len(piles[i]), k)</code> 枚硬币。
+- 从同一个栈取 <code>t</code> 枚硬币的收益是固定的（取前 <code>t</code> 枚的面值和）。
+- 我们需要从每组中至多选择一个“物品”（取 <code>t</code> 枚硬币），使得总硬币数恰好为 <code>k</code> 时总收益最大。</p>
+
+<h3 id="解法一动态规划分组背包">解法一：动态规划（分组背包）</h3>
+
+<p><strong>算法步骤</strong>：
+1. 预处理每个栈的前缀和，方便快速得到取 <code>t</code> 枚硬币的收益。
+2. 定义 <code>dp[j]</code> 表示取 <code>j</code> 枚硬币时的最大面值和。
+3. 遍历每个栈（组），对于每个栈，我们考虑取 <code>0</code> 到 <code>min(len(piles[i]), k)</code> 枚硬币的所有可能，并更新 <code>dp</code>。
+4. 注意更新顺序：为了避免同一组被重复取，需要从 <code>k</code> 到 <code>0</code> 逆序更新 <code>dp</code>。</p>
+
+<p><strong>注意事项</strong>：
+- 初始化 <code>dp[0] = 0</code>，其余为负无穷（或一个很小的负数），因为要求恰好取 <code>k</code> 枚。
+- 每个栈最多取 <code>min(len(piles[i]), k)</code> 枚，超过栈长的部分不考虑。</p>
+
+<h3 id="解法二动态规划二维-dp">解法二：动态规划（二维 DP）</h3>
+
+<ul>
+<li>定义 <code>dp[i][j]</code> 表示从前 <code>i</code> 个栈中取 <code>j</code> 枚硬币的最大面值和。</li>
+<li>状态转移：<code>dp[i][j] = max(dp[i-1][j-t] + sum[i][t])</code>，其中 <code>t</code> 为从第 <code>i</code> 个栈取的硬币数。</li>
+<li>可以优化为一维数组（即解法一）。</li>
+</ul>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一动态规划分组背包一维优化">解法一：动态规划（分组背包，一维优化）</h3>
+
+<pre><code>func maxValueOfCoins(piles [][]int, k int) int {
+    // dp[j] 表示取 j 枚硬币时的最大面值和
+    dp := make([]int, k+1)
+    for i := 1; i &lt;= k; i++ {
+        dp[i] = -1 &lt;&lt; 31 // 初始化为极小值，表示不可达
+    }
+    dp[0] = 0
+
+    // 遍历每个栈（组）
+    for _, pile := range piles {
+        m := len(pile)
+        // 计算前缀和，prefix[t] 表示取该栈前 t 枚硬币的面值和
+        prefix := make([]int, m+1)
+        for t := 1; t &lt;= m; t++ {
+            prefix[t] = prefix[t-1] + pile[t-1]
+        }
+
+        // 逆序更新 dp，避免同一组重复取
+        for j := k; j &gt;= 0; j-- {
+            // 从当前栈取 t 枚硬币
+            for t := 1; t &lt;= m &amp;&amp; t &lt;= j; t++ {
+                if dp[j-t] != -1&lt;&lt;31 {
+                    dp[j] = max(dp[j], dp[j-t]+prefix[t])
+                }
+            }
+        }
+    }
+    return dp[k]
+}
+
+func max(a, b int) int {
+    if a &gt; b {
+        return a
+    }
+    return b
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一">解法一</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n * k * min(m, k))，其中 <code>n</code> 是栈的数量，<code>m</code> 是每个栈的平均长度。由于总硬币数不超过 2000，且 <code>k</code> 不超过总硬币数，因此最坏情况下约为 O(2000 * 2000) = O(4e6)，可接受。</li>
+<li>💾 <strong>空间复杂度</strong>：O(k)，使用一维 DP 数组。</li>
+</ul>
+
+<p><strong>复杂度来源</strong>：
+- 外层循环遍历每个栈（n 次）。
+- 内层循环遍历 <code>j</code> 从 <code>k</code> 到 <code>0</code>（k 次）。
+- 最内层循环遍历从当前栈取的硬币数 <code>t</code>（最多 min(m, k) 次）。</p>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>一维 DP（分组背包）</td>
+  <td>空间优化好，代码简洁</td>
+  <td>状态转移需逆序，理解稍难</td>
+  <td>推荐，适用于大多数情况</td>
+</tr>
+<tr>
+  <td>二维 DP</td>
+  <td>直观，易于理解</td>
+  <td>空间复杂度 O(n*k)</td>
+  <td>当需要记录完整路径时</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法一</strong>：因为空间复杂度低，且运行效率高，适合本题的数据规模。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例-1常规用例">用例 1：常规用例</h3>
+
+<pre><code>输入：piles = [[1,100,3],[7,8,9]], k = 2
+输出：101
+解释：从第一个栈取 100，从第二个栈取 1，总面值 101。
+</code></pre>
+
+<h3 id="用例-2边界用例k-等于总硬币数">用例 2：边界用例（k 等于总硬币数）</h3>
+
+<pre><code>输入：piles = [[100],[100],[100],[100],[100],[100],[1,1,1,1,1,1,700]], k = 7
+输出：706
+解释：全部从最后一个栈取，得到 1+1+1+1+1+1+700 = 706。
+</code></pre>
+
+<h3 id="用例-3边界用例k1">用例 3：边界用例（k=1）</h3>
+
+<pre><code>输入：piles = [[5],[1,10]], k = 1
+输出：10
+解释：从第二个栈取顶部 1，或从第一个栈取 5，最大为 10（取第二个栈的顶部 1？不对，第二个栈顶部是 1，最大是 5？等等，第二个栈顶部是 1，但我们可以取任意栈的顶部，所以最大是 max(5,1)=5？等等，题目要求取 k 枚，但每个栈只能从顶部取，所以对于第二个栈，如果取 1 枚就是 1，取 2 枚才是 1+10=11，但 k=1，所以只能取 1 枚，所以最大是 max(5,1)=5。但示例中 k=2 时才能取到 100。所以这里 k=1 时，最大是 5。)
+修正：第二个栈顶部是 1，第一个栈顶部是 5，所以最大是 5。
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/">LeetCode 2218. Maximum Value of K Coins From Piles</a>（本题）</li>
+<li><a href="https://leetcode.com/problems/ones-and-zeroes/">LeetCode 474. Ones and Zeroes</a>（二维费用的背包问题）</li>
+<li><a href="https://leetcode.com/problems/target-sum/">LeetCode 494. Target Sum</a>（背包问题变种）</li>
+<li><a href="https://leetcode.com/problems/coin-change-ii/">LeetCode 518. Coin Change II</a>（完全背包问题）</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-24 10:32:57</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

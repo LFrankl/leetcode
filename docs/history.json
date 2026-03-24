@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-24 10:32:57",
+      "record_id": "20260324_103257",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3581",
+          "title": "计算数字中的奇数字母数量",
+          "difficulty": "easy",
+          "file": "20260324_103257_q1.html"
+        },
+        {
+          "number": "1937",
+          "title": "扣分后的最大得分",
+          "difficulty": "medium",
+          "file": "20260324_103257_q2.html"
+        },
+        {
+          "number": "2218",
+          "title": "从栈中取出 K 个硬币的最大面值和",
+          "difficulty": "hard",
+          "file": "20260324_103257_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-23 10:33:15",
       "record_id": "20260323_103315",
       "count": 3,
@@ -906,5 +931,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-23 10:33:15"
+  "last_updated": "2026-03-24 10:32:57"
 }
