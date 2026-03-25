@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2774. 数组的上界 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-25 10:34:12</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2774. 数组的上界</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/array-upper-bound/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2774-数组的上界">2774. 数组的上界</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: </p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/array-upper-bound/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Inside the Array.prototype.upperBound function you have access to the "this" keyword. You can access array elements, values, and methods. For example "this[0]", "this[1]", "this.length", "this.map()", etc.</li>
+<li>The most efficient way to solve this problem is with binary search.</li>
+<li>Choose the middle element and check if it's less than or equal to the goal value. If so, you can rule out the left side of the array.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[3,4,5]
+5
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>题目重述</strong>：
+给定一个已按升序排列的整数数组 <code>nums</code> 和一个目标值 <code>target</code>，要求找到 <code>target</code> 在数组中的<strong>上界</strong>。上界定义为第一个大于 <code>target</code> 的元素索引。如果所有元素都不大于 <code>target</code>，则返回数组长度。</p>
+
+<p><strong>关键约束</strong>：
+- 数组已按升序排列
+- 数组可能为空
+- 元素可能重复
+- 需要找到第一个<strong>大于</strong> <code>target</code> 的位置，而不是等于</p>
+
+<p><strong>边界情况</strong>：
+- 空数组：返回 0
+- 所有元素 ≤ target：返回数组长度
+- 所有元素 &gt; target：返回 0
+- 有多个等于 target 的元素：返回第一个大于 target 的位置</p>
+
+<p><strong>输入输出</strong>：
+- 输入：<code>nums []int</code>, <code>target int</code>
+- 输出：<code>int</code> 类型，表示上界索引</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一线性扫描">解法一：线性扫描</h3>
+
+<p><strong>核心思想</strong>：从左到右遍历数组，找到第一个大于 <code>target</code> 的元素。</p>
+
+<p><strong>步骤</strong>：
+1. 遍历数组中的每个元素
+2. 如果当前元素 &gt; target，返回当前索引
+3. 如果遍历结束都没有找到，返回数组长度</p>
+
+<p><strong>注意事项</strong>：
+- 需要处理空数组情况
+- 注意边界条件</p>
+
+<h3 id="解法二二分查找">解法二：二分查找</h3>
+
+<p><strong>核心思想</strong>：利用数组有序的特性，使用二分查找加速搜索。</p>
+
+<p><strong>步骤</strong>：
+1. 初始化左右指针 <code>left = 0</code>, <code>right = len(nums)</code>
+2. 当 <code>left &lt; right</code> 时循环：
+   - 计算中点 <code>mid = left + (right - left)/2</code>
+   - 如果 <code>nums[mid] &gt; target</code>，说明上界在左半部分，<code>right = mid</code>
+   - 否则，说明上界在右半部分，<code>left = mid + 1</code>
+3. 返回 <code>left</code> 即为上界位置</p>
+
+<p><strong>注意事项</strong>：
+- 循环条件是 <code>left &lt; right</code> 而不是 <code>left ≤ right</code>
+- 中点计算防止溢出
+- 最终返回的是 <code>left</code> 而不是 <code>mid</code></p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一线性扫描-2">解法一：线性扫描</h3>
+
+<pre><code>func upperBound(nums []int, target int) int {
+    // 遍历数组
+    for i, num := range nums {
+        // 找到第一个大于 target 的元素
+        if num &gt; target {
+            return i
+        }
+    }
+    // 所有元素都不大于 target
+    return len(nums)
+}
+</code></pre>
+
+<h3 id="解法二二分查找-2">解法二：二分查找</h3>
+
+<pre><code>func upperBound(nums []int, target int) int {
+    left, right := 0, len(nums)
+
+    // 二分查找
+    for left &lt; right {
+        mid := left + (right-left)/2  // 防止溢出
+
+        if nums[mid] &gt; target {
+            // 中点大于 target，上界在左半部分（包含中点）
+            right = mid
+        } else {
+            // 中点小于等于 target，上界在右半部分
+            left = mid + 1
+        }
+    }
+
+    // left 即为第一个大于 target 的位置
+    return left
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一线性扫描-3">解法一：线性扫描</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(n)
+<ul>
+<li>最坏情况下需要遍历整个数组</li>
+<li>n 为数组长度</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了常数级别的额外空间</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二二分查找-3">解法二：二分查找</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(log n)
+<ul>
+<li>每次将搜索范围减半</li>
+<li>最多需要 log₂n 次比较</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(1)
+<ul>
+<li>只使用了几个指针变量</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>特性</th>
+  <th>线性扫描</th>
+  <th>二分查找</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>时间复杂度</td>
+  <td>O(n)</td>
+  <td>O(log n)</td>
+</tr>
+<tr>
+  <td>空间复杂度</td>
+  <td>O(1)</td>
+  <td>O(1)</td>
+</tr>
+<tr>
+  <td>代码复杂度</td>
+  <td>简单</td>
+  <td>中等</td>
+</tr>
+<tr>
+  <td>适用场景</td>
+  <td>小规模数据</td>
+  <td>大规模数据</td>
+</tr>
+<tr>
+  <td>稳定性</td>
+  <td>稳定</td>
+  <td>稳定</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐解法</strong>：二分查找
+- 数组已排序，二分查找是最优选择
+- 时间复杂度从 O(n) 降到 O(log n)
+- 对于大数据量优势明显</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="常规用例">常规用例</h3>
+
+<pre><code>// 用例1：正常情况
+nums := []int{1, 2, 4, 4, 5, 6}
+target := 4
+// 输出：4 → 第一个大于4的元素5在索引4
+
+// 用例2：target不存在于数组中
+nums := []int{1, 3, 5, 7}
+target := 4
+// 输出：2 → 第一个大于4的元素5在索引2
+</code></pre>
+
+<h3 id="边界用例">边界用例</h3>
+
+<pre><code>// 用例3：空数组
+nums := []int{}
+target := 5
+// 输出：0
+
+// 用例4：所有元素都大于target
+nums := []int{5, 6, 7, 8}
+target := 2
+// 输出：0 → 第一个元素就大于target
+
+// 用例5：所有元素都不大于target
+nums := []int{1, 2, 3, 4}
+target := 5
+// 输出：4 → 数组长度
+
+// 用例6：有重复元素
+nums := []int{1, 2, 2, 2, 3, 4}
+target := 2
+// 输出：4 → 第一个大于2的元素3在索引4
+</code></pre>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ol>
+<li><strong>LeetCode 35. 搜索插入位置</strong> - 类似但找的是插入位置（≥ target）</li>
+<li><strong>LeetCode 34. 在排序数组中查找元素的第一个和最后一个位置</strong> - 找上下界</li>
+<li><strong>LeetCode 704. 二分查找</strong> - 基础的二分查找</li>
+<li><strong>LeetCode 278. 第一个错误的版本</strong> - 类似的二分查找变体</li>
+</ol>
+
+<hr />
+
+<p><em>获取时间: 2026-03-25 10:31:08</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1947. 最大兼容性评分和 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-25 10:34:12</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">1947. 最大兼容性评分和</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/maximum-compatibility-score-sum/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="1947-最大兼容性评分和">1947. 最大兼容性评分和</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 位运算, 数组, 动态规划, 回溯, 位掩码</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/maximum-compatibility-score-sum/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>有一份由 <code>n</code> 个问题组成的调查问卷，每个问题的答案要么是 <code>0</code>（no，否），要么是 <code>1</code>（yes，是）。</p>
+
+<p>这份调查问卷被分发给 <code>m</code> 名学生和 <code>m</code> 名导师，学生和导师的编号都是从 <code>0</code> 到 <code>m - 1</code> 。学生的答案用一个二维整数数组 <code>students</code> 表示，其中 <code>students[i]</code> 是一个整数数组，包含第 <code>i</code> 名学生对调查问卷给出的答案（<strong>下标从 0 开始</strong>）。导师的答案用一个二维整数数组 <code>mentors</code> 表示，其中 <code>mentors[j]</code> 是一个整数数组，包含第 <code>j</code> 名导师对调查问卷给出的答案（<strong>下标从 0 开始</strong>）。</p>
+
+<p>每个学生都会被分配给 <strong>一名</strong> 导师，而每位导师也会分配到 <strong>一名</strong> 学生。配对的学生与导师之间的兼容性评分等于学生和导师答案相同的次数。</p>
+
+<ul>
+    <li>例如，学生答案为<code>[1, <strong><em>0</em></strong>, <strong><em>1</em></strong>]</code> 而导师答案为 <code>[0, <strong><em>0</em></strong>, <strong><em>1</em></strong>]</code> ，那么他们的兼容性评分为 2 ，因为只有第二个和第三个答案相同。</li>
+</ul>
+
+<p>请你找出最优的学生与导师的配对方案，以 <strong>最大程度上</strong> 提高 <strong>兼容性评分和</strong> 。</p>
+
+<p>给你 <code>students</code> 和 <code>mentors</code> ，返回可以得到的<em> </em><strong>最大兼容性评分和</strong> 。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><strong>输入：</strong>students = [[1,1,0],[1,0,1],[0,0,1]], mentors = [[1,0,0],[0,0,1],[1,1,0]]
+<strong>输出：</strong>8
+<strong>解释：</strong>按下述方式分配学生和导师：
+- 学生 0 分配给导师 2 ，兼容性评分为 3 。
+- 学生 1 分配给导师 0 ，兼容性评分为 2 。
+- 学生 2 分配给导师 1 ，兼容性评分为 3 。
+最大兼容性评分和为 3 + 2 + 3 = 8 。</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><strong>输入：</strong>students = [[0,0],[0,0],[0,0]], mentors = [[1,1],[1,1],[1,1]]
+<strong>输出：</strong>0
+<strong>解释：</strong>任意学生与导师配对的兼容性评分都是 0 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>m == students.length == mentors.length</code></li>
+    <li><code>n == students[i].length == mentors[j].length</code></li>
+    <li><code>1 &lt;= m, n &lt;= 8</code></li>
+    <li><code>students[i][k]</code> 为 <code>0</code> 或 <code>1</code></li>
+    <li><code>mentors[j][k]</code> 为 <code>0</code> 或 <code>1</code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int maxCompatibilitySum(vector&lt;vector&lt;int&gt;&gt;&amp; students, vector&lt;vector&lt;int&gt;&gt;&amp; mentors) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int maxCompatibilitySum(int[][] students, int[][] mentors) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def maxCompatibilitySum(self, students: List[List[int]], mentors: List[List[int]]) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number[][]} students
+ * @param {number[][]} mentors
+ * @return {number}
+ */
+var maxCompatibilitySum = function(students, mentors) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func maxCompatibilitySum(students [][]int, mentors [][]int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Calculate the compatibility score for each student-mentor pair.</li>
+<li>Try every permutation of students with the original mentors array.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[[1,1,0],[1,0,1],[0,0,1]]
+[[1,0,0],[0,0,1],[1,1,0]]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h2 id="1-题意理解">1️⃣ 题意理解</h2>
+
+<p><strong>核心要求</strong>：
+- 有 <code>m</code> 个学生和 <code>m</code> 个导师，每个学生/导师对 <code>n</code> 个问题给出 0/1 答案。
+- 需要将学生和导师一一配对。
+- 每对（学生 i，导师 j）的兼容性评分 = 他们答案相同的题目数量。
+- 目标是找到一种配对方式，使得所有配对的兼容性评分之和最大。</p>
+
+<p><strong>关键约束</strong>：
+- <code>1 &lt;= m, n &lt;= 8</code>，数据规模很小。
+- 每个答案数组长度相同，且元素为 0 或 1。
+- 学生和导师数量相等，必须一一配对。</p>
+
+<p><strong>边界情况</strong>：
+- <code>m = 1</code> 时只有一种配对方式。
+- 所有答案完全相同或完全不同时，评分为 <code>m * n</code> 或 0。
+- 由于 <code>m, n</code> 最大为 8，暴力搜索是可行的。</p>
+
+<p><strong>输入输出</strong>：
+- 输入：<code>students [][]int</code>，<code>mentors [][]int</code>
+- 输出：最大兼容性评分和（整数）</p>
+
+<h2 id="2-解题思路">2️⃣ 解题思路</h2>
+
+<h3 id="解法一回溯法dfs-状态压缩">解法一：回溯法（DFS + 状态压缩）</h3>
+
+<p><strong>核心思想</strong>：
+- 将配对问题看作一个排列问题：为每个学生选择一个导师，且每个导师只能被选一次。
+- 使用回溯法枚举所有可能的配对方案，计算每种方案的评分和，取最大值。
+- 由于 <code>m &lt;= 8</code>，总排列数为 <code>m!</code>，最大为 <code>40320</code>，完全可行。</p>
+
+<p><strong>步骤</strong>：
+1. 预处理一个 <code>score[i][j]</code> 矩阵，表示学生 i 与导师 j 的兼容性评分。
+2. 使用 DFS 递归地为每个学生选择导师，用 <code>used</code> 数组标记导师是否已被选。
+3. 递归到第 <code>i</code> 个学生时，遍历所有未被选的导师 j，选择后继续递归。
+4. 当所有学生都配对完成时，更新最大评分和。</p>
+
+<p><strong>注意事项</strong>：
+- 注意递归边界条件。
+- 可以加入剪枝优化（但本题规模小，非必需）。</p>
+
+<h3 id="解法二状态压缩动态规划dp-bitmask">解法二：状态压缩动态规划（DP + Bitmask）</h3>
+
+<p><strong>核心思想</strong>：
+- 将导师的选择状态压缩为一个二进制数 <code>mask</code>，其中第 <code>j</code> 位为 1 表示导师 j 已被选。
+- 定义 <code>dp[mask]</code> 表示当前已选导师状态为 <code>mask</code> 时的最大评分和。
+- 状态转移：<code>dp[mask] = max(dp[mask], dp[mask ^ (1&lt;&lt;j)] + score[count][j])</code>，其中 <code>count</code> 是已选学生数（即 <code>mask</code> 中 1 的个数），<code>j</code> 是当前选择的导师。</p>
+
+<p><strong>步骤</strong>：
+1. 预处理 <code>score[i][j]</code> 矩阵。
+2. 初始化 <code>dp[0] = 0</code>。
+3. 遍历所有 <code>mask</code>，对于每个 <code>mask</code>，计算已选学生数 <code>cnt</code>，然后遍历所有导师 j，如果 j 未被选（<code>mask</code> 的第 j 位为 0），则尝试选择 j 进行转移。
+4. 最终 <code>dp[(1&lt;&lt;m)-1]</code> 即为答案。</p>
+
+<p><strong>注意事项</strong>：
+- 注意 <code>mask</code> 的遍历顺序，确保转移时子状态已计算（通常从小到大遍历即可）。
+- <code>cnt</code> 可以通过 <code>bits.OnesCount(uint(mask))</code> 快速计算。</p>
+
+<h2 id="3-代码实现">3️⃣ 代码实现</h2>
+
+<h3 id="解法一回溯法">解法一：回溯法</h3>
+
+<pre><code>func maxCompatibilitySum(students [][]int, mentors [][]int) int {
+    m, n := len(students), len(students[0])
+    // 预处理评分矩阵
+    score := make([][]int, m)
+    for i := 0; i &lt; m; i++ {
+        score[i] = make([]int, m)
+        for j := 0; j &lt; m; j++ {
+            s := 0
+            for k := 0; k &lt; n; k++ {
+                if students[i][k] == mentors[j][k] {
+                    s++
+                }
+            }
+            score[i][j] = s
+        }
+    }
+
+    used := make([]bool, m)
+    maxSum := 0
+    var dfs func(i, curSum int)
+    dfs = func(i, curSum int) {
+        if i == m {
+            if curSum &gt; maxSum {
+                maxSum = curSum
+            }
+            return
+        }
+        for j := 0; j &lt; m; j++ {
+            if !used[j] {
+                used[j] = true
+                dfs(i+1, curSum+score[i][j])
+                used[j] = false
+            }
+        }
+    }
+    dfs(0, 0)
+    return maxSum
+}
+</code></pre>
+
+<h3 id="解法二状态压缩-dp">解法二：状态压缩 DP</h3>
+
+<pre><code>func maxCompatibilitySum(students [][]int, mentors [][]int) int {
+    m, n := len(students), len(students[0])
+    // 预处理评分矩阵
+    score := make([][]int, m)
+    for i := 0; i &lt; m; i++ {
+        score[i] = make([]int, m)
+        for j := 0; j &lt; m; j++ {
+            s := 0
+            for k := 0; k &lt; n; k++ {
+                if students[i][k] == mentors[j][k] {
+                    s++
+                }
+            }
+            score[i][j] = s
+        }
+    }
+
+    // dp[mask] 表示当前已选导师状态为 mask 时的最大评分和
+    dp := make([]int, 1&lt;&lt;m)
+    for mask := 0; mask &lt; (1 &lt;&lt; m); mask++ {
+        // 计算当前已选学生数（即 mask 中 1 的个数）
+        cnt := bits.OnesCount(uint(mask))
+        // 为第 cnt 个学生选择导师
+        for j := 0; j &lt; m; j++ {
+            if mask&amp;(1&lt;&lt;j) == 0 { // 导师 j 未被选
+                newMask := mask | (1 &lt;&lt; j)
+                if dp[newMask] &lt; dp[mask]+score[cnt][j] {
+                    dp[newMask] = dp[mask] + score[cnt][j]
+                }
+            }
+        }
+    }
+    return dp[(1&lt;&lt;m)-1]
+}
+</code></pre>
+
+<h2 id="4-复杂度分析">4️⃣ 复杂度分析</h2>
+
+<h3 id="解法一回溯法-2">解法一：回溯法</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m! * n)
+<ul>
+<li>共有 m! 种配对方案，每种方案需要计算 m 对评分，每对评分需要 O(n) 时间。</li>
+<li>由于我们预处理了评分矩阵，实际递归中每层只需 O(m) 时间选择导师，总时间 O(m! * m)。</li>
+<li>预处理评分矩阵 O(m² * n)。</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(m² + m)
+<ul>
+<li>存储评分矩阵 O(m²)，递归栈深度 O(m)，used 数组 O(m)。</li>
+</ul></li>
+</ul>
+
+<h3 id="解法二状态压缩-dp-2">解法二：状态压缩 DP</h3>
+
+<ul>
+<li>⏱️ <strong>时间复杂度</strong>：O(m² * 2^m + m² * n)
+<ul>
+<li>预处理评分矩阵 O(m² * n)。</li>
+<li>DP 状态数 2^m，每个状态需要遍历 m 个导师进行转移，总 O(m * 2^m)。</li>
+</ul></li>
+<li>💾 <strong>空间复杂度</strong>：O(m² + 2^m)
+<ul>
+<li>评分矩阵 O(m²)，dp 数组 O(2^m)。</li>
+</ul></li>
+</ul>
+
+<h2 id="5-解法对比">5️⃣ 解法对比</h2>
+
+<table>
+<thead>
+<tr>
+  <th>解法</th>
+  <th>优点</th>
+  <th>缺点</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>回溯法</td>
+  <td>思路直观，易于实现</td>
+  <td>当 m 较大时（如 m>10）会超时</td>
+  <td>m ≤ 8 的小规模问题</td>
+</tr>
+<tr>
+  <td>状态压缩 DP</td>
+  <td>效率更高，可处理稍大的 m（如 m≤16）</td>
+  <td>代码稍复杂，需要理解位运算</td>
+  <td>m ≤ 16 的中等规模问题</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>推荐</strong>：
+- 本题 m ≤ 8，两种方法均可，但状态压缩 DP 更高效且更具通用性。
+- 如果对位运算不熟悉，回溯法更易实现。</p>
+
+<h2 id="6-测试用例">6️⃣ 测试用例</h2>
+
+<h3 id="用例-1常规">用例 1（常规）</h3>
+
+<ul>
+<li><strong>输入</strong>：
+<pre><code>students = [[1,1,0],[1,0,1],[0,0,1]]
+mentors = [[1,0,0],[0,0,1],[1,1,0]]
+</code></pre></li>
+<li><strong>输出</strong>：8</li>
+<li><strong>解释</strong>：最优配对为 (0,2)=3, (1,0)=2, (2,1)=3，总和 8。</li>
+</ul>
+
+<h3 id="用例-2全相同">用例 2（全相同）</h3>
+
+<ul>
+<li><strong>输入</strong>：
+<pre><code>students = [[0,0],[0,0],[0,0]]
+mentors = [[0,0],[0,0],[0,0]]
+</code></pre></li>
+<li><strong>输出</strong>：6</li>
+<li><strong>解释</strong>：所有配对评分均为 2，任意配对总和为 6。</li>
+</ul>
+
+<h3 id="用例-3全不同">用例 3（全不同）</h3>
+
+<ul>
+<li><strong>输入</strong>：
+<pre><code>students = [[1,1],[1,1]]
+mentors = [[0,0],[0,0]]
+</code></pre></li>
+<li><strong>输出</strong>：0</li>
+<li><strong>解释</strong>：所有配对评分均为 0。</li>
+</ul>
+
+<h3 id="用例-4m1">用例 4（m=1）</h3>
+
+<ul>
+<li><strong>输入</strong>：
+<pre><code>students = [[1,0,1]]
+mentors = [[0,0,1]]
+</code></pre></li>
+<li><strong>输出</strong>：2</li>
+<li><strong>解释</strong>：只有一种配对，评分为 2。</li>
+</ul>
+
+<h2 id="7-相关题目">7️⃣ 相关题目</h2>
+
+<ul>
+<li><a href="https://leetcode.com/problems/beautiful-arrangement/">526. 优美的排列</a>：类似排列问题，可用回溯或状态压缩 DP。</li>
+<li><a href="https://leetcode.com/problems/maximum-students-taking-exam/">1349. 参加考试的最大学生数</a>：状态压缩 DP 经典题。</li>
+<li><a href="https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/">1986. 完成任务的最少工作时间段</a>：状态压缩 DP 应用。</li>
+</ul>
+
+<hr />
+
+<p><em>获取时间: 2026-03-25 10:32:44</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
