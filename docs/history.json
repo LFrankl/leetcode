@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-26 10:33:34",
+      "record_id": "20260326_103334",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1484",
+          "title": "按日期分组销售产品",
+          "difficulty": "easy",
+          "file": "20260326_103334_q1.html"
+        },
+        {
+          "number": "1871",
+          "title": "跳跃游戏 VII",
+          "difficulty": "medium",
+          "file": "20260326_103334_q2.html"
+        },
+        {
+          "number": "3480",
+          "title": "删除一个冲突对后最大子数组数目",
+          "difficulty": "hard",
+          "file": "20260326_103334_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-25 10:34:12",
       "record_id": "20260325_103412",
       "count": 3,
@@ -956,5 +981,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-25 10:34:12"
+  "last_updated": "2026-03-26 10:33:34"
 }
