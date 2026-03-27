@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-27 10:35:10",
+      "record_id": "20260327_103510",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1065",
+          "title": "字符串的索引对",
+          "difficulty": "easy",
+          "file": "20260327_103510_q1.html"
+        },
+        {
+          "number": "1400",
+          "title": "构造 K 个回文字符串",
+          "difficulty": "medium",
+          "file": "20260327_103510_q2.html"
+        },
+        {
+          "number": "132",
+          "title": "分割回文串 II",
+          "difficulty": "hard",
+          "file": "20260327_103510_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-26 10:33:34",
       "record_id": "20260326_103334",
       "count": 3,
@@ -981,5 +1006,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-26 10:33:34"
+  "last_updated": "2026-03-27 10:35:11"
 }
