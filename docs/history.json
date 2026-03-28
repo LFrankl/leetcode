@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-28 10:42:39",
+      "record_id": "20260328_104239",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1464",
+          "title": "数组中两元素的最大乘积",
+          "difficulty": "easy",
+          "file": "20260328_104239_q1.html"
+        },
+        {
+          "number": "324",
+          "title": "摆动排序 II",
+          "difficulty": "medium",
+          "file": "20260328_104239_q2.html"
+        },
+        {
+          "number": "2338",
+          "title": "统计理想数组的数目",
+          "difficulty": "hard",
+          "file": "20260328_104239_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-27 10:35:10",
       "record_id": "20260327_103510",
       "count": 3,
@@ -1006,5 +1031,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-27 10:35:11"
+  "last_updated": "2026-03-28 10:42:39"
 }

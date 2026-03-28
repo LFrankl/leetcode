@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2338. 统计理想数组的数目 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-03-28 10:42:39</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2338. 统计理想数组的数目</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/count-the-number-of-ideal-arrays/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2338-统计理想数组的数目">2338. 统计理想数组的数目</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数学, 动态规划, 组合数学, 数论</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/count-the-number-of-ideal-arrays/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你两个整数 <code>n</code> 和 <code>maxValue</code> ，用于描述一个 <strong>理想数组</strong> 。</p>
+
+<p>对于下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的整数数组 <code>arr</code> ，如果满足以下条件，则认为该数组是一个 <strong>理想数组</strong> ：</p>
+
+<ul>
+    <li>每个 <code>arr[i]</code> 都是从 <code>1</code> 到 <code>maxValue</code> 范围内的一个值，其中 <code>0 &lt;= i &lt; n</code> 。</li>
+    <li>每个 <code>arr[i]</code> 都可以被 <code>arr[i - 1]</code> 整除，其中 <code>0 &lt; i &lt; n</code> 。</li>
+</ul>
+
+<p>返回长度为 <code>n</code> 的 <strong>不同</strong> 理想数组的数目。由于答案可能很大，返回对 <code>10<sup>9</sup> + 7</code> 取余的结果。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><strong>输入：</strong>n = 2, maxValue = 5
+<strong>输出：</strong>10
+<strong>解释：</strong>存在以下理想数组：
+- 以 1 开头的数组（5 个）：[1,1]、[1,2]、[1,3]、[1,4]、[1,5]
+- 以 2 开头的数组（2 个）：[2,2]、[2,4]
+- 以 3 开头的数组（1 个）：[3,3]
+- 以 4 开头的数组（1 个）：[4,4]
+- 以 5 开头的数组（1 个）：[5,5]
+共计 5 + 2 + 1 + 1 + 1 = 10 个不同理想数组。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><strong>输入：</strong>n = 5, maxValue = 3
+<strong>输出：</strong>11
+<strong>解释：</strong>存在以下理想数组：
+- 以 1 开头的数组（9 个）：
+   - 不含其他不同值（1 个）：[1,1,1,1,1] 
+   - 含一个不同值 2（4 个）：[1,1,1,1,2], [1,1,1,2,2], [1,1,2,2,2], [1,2,2,2,2]
+   - 含一个不同值 3（4 个）：[1,1,1,1,3], [1,1,1,3,3], [1,1,3,3,3], [1,3,3,3,3]
+- 以 2 开头的数组（1 个）：[2,2,2,2,2]
+- 以 3 开头的数组（1 个）：[3,3,3,3,3]
+共计 9 + 1 + 1 = 11 个不同理想数组。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>2 &lt;= n &lt;= 10<sup>4</sup></code></li>
+    <li><code>1 &lt;= maxValue &lt;= 10<sup>4</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int idealArrays(int n, int maxValue) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int idealArrays(int n, int maxValue) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def idealArrays(self, n: int, maxValue: int) -&gt; int:
+
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {number} n
+ * @param {number} maxValue
+ * @return {number}
+ */
+var idealArrays = function(n, maxValue) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func idealArrays(n int, maxValue int) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Notice that an ideal array is non-decreasing.</li>
+<li>Consider an alternative problem: where an ideal array must also be strictly increasing. Can you use DP to solve it?</li>
+<li>Will combinatorics help to get an answer from the alternative problem to the actual problem?</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>2
+5
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答">AI 解答</h2>
+
+<p><em>DeepSeek API 未配置或调用失败</em></p>
+
+<hr />
+
+<p><em>获取时间: 2026-03-28 10:42:39</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
