@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-30 10:30:07",
+      "record_id": "20260330_103007",
+      "count": 3,
+      "questions": [
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "easy",
+          "file": "20260330_103007_q1.html"
+        },
+        {
+          "number": "540",
+          "title": "有序数组中的单一元素",
+          "difficulty": "medium",
+          "file": "20260330_103007_q2.html"
+        },
+        {
+          "number": "3632",
+          "title": "异或至少为 K 的子数组数目",
+          "difficulty": "hard",
+          "file": "20260330_103007_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-28 10:42:39",
       "record_id": "20260328_104239",
       "count": 3,
@@ -1031,5 +1056,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-28 10:42:39"
+  "last_updated": "2026-03-30 10:30:07"
 }
