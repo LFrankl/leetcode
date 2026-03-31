@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-03-31 10:30:04",
+      "record_id": "20260331_103004",
+      "count": 3,
+      "questions": [
+        {
+          "number": "657",
+          "title": "机器人能否返回原点",
+          "difficulty": "easy",
+          "file": "20260331_103004_q1.html"
+        },
+        {
+          "number": "373",
+          "title": "查找和最小的 K 对数字",
+          "difficulty": "medium",
+          "file": "20260331_103004_q2.html"
+        },
+        {
+          "number": "2167",
+          "title": "移除所有载有违禁货物车厢所需的最少时间",
+          "difficulty": "hard",
+          "file": "20260331_103004_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-30 10:30:07",
       "record_id": "20260330_103007",
       "count": 3,
@@ -1056,5 +1081,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-30 10:30:07"
+  "last_updated": "2026-03-31 10:30:04"
 }
