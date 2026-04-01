@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-04-01 10:30:05",
+      "record_id": "20260401_103005",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1417",
+          "title": "重新格式化字符串",
+          "difficulty": "easy",
+          "file": "20260401_103005_q1.html"
+        },
+        {
+          "number": "2679",
+          "title": "矩阵中的和",
+          "difficulty": "medium",
+          "file": "20260401_103005_q2.html"
+        },
+        {
+          "number": "LCR 117",
+          "title": "相似字符串组",
+          "difficulty": "hard",
+          "file": "20260401_103005_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-03-31 10:30:04",
       "record_id": "20260331_103004",
       "count": 3,
@@ -1081,5 +1106,5 @@
       ]
     }
   ],
-  "last_updated": "2026-03-31 10:30:04"
+  "last_updated": "2026-04-01 10:30:05"
 }

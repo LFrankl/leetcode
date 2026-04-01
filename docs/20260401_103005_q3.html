@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCR 117. 相似字符串组 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-04-01 10:30:05</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">LCR 117. 相似字符串组</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/H6lPxb/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="lcr-117-相似字符串组">LCR 117. 相似字符串组</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 深度优先搜索, 广度优先搜索, 并查集, 数组, 哈希表, 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/H6lPxb/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>如果交换字符串&nbsp;<code>X</code> 中的两个不同位置的字母，使得它和字符串&nbsp;<code>Y</code> 相等，那么称 <code>X</code> 和 <code>Y</code> 两个字符串相似。如果这两个字符串本身是相等的，那它们也是相似的。</p>
+
+<p>例如，<code>&quot;tars&quot;</code> 和 <code>&quot;rats&quot;</code> 是相似的 (交换 <code>0</code> 与 <code>2</code> 的位置)；&nbsp;<code>&quot;rats&quot;</code> 和 <code>&quot;arts&quot;</code> 也是相似的，但是 <code>&quot;star&quot;</code> 不与 <code>&quot;tars&quot;</code>，<code>&quot;rats&quot;</code>，或 <code>&quot;arts&quot;</code> 相似。</p>
+
+<p>总之，它们通过相似性形成了两个关联组：<code>{&quot;tars&quot;, &quot;rats&quot;, &quot;arts&quot;}</code> 和 <code>{&quot;star&quot;}</code>。注意，<code>&quot;tars&quot;</code> 和 <code>&quot;arts&quot;</code> 是在同一组中，即使它们并不相似。形式上，对每个组而言，要确定一个单词在组中，只需要这个词和该组中至少一个单词相似。</p>
+
+<p>给定一个字符串列表 <code>strs</code>。列表中的每个字符串都是 <code>strs</code> 中其它所有字符串的一个&nbsp;<strong>字母异位词&nbsp;</strong>。请问 <code>strs</code> 中有多少个相似字符串组？</p>
+
+<p><strong>字母异位词（anagram）</strong>，一种把某个字符串的字母的位置（顺序）加以改换所形成的新词。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>strs = [&quot;tars&quot;,&quot;rats&quot;,&quot;arts&quot;,&quot;star&quot;]
+<strong>输出：</strong>2
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>strs = [&quot;omv&quot;,&quot;ovm&quot;]
+<strong>输出：</strong>1
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= strs.length &lt;= 300</code></li>
+    <li><code>1 &lt;= strs[i].length &lt;= 300</code></li>
+    <li><code>strs[i]</code> 只包含小写字母。</li>
+    <li><code>strs</code> 中的所有单词都具有相同的长度，且是彼此的字母异位词。</li>
+</ul>
+
+<p>&nbsp; &nbsp;</p>
+
+<p><meta charset="UTF-8" />注意：本题与主站 839&nbsp;题相同：<a href="https://leetcode.cn/problems/similar-string-groups/">https://leetcode.cn/problems/similar-string-groups/</a></p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<pre><code>class Solution {
+public:
+    int numSimilarGroups(vector&lt;string&gt;&amp; strs) {
+
+    }
+};
+</code></pre>
+
+<h3 id="java">Java</h3>
+
+<pre><code>class Solution {
+    public int numSimilarGroups(String[] strs) {
+
+    }
+}
+</code></pre>
+
+<h3 id="python3">Python3</h3>
+
+<pre><code>class Solution:
+    def numSimilarGroups(self, strs: List[str]) -&gt; int:
+</code></pre>
+
+<h3 id="javascript">JavaScript</h3>
+
+<pre><code>/**
+ * @param {string[]} strs
+ * @return {number}
+ */
+var numSimilarGroups = function(strs) {
+
+};
+</code></pre>
+
+<h3 id="go">Go</h3>
+
+<pre><code>func numSimilarGroups(strs []string) int {
+
+}
+</code></pre>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>["tars","rats","arts","star"]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答">AI 解答</h2>
+
+<p><em>DeepSeek API 未配置或调用失败</em></p>
+
+<hr />
+
+<p><em>获取时间: 2026-04-01 10:30:05</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
