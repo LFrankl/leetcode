@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-04-02 10:39:33",
+      "record_id": "20260402_103933",
+      "count": 3,
+      "questions": [
+        {
+          "number": "605",
+          "title": "种花问题",
+          "difficulty": "easy",
+          "file": "20260402_103933_q1.html"
+        },
+        {
+          "number": "1432",
+          "title": "改变一个整数能得到的最大差值",
+          "difficulty": "medium",
+          "file": "20260402_103933_q2.html"
+        },
+        {
+          "number": "3303",
+          "title": "第一个几乎相等子字符串的下标",
+          "difficulty": "hard",
+          "file": "20260402_103933_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-04-01 10:30:05",
       "record_id": "20260401_103005",
       "count": 3,
@@ -1106,5 +1131,5 @@
       ]
     }
   ],
-  "last_updated": "2026-04-01 10:30:05"
+  "last_updated": "2026-04-02 10:39:33"
 }
