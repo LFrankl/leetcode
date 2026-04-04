@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-04-04 10:32:57",
+      "record_id": "20260404_103257",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2339",
+          "title": "联赛的所有比赛",
+          "difficulty": "easy",
+          "file": "20260404_103257_q1.html"
+        },
+        {
+          "number": "3094",
+          "title": "使用按位查询猜测数字 II",
+          "difficulty": "medium",
+          "file": "20260404_103257_q2.html"
+        },
+        {
+          "number": "1643",
+          "title": "第 K 条最小指令",
+          "difficulty": "hard",
+          "file": "20260404_103257_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-04-02 10:39:33",
       "record_id": "20260402_103933",
       "count": 3,
@@ -1131,5 +1156,5 @@
       ]
     }
   ],
-  "last_updated": "2026-04-02 10:39:33"
+  "last_updated": "2026-04-04 10:32:57"
 }
