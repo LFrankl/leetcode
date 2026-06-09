@@ -128,24 +128,42 @@ class QuestionHistory:
             'total_selected': len(self.history)
         }
 
-class DeepSeekAPI:
-    """DeepSeek API 调用"""
+class AISolutionGenerator:
+    """AI 解答生成器（支持 DeepSeek API 和本地 Claude Code CLI）"""
     def __init__(self, config: Dict):
         self.enabled = config.get('enabled', False)
+        self.mode = config.get('mode', 'deepseek')  # 'deepseek' 或 'claude_cli'
+        self.prompt_template = config.get('prompt_template', '')
+        self.max_retries = config.get('max_retries', 3)
+
+        # DeepSeek API 配置
         self.api_key = config.get('api_key', '')
         self.base_url = config.get('base_url', 'https://api.deepseek.com/v1')
         self.model = config.get('model', 'deepseek-chat')
-        self.prompt_template = config.get('prompt_template', '')
-        self.timeout = config.get('timeout', 300)  # 默认 300 秒（5 分钟）
-        self.max_retries = config.get('max_retries', 3)  # 最大重试次数
+        self.timeout = config.get('timeout', 300)
+
+        # Claude CLI 配置
+        self.claude_cli = config.get('claude_cli', 'claude')
 
     def is_available(self) -> bool:
-        """检查 API 是否可用"""
+        """检查 AI 生成器是否可用"""
         if not self.enabled:
             return False
-        if not self.api_key or self.api_key == 'YOUR_DEEPSEEK_API_KEY_HERE':
-            return False
-        return True
+        if self.mode == 'claude_cli':
+            # 检查 claude CLI 是否存在
+            try:
+                result = subprocess.run(
+                    [self.claude_cli, '--version'],
+                    capture_output=True, text=True, timeout=5
+                )
+                return result.returncode == 0
+            except Exception:
+                return False
+        else:
+            # DeepSeek API 模式
+            if not self.api_key or self.api_key == 'YOUR_DEEPSEEK_API_KEY_HERE':
+                return False
+            return True
 
     def generate_solution(self, question: Dict) -> Optional[str]:
         """生成题目解答（带重试机制）"""
@@ -164,6 +182,46 @@ class DeepSeekAPI:
             content=content[:2000]  # 限制长度
         )
 
+        # 根据模式选择生成方式
+        if self.mode == 'claude_cli':
+            return self._generate_via_claude_cli(prompt)
+        else:
+            return self._generate_via_deepseek(prompt)
+
+    def _generate_via_claude_cli(self, prompt: str) -> Optional[str]:
+        """通过本地 Claude Code CLI 生成解答"""
+        for attempt in range(self.max_retries):
+            try:
+                log_info(f"  调用 Claude CLI... (尝试 {attempt + 1}/{self.max_retries})")
+                result = subprocess.run(
+                    [self.claude_cli, '-p', '--bare', '--dangerously-skip-permissions',
+                     '--output-format', 'text', prompt],
+                    capture_output=True, text=True,
+                    timeout=120  # bare 模式更快，120 秒足够
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    return result.stdout.strip()
+                else:
+                    log_info(f"  ⚠ Claude CLI 返回异常 (exit code {result.returncode})")
+                    if attempt < self.max_retries - 1:
+                        time.sleep(2)
+                    else:
+                        log_info(f"  ❌ Claude CLI 调用失败，已重试 {self.max_retries} 次")
+                        return None
+            except subprocess.TimeoutExpired:
+                log_info(f"  ⚠ Claude CLI 超时（300秒），重试...")
+                if attempt < self.max_retries - 1:
+                    time.sleep(2)
+                else:
+                    log_info(f"  ❌ Claude CLI 超时，已重试 {self.max_retries} 次，放弃")
+                    return None
+            except Exception as e:
+                log_info(f"  ❌ Claude CLI 调用失败: {e}")
+                return None
+        return None
+
+    def _generate_via_deepseek(self, prompt: str) -> Optional[str]:
+        """通过 DeepSeek API 生成解答（带重试机制）"""
         headers = {
             'Authorization': f'Bearer {self.api_key}',
             'Content-Type': 'application/json'
@@ -189,10 +247,23 @@ class DeepSeekAPI:
                 )
                 response.raise_for_status()
                 data = response.json()
-                return data['choices'][0]['message']['content']
+
+                # 支持 OpenAI 标准格式和 dewu 格式
+                if 'choices' in data:
+                    return data['choices'][0]['message']['content']
+                elif 'content' in data and isinstance(data['content'], list):
+                    # dewu 格式: content 是数组
+                    text_parts = []
+                    for item in data['content']:
+                        if item.get('type') == 'text':
+                            text_parts.append(item.get('text', ''))
+                    return '\n'.join(text_parts) if text_parts else None
+                else:
+                    log_info(f"  ⚠ 未知的 API 响应格式")
+                    return None
 
             except requests.exceptions.Timeout:
-                wait_time = 2 ** attempt  # 指数退避：1秒, 2秒, 4秒
+                wait_time = 2 ** attempt
                 if attempt < self.max_retries - 1:
                     log_info(f"  ⚠ DeepSeek API 超时（超过 {self.timeout} 秒），{wait_time}秒后重试... ({attempt + 1}/{self.max_retries})")
                     time.sleep(wait_time)
@@ -201,7 +272,6 @@ class DeepSeekAPI:
                     return None
 
             except requests.exceptions.HTTPError as e:
-                # HTTP 错误（如 401, 429, 500 等）
                 status_code = e.response.status_code if e.response else None
                 if status_code == 429:  # Rate limit
                     wait_time = 2 ** attempt
@@ -211,7 +281,7 @@ class DeepSeekAPI:
                     else:
                         log_info(f"  ❌ 触发速率限制，已重试 {self.max_retries} 次，放弃")
                         return None
-                elif status_code in [500, 502, 503, 504]:  # 服务器错误，可以重试
+                elif status_code in [500, 502, 503, 504]:
                     wait_time = 2 ** attempt
                     if attempt < self.max_retries - 1:
                         log_info(f"  ⚠ 服务器错误 ({status_code})，{wait_time}秒后重试... ({attempt + 1}/{self.max_retries})")
@@ -220,12 +290,10 @@ class DeepSeekAPI:
                         log_info(f"  ❌ 服务器错误 ({status_code})，已重试 {self.max_retries} 次，放弃")
                         return None
                 else:
-                    # 其他 HTTP 错误（401, 403 等）不重试
                     log_info(f"  ❌ DeepSeek API 调用失败 (HTTP {status_code}): {e}")
                     return None
 
             except requests.exceptions.ConnectionError as e:
-                # 网络连接错误，可以重试
                 wait_time = 2 ** attempt
                 if attempt < self.max_retries - 1:
                     log_info(f"  ⚠ 网络连接错误，{wait_time}秒后重试... ({attempt + 1}/{self.max_retries})")
@@ -235,7 +303,6 @@ class DeepSeekAPI:
                     return None
 
             except Exception as e:
-                # 其他未知错误，不重试
                 log_info(f"  ❌ DeepSeek API 调用失败（未知错误）: {e}")
                 return None
 
@@ -810,12 +877,13 @@ def main():
     stats = history.get_stats()
     log_info(f"历史记录: 已选择 {stats['total_selected']} 道题目")
 
-    # 初始化 DeepSeek API
-    deepseek = DeepSeekAPI(config.get('deepseek', {}))
-    if deepseek.is_available():
-        log_info(f"DeepSeek API: 已启用 (模型: {deepseek.model})")
+    # 初始化 AI 解答生成器
+    ai_generator = AISolutionGenerator(config.get('deepseek', {}))
+    if ai_generator.is_available():
+        mode_str = 'Claude CLI' if ai_generator.mode == 'claude_cli' else f'DeepSeek API (模型: {ai_generator.model})'
+        log_info(f"AI 解答生成器: 已启用 ({mode_str})")
     else:
-        log_info(f"DeepSeek API: 未配置或已禁用")
+        log_info(f"AI 解答生成器: 未配置或已禁用")
 
     log_info("")
 
@@ -861,9 +929,9 @@ def main():
 
         # 获取 AI 解答
         ai_solution = None
-        if deepseek.is_available():
+        if ai_generator.is_available():
             log_info(f"  正在生成 AI 解答...")
-            ai_solution = deepseek.generate_solution(detail)
+            ai_solution = ai_generator.generate_solution(detail)
             if ai_solution:
                 log_info(f"  ✓ AI 解答已生成")
 
