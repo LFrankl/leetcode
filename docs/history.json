@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-09 20:02:10",
+      "record_id": "20260609_200210",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3668",
+          "title": "重排完成顺序",
+          "difficulty": "easy",
+          "file": "20260609_200210_q1.html"
+        },
+        {
+          "number": "2105",
+          "title": "给植物浇水 II",
+          "difficulty": "medium",
+          "file": "20260609_200210_q2.html"
+        },
+        {
+          "number": "2617",
+          "title": "网格图中最少访问的格子数",
+          "difficulty": "hard",
+          "file": "20260609_200210_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-09 20:01:24",
       "record_id": "20260609_200124",
       "count": 8,
@@ -1211,5 +1236,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-09 20:01:24"
+  "last_updated": "2026-06-09 20:02:10"
 }
