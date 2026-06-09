@@ -1,6 +1,61 @@
 {
   "records": [
     {
+      "date": "2026-06-09 20:01:24",
+      "record_id": "20260609_200124",
+      "count": 8,
+      "questions": [
+        {
+          "number": "100",
+          "title": "相同的树",
+          "difficulty": "easy",
+          "file": "20260609_200124_q1.html"
+        },
+        {
+          "number": "2105",
+          "title": "给植物浇水 II",
+          "difficulty": "medium",
+          "file": "20260609_200124_q2.html"
+        },
+        {
+          "number": "2136",
+          "title": "全部开花的最早一天",
+          "difficulty": "hard",
+          "file": "20260609_200124_q3.html"
+        },
+        {
+          "number": "2347",
+          "title": "最好的扑克手牌",
+          "difficulty": "easy",
+          "file": "20260609_200124_q4.html"
+        },
+        {
+          "number": "274",
+          "title": "H 指数",
+          "difficulty": "medium",
+          "file": "20260609_200124_q5.html"
+        },
+        {
+          "number": "2937",
+          "title": "使三个字符串相等",
+          "difficulty": "easy",
+          "file": "20260609_200124_q6.html"
+        },
+        {
+          "number": "3668",
+          "title": "重排完成顺序",
+          "difficulty": "easy",
+          "file": "20260609_200124_q7.html"
+        },
+        {
+          "number": "377",
+          "title": "组合总和 Ⅳ",
+          "difficulty": "medium",
+          "file": "20260609_200124_q8.html"
+        }
+      ]
+    },
+    {
       "date": "2026-04-04 10:32:57",
       "record_id": "20260404_103257",
       "count": 3,
@@ -1156,5 +1211,5 @@
       ]
     }
   ],
-  "last_updated": "2026-04-04 10:32:57"
+  "last_updated": "2026-06-09 20:01:24"
 }

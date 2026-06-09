@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2136. 全部开花的最早一天 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-06-09 20:01:24</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2136. 全部开花的最早一天</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/earliest-possible-day-of-full-bloom/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2136-全部开花的最早一天">2136. 全部开花的最早一天</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 贪心, 数组, 排序</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/earliest-possible-day-of-full-bloom/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>你有 <code>n</code> 枚花的种子。每枚种子必须先种下，才能开始生长、开花。播种需要时间，种子的生长也是如此。给你两个下标从 <strong>0</strong> 开始的整数数组 <code>plantTime</code> 和 <code>growTime</code> ，每个数组的长度都是 <code>n</code> ：</p>
+
+<ul>
+    <li><code>plantTime[i]</code> 是 <strong>播种</strong> 第 <code>i</code> 枚种子所需的 <strong>完整天数</strong> 。每天，你只能为播种某一枚种子而劳作。<strong>无须</strong> 连续几天都在种同一枚种子，但是种子播种必须在你工作的天数达到 <code>plantTime[i]</code> 之后才算完成。</li>
+    <li><code>growTime[i]</code> 是第 <code>i</code> 枚种子完全种下后生长所需的 <strong>完整天数 </strong>。在它生长的最后一天 <strong>之后</strong> ，将会开花并且永远 <strong>绽放</strong> 。</li>
+</ul>
+
+<p>从第 <code>0</code> 开始，你可以按 <strong>任意</strong> 顺序播种种子。</p>
+
+<p>返回所有种子都开花的 <strong>最早</strong> 一天是第几天。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/12/21/1.png" style="width: 453px; height: 149px;"></p>
+
+<pre><strong>输入：</strong>plantTime = [1,4,3], growTime = [2,3,1]
+<strong>输出：</strong>9
+<strong>解释：</strong>灰色的花盆表示播种的日子，彩色的花盆表示生长的日子，花朵表示开花的日子。
+一种最优方案是：
+第 0 天，播种第 0 枚种子，种子生长 2 整天。并在第 3 天开花。
+第 1、2、3、4 天，播种第 1 枚种子。种子生长 3 整天，并在第 8 天开花。
+第 5、6、7 天，播种第 2 枚种子。种子生长 1 整天，并在第 9 天开花。
+因此，在第 9 天，所有种子都开花。 
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2021/12/21/2.png" style="width: 454px; height: 184px;"></p>
+
+<pre><strong>输入：</strong>plantTime = [1,2,3,2], growTime = [2,1,2,1]
+<strong>输出：</strong>9
+<strong>解释：</strong>灰色的花盆表示播种的日子，彩色的花盆表示生长的日子，花朵表示开花的日子。 
+一种最优方案是：
+第 1 天，播种第 0 枚种子，种子生长 2 整天。并在第 4 天开花。
+第 0、3 天，播种第 1 枚种子。种子生长 1 整天，并在第 5 天开花。
+第 2、4、5 天，播种第 2 枚种子。种子生长 2 整天，并在第 8 天开花。
+第 6、7 天，播种第 3 枚种子。种子生长 1 整天，并在第 9 天开花。
+因此，在第 9 天，所有种子都开花。 
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre><strong>输入：</strong>plantTime = [1], growTime = [1]
+<strong>输出：</strong>2
+<strong>解释：</strong>第 0 天，播种第 0 枚种子。种子需要生长 1 整天，然后在第 2 天开花。
+因此，在第 2 天，所有种子都开花。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>n == plantTime.length == growTime.length</code></li>
+    <li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>
+    <li><code>1 &lt;= plantTime[i], growTime[i] &lt;= 10<sup>4</sup></code></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">earliestFullBloom</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">plantTime</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">growTime</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="java">Java</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">earliestFullBloom</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">plantTime</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">growTime</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="python3">Python3</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">earliestFullBloom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plantTime</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">growTime</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</code></pre>
+</div>
+
+<h3 id="javascript">JavaScript</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @param {number[]} plantTime</span>
+<span class="cm"> * @param {number[]} growTime</span>
+<span class="cm"> * @return {number}</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">earliestFullBloom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">plantTime</span><span class="p">,</span><span class="w"> </span><span class="nx">growTime</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="go">Go</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">earliestFullBloom</span><span class="p">(</span><span class="nx">plantTime</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">growTime</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>List the planting like the diagram above shows, where a row represents the timeline of a seed. A row i is above another row j if the last day planting seed i is ahead of the last day for seed j. Does it have any advantage to spend some days to plant seed j before completely planting seed i?</li>
+<li>No. It does not help seed j but could potentially delay the completion of seed i, resulting in a worse final answer. Remaining focused is a part of the optimal solution.</li>
+<li>Sort the seeds by their growTime in descending order. Can you prove why this strategy is the other part of the optimal solution? Note the bloom time of a seed is the sum of plantTime of all seeds preceding this seed plus the growTime of this seed.</li>
+<li>There is no way to improve this strategy. The seed to bloom last dominates the final answer. Exchanging the planting of this seed with another seed with either a larger or smaller growTime will result in a potentially worse answer.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[1,4,3]
+[2,3,1]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h3 id="解法一贪心排序">解法一：贪心排序</h3>
+
+<p>思路：总播种时间是固定的（所有 plantTime 的总和），但播种顺序影响开花时间。关键观察：生长时间长的种子应该先种，因为生长时间长的种子需要更久才能开花，先种可以让它在其他种子播种期间就开始生长，从而减少最终等待时间。按 growTime 降序排序后，依次播种，计算每枚种子的开花时间 = 当前累计播种时间 + 该种子的 growTime，取最大值即为答案。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">earliestFullBloom</span><span class="p">(</span><span class="nx">plantTime</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">growTime</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">plantTime</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">indices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">indices</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">indices</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 按 growTime 降序排序</span>
+<span class="w">    </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Slice</span><span class="p">(</span><span class="nx">indices</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">growTime</span><span class="p">[</span><span class="nx">indices</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">growTime</span><span class="p">[</span><span class="nx">indices</span><span class="p">[</span><span class="nx">j</span><span class="p">]]</span>
+<span class="w">    </span><span class="p">})</span>
+
+<span class="w">    </span><span class="nx">curPlant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="nx">ans</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">idx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">indices</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">curPlant</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">plantTime</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span>
+<span class="w">        </span><span class="c1">// 该种子开花时间 = 累计播种完成时间 + 生长时间</span>
+<span class="w">        </span><span class="nx">bloomDay</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">curPlant</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">growTime</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">bloomDay</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">bloomDay</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 O(n log n)，空间 O(n)</p>
+
+<h3 id="解法二贪心排序简化写法">解法二：贪心排序（简化写法）</h3>
+
+<p>思路：与解法一相同，但用结构体数组替代索引数组，代码更简洁。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">earliestFullBloom</span><span class="p">(</span><span class="nx">plantTime</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">growTime</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">seeds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([][</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">plantTime</span><span class="p">))</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">seeds</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">seeds</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="nx">plantTime</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span><span class="w"> </span><span class="nx">growTime</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 按 growTime 降序排序</span>
+<span class="w">    </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Slice</span><span class="p">(</span><span class="nx">seeds</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">seeds</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">seeds</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="p">})</span>
+
+<span class="w">    </span><span class="nx">curPlant</span><span class="p">,</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">seeds</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">curPlant</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">        </span><span class="nx">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nx">ans</span><span class="p">,</span><span class="w"> </span><span class="nx">curPlant</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 O(n log n)，空间 O(n)</p>
+
+<hr />
+
+<p><strong>核心证明</strong>：为什么按 growTime 降序贪心最优？</p>
+
+<p>考虑相邻两枚种子 i 和 j（按当前顺序依次播种）。交换它们的顺序时，其他种子的开花时间不变，只有 i 和 j 的开花时间可能变化。</p>
+
+<ul>
+<li>原顺序：i 先种，j 后种。i 开花 = <code>pre + p[i] + g[i]</code>，j 开花 = <code>pre + p[i] + p[j] + g[j]</code></li>
+<li>交换后：j 先种，i 后种。j 开花 = <code>pre + p[j] + g[j]</code>，i 开花 = <code>pre + p[j] + p[i] + g[i]</code></li>
+</ul>
+
+<p>原顺序的最大值 vs 交换后的最大值中，<code>pre + p[i] + p[j] + g[j]</code> 和 <code>pre + p[j] + p[i] + g[i]</code> 两项不变，而另外两项取决于 <code>pre + p[i] + g[i]</code> vs <code>pre + p[j] + g[j]</code>。当 <code>g[i] ≥ g[j]</code> 时原顺序更优，因此 growTime 大的应优先播种。这构成交换论证，证明了贪心策略的正确性。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-06-09 19:53:11</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

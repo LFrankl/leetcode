@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2347. 最好的扑克手牌 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-06-09 20:01:24</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2347. 最好的扑克手牌</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/best-poker-hand/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2347-最好的扑克手牌">2347. 最好的扑克手牌</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 数组, 哈希表, 计数</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/best-poker-hand/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>给你一个整数数组&nbsp;<code>ranks</code>&nbsp;和一个字符数组&nbsp;<code>suit</code>&nbsp;。你有&nbsp;<code>5</code>&nbsp;张扑克牌，第&nbsp;<code>i</code>&nbsp;张牌大小为&nbsp;<code>ranks[i]</code>&nbsp;，花色为&nbsp;<code>suits[i]</code>&nbsp;。</p>
+
+<p>下述是从好到坏你可能持有的 <strong>手牌类型&nbsp;</strong>：</p>
+
+<ol>
+    <li><code>"Flush"</code>：同花，五张相同花色的扑克牌。</li>
+    <li><code>"Three of a Kind"</code>：三条，有 3 张大小相同的扑克牌。</li>
+    <li><code>"Pair"</code>：对子，两张大小一样的扑克牌。</li>
+    <li><code>"High Card"</code>：高牌，五张大小互不相同的扑克牌。</li>
+</ol>
+
+<p>请你返回一个字符串，表示给定的 5 张牌中，你能组成的 <strong>最好手牌类型</strong>&nbsp;。</p>
+
+<p><strong>注意：</strong>返回的字符串&nbsp;<strong>大小写</strong>&nbsp;需与题目描述相同。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><b>输入：</b>ranks = [13,2,3,1,9], suits = ["a","a","a","a","a"]
+<b>输出：</b>"Flush"
+<b>解释：</b>5 张扑克牌的花色相同，所以返回 "Flush" 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><b>输入：</b>ranks = [4,4,2,4,4], suits = ["d","a","a","b","c"]
+<b>输出：</b>"Three of a Kind"
+<b>解释：</b>第一、二和四张牌组成三张相同大小的扑克牌，所以得到 "Three of a Kind" 。
+注意我们也可以得到 "Pair" ，但是 "Three of a Kind" 是更好的手牌类型。
+有其他的 3 张牌也可以组成 "Three of a Kind" 手牌类型。</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre><b>输入：</b>ranks = [10,10,2,12,9], suits = ["a","b","c","a","d"]
+<b>输出：</b>"Pair"
+<b>解释：</b>第一和第二张牌大小相同，所以得到 "Pair" 。
+我们无法得到 "Flush" 或者 "Three of a Kind" 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>ranks.length == suits.length == 5</code></li>
+    <li><code>1 &lt;= ranks[i] &lt;= 13</code></li>
+    <li><code>'a' &lt;= suits[i] &lt;= 'd'</code></li>
+    <li>任意两张扑克牌不会同时有相同的大小和花色。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">bestHand</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">ranks</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">suits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="java">Java</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">bestHand</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">ranks</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">suits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="python3">Python3</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bestHand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">suits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</code></pre>
+</div>
+
+<h3 id="javascript">JavaScript</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @param {number[]} ranks</span>
+<span class="cm"> * @param {character[]} suits</span>
+<span class="cm"> * @return {string}</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bestHand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">ranks</span><span class="p">,</span><span class="w"> </span><span class="nx">suits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="go">Go</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">bestHand</span><span class="p">(</span><span class="nx">ranks</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">suits</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Sequentially check the conditions 1 through 4, and return the outcome corresponding to the first met condition.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[13,2,3,1,9]
+["a","a","a","a","a"]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h3 id="解法一枚举判断">解法一：枚举判断</h3>
+
+<p>思路：按手牌优先级从高到低依次判断。先检查5张牌花色是否全部相同（Flush），再统计每个rank出现的次数，看是否有rank出现3次以上（Three of a Kind），是否有rank出现2次以上（Pair），否则就是High Card。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">bestHand</span><span class="p">(</span><span class="nx">ranks</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">suits</span><span class="w"> </span><span class="p">[]</span><span class="nx">char</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 判断 Flush：所有花色相同</span>
+<span class="w">    </span><span class="nx">flush</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">suits</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">suits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">flush</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">flush</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Flush&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 统计每个 rank 出现次数</span>
+<span class="w">    </span><span class="nx">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">ranks</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">count</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">++</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">hasThree</span><span class="p">,</span><span class="w"> </span><span class="nx">hasPair</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">hasThree</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">hasPair</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">hasThree</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Three of a Kind&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">hasPair</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Pair&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;High Card&quot;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间O(n)，空间O(n)，其中n=5（固定），实际可视为O(1)。</p>
+
+<h3 id="解法二排序紧凑判断">解法二：排序+紧凑判断</h3>
+
+<p>思路：对ranks排序后，通过连续相同值的最大长度判断三条/对子；花色判断与解法一相同。排序后只需扫描一次即可得到最大连续重复长度。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">bestHand</span><span class="p">(</span><span class="nx">ranks</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">suits</span><span class="w"> </span><span class="p">[]</span><span class="nx">char</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 判断 Flush</span>
+<span class="w">    </span><span class="nx">flush</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">suits</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">suits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">flush</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">flush</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Flush&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 排序 ranks</span>
+<span class="w">    </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Ints</span><span class="p">(</span><span class="nx">ranks</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// 找最大连续重复长度</span>
+<span class="w">    </span><span class="nx">maxLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nx">curLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">ranks</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">ranks</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">curLen</span><span class="o">++</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">curLen</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">maxLen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">maxLen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">curLen</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">curLen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">maxLen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Three of a Kind&quot;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Pair&quot;</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;High Card&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间O(n log n)（排序），空间O(1)。因n=5固定，实际也为O(1)。</p>
+
+<blockquote>
+  <p><strong>总结</strong>：解法一用哈希表计数更直观，解法二排序后扫描更紧凑。由于n恒为5，两者性能差异可忽略，推荐解法一更易理解。</p>
+</blockquote>
+
+<hr />
+
+<p><em>获取时间: 2026-06-09 19:52:34</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
