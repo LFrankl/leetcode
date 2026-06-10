@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-10 10:12:34",
+      "record_id": "20260610_101234",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2806",
+          "title": "取整购买后的账户余额",
+          "difficulty": "easy",
+          "file": "20260610_101234_q1.html"
+        },
+        {
+          "number": "3776",
+          "title": "使循环数组余额非负的最少移动次数",
+          "difficulty": "medium",
+          "file": "20260610_101234_q2.html"
+        },
+        {
+          "number": "2493",
+          "title": "将节点分成尽可能多的组",
+          "difficulty": "hard",
+          "file": "20260610_101234_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-09 20:02:10",
       "record_id": "20260609_200210",
       "count": 3,
@@ -1236,5 +1261,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-09 20:02:10"
+  "last_updated": "2026-06-10 10:12:34"
 }
