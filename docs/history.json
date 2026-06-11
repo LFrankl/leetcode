@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-11 10:06:52",
+      "record_id": "20260611_100652",
+      "count": 3,
+      "questions": [
+        {
+          "number": "83",
+          "title": "删除排序链表中的重复元素",
+          "difficulty": "easy",
+          "file": "20260611_100652_q1.html"
+        },
+        {
+          "number": "3551",
+          "title": "数位和排序需要的最小交换次数",
+          "difficulty": "medium",
+          "file": "20260611_100652_q2.html"
+        },
+        {
+          "number": "2281",
+          "title": "巫师的总力量和",
+          "difficulty": "hard",
+          "file": "20260611_100652_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-10 10:12:34",
       "record_id": "20260610_101234",
       "count": 3,
@@ -1261,5 +1286,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-10 10:12:34"
+  "last_updated": "2026-06-11 10:06:52"
 }
