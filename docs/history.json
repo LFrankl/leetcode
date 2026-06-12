@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-12 10:09:00",
+      "record_id": "20260612_100900",
+      "count": 3,
+      "questions": [
+        {
+          "number": "263",
+          "title": "丑数",
+          "difficulty": "easy",
+          "file": "20260612_100900_q1.html"
+        },
+        {
+          "number": "3863",
+          "title": "将一个字符串排序的最小操作次数",
+          "difficulty": "medium",
+          "file": "20260612_100900_q2.html"
+        },
+        {
+          "number": "2361",
+          "title": "乘坐火车路线的最少费用",
+          "difficulty": "hard",
+          "file": "20260612_100900_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-11 10:06:52",
       "record_id": "20260611_100652",
       "count": 3,
@@ -1286,5 +1311,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-11 10:06:52"
+  "last_updated": "2026-06-12 10:09:13"
 }
