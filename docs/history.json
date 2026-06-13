@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-13 10:01:36",
+      "record_id": "20260613_100136",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3894",
+          "title": "交通信号灯的颜色",
+          "difficulty": "easy",
+          "file": "20260613_100136_q1.html"
+        },
+        {
+          "number": "2838",
+          "title": "英雄可以获得的最大金币数",
+          "difficulty": "medium",
+          "file": "20260613_100136_q2.html"
+        },
+        {
+          "number": "301",
+          "title": "删除无效的括号",
+          "difficulty": "hard",
+          "file": "20260613_100136_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-12 10:09:00",
       "record_id": "20260612_100900",
       "count": 3,
@@ -1311,5 +1336,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-12 10:09:13"
+  "last_updated": "2026-06-13 10:01:37"
 }
