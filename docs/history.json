@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-14 10:00:44",
+      "record_id": "20260614_100044",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2620",
+          "title": "计数器",
+          "difficulty": "easy",
+          "file": "20260614_100044_q1.html"
+        },
+        {
+          "number": "3054",
+          "title": "二叉树节点",
+          "difficulty": "medium",
+          "file": "20260614_100044_q2.html"
+        },
+        {
+          "number": "123",
+          "title": "买卖股票的最佳时机 III",
+          "difficulty": "hard",
+          "file": "20260614_100044_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-13 10:01:36",
       "record_id": "20260613_100136",
       "count": 3,
@@ -1336,5 +1361,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-13 10:01:37"
+  "last_updated": "2026-06-14 10:00:45"
 }
