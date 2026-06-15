@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-15 10:00:32",
+      "record_id": "20260615_100032",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1002",
+          "title": "查找共用字符",
+          "difficulty": "easy",
+          "file": "20260615_100032_q1.html"
+        },
+        {
+          "number": "237",
+          "title": "删除链表中的节点",
+          "difficulty": "medium",
+          "file": "20260615_100032_q2.html"
+        },
+        {
+          "number": "601",
+          "title": "体育馆的人流量",
+          "difficulty": "hard",
+          "file": "20260615_100032_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-14 10:00:44",
       "record_id": "20260614_100044",
       "count": 3,
@@ -1361,5 +1386,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-14 10:00:45"
+  "last_updated": "2026-06-15 10:00:33"
 }

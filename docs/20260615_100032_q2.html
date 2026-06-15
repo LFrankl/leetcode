@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>237. 删除链表中的节点 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-06-15 10:00:32</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">237. 删除链表中的节点</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/delete-node-in-a-linked-list/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="237-删除链表中的节点">237. 删除链表中的节点</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 链表</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/delete-node-in-a-linked-list/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>有一个单链表的&nbsp;<code>head</code>，我们想删除它其中的一个节点&nbsp;<code>node</code>。</p>
+
+<p>给你一个需要删除的节点&nbsp;<code>node</code>&nbsp;。你将&nbsp;<strong>无法访问</strong>&nbsp;第一个节点&nbsp;&nbsp;<code>head</code>。</p>
+
+<p>链表的所有值都是 <b>唯一的</b>，并且保证给定的节点&nbsp;<code>node</code>&nbsp;不是链表中的最后一个节点。</p>
+
+<p>删除给定的节点。注意，删除节点并不是指从内存中删除它。这里的意思是：</p>
+
+<ul>
+    <li>给定节点的值不应该存在于链表中。</li>
+    <li>链表中的节点数应该减少 1。</li>
+    <li><code>node</code>&nbsp;前面的所有值顺序相同。</li>
+    <li><code>node</code>&nbsp;后面的所有值顺序相同。</li>
+</ul>
+
+<p><strong>自定义测试：</strong></p>
+
+<ul>
+    <li>对于输入，你应该提供整个链表&nbsp;<code>head</code>&nbsp;和要给出的节点&nbsp;<code>node</code>。<code>node</code>&nbsp;不应该是链表的最后一个节点，而应该是链表中的一个实际节点。</li>
+    <li>我们将构建链表，并将节点传递给你的函数。</li>
+    <li>输出将是调用你函数后的整个链表。</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2020/09/01/node1.jpg" style="height: 286px; width: 400px;" /></p>
+
+<pre>
+<strong>输入：</strong>head = [4,5,1,9], node = 5
+<strong>输出：</strong>[4,1,9]
+<strong>解释：</strong>指定链表中值为&nbsp;5&nbsp;的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2020/09/01/node2.jpg" style="height: 315px; width: 400px;" /></p>
+
+<pre>
+<strong>输入：</strong>head = [4,5,1,9], node = 1
+<strong>输出：</strong>[4,5,9]
+<strong>解释：</strong>指定链表中值为&nbsp;1&nbsp;的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li>链表中节点的数目范围是 <code>[2, 1000]</code></li>
+    <li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
+    <li>链表中每个节点的值都是 <strong>唯一</strong> 的</li>
+    <li>需要删除的节点 <code>node</code> 是 <strong>链表中的节点</strong> ，且 <strong>不是末尾节点</strong></li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for singly-linked list.</span>
+<span class="cm"> * struct ListNode {</span>
+<span class="cm"> *     int val;</span>
+<span class="cm"> *     ListNode *next;</span>
+<span class="cm"> *     ListNode(int x) : val(x), next(NULL) {}</span>
+<span class="cm"> * };</span>
+<span class="cm"> */</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span><span class="w"> </span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="java">Java</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for singly-linked list.</span>
+<span class="cm"> * public class ListNode {</span>
+<span class="cm"> *     int val;</span>
+<span class="cm"> *     ListNode next;</span>
+<span class="cm"> *     ListNode(int x) { val = x; }</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+<span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteNode</span><span class="p">(</span><span class="n">ListNode</span><span class="w"> </span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="python3">Python3</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode:</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = None</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deleteNode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type node: ListNode</span>
+<span class="sd">        :rtype: void Do not return anything, modify node in-place instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</code></pre>
+</div>
+
+<h3 id="javascript">JavaScript</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for singly-linked list.</span>
+<span class="cm"> * function ListNode(val) {</span>
+<span class="cm"> *     this.val = val;</span>
+<span class="cm"> *     this.next = null;</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+<span class="cm">/**</span>
+<span class="cm"> * @param {ListNode} node</span>
+<span class="cm"> * @return {void} Do not return anything, modify node in-place instead.</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">deleteNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="go">Go</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for singly-linked list.</span>
+<span class="cm"> * type ListNode struct {</span>
+<span class="cm"> *     Val int</span>
+<span class="cm"> *     Next *ListNode</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">deleteNode</span><span class="p">(</span><span class="nx">node</span><span class="w"> </span><span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[4,5,1,9]
+5
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答">AI 解答</h2>
+
+<p><em>DeepSeek API 未配置或调用失败</em></p>
+
+<hr />
+
+<p><em>获取时间: 2026-06-15 10:00:23</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
