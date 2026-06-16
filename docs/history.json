@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-16 10:00:31",
+      "record_id": "20260616_100031",
+      "count": 3,
+      "questions": [
+        {
+          "number": "383",
+          "title": "赎金信",
+          "difficulty": "easy",
+          "file": "20260616_100031_q1.html"
+        },
+        {
+          "number": "2038",
+          "title": "如果相邻两个颜色均相同则删除当前颜色",
+          "difficulty": "medium",
+          "file": "20260616_100031_q2.html"
+        },
+        {
+          "number": "2713",
+          "title": "矩阵中严格递增的单元格数",
+          "difficulty": "hard",
+          "file": "20260616_100031_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-15 10:00:32",
       "record_id": "20260615_100032",
       "count": 3,
@@ -1386,5 +1411,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-15 10:00:33"
+  "last_updated": "2026-06-16 10:00:32"
 }
