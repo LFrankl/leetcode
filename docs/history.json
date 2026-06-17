@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-17 10:07:25",
+      "record_id": "20260617_100725",
+      "count": 3,
+      "questions": [
+        {
+          "number": "796",
+          "title": "旋转字符串",
+          "difficulty": "easy",
+          "file": "20260617_100725_q1.html"
+        },
+        {
+          "number": "3249",
+          "title": "统计好节点的数目",
+          "difficulty": "medium",
+          "file": "20260617_100725_q2.html"
+        },
+        {
+          "number": "1825",
+          "title": "求出 MK 平均值",
+          "difficulty": "hard",
+          "file": "20260617_100725_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-16 10:00:31",
       "record_id": "20260616_100031",
       "count": 3,
@@ -1411,5 +1436,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-16 10:00:32"
+  "last_updated": "2026-06-17 10:07:26"
 }
