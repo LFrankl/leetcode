@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-18 10:07:46",
+      "record_id": "20260618_100746",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3083",
+          "title": "字符串及其反转中是否存在同一子字符串",
+          "difficulty": "easy",
+          "file": "20260618_100746_q1.html"
+        },
+        {
+          "number": "372",
+          "title": "超级次方",
+          "difficulty": "medium",
+          "file": "20260618_100746_q2.html"
+        },
+        {
+          "number": "480",
+          "title": "滑动窗口中位数",
+          "difficulty": "hard",
+          "file": "20260618_100746_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-17 10:07:25",
       "record_id": "20260617_100725",
       "count": 3,
@@ -1436,5 +1461,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-17 10:07:26"
+  "last_updated": "2026-06-18 10:07:46"
 }
