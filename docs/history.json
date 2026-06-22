@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-22 10:07:12",
+      "record_id": "20260622_100712",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1108",
+          "title": "IP 地址无效化",
+          "difficulty": "easy",
+          "file": "20260622_100712_q1.html"
+        },
+        {
+          "number": "3535",
+          "title": "单位转换 II",
+          "difficulty": "medium",
+          "file": "20260622_100712_q2.html"
+        },
+        {
+          "number": "2448",
+          "title": "使数组相等的最小开销",
+          "difficulty": "hard",
+          "file": "20260622_100712_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-22 09:58:35",
       "record_id": "20260622_095835",
       "count": 3,
@@ -1486,5 +1511,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-22 09:58:35"
+  "last_updated": "2026-06-22 10:07:13"
 }
