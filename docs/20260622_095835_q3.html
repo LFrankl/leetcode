@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>262. 行程和用户 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-06-22 09:58:35</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">262. 行程和用户</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/trips-and-users/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="262-行程和用户">262. 行程和用户</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 数据库</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/trips-and-users/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>表：<code>Trips</code></p>
+
+<div class="original__bRMd">
+<div>
+<pre>
++-------------+----------+
+| Column Name | Type     |
++-------------+----------+
+| id          | int      |
+| client_id   | int      |
+| driver_id   | int      |
+| city_id     | int      |
+| status      | enum     |
+| request_at  | varchar  |     
++-------------+----------+
+id 是这张表的主键（具有唯一值的列）。
+这张表中存所有出租车的行程信息。每段行程有唯一 id ，其中 client_id 和 driver_id 是 Users 表中 users_id 的外键。
+status 是一个表示行程状态的枚举类型，枚举成员为(‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’) 。
+</pre>
+
+<div class="original__bRMd">
+<div>
+<p>表：<code>Users</code></p>
+</div>
+</div>
+
+<pre>
++-------------+----------+
+| Column Name | Type     |
++-------------+----------+
+| users_id    | int      |
+| banned      | enum     |
+| role        | enum     |
++-------------+----------+
+users_id 是这张表的主键（具有唯一值的列）。
+这张表中存所有用户，每个用户都有一个唯一的 users_id ，role 是一个表示用户身份的枚举类型，枚举成员为 (‘client’, ‘driver’, ‘partner’) 。
+banned 是一个表示用户是否被禁止的枚举类型，枚举成员为 (‘Yes’, ‘No’) 。
+</pre>
+
+<p><strong>取消率</strong> 的计算方式如下：(被司机或乘客取消的非禁止用户生成的订单数量) / (非禁止用户生成的订单总数)。</p>
+
+<p>编写解决方案找出&nbsp;<code>"2013-10-01"</code><strong>&nbsp;</strong>至&nbsp;<code>"2013-10-03"</code><strong>&nbsp;</strong>期间有&nbsp;<strong>至少&nbsp;</strong>一次行程的非禁止用户（<strong>乘客和司机都必须未被禁止</strong>）的 <strong>取消率</strong>。非禁止用户即 banned 为 No 的用户，禁止用户即 banned 为 Yes 的用户。其中取消率 <code>Cancellation Rate</code> 需要四舍五入保留 <strong>两位小数</strong> 。</p>
+
+<p>返回结果表中的数据 <strong>无顺序要求</strong> 。</p>
+
+<p>结果格式如下例所示。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong> 
+Trips 表：
++----+-----------+-----------+---------+---------------------+------------+
+| id | client_id | driver_id | city_id | status              | request_at |
++----+-----------+-----------+---------+---------------------+------------+
+| 1  | 1         | 10        | 1       | completed           | 2013-10-01 |
+| 2  | 2         | 11        | 1       | cancelled_by_driver | 2013-10-01 |
+| 3  | 3         | 12        | 6       | completed           | 2013-10-01 |
+| 4  | 4         | 13        | 6       | cancelled_by_client | 2013-10-01 |
+| 5  | 1         | 10        | 1       | completed           | 2013-10-02 |
+| 6  | 2         | 11        | 6       | completed           | 2013-10-02 |
+| 7  | 3         | 12        | 6       | completed           | 2013-10-02 |
+| 8  | 2         | 12        | 12      | completed           | 2013-10-03 |
+| 9  | 3         | 10        | 12      | completed           | 2013-10-03 |
+| 10 | 4         | 13        | 12      | cancelled_by_driver | 2013-10-03 |
++----+-----------+-----------+---------+---------------------+------------+
+Users 表：
++----------+--------+--------+
+| users_id | banned | role   |
++----------+--------+--------+
+| 1        | No     | client |
+| 2        | Yes    | client |
+| 3        | No     | client |
+| 4        | No     | client |
+| 10       | No     | driver |
+| 11       | No     | driver |
+| 12       | No     | driver |
+| 13       | No     | driver |
++----------+--------+--------+
+<strong>输出：</strong>
++------------+-------------------+
+| Day        | Cancellation Rate |
++------------+-------------------+
+| 2013-10-01 | 0.33              |
+| 2013-10-02 | 0.00              |
+| 2013-10-03 | 0.50              |
++------------+-------------------+
+<strong>解释：</strong>
+2013-10-01：
+  - 共有 4 条请求，其中 2 条取消。
+  - 然而，id=2 的请求是由禁止用户（user_id=2）发出的，所以计算时应当忽略它。
+  - 因此，总共有 3 条非禁止请求参与计算，其中 1 条取消。
+  - 取消率为 (1 / 3) = 0.33
+2013-10-02：
+  - 共有 3 条请求，其中 0 条取消。
+  - 然而，id=6 的请求是由禁止用户发出的，所以计算时应当忽略它。
+  - 因此，总共有 2 条非禁止请求参与计算，其中 0 条取消。
+  - 取消率为 (0 / 2) = 0.00
+2013-10-03：
+  - 共有 3 条请求，其中 1 条取消。
+  - 然而，id=8 的请求是由禁止用户发出的，所以计算时应当忽略它。
+  - 因此，总共有 2 条非禁止请求参与计算，其中 1 条取消。
+  - 取消率为 (1 / 2) = 0.50
+</pre>
+</div>
+</div>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>{"headers": {"Trips": ["id", "client_id", "driver_id", "city_id", "status", "request_at"], "Users": ["users_id", "banned", "role"]}, "rows": {"Trips": [["1", "1", "10", "1", "completed", "2013-10-01"], ["2", "2", "11", "1", "cancelled_by_driver", "2013-10-01"], ["3", "3", "12", "6", "completed", "2013-10-01"], ["4", "4", "13", "6", "cancelled_by_client", "2013-10-01"], ["5", "1", "10", "1", "completed", "2013-10-02"], ["6", "2", "11", "6", "completed", "2013-10-02"], ["7", "3", "12", "6", "completed", "2013-10-02"], ["8", "2", "12", "12", "completed", "2013-10-03"], ["9", "3", "10", "12", "completed", "2013-10-03"], ["10", "4", "13", "12", "cancelled_by_driver", "2013-10-03"]], "Users": [["1", "No", "client"], ["2", "Yes", "client"], ["3", "No", "client"], ["4", "No", "client"], ["10", "No", "driver"], ["11", "No", "driver"], ["12", "No", "driver"], ["13", "No", "driver"]]}}
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h3 id="解法一哈希集合过滤-按日期分组统计">解法一：哈希集合过滤 + 按日期分组统计</h3>
+
+<p>思路：先用 Users 表构建被禁止用户的哈希集合，然后筛选出行程中乘客和司机都未被禁止且日期在指定范围内的记录，按日期分组统计总行程数和取消行程数，最后计算取消率并四舍五入保留两位小数。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;math&quot;</span>
+<span class="w">    </span><span class="s">&quot;sort&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Trip</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">        </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">ClientID</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">DriverID</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">CityID</span><span class="w">    </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Status</span><span class="w">    </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">RequestAt</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">UsersID</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Banned</span><span class="w">  </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Role</span><span class="w">    </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Result</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Day</span><span class="w">             </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">CancellationRate</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">cancellationRate</span><span class="p">(</span><span class="nx">trips</span><span class="w"> </span><span class="p">[]</span><span class="nx">Trip</span><span class="p">,</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="nx">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 构建被禁止用户的哈希集合</span>
+<span class="w">    </span><span class="nx">bannedSet</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">Banned</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Yes&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">bannedSet</span><span class="p">[</span><span class="nx">u</span><span class="p">.</span><span class="nx">UsersID</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 按日期分组统计</span>
+<span class="w">    </span><span class="nx">dayStats</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">struct</span><span class="p">{</span><span class="w"> </span><span class="nx">total</span><span class="p">,</span><span class="w"> </span><span class="nx">cancelled</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">})</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">trips</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 日期范围过滤</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">continue</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 乘客和司机都必须未被禁止</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">bannedSet</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">ClientID</span><span class="p">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">bannedSet</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">DriverID</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">continue</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">stats</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">dayStats</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="p">]</span>
+<span class="w">        </span><span class="nx">stats</span><span class="p">.</span><span class="nx">total</span><span class="o">++</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;cancelled_by_driver&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;cancelled_by_client&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">stats</span><span class="p">.</span><span class="nx">cancelled</span><span class="o">++</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">dayStats</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">stats</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 构建结果</span>
+<span class="w">    </span><span class="nx">results</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="nx">Result</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">dayStats</span><span class="p">))</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">day</span><span class="p">,</span><span class="w"> </span><span class="nx">stats</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">dayStats</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">rate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">float64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">stats</span><span class="p">.</span><span class="nx">total</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">rate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Round</span><span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">stats</span><span class="p">.</span><span class="nx">cancelled</span><span class="p">)</span><span class="o">/</span><span class="nb">float64</span><span class="p">(</span><span class="nx">stats</span><span class="p">.</span><span class="nx">total</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">results</span><span class="p">,</span><span class="w"> </span><span class="nx">Result</span><span class="p">{</span><span class="nx">Day</span><span class="p">:</span><span class="w"> </span><span class="nx">day</span><span class="p">,</span><span class="w"> </span><span class="nx">CancellationRate</span><span class="p">:</span><span class="w"> </span><span class="nx">rate</span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 按日期排序输出（题目说无顺序要求，排序仅为美观）</span>
+<span class="w">    </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Slice</span><span class="p">(</span><span class="nx">results</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">results</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Day</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">results</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Day</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">results</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">trips</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">Trip</span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cancelled_by_driver&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cancelled_by_client&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-02&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-02&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-02&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cancelled_by_driver&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Yes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">results</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cancellationRate</span><span class="p">(</span><span class="nx">trips</span><span class="p">,</span><span class="w"> </span><span class="nx">users</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">results</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;| %s | %.2f |\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Day</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">CancellationRate</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 O(T + U)，空间 O(U + D)，其中 T 为行程数，U 为用户数，D 为日期数。构建哈希集合遍历 Users O(U)，过滤统计遍历 Trips O(T)，每个行程只做哈希查找 O(1)。</p>
+
+<hr />
+
+<h3 id="解法二一次遍历-内联判断">解法二：一次遍历 + 内联判断</h3>
+
+<p>思路：与解法一类似，但不做预构建哈希集合，而是将 Users 表转化为 <code>map[int]string</code>（users_id → banned），在遍历行程时直接查 map 判断乘客和司机是否被禁止。本质上复杂度一致，只是组织方式不同，更贴近 SQL 的 JOIN 语义。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;math&quot;</span>
+<span class="w">    </span><span class="s">&quot;sort&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Trip</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">        </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">ClientID</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">DriverID</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">CityID</span><span class="w">    </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Status</span><span class="w">    </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">RequestAt</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">UsersID</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Banned</span><span class="w">  </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Role</span><span class="w">    </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Result</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Day</span><span class="w">              </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">CancellationRate</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">cancellationRate</span><span class="p">(</span><span class="nx">trips</span><span class="w"> </span><span class="p">[]</span><span class="nx">Trip</span><span class="p">,</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="nx">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 构建 users_id -&gt; banned 的映射，模拟 SQL JOIN</span>
+<span class="w">    </span><span class="nx">bannedMap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">bannedMap</span><span class="p">[</span><span class="nx">u</span><span class="p">.</span><span class="nx">UsersID</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">Banned</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 按日期聚合统计</span>
+<span class="w">    </span><span class="kd">type</span><span class="w"> </span><span class="nx">stats</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">total</span><span class="p">,</span><span class="w"> </span><span class="nx">cancelled</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">dayStats</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">stats</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">trips</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">continue</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 乘客和司机都必须 banned == &quot;No&quot;，模拟两次 JOIN Users 表</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">bannedMap</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">ClientID</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Yes&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">bannedMap</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">DriverID</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Yes&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">continue</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">dayStats</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="p">]</span>
+<span class="w">        </span><span class="nx">s</span><span class="p">.</span><span class="nx">total</span><span class="o">++</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">s</span><span class="p">.</span><span class="nx">cancelled</span><span class="o">++</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">dayStats</span><span class="p">[</span><span class="nx">t</span><span class="p">.</span><span class="nx">RequestAt</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">s</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">results</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">Result</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">day</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">dayStats</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">rate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">total</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">rate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Round</span><span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cancelled</span><span class="p">)</span><span class="o">/</span><span class="nb">float64</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">total</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">results</span><span class="p">,</span><span class="w"> </span><span class="nx">Result</span><span class="p">{</span><span class="nx">day</span><span class="p">,</span><span class="w"> </span><span class="nx">rate</span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Slice</span><span class="p">(</span><span class="nx">results</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">results</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Day</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">results</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Day</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">results</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">trips</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">Trip</span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cancelled_by_driver&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cancelled_by_client&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-01&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-02&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-02&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-02&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cancelled_by_driver&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2013-10-03&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Yes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">cancellationRate</span><span class="p">(</span><span class="nx">trips</span><span class="p">,</span><span class="w"> </span><span class="nx">users</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;| %s | %.2f |\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Day</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">CancellationRate</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 O(T + U)，空间 O(U + D)。与解法一相同，核心瓶颈在于遍历行程表和构建用户映射，哈希查找每次 O(1)。</p>
+
+<hr />
+
+<p><strong>补充说明</strong>：此题本质是 SQL 问题（LeetCode 262），等价 SQL 为：</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">request_at</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">Day</span><span class="p">,</span>
+<span class="w">       </span><span class="n">ROUND</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;completed&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">CancellationRate</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">Trips</span><span class="w"> </span><span class="n">t</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="n">u1</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">client_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u1</span><span class="p">.</span><span class="n">users_id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">u1</span><span class="p">.</span><span class="n">banned</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;No&#39;</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="n">u2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">driver_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u2</span><span class="p">.</span><span class="n">users_id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">u2</span><span class="p">.</span><span class="n">banned</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;No&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">request_at</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="s1">&#39;2013-10-01&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="s1">&#39;2013-10-03&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">request_at</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Go 解法模拟了上述 SQL 的逻辑：两次 JOIN → 两次哈希查找判断 banned，GROUP BY → map 按日期分组，ROUND → <code>math.Round</code>。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-06-22 09:58:35</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

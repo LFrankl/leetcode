@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-22 09:58:35",
+      "record_id": "20260622_095835",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3452",
+          "title": "好数字之和",
+          "difficulty": "easy",
+          "file": "20260622_095835_q1.html"
+        },
+        {
+          "number": "3440",
+          "title": "重新安排会议得到最多空余时间 II",
+          "difficulty": "medium",
+          "file": "20260622_095835_q2.html"
+        },
+        {
+          "number": "262",
+          "title": "行程和用户",
+          "difficulty": "hard",
+          "file": "20260622_095835_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-18 10:07:46",
       "record_id": "20260618_100746",
       "count": 3,
@@ -1461,5 +1486,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-18 10:07:46"
+  "last_updated": "2026-06-22 09:58:35"
 }
