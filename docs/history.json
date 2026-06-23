@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-23 10:01:10",
+      "record_id": "20260623_100110",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2441",
+          "title": "与对应负数同时存在的最大正整数",
+          "difficulty": "easy",
+          "file": "20260623_100110_q1.html"
+        },
+        {
+          "number": "34",
+          "title": "在排序数组中查找元素的第一个和最后一个位置",
+          "difficulty": "medium",
+          "file": "20260623_100110_q2.html"
+        },
+        {
+          "number": "502",
+          "title": "IPO",
+          "difficulty": "hard",
+          "file": "20260623_100110_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-22 10:07:12",
       "record_id": "20260622_100712",
       "count": 3,
@@ -1511,5 +1536,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-22 10:07:13"
+  "last_updated": "2026-06-23 10:01:10"
 }
