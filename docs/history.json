@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-24 10:02:01",
+      "record_id": "20260624_100201",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3184",
+          "title": "构成整天的下标对数目 I",
+          "difficulty": "easy",
+          "file": "20260624_100201_q1.html"
+        },
+        {
+          "number": "974",
+          "title": "和可被 K 整除的子数组",
+          "difficulty": "medium",
+          "file": "20260624_100201_q2.html"
+        },
+        {
+          "number": "1293",
+          "title": "网格中的最短路径",
+          "difficulty": "hard",
+          "file": "20260624_100201_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-23 10:01:10",
       "record_id": "20260623_100110",
       "count": 3,
@@ -1536,5 +1561,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-23 10:01:10"
+  "last_updated": "2026-06-24 10:02:01"
 }
