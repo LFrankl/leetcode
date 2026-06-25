@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-25 10:01:01",
+      "record_id": "20260625_100101",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2404",
+          "title": "出现最频繁的偶数元素",
+          "difficulty": "easy",
+          "file": "20260625_100101_q1.html"
+        },
+        {
+          "number": "1145",
+          "title": "二叉树着色游戏",
+          "difficulty": "medium",
+          "file": "20260625_100101_q2.html"
+        },
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "hard",
+          "file": "20260625_100101_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-24 10:02:01",
       "record_id": "20260624_100201",
       "count": 3,
@@ -1561,5 +1586,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-24 10:02:01"
+  "last_updated": "2026-06-25 10:01:01"
 }
