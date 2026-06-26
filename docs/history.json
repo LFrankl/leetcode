@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-26 10:10:24",
+      "record_id": "20260626_101024",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2908",
+          "title": "元素和最小的山形三元组 I",
+          "difficulty": "easy",
+          "file": "20260626_101024_q1.html"
+        },
+        {
+          "number": "3040",
+          "title": "相同分数的最大操作数目 II",
+          "difficulty": "medium",
+          "file": "20260626_101024_q2.html"
+        },
+        {
+          "number": "805",
+          "title": "数组的均值分割",
+          "difficulty": "hard",
+          "file": "20260626_101024_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-25 10:01:01",
       "record_id": "20260625_100101",
       "count": 3,
@@ -1586,5 +1611,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-25 10:01:01"
+  "last_updated": "2026-06-26 10:10:25"
 }
