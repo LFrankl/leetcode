@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2345. 寻找可见山的数量 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-06-27 10:02:13</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2345. 寻找可见山的数量</span>
+                    <span class="difficulty-badge difficulty-medium">
+                        中等
+                    </span>
+                    <a href="https://leetcode.cn/problems/finding-the-number-of-visible-mountains/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2345-寻找可见山的数量">2345. 寻找可见山的数量</h1>
+
+<p><strong>难度</strong>: Medium</p>
+
+<p><strong>标签</strong>: 栈, 数组, 排序, 单调栈</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/finding-the-number-of-visible-mountains/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>None</p>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>How can we efficiently find for each mountain the relevant mountains to compare itself against to check whether or not it would be visible?</li>
+<li>Do you notice a pattern after sorting the peaks by their x-coordinates?</li>
+<li>After sorting, process the peaks sequentially and use a monotonic stack to store currently visible mountains.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>[[2,2],[6,3],[5,4]]
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h1 id="寻找可见山的数量">寻找可见山的数量</h1>
+
+<h2 id="简要思路">简要思路</h2>
+
+<p>每座山由峰坐标 <code>(x, y)</code> 定义，其底边区间为 <code>[x-y, x+y]</code>。一座山被另一座山"完全遮挡"的条件是：另一座山的底边区间完全覆盖它的区间（左端点更小、右端点更大，且高度必然更高）。因此问题转化为：<strong>统计不被任何其他区间完全覆盖的区间数量</strong>，同时完全相同的山互相遮挡，均不可见。</p>
+
+<hr />
+
+<h3 id="解法一区间排序-遍历判定">解法一：区间排序 + 遍历判定</h3>
+
+<p><strong>思路：</strong> 将每座山转换为区间 <code>[x-y, x+y]</code>，统计每个区间出现次数（处理重复）。按左端点升序、右端点降序排序后遍历，维护已见最大右端点 <code>maxRight</code>。若当前区间右端点 &gt; <code>maxRight</code>，则未被覆盖，候选可见；但若该区间出现次数 &gt; 1（有重复山），仍不可见。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">visibleMountains</span><span class="p">(</span><span class="nx">peaks</span><span class="w"> </span><span class="p">[][]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">peaks</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">intervals</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([][</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">cnt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">peaks</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="nx">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="nx">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="nx">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="nx">intervals</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">}</span>
+<span class="w">        </span><span class="nx">cnt</span><span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">}]</span><span class="o">++</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 按左端点升序，右端点降序排序</span>
+<span class="w">    </span><span class="c1">// 同一左端点时，更宽的区间先处理，确保宽区间先&quot;占据&quot;maxRight</span>
+<span class="w">    </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Slice</span><span class="p">(</span><span class="nx">intervals</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">intervals</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">intervals</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">intervals</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">intervals</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">intervals</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">intervals</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="p">})</span>
+
+<span class="w">    </span><span class="nx">maxRight</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="nx">visible</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">iv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">intervals</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">iv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">maxRight</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 右端点突破已有最大右边界 → 未被完全覆盖</span>
+<span class="w">            </span><span class="c1">// 但若有重复山（同一区间出现多次），互相遮挡，不可见</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">cnt</span><span class="p">[</span><span class="nx">iv</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">visible</span><span class="o">++</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="nx">maxRight</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">iv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">visible</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>复杂度：</strong> 时间 O(n log n)（排序），空间 O(n)（区间数组 + 计数map）</p>
+
+<hr />
+
+<h3 id="解法二单调栈去重后">解法二：单调栈（去重后）</h3>
+
+<p><strong>思路：</strong> 先去重（标记重复区间），再对剩余区间按左端点升序排序，使用单调栈维护"可见"候选：新区间入栈时，弹出被其完全覆盖的旧区间（左端点 ≥ 栈顶左端点 且 右端点 ≤ 栈顶右端点 → 栈顶被覆盖弹出）。最后栈中元素即为可见山。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">visibleMountains</span><span class="p">(</span><span class="nx">peaks</span><span class="w"> </span><span class="p">[][]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">cnt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">peaks</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="nx">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="nx">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="nx">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="nx">cnt</span><span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">}]</span><span class="o">++</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 去重：只保留出现1次的区间候选</span>
+<span class="w">    </span><span class="nx">unique</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[][</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">iv</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">cnt</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">unique</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">unique</span><span class="p">,</span><span class="w"> </span><span class="nx">iv</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Slice</span><span class="p">(</span><span class="nx">unique</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">unique</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">unique</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">unique</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">unique</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">unique</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">unique</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="p">})</span>
+
+<span class="w">    </span><span class="c1">// 单调栈：栈顶右端点单调递增</span>
+<span class="w">    </span><span class="c1">// 新区间入栈时，弹出被新区间完全覆盖的栈顶</span>
+<span class="w">    </span><span class="nx">stack</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[][</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">iv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">unique</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">stack</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">iv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">stack</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">iv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">stack</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">stack</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">stack</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">stack</span><span class="p">,</span><span class="w"> </span><span class="nx">iv</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>复杂度：</strong> 时间 O(n log n)（排序），空间 O(n)（计数map + 栈）</p>
+
+<hr />
+
+<blockquote>
+  <p><strong>推荐解法一</strong>，逻辑更简洁，一次遍历即可完成判定，无需额外的栈操作。核心关键点：<strong>按左升序右降序排序</strong>，保证同起点时宽区间优先处理，使被覆盖的窄区间自然被跳过。</p>
+</blockquote>
+
+<hr />
+
+<p><em>获取时间: 2026-06-27 10:01:54</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>
