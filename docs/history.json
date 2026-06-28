@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-28 10:06:35",
+      "record_id": "20260628_100635",
+      "count": 3,
+      "questions": [
+        {
+          "number": "1967",
+          "title": "作为子字符串出现在单词中的字符串数目",
+          "difficulty": "easy",
+          "file": "20260628_100635_q1.html"
+        },
+        {
+          "number": "1557",
+          "title": "可以到达所有点的最少点数目",
+          "difficulty": "medium",
+          "file": "20260628_100635_q2.html"
+        },
+        {
+          "number": "3049",
+          "title": "标记所有下标的最早秒数 II",
+          "difficulty": "hard",
+          "file": "20260628_100635_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-27 10:02:13",
       "record_id": "20260627_100213",
       "count": 3,
@@ -1636,5 +1661,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-27 10:02:13"
+  "last_updated": "2026-06-28 10:06:35"
 }
