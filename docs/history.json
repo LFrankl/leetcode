@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-29 10:05:44",
+      "record_id": "20260629_100544",
+      "count": 3,
+      "questions": [
+        {
+          "number": "2243",
+          "title": "计算字符串的数字和",
+          "difficulty": "easy",
+          "file": "20260629_100544_q1.html"
+        },
+        {
+          "number": "LCS 03",
+          "title": "主题空间",
+          "difficulty": "medium",
+          "file": "20260629_100544_q2.html"
+        },
+        {
+          "number": "1635",
+          "title": "Hopper 公司查询 I",
+          "difficulty": "hard",
+          "file": "20260629_100544_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-28 10:06:35",
       "record_id": "20260628_100635",
       "count": 3,
@@ -1661,5 +1686,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-28 10:06:35"
+  "last_updated": "2026-06-29 10:05:44"
 }
