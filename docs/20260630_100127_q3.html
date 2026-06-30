@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2262. 字符串的总引力 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-06-30 10:01:27</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">2262. 字符串的总引力</span>
+                    <span class="difficulty-badge difficulty-hard">
+                        困难
+                    </span>
+                    <a href="https://leetcode.cn/problems/total-appeal-of-a-string/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="2262-字符串的总引力">2262. 字符串的总引力</h1>
+
+<p><strong>难度</strong>: Hard</p>
+
+<p><strong>标签</strong>: 哈希表, 字符串, 动态规划</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/total-appeal-of-a-string/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p>字符串的 <strong>引力</strong> 定义为：字符串中 <strong>不同</strong> 字符的数量。</p>
+
+<ul>
+    <li>例如，<code>"abbca"</code> 的引力为 <code>3</code> ，因为其中有 <code>3</code> 个不同字符 <code>'a'</code>、<code>'b'</code> 和 <code>'c'</code> 。</li>
+</ul>
+
+<p>给你一个字符串 <code>s</code> ，返回 <strong>其所有子字符串的总引力</strong> <strong>。</strong></p>
+
+<p><strong>子字符串</strong> 定义为：字符串中的一个连续字符序列。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre><strong>输入：</strong>s = "abbca"
+<strong>输出：</strong>28
+<strong>解释：</strong>"abbca" 的子字符串有：
+- 长度为 1 的子字符串："a"、"b"、"b"、"c"、"a" 的引力分别为 1、1、1、1、1，总和为 5 。
+- 长度为 2 的子字符串："ab"、"bb"、"bc"、"ca" 的引力分别为 2、1、2、2 ，总和为 7 。
+- 长度为 3 的子字符串："abb"、"bbc"、"bca" 的引力分别为 2、2、3 ，总和为 7 。
+- 长度为 4 的子字符串："abbc"、"bbca" 的引力分别为 3、3 ，总和为 6 。
+- 长度为 5 的子字符串："abbca" 的引力为 3 ，总和为 3 。
+引力总和为 5 + 7 + 7 + 6 + 3 = 28 。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre><strong>输入：</strong>s = "code"
+<strong>输出：</strong>20
+<strong>解释：</strong>"code" 的子字符串有：
+- 长度为 1 的子字符串："c"、"o"、"d"、"e" 的引力分别为 1、1、1、1 ，总和为 4 。
+- 长度为 2 的子字符串："co"、"od"、"de" 的引力分别为 2、2、2 ，总和为 6 。
+- 长度为 3 的子字符串："cod"、"ode" 的引力分别为 3、3 ，总和为 6 。
+- 长度为 4 的子字符串："code" 的引力为 4 ，总和为 4 。
+引力总和为 4 + 6 + 6 + 4 = 20 。
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+    <li><code>s</code> 由小写英文字母组成</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">appealSum</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="java">Java</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">appealSum</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="python3">Python3</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">appealSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</code></pre>
+</div>
+
+<h3 id="javascript">JavaScript</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @param {string} s</span>
+<span class="cm"> * @return {number}</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">appealSum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="go">Go</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">appealSum</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Consider the set of substrings that end at a certain index i. Then, consider a specific alphabetic character. How do you count the number of substrings ending at index i that contain that character?</li>
+<li>The number of substrings that contain the alphabetic character is equivalent to 1 plus the index of the last occurrence of the character before index i + 1.</li>
+<li>The total appeal of all substrings ending at index i is the total sum of the number of substrings that contain each alphabetic character.</li>
+<li>To find the total appeal of all substrings, we simply sum up the total appeal for each index.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"abbca"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h3 id="解法一逐字符贡献法最优解">解法一：逐字符贡献法（最优解）</h3>
+
+<p>思路：将总引力拆解为每个字符对总引力的"贡献"。字符 <code>s[i]</code> 对某个子串有贡献，当且仅当它是该子串中<strong>首次出现</strong>的该字符。设 <code>lastPos[c]</code> 为字符 <code>c</code> 上一次出现的位置，则以 <code>s[i]</code> 为首次出现的子串，起点范围为 <code>(lastPos[c]+1) ~ i</code>，终点范围为 <code>i ~ n-1</code>，贡献数为 <code>(i - lastPos[c]) × (n - i)</code>。遍历一遍累加即可。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">totalGravity</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="kt">int64</span>
+<span class="w">    </span><span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">lastPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">26</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span><span class="w"> </span><span class="c1">// 每个字符上次出现的位置，初始为 -1</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">lastPos</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">lastPos</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">ans</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">lastPos</span><span class="p">[</span><span class="nx">c</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">lastPos</span><span class="p">[</span><span class="nx">c</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 <strong>O(n)</strong>，空间 <strong>O(1)</strong>（仅 26 个字母的 lastPos 数组）</p>
+
+<hr />
+
+<h3 id="解法二增量递推法">解法二：增量递推法</h3>
+
+<p>思路：设 <code>g(i)</code> 表示以位置 <code>i</code> 为右端点的所有子串的引力之和。从 <code>g(i-1)</code> 递推到 <code>g(i)</code> 时，新增字符 <code>s[i]</code>：若 <code>s[i]</code> 之前未出现过，则所有以 <code>i</code> 结尾的子串引力各加 1，贡献 <code>i+1</code>；若 <code>s[i]</code> 上次出现在 <code>lastPos</code>，则仅从 <code>lastPos+1</code> 到 <code>i</code> 开头的子串引力加 1，贡献 <code>i - lastPos</code>。总答案为所有 <code>g(i)</code> 的累加。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">totalGravity</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="kt">int64</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="c1">// g(i)：以 i 为右端点的所有子串引力之和</span>
+<span class="w">    </span><span class="nx">lastPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">26</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">lastPos</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">lastPos</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">lastPos</span><span class="p">[</span><span class="nx">c</span><span class="p">])</span><span class="w"> </span><span class="c1">// 增量：s[i] 对以 i 结尾的子串的贡献</span>
+<span class="w">        </span><span class="nx">ans</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">cur</span>
+<span class="w">        </span><span class="nx">lastPos</span><span class="p">[</span><span class="nx">c</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 <strong>O(n)</strong>，空间 <strong>O(1)</strong></p>
+
+<blockquote>
+  <p><strong>两种解法本质相同</strong>——解法一是从"全局贡献"角度直接计算，解法二是从"逐步累加"角度递推。核心都是维护每个字符的 <code>lastPos</code>，时间 O(n) 线性扫描，空间 O(1)。</p>
+</blockquote>
+
+<hr />
+
+<p><em>获取时间: 2026-06-30 10:01:27</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

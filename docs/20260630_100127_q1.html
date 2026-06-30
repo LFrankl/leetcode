@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3136. 有效单词 - LeetCode</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <button class="menu-button" onclick="history.back()" aria-label="返回">
+            <div class="menu-icon">
+                <span style="transform: rotate(-45deg) translateY(-2px);"></span>
+                <span style="transform: rotate(45deg) translateY(2px);"></span>
+            </div>
+        </button>
+        <div class="logo">
+            <span class="logo-emoji">📚</span>
+            LeetCode 每日题目
+        </div>
+        <div class="update-time">2026-06-30 10:01:27</div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" style="margin-left: 0;">
+        <div class="content-wrapper">
+            <button class="back-button" onclick="history.back()">
+                ← 返回题目列表
+            </button>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">3136. 有效单词</span>
+                    <span class="difficulty-badge difficulty-easy">
+                        简单
+                    </span>
+                    <a href="https://leetcode.cn/problems/valid-word/" target="_blank" class="question-link">在 LeetCode 打开</a>
+                </div>
+                <div class="markdown-content">
+                    <h1 id="3136-有效单词">3136. 有效单词</h1>
+
+<p><strong>难度</strong>: Easy</p>
+
+<p><strong>标签</strong>: 字符串</p>
+
+<p><strong>链接</strong>: https://leetcode.cn/problems/valid-word/</p>
+
+<hr />
+
+<h2 id="题目描述">题目描述</h2>
+
+<p><strong>有效单词</strong> 需要满足以下几个条件：</p>
+
+<ul>
+    <li><strong>至少 </strong>包含 3 个字符。</li>
+    <li>由数字 0-9 和英文大小写字母组成。（不必包含所有这类字符。）</li>
+    <li><strong>至少</strong> 包含一个 <strong>元音字母 </strong>。</li>
+    <li><strong>至少</strong> 包含一个 <strong>辅音字母 </strong>。</li>
+</ul>
+
+<p>给你一个字符串 <code>word</code> 。如果 <code>word</code> 是一个有效单词，则返回 <code>true</code> ，否则返回 <code>false</code> 。</p>
+
+<p><strong>注意：</strong></p>
+
+<ul>
+    <li><code>'a'</code>、<code>'e'</code>、<code>'i'</code>、<code>'o'</code>、<code>'u'</code> 及其大写形式都属于<strong> 元音字母 </strong>。</li>
+    <li>英文中的 <strong>辅音字母 </strong>是指那些除元音字母之外的字母。</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">word = "234Adas"</span></p>
+
+<p><strong>输出：</strong><span class="example-io">true</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>这个单词满足所有条件。</p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">word = "b3"</span></p>
+
+<p><strong>输出：</strong><span class="example-io">false</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>这个单词的长度少于 3 且没有包含元音字母。</p>
+</div>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong><span class="example-io">word = "a3$e"</span></p>
+
+<p><strong>输出：</strong><span class="example-io">false</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>这个单词包含了 <code>'$'</code> 字符且没有包含辅音字母。</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+    <li><code>1 &lt;= word.length &lt;= 20</code></li>
+    <li><code>word</code> 由英文大写和小写字母、数字、<code>'@'</code>、<code>'#'</code> 和 <code>'$'</code> 组成。</li>
+</ul>
+
+<hr />
+
+<h2 id="代码模板">代码模板</h2>
+
+<h3 id="c">C++</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">isValid</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="java">Java</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="python3">Python3</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</code></pre>
+</div>
+
+<h3 id="javascript">JavaScript</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @param {string} word</span>
+<span class="cm"> * @return {boolean}</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">isValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h3 id="go">Go</h3>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">isValid</span><span class="p">(</span><span class="nx">word</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="提示">提示</h2>
+
+<ol>
+<li>Use if-else to check all the conditions.</li>
+</ol>
+
+<hr />
+
+<h2 id="示例测试用例">示例测试用例</h2>
+
+<pre><code>"234Adas"
+</code></pre>
+
+<hr />
+
+<h2 id="ai-解答-deepseek">AI 解答 (DeepSeek)</h2>
+
+<h3 id="解法一一次遍历逐项检查">解法一：一次遍历逐项检查</h3>
+
+<p>思路：对字符串进行一次遍历，同时检查所有条件——长度≥3、每个字符都是数字或字母、存在至少一个元音字母、存在至少一个辅音字母。遍历时分别用两个布尔标记记录是否出现过元音和辅音。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">isValidWord</span><span class="p">(</span><span class="nx">word</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">vowels</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">byte</span><span class="p">]</span><span class="kt">bool</span><span class="p">{</span>
+<span class="w">        </span><span class="sc">&#39;a&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="sc">&#39;A&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;I&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">hasVowel</span><span class="p">,</span><span class="w"> </span><span class="nx">hasConsonant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">word</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!((</span><span class="nx">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;9&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;z&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c1">// 包含非法字符</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;z&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">vowels</span><span class="p">[</span><span class="nx">c</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">hasVowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">hasConsonant</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hasVowel</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">hasConsonant</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 O(n)，空间 O(1)</p>
+
+<hr />
+
+<h3 id="解法二利用-unicode-分类函数简化判断">解法二：利用 Unicode 分类函数简化判断</h3>
+
+<p>思路：使用 Go 标准库的 <code>unicode</code> 包来判断字符类别，<code>IsDigit</code> 判断数字、<code>IsLetter</code> 判断字母，配合自定义元音集合，逻辑更清晰。</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">isValidWord</span><span class="p">(</span><span class="nx">word</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">vowels</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;aeiouAEIOU&quot;</span>
+<span class="w">    </span><span class="nx">hasVowel</span><span class="p">,</span><span class="w"> </span><span class="nx">hasConsonant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">word</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">unicode</span><span class="p">.</span><span class="nx">IsDigit</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">!</span><span class="nx">unicode</span><span class="p">.</span><span class="nx">IsLetter</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">unicode</span><span class="p">.</span><span class="nx">IsLetter</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">ContainsRune</span><span class="p">(</span><span class="nx">vowels</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">hasVowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">hasConsonant</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hasVowel</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">hasConsonant</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>复杂度：时间 O(n)，空间 O(1)</p>
+
+<hr />
+
+<p><strong>关键点总结</strong>：本题的核心在于区分三个概念——<strong>数字</strong>（不是元音也不是辅音）、<strong>元音字母</strong>、<strong>辅音字母</strong>（非元音的字母）。遍历中只需三条布尔判断即可完成，非常简洁。</p>
+
+<hr />
+
+<p><em>获取时间: 2026-06-30 10:00:20</em></p>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>由 <a href="https://github.com/LFrankl/leetcode" target="_blank">LeetCode Daily Script</a> 自动生成</p>
+                <p>AI 解答由 <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> 提供</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动返回按钮 -->
+    <button class="fab-back" onclick="history.back()" aria-label="返回题目列表">
+        ↑
+    </button>
+</body>
+</html>

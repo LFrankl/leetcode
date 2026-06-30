@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-06-30 10:01:27",
+      "record_id": "20260630_100127",
+      "count": 3,
+      "questions": [
+        {
+          "number": "3136",
+          "title": "有效单词",
+          "difficulty": "easy",
+          "file": "20260630_100127_q1.html"
+        },
+        {
+          "number": "536",
+          "title": "从字符串生成二叉树",
+          "difficulty": "medium",
+          "file": "20260630_100127_q2.html"
+        },
+        {
+          "number": "2262",
+          "title": "字符串的总引力",
+          "difficulty": "hard",
+          "file": "20260630_100127_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-29 10:05:44",
       "record_id": "20260629_100544",
       "count": 3,
@@ -1686,5 +1711,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-29 10:05:44"
+  "last_updated": "2026-06-30 10:01:28"
 }
