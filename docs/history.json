@@ -1,6 +1,31 @@
 {
   "records": [
     {
+      "date": "2026-07-01 10:06:50",
+      "record_id": "20260701_100650",
+      "count": 3,
+      "questions": [
+        {
+          "number": "409",
+          "title": "最长回文串",
+          "difficulty": "easy",
+          "file": "20260701_100650_q1.html"
+        },
+        {
+          "number": "Unknown",
+          "title": "未知题目",
+          "difficulty": "medium",
+          "file": "20260701_100650_q2.html"
+        },
+        {
+          "number": "3538",
+          "title": "合并得到最小旅行时间",
+          "difficulty": "hard",
+          "file": "20260701_100650_q3.html"
+        }
+      ]
+    },
+    {
       "date": "2026-06-30 10:01:27",
       "record_id": "20260630_100127",
       "count": 3,
@@ -1711,5 +1736,5 @@
       ]
     }
   ],
-  "last_updated": "2026-06-30 10:01:28"
+  "last_updated": "2026-07-01 10:06:50"
 }
